@@ -1,0 +1,270 @@
+/* GLOBAL STYLES
+------------------------------------------------------
+----------------------------------------------------*/
+* {
+	box-sizing: border-box;
+}
+html {
+	font-size: 62.5%;
+}
+body {
+    background:#ffffff;
+    font:1.2rem/1.8rem 'Open Sans', sans-serif;
+    color:#959595;
+}
+body a {
+    color:#959595;
+}
+#main{
+    background:#f6f6f6;
+    padding:0 0 5rem 0;
+}
+@font-face{
+    font-family:'Socialico';
+    src:url(../fonts/Socialico.ttf);
+}
+/* #MAIN STYLES
+------------------------------------------------------
+----------------------------------------------------*/
+
+/* .doubleColumn
+---------------------------*/
+
+.navbar-default {
+	background:#ffffff;
+    border:none;
+
+}
+.in{
+    display:block;
+}
+.navbar-brand{
+    background:url(../img/design/logo.png) center no-repeat;
+    width:114px;
+    height:70px;
+}
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+  
+}
+.navbar-default .navbar-nav>li>a {
+    color: #959595;
+    font: 15px/36px 'Open Sans';
+    font-weight:400;
+    padding:0;
+   margin: 1rem 1rem 1rem 2rem;
+}
+.navbar-default .navbar-nav>li>a:hover {
+    color: #565656;
+    border-bottom:1px solid #000;
+
+}
+.nav .col-xs-12{
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+.navbar-nav>li>a {
+ 
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+	border:none;
+}
+.navbar-form .form-group {
+   
+}
+header{
+    padding:2rem;
+}
+header .row{
+    margin-left:0;
+    margin-right:0;
+
+}
+main .row{
+    margin-left:0;
+}
+
+.doubleColumn h1 {
+    font:1.4rem/2.1rem 'Open Sans', sans-serif;
+    text-transform:uppercase;
+    color:#565656;
+    border-top:.1rem dotted #959595;
+    padding:1.2rem 0 0;
+}
+.doubleColumn .items {
+margin: 2rem 0 0 0;
+}
+
+/* .blogItems
+---------------------------*/
+.galItems  {
+     margin:2rem 0 0 0;
+    padding-left:4rem;
+}	
+.blogItems article {
+    margin:0 0 2rem 0;
+}
+.blogItems article:nth-of-type(3n) {
+}
+.blogItems article h2 {
+    font:1.5rem/2.1rem 'Open Sans', sans-serif;
+    color:#565656;
+}
+.blogItems article .image {
+    overflow:hidden;
+    position:relative;
+}
+.blogItems article .image img, .galItems article img {
+   display:block;
+    width:100%;
+}
+.blogItems article .image a {
+    position:absolute;
+    top:0%;
+    left:0;
+    width:100%;
+    height:100%;
+    text-indent:-9999px;
+    background:rgba(0,0,0,.5);
+    transition:all 1.5s;
+}
+.blogItems article .image a::before {
+    position:absolute;
+    content:'';
+    width:36px;
+    height:36px;
+    top:calc(50% - 18px);
+    left:calc(50% - 18px);
+    background:url('../img/design/link.png') center no-repeat;
+    transition:all 1.5s ease-in-out;
+}
+.blogItems article .image:hover a {
+    top:0;
+}
+.blogItems article .image:hover a::before {
+    transform:rotate(360deg);
+}
+
+/* .galItems
+---------------------------*/
+.galItems article {
+
+    overflow:hidden;
+    position:relative;
+        padding: 0rem 0vh;
+}
+.galItems article a {
+    position:absolute;
+    bottom:0%;
+
+    width:100%;
+    height:100%;
+    padding:1rem 1.5rem;  
+    color:#9f9e9e;
+    background:rgba(23,23,23,.8);
+    transition:all 1.5s;
+}
+.galItems article h2 {
+    color:#fff;
+    text-transform:uppercase;
+    margin:0 0 .5rem;
+}
+.galItems article:hover a {
+    bottom:0;
+}
+footer{
+	background:#171717;
+}
+@media (min-width: 768px){
+    .navbar-form .form-control{
+        margin: 1rem 0 0 0;
+    
+    }
+    .navbar-nav>li {
+    float: left;
+    margin-top: 1rem;
+}
+    .navbar-form .form-group {
+    float: right !important;
+}
+
+}
+@media (min-width: 992px){
+       h2,.soc{
+        text-align:left !important;}
+    .title {
+    margin-left:calc(25% + 4rem);
+}
+    footer .row {
+        margin-left:calc(25% + 2rem);
+    }
+    .blogItems article .image a {
+    top:-100%;
+    }
+    .galItems article a {
+    bottom:-100%;
+}
+.navbar-toggle{
+        margin-right: 0px;
+            margin-top: 20px;
+}
+.in {
+    margin:0;
+    }
+.navbar-default .navbar-collapse, .navbar-default .navbar-form{
+    border:0;
+}
+.navbar-default{
+    background:#ffffff;
+}
+.navbar-left{
+    float:none !important; 
+}
+.title{
+    font:3rem/3.6rem 'Open Sans';
+    font-weight:300;
+    color:#565656;
+}
+
+.foot h2{
+    font:1.6rem/2.1rem 'Open Sans';
+    color:#919191;
+    text-align:center;
+}
+.foot p{
+    text-align:left;
+    color:#474747;
+    font:1.2rem/1.7rem 'Open Sans';
+}
+.psevdo::after{
+    display:block;
+    content:'1 day ago';
+    text-align:left;
+    font:italic 1.1rem/1.3rem 'Open Sans';
+    color:#3b3b3b;
+    margin:.5rem;
+}
+footer{
+    padding:4rem !important;
+}
+
+.social{
+    font:3.7rem/4rem 'Socialico' !important;
+    text-align:center;
+}
+.social:hover{
+    color:#c6c6c6 !important;
+    text-decoration:none;
+}
+.social:focus{
+    color:#c6c6c6;
+    text-decoration:none;
+}
+.soc{
+    text-align:center;
+}
+.foot h2::before{
+    display:block;
+    content:'';
+    border-top:.1rem solid #3e3e3e;
+    padding:1rem;
+}

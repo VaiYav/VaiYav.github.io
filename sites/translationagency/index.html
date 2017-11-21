@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>index</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" href="css/font-open-sans.css">
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<link rel="stylesheet" href="css/main.min.css">
+	<link rel="stylesheet" href="css/styl.css">
+</head>
+
+<body>
+	<header class="header">
+		<div class="header-content">
+			<div class="header-container">
+				<a href="#" class="header-logo">
+					<img class="header-logo-img" src="images/img/Logo.png" alt="">
+				</a>
+				<h1 class="header-title">Company Slogan</h1>
+			</div>
+			<div class="header-container">
+				<div class="header-contact">
+					<span class="header-contact-number">+38 (067) 937 99 92</span><br />
+					<a class="header-contact-link header-contact-link__viber" href="#">Viber</a>
+					<a class="header-contact-link" href="#">Whatsup</a>
+				</div>
+				<button id="myBtn" class="header-button button__red-orang-grad"><i class="zmdi zmdi-plus-circle"></i>Заказать&nbsp;<span>перевод</span></button>
+				<i class="fa fa-bars" aria-hidden="true" onclick="openNav()"></i>
+				<div id="myNav" class="overlay">
+					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+					<div class="overlay-content">
+						<a href="#">О Компании</a>
+						<a href="#">Услуги</a>
+						<a href="#">Технологии</a>
+						<a href="#">Схема работы</a>
+						<a href="#">Преимущества</a>
+						<a href="#">Отзывы</a>
+						<a href="#">Контакты</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</header>
+	<main class="main">
+	<div class="main-change-lang">
+			<div class="change-lang">
+				<a class="change-lang-link" href="">
+					<img class="change-lang-img" src="images/background/Layer25.jpg" alt="">
+					<span class="change-lang-text">Rus</span></a>
+			</div>
+			<div class="change-lang">
+				<a class="change-lang-link" href="">
+					<img class="change-lang-img" src="images/background/Layer26.jpg" alt="">
+					<span class="change-lang-text">Eng</span></a>
+			</div>
+			<div class="change-lang">
+				<a class="change-lang-link" href="">
+					<img class="change-lang-img" src="images/background/Layer27.jpg" alt="">
+					<span class="change-lang-text">Deu</span></a>
+			</div>
+		</div>
+		<div id="swiper-container" class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide slider__title">
+					<h2 class="swiper-slide-title">Будь со всем миром <br />на одном языке!</h2>
+					<span class="swiper-slide-text">Ищете квалифицированного переводчика? <br />Тогда <b>Yota Global translation agency</b> - <br />это то, что Вам нужно!</span>
+					<button class="swiper-slide-button button-orange-gradient">
+					<i class="zmdi zmdi-play-circle"></i>Как это работает?</button>
+				</div>
+				<div class="swiper-slide slider__title">
+					<h2 class="swiper-slide-title">Будь со всем миром <br />на одном языке!</h2>
+					<span class="swiper-slide-text">Ищете квалифицированного переводчика? <br />Тогда <b>Yota Global translation agency</b> - <br />это то, что Вам нужно!</span>
+					<button class="swiper-slide-button button-orange-gradient">
+					<i class="zmdi zmdi-play-circle"></i>Как это работает?</button>
+				</div>
+				<div class="swiper-slide slider__title">
+					<h2 class="swiper-slide-title">Будь со всем миром <br />на одном языке!</h2>
+					<span class="swiper-slide-text">Ищете квалифицированного переводчика? <br />Тогда <b>Yota Global translation agency</b> - <br />это то, что Вам нужно!</span>
+					<button class="swiper-slide-button button-orange-gradient">
+					<i class="zmdi zmdi-play-circle"></i>Как это работает?</button>
+				</div>
+
+			</div>
+			<div class="main-nav">
+				<a class="main-nav-elem" href="#">О Компании</a>
+				<a class="main-nav-elem" href="#">Услуги</a>
+				<a class="main-nav-elem" href="#">Технологии</a>
+				<a class="main-nav-elem" href="#">Схема работы</a>
+				<a class="main-nav-elem" href="#">Преимущества</a>
+				<a class="main-nav-elem" href="#">Отзывы</a>
+				<a class="main-nav-elem" href="#">Контакты</a>
+			</div>
+			<div id="sliderPaginationFirst" class="swiper-pagination"></div>
+
+			<div class="swiper-button-prev swiper-button-main-prev"><i class="zmdi zmdi-chevron-left"></i></div>
+			<div class="swiper-button-next swiper-button-main-next"><i class="zmdi zmdi-chevron-right"></i></div>
+		</div>
+		<div id="myModal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<h2 class="modal-content-title">Обратный звонок</h2>
+				<span class="modal-content-text">Заполните форму и мы вам перезвоним</span>
+				<form class="modal-form" action="/php">
+					<input class="modal-form-input" type="text" id="name" name="firstname" placeholder="Ваше имя">
+					<input class="modal-form-input" type="tel" id="number" name="firstname" placeholder="Номер телефона">
+					<textarea class="modal-form-textarea" name="subject" placeholder="Комментарий"></textarea>
+					<input id="myBtnsec" class="modal-form-button__send button__red-orang-grad" type="submit" value="Отправить">
+				</form>
+			</div>
+
+		</div>
+		<div id="myModalsec" class="modal">
+
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<h2 class="modal-content-title">Спасибо!</h2>
+				<p class="modal-content-text">Ваш запрос был успешно отправлен! Пожалуйста, <br />ожидайте - мы свяжемся с Вами в ближайшее время.</p>
+				<button id="myBtnthird" class="modal-form-button__send button-orange-gradient"><i class="zmdi zmdi-check-circle"></i>Продолжить</button>
+			</div>
+
+		</div>
+		<section class="about">
+			<h2 class="about-title orange__title">О компании</h2>
+			<div class="about-container">
+				<div class="about-left-container">
+					<span class="about-text"><b>Мы</b> является сертифицированным бюро переводов согласно системе управления качеством ISO 9001. Мы предоставляем широкий спектр переводческих услуг (как письменное так и устное сопровождение) для наших клиентов, включая сопутствующее юридическое сопровождение при выполнении перевода – нотариальное заверение, проставление апостиля, легализация, нострификация документов, получение справок о несудимости и прочее.
+</span>
+					<h3 class="about-title undertitle">Мы имеем представительства в:</h3>
+					<div class="about-country-container">
+						<span class="about-country italy">Республике Италия</span>
+						<span class="about-country poland">Республике Польша</span>
+					</div>
+					<div class="about-button-container">
+						<button class="about-question button-orange-gradient">Задать вопрос</button>
+						<a href="#" class="about-title undertitle">Больше о компании</a>
+					</div>
+				</div>
+				<img class="about-img" src="images/img/Layer514.png" alt="">
+			</div>
+			<h3 class="about-garant-title">Мы гарантируем</h3>
+			<ul class="about-garant">
+				<li class="about-garant-child"><i class="zmdi zmdi-check-circle"></i>Качество</li>
+				<li class="about-garant-child"><i class="zmdi zmdi-check-circle"></i>Пунктуальность</li>
+				<li class="about-garant-child"><i class="zmdi zmdi-check-circle"></i>Конфиденциальность</li>
+				<li class="about-garant-child"><i class="zmdi zmdi-check-circle"></i>Экономичность</li>
+			</ul>
+		</section>
+		<section class="service">
+			<h2 class="service-title orange__title">Услуги</h2>
+			<div class="service-textcontainer">
+				<span class="service-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excep </span>
+				<a id="spoiler" class="service-text-link" href="#">Подробнее...</a>
+				<span class="service-addtext">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excep </span>
+			</div>
+			<div class="tab">
+				<button class="tablinks active" onclick="opentab(event, 'translate')">Переводческие <br />услуги</button>
+				<button class="tablinks" onclick="opentab(event, 'legal')">Легализация <br />документов</button>
+			</div>
+			<div id="translate" class="tabcontent">
+				<div class="tabcontent-container">
+					<a href="#">
+
+						<article class="tabcontent-child">
+
+							<i class="fa fa-university" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Юридический<br /> перевод</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-cogs" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Технический<br /> перевод</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-fire" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Переводы по<br /> нефтегазовой тематике</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-globe" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Перевод<br /> веб сайтов</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-user" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Перевод личных<br /> документов</h3>
+						</article>
+					</a>
+				</div>
+				<div class="tabcontent-container">
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-youtube-play" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Перевод<br /> мультимедиа</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-stethoscope" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Медицинский<br /> перевод</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-bullhorn" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Перевод рекламных<br /> текстов</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-star" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Художественный<br /> перевод</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-flag" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Перевод носителем<br /> языка</h3>
+						</article>
+					</a>
+				</div>
+			</div>
+			<div id="legal" class="tabcontent">
+				<div class="tabcontent-container">
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-stethoscope" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Медицинский<br /> перевод</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-bullhorn" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Перевод рекламных<br /> текстов</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-star" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Художественный<br /> перевод</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-flag" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Перевод носителем<br /> языка</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-fire" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Переводы по<br /> нефтегазовой тематике</h3>
+						</article>
+					</a>
+				</div>
+				<div class="tabcontent-container">
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-globe" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Перевод<br /> веб сайтов</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-user" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Перевод личных<br /> документов</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-youtube-play" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Перевод<br /> мультимедиа</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-university" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Юридический<br /> перевод</h3>
+						</article>
+					</a>
+					<a href="#">
+						<article class="tabcontent-child">
+							<i class="fa fa-cogs" aria-hidden="true"></i>
+							<h3 class="tabcontent-title">Технический<br /> перевод</h3>
+						</article>
+					</a>
+				</div>
+			</div>
+			<div class="service-questcontainer">
+				<span class="service-question">Не нашли то что искали?</span>
+				<a class="service-questionlink" href="#">Задайте вопрос нашим специалистам!</a>
+			</div>
+		</section>
+		<section class="works">
+			<h2 class="works-title orange__title">Схема работы</h2>
+
+			<div id="myProgress">
+				<div id="myBar"></div>
+				<div id="sliderPaginationSecond" class="swiper-pagination swiper-works-pagination"></div>
+			</div>
+			<div id="swiper-works" class="swiper-container swiper-container-works slider-shadow">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide slider__work ">
+						<div class="swiper-slide-container">
+							<div class="container-title-sldie">
+								<h2 class="swiper-slide-works-title">1. Просчет перевода</h2>
+								<span class="container-title-sldie-number"><b>1</b>/5</span>
+							</div>
+							<span class="swiper-slide-text swiper-works-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</span>
+						</div>
+						<img class="swiper-slide-img" src="images/img/Layer6.jpg" alt="">
+					</div>
+					<div class="swiper-slide slider__work ">
+						<div class="swiper-slide-container">
+							<div class="container-title-sldie">
+								<h2 class="swiper-slide-works-title">2. Подтверждение заказа</h2>
+								<span class="container-title-sldie-number"><b>2</b>/5</span></div>
+							<span class="swiper-slide-text swiper-works-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</span>
+						</div>
+						<img class="swiper-slide-img" src="images/img/Layer7.jpg" alt="">
+					</div>
+					<div class="swiper-slide slider__work ">
+						<div class="swiper-slide-container">
+							<div class="container-title-sldie">
+								<h2 class="swiper-slide-works-title">3. Оплата</h2>
+								<span class="container-title-sldie-number"><b>3</b>/5</span>
+							</div>
+							<span class="swiper-slide-text swiper-works-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</span>
+						</div>
+						<img class="swiper-slide-img" src="images/img/Layer8.jpg" alt="">
+					</div>
+					<div class="swiper-slide slider__work ">
+						<div class="swiper-slide-container">
+							<div class="container-title-sldie">
+								<h2 class="swiper-slide-works-title">4. Перевод</h2>
+								<span class="container-title-sldie-number"><b>4</b>/5</span>
+							</div>
+							<span class="swiper-slide-text swiper-works-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</span>
+						</div>
+						<img class="swiper-slide-img" src="images/img/Layer9.jpg" alt="">
+					</div>
+					<div class="swiper-slide slider__work ">
+						<div class="swiper-slide-container">
+							<div class="container-title-sldie">
+								<h2 class="swiper-slide-works-title">5. Передача перевода</h2>
+								<span class="container-title-sldie-number"><b>5</b>/5</span>
+							</div>
+							<span class="swiper-slide-text swiper-works-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</span>
+						</div>
+						<img class="swiper-slide-img" src="images/img/Layer11.jpg" alt="">
+					</div>
+				</div>
+
+				<div class="swiper-button-prev works-button-prev prev"><i class="zmdi zmdi-chevron-left"></i></div>
+				<div class="swiper-button-next works-button-next next"><i class="zmdi zmdi-chevron-right"></i></div>
+				<div class="swiper-pagination-progressbar"> </div>
+			</div>
+			<button class="swiper-slide-button button-orange-gradient">
+					<i class="zmdi zmdi-play-circle"></i>Смотреть видео</button>
+		</section>
+		<section class="feedbacks">
+			<h2 class="feedbacks-title orange__title">Отзывы</h2>
+			<div id="swiper-feedbacks" class="swiper-container swiper-container-works slider-shadow">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide slider__work slider__feedback">
+						<div class="swiper-slide-container">
+							<div class="container-title-sldie slider-feedbacks-title-container">
+								<h2 class="swiper-slide-works-title swiper-feedbacks-title">Иван Петров
+									<span class="title-sldie-position">CEO “Arista Corp.”</span></h2>
+								<div class="title-sldie-stars">
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i></div>
+								<span class="container-title-sldie-number feedback-slider-number"><b>1</b>/5</span>
+							</div>
+							<span class="swiper-slide-text swiper-works-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu  enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+						<a class="swiper-works-text-next" href="#">Далее</a>
+						</span>
+						</div>
+						<div class="feedback-slide-img"><img class="swiper-slide-img" src="images/img/man-on-ipad.png" alt=""></div>
+					</div>
+					<div class="swiper-slide slider__work slider__feedback">
+						<div class="swiper-slide-container">
+							<div class="container-title-sldie slider-feedbacks-title-container">
+								<h2 class="swiper-slide-works-title swiper-feedbacks-title">Иван Петров
+									<span class="title-sldie-position">CEO “Arista Corp.”</span></h2>
+								<div class="title-sldie-stars">
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i></div>
+								<span class="container-title-sldie-number feedback-slider-number"><b>2</b>/5</span>
+							</div>
+							<span class="swiper-slide-text swiper-works-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+						<a class="swiper-works-text-next" href="#">Далее</a>
+						</span>
+						</div>
+						<div class="feedback-slide-img"><img class="swiper-slide-img" src="images/img/man-on-ipad.png" alt=""></div>
+					</div>
+					<div class="swiper-slide slider__work slider__feedback">
+						<div class="swiper-slide-container">
+							<div class="container-title-sldie slider-feedbacks-title-container">
+								<h2 class="swiper-slide-works-title swiper-feedbacks-title">Иван Петров
+									<span class="title-sldie-position">CEO “Arista Corp.”</span></h2>
+								<div class="title-sldie-stars">
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i></div>
+								<span class="container-title-sldie-number feedback-slider-number"><b>3</b>/5</span>
+							</div>
+							<span class="swiper-slide-text swiper-works-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+						<a class="swiper-works-text-next" href="#">Далее</a>
+						</span>
+						</div>
+						<div class="feedback-slide-img"><img class="swiper-slide-img" src="images/img/man-on-ipad.png" alt=""></div>
+					</div>
+					<div class="swiper-slide slider__work slider__feedback">
+						<div class="swiper-slide-container">
+							<div class="container-title-sldie slider-feedbacks-title-container">
+								<h2 class="swiper-slide-works-title swiper-feedbacks-title">Иван Петров
+									<span class="title-sldie-position">CEO “Arista Corp.”</span></h2>
+								<div class="title-sldie-stars">
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i></div>
+								<span class="container-title-sldie-number feedback-slider-number"><b>4</b>/5</span>
+							</div>
+							<span class="swiper-slide-text swiper-works-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+						<a class="swiper-works-text-next" href="#">Далее</a>
+						</span>
+						</div>
+						<div class="feedback-slide-img"><img class="swiper-slide-img" src="images/img/man-on-ipad.png" alt=""></div>
+					</div>
+					<div class="swiper-slide slider__work slider__feedback">
+						<div class="swiper-slide-container">
+							<div class="container-title-sldie slider-feedbacks-title-container">
+								<h2 class="swiper-slide-works-title swiper-feedbacks-title">Иван Петров
+									<span class="title-sldie-position">CEO “Arista Corp.”</span></h2>
+								<div class="title-sldie-stars">
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i>
+									<i class="zmdi zmdi-star container-title-sldie-star"></i></div>
+								<span class="container-title-sldie-number feedback-slider-number"><b>5</b>/5</span>
+							</div>
+							<span class="swiper-slide-text swiper-works-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+						<a class="swiper-works-text-next" href="#">Далее</a>
+						</span>
+						</div>
+						<div class="feedback-slide-img"><img class="swiper-slide-img" src="images/img/man-on-ipad.png" alt=""></div>
+					</div>
+
+
+					<div class="swiper-button-prev works-button-prev feedbacks-button-prev"><i class="zmdi zmdi-chevron-left"></i></div>
+					<div class="swiper-button-next works-button-next feedbacks-button-next"><i class="zmdi zmdi-chevron-right"></i></div>
+
+				</div>
+			</div>
+			<div class="pagination-container">
+				<div id="sliderPaginationThird" class="swiper-paginations swiper-works-pagination"></div>
+			</div>
+		</section>
+		<section class="contacts">
+			<h2 class="contacts-title title__white">Контакты</h2>
+			<span class="contacts-timework"><b>Мы работаем:</b> с 9.00 до 19.00(пн.-сб.) <br />Заявки принимаем и обрабатываем <br />в режиме 24/7</span>
+			<div class="contacts-article-container">
+				<article class="contacts-article">
+					<h4 class="contacts-article-title"><i class="zmdi zmdi-phone-msg"></i>Контактные телефоны:</h4>
+					<div class="article-tel">
+						<span class="article-tel-numbers">+38 (050) 937-99-92</span>
+						<span class="article-tel-numbers">+38 (057) 937-99-92 </span>
+					</div>
+				</article>
+				<article class="contacts-article">
+					<h4 class="contacts-article-title"><i class="zmdi zmdi-email"></i>Електронная почта:</h4>
+					<div class="article-email">
+						<span class="article-email-text"><b>zakaz@gmail.com</b> (для заказов)</span>
+						<span class="article-email-text"><b>perevod@gmail.com</b> (для резюме)</span>
+						<span class="article-email-text"><b>ol@mail.ru</b> (для общих вопросов)</span>
+					</div>
+				</article>
+				<article class="contacts-article">
+					<h4 class="contacts-article-title"><i class="zmdi zmdi-skype"></i>Skype:</h4>
+					<div class="article-skype">
+						<span class="article-skype-text">translate_me</span>
+					</div>
+				</article>
+			</div>
+			<button class="contacts-button"><i class="zmdi zmdi-plus-circle"></i>Заказать перевод</button>
+			<div class="contacts-form">
+				<div class="form-container">
+					<h3 class="contact-form-title">Заказать перевод</h3>
+					<span class="contact-form-text">*Обязательные для заполнения поля</span>
+
+					<div class="form-child-container">
+						<input type="text" id="fname" name="firstname" placeholder="Ваше имя*">
+						<input type="tel" id="tel" name="secondtname" placeholder="Контактный телефон*">
+					</div>
+					<input type="email" id="email" name="email" placeholder="Email*">
+					<div class="form-rectangle"></div>
+					<div class="form-child-container">
+						<select class="selector-instance" data-type="search-selector" name="first-selector" id="firstSelect">
+  <option value="1" disabled selected>Язык оригинала*</option>
+  <option value="2">рапануйский</option>
+  <option value="3">ретороманский</option>
+  <option value="4">рипуарский</option>
+  <option value="5">румынский</option>
+  <option value="7">русинский</option>
+  <option value="8">русский</option>
+  <option value="9">самоа</option>
+</select>
+						<select class="selector-instance" data-type="search-selector" name="second-selector" id="secondSelect">
+  <option value="1" disabled selected>Язык перевода*</option>
+  <option value="2">рапануйский</option>
+  <option value="3">ретороманский</option>
+  <option value="4">рипуарский</option>
+  <option value="5">румынский</option>
+  <option value="7">русинский</option>
+  <option value="8">русский</option>
+  <option value="9">самоа</option>
+</select>
+					</div>
+					<select class="selector-instance" data-type="search-selector" name="third-selector" id="thirdSelect">
+  <option value="1" disabled selected>Тематика*</option>
+  <option value="2">Тематика 1</option>
+  <option value="3">Тематика 2</option>
+</select>
+					<textarea id="commit" name="commit" placeholder="Комментарий"></textarea>
+					<div class="fileloader-container">
+						<label for="fileloader" class="fileloader-label"><i class="zmdi zmdi-attachment-alt"></i>Прикрепить документ</label>
+						<input id="fileloader" type="file" onchange="getFileName();" name="fileloader">
+					</div>
+					<button class="form-button button__red-orang-grad">Отправить</button>
+				</div>
+			</div>
+		</section>
+	</main>
+	<footer class="footer">
+		<div class="footer-article-links-container footer-grow">
+			<article class="article-links">
+				<h3 class="article-links-title">Информация</h3>
+				<a class="article-links-elem" href="">Поддерживаемые языки</a>
+				<a class="article-links-elem" href="">Как это работает</a>
+				<a class="article-links-elem" href="">О компании</a>
+			</article>
+			<article class="article-links">
+				<h3 class="article-links-title">Правовая информация</h3>
+				<a class="article-links-elem" href="">Условия использования</a>
+				<a class="article-links-elem" href="">Политика конфиденциальности</a>
+			</article>
+		</div>
+		<article class="article-links footer-grow">
+			<h3 class="article-links-title">Ссылки</h3>
+			<a class="article-links-elem" href="">Переводические услуги</a>
+			<a class="article-links-elem" href="">Легализация документов</a>
+			<a class="article-links-elem" href="">Проверка перевода</a>
+			<a class="article-links-elem" href="">Транслитерация</a>
+			<a class="article-links-elem" href="">Перевод с английского</a>
+			<a class="article-links-elem" href="">Технический перевод</a>
+			<a class="article-links-elem" href="">Правовой перевод</a>
+			<a class="article-links-elem" href="">Вопрос/ответ</a>
+		</article>
+		<article class="footer-social">
+			<img class="footer-logo" src="images/background/logo.svg" alt="">
+			<div class="footer-sociallink-container">
+				<a class="sociallink-child" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+				<a class="sociallink-child" href="#"><i class="fa fa-vk" aria-hidden="true"></i></a>
+				<a class="sociallink-child" href="#"><i class="fa fa-odnoklassniki" aria-hidden="true"></i></a>
+				<a class="sociallink-child" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+				<a class="sociallink-child" href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+			</div>
+			<h4 class="footer-about">Translation Agency предоставляет <br />профессиональные, быстрые переводы более <br />чем на 55 языках мира! <br />Мы работаем Пн-Сб, 24/7</h4>
+			<h5 class="footer-rights">© Все права защищены</h5>
+		</article>
+	</footer>
+	<script src="js/lib/swiper.min.js"></script>
+	<script src="js/lib/main.min.js"></script>
+	<script src="js/user/user.js"></script>
+</body>
+
+</html>
