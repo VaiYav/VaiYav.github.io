@@ -1,377 +1,394 @@
 <!DOCTYPE html>
 <html class="dark" lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Valentin Yakovlev - GitHub CV</title>
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#389cff",
-                        "background-light": "#f5f7f8",
-                        "background-dark": "#0f1923",
-                        "gh-dark": "#0d1117",
-                        "gh-card": "#161b22",
-                        "gh-border": "#30363d",
-                        "gh-green-0": "#161b22",
-                        "gh-green-1": "#0e4429",
-                        "gh-green-2": "#006d32",
-                        "gh-green-3": "#26a641",
-                        "gh-green-4": "#39d353",
-                    },
-                    fontFamily: {
-                        "display": ["Space Grotesk", "sans-serif"]
-                    },
-                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-                },
-            },
-        }
-    </script>
-    <style>
-        ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f1923; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #30363d; 
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #389cff; 
-        }
-        
-        .contribution-grid {
-            display: grid;
-            grid-template-rows: repeat(7, 1fr);
-            grid-auto-flow: column;
-            gap: 3px;
-        }
-    </style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Valentyn Yakovliev — Full-Stack Developer</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-[#c9d1d9] font-display min-h-screen flex flex-col">
+<body>
 
+<div class="page-wrapper">
+  <div class="main-layout">
 
-<!-- Main Content Layout -->
-<div class="flex-1 max-w-[1280px] w-full mx-auto p-4 md:py-8 md:px-6 lg:px-8 flex flex-col md:flex-row gap-6 lg:gap-8">
-    
-    <!-- Sidebar -->
-    <aside class="w-full md:w-[296px] shrink-0 flex flex-col gap-4 -mt-4 md:-mt-12 relative z-10 pt-20">
-        <div class="group relative inline-block mx-auto md:mx-0">
-            <div class="bg-center bg-no-repeat bg-cover rounded-full w-[260px] h-[260px] md:w-[296px] md:h-[296px] border border-gh-border shadow-xl z-20 relative bg-[#0f1923]" style='background-image: url("assets/unnamed.jpg");'></div>
-            <div class="absolute bottom-10 right-0 md:bottom-12 md:right-4 bg-[#20262d] border border-gh-border rounded-full p-2 text-gray-300 flex items-center justify-center hover:text-primary cursor-pointer shadow-sm">
-                <span class="material-symbols-outlined text-[18px]">sentiment_satisfied</span>
-            </div>
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+
+      <!-- Avatar -->
+      <div class="avatar-wrap">
+        <div class="avatar-ring"></div>
+        <div class="avatar-ring-mask"></div>
+        <div class="avatar" style="background-image:url('assets/unnamed.jpg')"></div>
+      </div>
+
+      <!-- Name -->
+      <div>
+        <h1 class="name">Valentyn Yakovliev</h1>
+        <div class="handle">@vaiyav</div>
+        <div class="role-badge">
+          <span class="material-symbols-outlined" style="font-size:13px;line-height:1">terminal</span>
+          Full-stack Product Engineer
         </div>
-        
-        <div class="px-2 md:px-0">
-            <h1 class="text-3xl font-bold text-white leading-tight">Valentyn Yakovliev</h1>
-            <h2 class="text-xl text-gray-500 font-light mb-4">@vaiyav</h2>
-            
-            <div class="text-[16px] leading-relaxed text-white mb-4">
-                Full-Stack Developer | 7+ years Vue.js | 1+ year NestJS | Founder of My Zodiac AI 🚀
-            </div>
-            
-            
-            <div class="flex flex-col gap-2">
-                <div class="flex items-center gap-2 text-white/80">
-                    <span class="material-symbols-outlined text-[20px] text-gray-400">apartment</span>
-                    <span class="text-sm truncate">Founder at My Zodiac AI</span>
-                </div>
-                <div class="flex items-center gap-2 text-white/80">
-                    <span class="material-symbols-outlined text-[20px] text-gray-400">work</span>
-                    <span class="text-sm truncate">Full-Stack Developer (Vue.js + Nest.js)</span>
-                </div>
-                <div class="flex items-center gap-2 text-white/80">
-                    <span class="material-symbols-outlined text-[20px] text-gray-400">location_on</span>
-                    <span class="text-sm truncate">Ukraine (Remote)</span>
-                </div>
-                <div class="flex items-center gap-2 text-white/80">
-                    <span class="material-symbols-outlined text-[20px] text-gray-400">mail</span>
-                    <a class="text-sm truncate hover:text-primary hover:underline" href="mailto:yakovlev.valentin97@gmail.com">yakovlev.valentin97@gmail.com</a>
-                </div>
-                <div class="flex items-center gap-2 text-white/80">
-                    <span class="material-symbols-outlined text-[20px] text-gray-400">link</span>
-                    <a class="text-sm truncate hover:text-primary hover:underline" href="https://my-zodiac-ai.com" target="_blank">my-zodiac-ai.com</a>
-                </div>
-                <div class="flex items-center gap-2 text-white/80">
-                    <span class="material-symbols-outlined text-[20px] text-gray-400">link</span>
-                    <a class="text-sm truncate hover:text-primary hover:underline" href="https://www.linkedin.com/in/valentyn-yakovliev-960303140/" target="_blank">LinkedIn Profile</a>
-                </div>
-            </div>
+        <p class="bio">Founder of My Zodiac AI 🚀<br/>Building products people love to use.</p>
+      </div>
+
+      <!-- Meta -->
+      <div class="meta-list">
+        <div class="meta-item">
+          <span class="material-symbols-outlined meta-icon">apartment</span>
+          <span>Founder at My Zodiac AI</span>
         </div>
+        <div class="meta-item">
+          <span class="material-symbols-outlined meta-icon">location_on</span>
+          <span>Ukraine (Remote)</span>
+        </div>
+        <div class="meta-item">
+          <span class="material-symbols-outlined meta-icon">mail</span>
+          <a href="mailto:yakovlev.valentin97@gmail.com">yakovlev.valentin97@gmail.com</a>
+        </div>
+        <div class="meta-item">
+          <span class="material-symbols-outlined meta-icon">language</span>
+          <a href="https://my-zodiac-ai.com" target="_blank">my-zodiac-ai.com</a>
+        </div>
+        <div class="meta-item">
+          <span class="material-symbols-outlined meta-icon">link</span>
+          <a href="https://www.linkedin.com/in/valentyn-yakovliev-960303140/" target="_blank">LinkedIn</a>
+        </div>
+        <div class="meta-item">
+          <span class="material-symbols-outlined meta-icon">code</span>
+          <a href="https://github.com/vaiyav" target="_blank">github.com/vaiyav</a>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="side-card fade-up">
+        <div class="side-card-title">Quick Stats</div>
+        <div class="stats-row">
+          <div class="stat-box">
+            <span class="stat-num" data-target="7" data-suffix="+">0+</span>
+            <div class="stat-label">Years Vue.js</div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num" data-target="1500" data-suffix="+">0+</span>
+            <div class="stat-label">Platform Users</div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num" data-target="15" data-suffix="+">0+</span>
+            <div class="stat-label">Microservices</div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num" data-target="85" data-suffix="%">0%</span>
+            <div class="stat-label">Test Coverage</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="side-card fade-up">
+        <div class="side-card-title">Core Skills</div>
+        <div class="skills-block">
+          <div class="skill-row">
+            <div class="skill-head"><span>Vue.js / Vue 3</span><span>95%</span></div>
+            <div class="skill-track"><div class="skill-bar" data-pct="95" style="background:var(--vue)"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-head"><span>TypeScript</span><span>88%</span></div>
+            <div class="skill-track"><div class="skill-bar" data-pct="88" style="background:var(--ts)"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-head"><span>NestJS</span><span>80%</span></div>
+            <div class="skill-track"><div class="skill-bar" data-pct="80" style="background:var(--nest)"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-head"><span>MongoDB</span><span>78%</span></div>
+            <div class="skill-track"><div class="skill-bar" data-pct="78" style="background:var(--mongo)"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-head"><span>Docker / Microservices</span><span>72%</span></div>
+            <div class="skill-track"><div class="skill-bar" data-pct="72" style="background:var(--docker)"></div></div>
+          </div>
+        </div>
+      </div>
+
     </aside>
-    
-    <!-- Right Content -->
-    <main class="flex-1 min-w-0">
-    
-        
-        <!-- Pinned Items -->
-        <section class="mb-8">
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- My Zodiac AI -->
-                <div class="bg-gh-card border-2 border-primary rounded-md p-4 flex flex-col justify-between hover:border-primary/70 transition-colors cursor-pointer group">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2 text-primary font-semibold">
-                            <span class="material-symbols-outlined text-[18px] text-primary group-hover:text-primary">rocket_launch</span>
-                            <span class="group-hover:underline">my-zodiac-ai</span>
-                            <span class="border border-primary bg-primary/10 rounded-full px-2 py-0.5 text-xs text-primary font-normal ml-auto">LIVE</span>
-                        </div>
-                        <p class="text-sm text-gray-400 mb-4">Full-stack astrology platform with AI-powered personalized horoscopes, real-time chat, payment integration, and multi-platform deployment (Web + Android)</p>
-                        <div class="flex flex-wrap gap-1 mb-3">
-                            <span class="bg-[#21262d] text-primary text-xs px-2 py-1 rounded">1,500+ users</span>
-                            <span class="bg-[#21262d] text-green-400 text-xs px-2 py-1 rounded">99.9% uptime</span>
-                            <span class="bg-[#21262d] text-purple-400 text-xs px-2 py-1 rounded">15+ microservices</span>
-                            <span class="bg-[#21262d] text-orange-400 text-xs px-2 py-1 rounded">85% test coverage</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4 text-xs text-gray-400">
-                        <div class="flex items-center gap-1">
-                            <span class="w-3 h-3 rounded-full bg-[#42b883]"></span>
-                            <span>Vue 3</span>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <span class="w-3 h-3 rounded-full bg-[#e0234e]"></span>
-                            <span>NestJS</span>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <span class="w-3 h-3 rounded-full bg-[#47A248]"></span>
-                            <span>MongoDB</span>
-                        </div>
-                        <div class="flex items-center gap-1 hover:text-primary">
-                            <span class="material-symbols-outlined text-[16px]">link</span>
-                            <a href="https://my-zodiac-ai.com" target="_blank">Website</a>
-                        </div>
-                        <div class="flex items-center gap-1 hover:text-primary">
-                            <span class="material-symbols-outlined text-[16px]">phone_android</span>
-                            <a href="https://play.google.com/store/apps/details?id=com.myzodiacai.app" target="_blank">Android</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Oboard CRM -->
-                <div class="bg-gh-card border border-gh-border rounded-md p-4 flex flex-col justify-between hover:border-gray-400 transition-colors cursor-pointer group">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2 text-primary font-semibold">
-                            <span class="material-symbols-outlined text-[18px] text-gray-400 group-hover:text-primary">business</span>
-                            <span class="group-hover:underline">oboard-crm</span>
-                            <span class="border border-gh-border rounded-full px-2 py-0.5 text-xs text-gray-400 font-normal ml-auto">Production</span>
-                        </div>
-                        <p class="text-sm text-gray-400 mb-4">Enterprise CRM system with complex workflows, real-time analytics, and comprehensive component library</p>
-                    </div>
-                    <div class="flex items-center gap-4 text-xs text-gray-400">
-                        <div class="flex items-center gap-1">
-                            <span class="w-3 h-3 rounded-full bg-[#2b7489]"></span>
-                            <span>TypeScript</span>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <span class="w-3 h-3 rounded-full bg-[#42b883]"></span>
-                            <span>Vue 3</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Windsurf Workflows -->
-                <div class="bg-gh-card border border-gh-border rounded-md p-4 flex flex-col justify-between hover:border-gray-400 transition-colors cursor-pointer group">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2 text-primary font-semibold">
-                            <span class="material-symbols-outlined text-[18px] text-gray-400 group-hover:text-primary">psychology</span>
-                            <span class="group-hover:underline">windsurf-workflows</span>
-                            <span class="border border-gh-border rounded-full px-2 py-0.5 text-xs text-gray-400 font-normal ml-auto">AI</span>
-                        </div>
-                        <p class="text-sm text-gray-400 mb-4">Custom AI-assisted development workflows and prompts for rapid prototyping and production deployment</p>
-                        <div class="flex flex-wrap gap-1 mb-3">
-                            <span class="bg-[#21262d] text-purple-400 text-xs px-2 py-1 rounded">60% faster</span>
-                            <span class="bg-[#21262d] text-green-400 text-xs px-2 py-1 rounded">1000+ tests</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4 text-xs text-gray-400">
-                        <div class="flex items-center gap-1">
-                            <span class="w-3 h-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500"></span>
-                            <span>AI/ML</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- EDA Microservices -->
-                <div class="bg-gh-card border border-gh-border rounded-md p-4 flex flex-col justify-between hover:border-gray-400 transition-colors cursor-pointer group">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2 text-primary font-semibold">
-                            <span class="material-symbols-outlined text-[18px] text-gray-400 group-hover:text-primary">architecture</span>
-                            <span class="group-hover:underline">eda-microservices-template</span>
-                            <span class="border border-gh-border rounded-full px-2 py-0.5 text-xs text-gray-400 font-normal ml-auto">Template</span>
-                        </div>
-                        <p class="text-sm text-gray-400 mb-4">Production-ready microservices template with Event-Driven Architecture, CQRS, and comprehensive testing</p>
-                    </div>
-                    <div class="flex items-center gap-4 text-xs text-gray-400">
-                        <div class="flex items-center gap-1">
-                            <span class="w-3 h-3 rounded-full bg-[#e0234e]"></span>
-                            <span>NestJS</span>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <span class="w-3 h-3 rounded-full bg-[#00ADD8]"></span>
-                            <span>Docker</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- end sidebar -->
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="content">
+
+      <!-- ===== HERO ===== -->
+      <section class="hero fade-up">
+        <div class="hero-title"><span id="typing-title"></span><span class="cursor"></span></div>
+        <p class="hero-sub">
+          Building high-performance web applications and microservice backends.
+          Currently running <strong style="color:#fff">My Zodiac AI</strong> — a full-stack astrology platform with 1,500+ users.
+          Open to senior/lead frontend or full-stack roles.
+        </p>
+        <div class="hero-tags">
+          <span class="hero-tag">Vue 3 · Composition API</span>
+          <span class="hero-tag">NestJS · Microservices</span>
+          <span class="hero-tag">TypeScript</span>
+          <span class="hero-tag">MongoDB · Redis</span>
+          <span class="hero-tag">Docker · CI/CD</span>
+          <span class="hero-tag">Quasar Framework</span>
+          <span class="hero-tag">AI Integration</span>
+          <span class="hero-tag">Event-Driven Architecture</span>
+        </div>
+      </section>
+
+      <!-- ===== PINNED PROJECTS ===== -->
+      <section class="fade-up">
+        <div class="section-title">
+          <span class="material-symbols-outlined" style="font-size:16px">push_pin</span>
+          Pinned Projects
+        </div>
+        <div class="cards-grid">
+
+          <!-- My Zodiac AI -->
+          <div class="card featured">
+            <div class="card-header">
+              <span class="material-symbols-outlined card-icon">rocket_launch</span>
+              <span class="card-name">my-zodiac-ai</span>
+              <span class="card-badge">LIVE</span>
             </div>
-        </section>
-        
-        <!-- Work Experience Section -->
-        <section class="mb-8">
-            <h2 class="text-base text-white font-medium mb-4">Work Experience</h2>
-            <div class="space-y-4">
-                <!-- My Zodiac AI -->
-                <div class="bg-gh-card border border-gh-border rounded-md p-4 hover:border-gray-400 transition-colors">
-                    <div class="flex items-start justify-between mb-2">
-                        <div>
-                            <h3 class="text-white font-semibold">Founder</h3>
-                            <p class="text-primary text-sm">My Zodiac AI · Startup</p>
-                        </div>
-                        <span class="text-xs text-gray-400">Nov 2024 - Present · 4 mos</span>
-                    </div>
-                    <p class="text-sm text-gray-400 mb-2">Built and launched full-stack astrology platform serving 1,500+ users</p>
-                    <div class="flex flex-wrap gap-1">
-                        <span class="bg-[#21262d] text-xs px-2 py-1 rounded text-gray-400">Vue 3</span>
-                        <span class="bg-[#21262d] text-xs px-2 py-1 rounded text-gray-400">NestJS</span>
-                        <span class="bg-[#21262d] text-xs px-2 py-1 rounded text-gray-400">MongoDB</span>
-                        <span class="bg-[#21262d] text-xs px-2 py-1 rounded text-gray-400">Microservices</span>
-                    </div>
-                </div>
-
-                <!-- Oboard -->
-                <div class="bg-gh-card border border-gh-border rounded-md p-4 hover:border-gray-400 transition-colors">
-                    <div class="flex items-start justify-between mb-2">
-                        <div>
-                            <h3 class="text-white font-semibold">Front-end Vue.js</h3>
-                            <p class="text-primary text-sm">Oboard · Full-time</p>
-                        </div>
-                        <span class="text-xs text-gray-400">May 2022 - Nov 2025 · 3 yrs 7 mos</span>
-                    </div>
-                    <p class="text-sm text-gray-400 mb-2">Enterprise CRM development with complex workflows and real-time features</p>
-                    <div class="flex flex-wrap gap-1">
-                        <span class="bg-[#21262d] text-xs px-2 py-1 rounded text-gray-400">Vue 3</span>
-                        <span class="bg-[#21262d] text-xs px-2 py-1 rounded text-gray-400">TypeScript</span>
-                        <span class="bg-[#21262d] text-xs px-2 py-1 rounded text-gray-400">Quasar</span>
-                    </div>
-                </div>
-
-                <!-- ITOMYCH STUDIO -->
-                <div class="bg-gh-card border border-gh-border rounded-md p-4 hover:border-gray-400 transition-colors">
-                    <div class="flex items-start justify-between mb-2">
-                        <div>
-                            <h3 class="text-white font-semibold">Front-end Developer (Vue.js)</h3>
-                            <p class="text-primary text-sm">ITOMYCH STUDIO</p>
-                        </div>
-                        <span class="text-xs text-gray-400">Feb 2022 - Apr 2022 · 3 mos</span>
-                    </div>
-                    <div class="flex flex-wrap gap-1">
-                        <span class="bg-[#21262d] text-xs px-2 py-1 rounded text-gray-400">Vue.js</span>
-                    </div>
-                </div>
-
-                <!-- AnyforSoft -->
-                <div class="bg-gh-card border border-gh-border rounded-md p-4 hover:border-gray-400 transition-colors">
-                    <div class="flex items-start justify-between mb-2">
-                        <div>
-                            <h3 class="text-white font-semibold">Front-end Developer (React, Vue)</h3>
-                            <p class="text-primary text-sm">AnyforSoft</p>
-                        </div>
-                        <span class="text-xs text-gray-400">Jul 2021 - Feb 2022 · 8 mos</span>
-                    </div>
-                    <div class="flex flex-wrap gap-1">
-                        <span class="bg-[#21262d] text-xs px-2 py-1 rounded text-gray-400">React</span>
-                        <span class="bg-[#21262d] text-xs px-2 py-1 rounded text-gray-400">Vue.js</span>
-                    </div>
-                </div>
-
-                <!-- IT Svit -->
-                <div class="bg-gh-card border border-gh-border rounded-md p-4 hover:border-gray-400 transition-colors">
-                    <div class="flex items-start justify-between mb-2">
-                        <div>
-                            <h3 class="text-white font-semibold">Front-end Developer (Vue.js)</h3>
-                            <p class="text-primary text-sm">IT Svit · Full-time</p>
-                        </div>
-                        <span class="text-xs text-gray-400">Jun 2020 - Jun 2021 · 1 yr 1 mo</span>
-                    </div>
-                    <div class="flex flex-wrap gap-1">
-                        <span class="bg-[#21262d] text-xs px-2 py-1 rounded text-gray-400">Vue.js</span>
-                    </div>
-                </div>
-
-                <!-- Freelance -->
-                <div class="bg-gh-card border border-gh-border rounded-md p-4 hover:border-gray-400 transition-colors">
-                    <div class="flex items-start justify-between mb-2">
-                        <div>
-                            <h3 class="text-white font-semibold">Front-end Developer</h3>
-                            <p class="text-primary text-sm">Freelance, self-employed</p>
-                        </div>
-                        <span class="text-xs text-gray-400">Mar 2020 - Jun 2020 · 4 mos</span>
-                    </div>
-                    <p class="text-sm text-gray-400">Kharkiv, Ukraine</p>
-                </div>
-
-                <!-- Codica -->
-                <div class="bg-gh-card border border-gh-border rounded-md p-4 hover:border-gray-400 transition-colors">
-                    <div class="flex items-start justify-between mb-2">
-                        <div>
-                            <h3 class="text-white font-semibold">Front-end Vue.js</h3>
-                            <p class="text-primary text-sm">Codica</p>
-                        </div>
-                        <span class="text-xs text-gray-400">Aug 2018 - Mar 2020 · 1 yr 8 mos</span>
-                    </div>
-                    <div class="flex flex-wrap gap-1">
-                        <span class="bg-[#21262d] text-xs px-2 py-1 rounded text-gray-400">Vue.js</span>
-                    </div>
-                </div>
-
-                <!-- QPARD -->
-                <div class="bg-gh-card border border-gh-border rounded-md p-4 hover:border-gray-400 transition-colors">
-                    <div class="flex items-start justify-between mb-2">
-                        <div>
-                            <h3 class="text-white font-semibold">Front-end Vue.js</h3>
-                            <p class="text-primary text-sm">QPARD</p>
-                        </div>
-                        <span class="text-xs text-gray-400">Aug 2017 - Jul 2018 · 1 yr</span>
-                    </div>
-                    <p class="text-sm text-gray-400">Kharkiv, Ukraine</p>
-                    <div class="flex flex-wrap gap-1">
-                        <span class="bg-[#21262d] text-xs px-2 py-1 rounded text-gray-400">Vue.js</span>
-                    </div>
-                </div>
+            <p class="card-desc">Full-stack astrology platform with AI-powered horoscopes, real-time chat, payment integration, and multi-platform deployment (Web + Android).</p>
+            <div class="card-metrics">
+              <span class="metric blue">1,500+ users</span>
+              <span class="metric green">99.9% uptime</span>
+              <span class="metric purple">15+ microservices</span>
+              <span class="metric orange">85% test coverage</span>
             </div>
-        </section>
+            <div class="card-footer">
+              <div class="lang-dot"><div class="dot" style="background:var(--vue)"></div>Vue 3</div>
+              <div class="lang-dot"><div class="dot" style="background:var(--nest)"></div>NestJS</div>
+              <div class="lang-dot"><div class="dot" style="background:var(--mongo)"></div>MongoDB</div>
+              <a class="card-link" href="https://my-zodiac-ai.com" target="_blank">
+                <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Website
+              </a>
+            </div>
+          </div>
+
+          <!-- Oboard CRM -->
+          <div class="card">
+            <div class="card-header">
+              <span class="material-symbols-outlined card-icon" style="color:var(--text-dim)">business</span>
+              <span class="card-name">oboard-crm</span>
+              <span class="card-badge gray">Production</span>
+            </div>
+            <p class="card-desc">Enterprise CRM with complex workflows, real-time analytics, and a comprehensive component library serving thousands of business users.</p>
+            <div class="card-footer">
+              <div class="lang-dot"><div class="dot" style="background:var(--ts)"></div>TypeScript</div>
+              <div class="lang-dot"><div class="dot" style="background:var(--vue)"></div>Vue 3</div>
+            </div>
+          </div>
+
+          <!-- Windsurf Workflows -->
+          <div class="card">
+            <div class="card-header">
+              <span class="material-symbols-outlined card-icon" style="color:var(--purple)">psychology</span>
+              <span class="card-name">windsurf-workflows</span>
+              <span class="card-badge gray">AI</span>
+            </div>
+            <p class="card-desc">Custom AI-assisted development workflows and prompts for rapid prototyping and production deployment. Speeds up delivery by 60%.</p>
+            <div class="card-metrics">
+              <span class="metric purple">60% faster dev</span>
+              <span class="metric green">1000+ tests</span>
+            </div>
+            <div class="card-footer">
+              <div class="lang-dot">
+                <div class="dot" style="background:linear-gradient(135deg,#bc8cff,#ff6b9d)"></div>AI/ML
+              </div>
+            </div>
+          </div>
+
+          <!-- EDA Template -->
+          <div class="card">
+            <div class="card-header">
+              <span class="material-symbols-outlined card-icon" style="color:var(--orange)">architecture</span>
+              <span class="card-name">eda-microservices-template</span>
+              <span class="card-badge gray">Template</span>
+            </div>
+            <p class="card-desc">Production-ready microservices template with Event-Driven Architecture, CQRS pattern, and comprehensive testing suite.</p>
+            <div class="card-footer">
+              <div class="lang-dot"><div class="dot" style="background:var(--nest)"></div>NestJS</div>
+              <div class="lang-dot"><div class="dot" style="background:var(--docker)"></div>Docker</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== CONTRIBUTION HEATMAP ===== -->
+      <section class="fade-up">
+        <div class="section-title">
+          <span class="material-symbols-outlined" style="font-size:16px">insights</span>
+          Contribution Activity
+        </div>
+        <div class="side-card">
+          <div class="heatmap-wrap">
+            <div class="contribution-grid" id="heatmap"></div>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:center;gap:6px;font-size:0.72rem;color:var(--text-dim)">
+            <span>Less</span>
+            <div class="gh-cell gh-0" style="width:11px;height:11px;border-radius:2px;display:inline-block"></div>
+            <div class="gh-cell gh-1" style="width:11px;height:11px;border-radius:2px;display:inline-block"></div>
+            <div class="gh-cell gh-2" style="width:11px;height:11px;border-radius:2px;display:inline-block"></div>
+            <div class="gh-cell gh-3" style="width:11px;height:11px;border-radius:2px;display:inline-block"></div>
+            <div class="gh-cell gh-4" style="width:11px;height:11px;border-radius:2px;display:inline-block"></div>
+            <span>More</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== WORK EXPERIENCE ===== -->
+      <section class="fade-up">
+        <div class="section-title">
+          <span class="material-symbols-outlined" style="font-size:16px">work_history</span>
+          Work Experience
+        </div>
+        <div class="timeline">
+
+          <!-- My Zodiac AI -->
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-top">
+                <span class="tl-role">Founder &amp; Full-Stack Developer</span>
+                <span class="tl-date">Nov 2024 – Present · 4 mos</span>
+              </div>
+              <div class="tl-company">My Zodiac AI · Startup</div>
+              <p class="tl-desc">Built and launched a full-stack astrology platform from scratch, growing to 1,500+ active users. Architected 15+ microservices, integrated AI APIs, Stripe payments, and shipped on Web + Android.</p>
+              <div class="tl-tags">
+                <span class="tl-tag">Vue 3</span><span class="tl-tag">NestJS</span>
+                <span class="tl-tag">MongoDB</span><span class="tl-tag">Microservices</span>
+                <span class="tl-tag">Stripe</span><span class="tl-tag">Capacitor</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Oboard -->
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-top">
+                <span class="tl-role">Front-end Vue.js Developer</span>
+                <span class="tl-date">May 2022 – Nov 2025 · 3 yrs 7 mos</span>
+              </div>
+              <div class="tl-company">Oboard · Full-time</div>
+              <p class="tl-desc">Led frontend development of an enterprise CRM. Built complex workflow editors, real-time dashboards, and a reusable component library used across the entire product.</p>
+              <div class="tl-tags">
+                <span class="tl-tag">Vue 3</span><span class="tl-tag">TypeScript</span>
+                <span class="tl-tag">Quasar</span><span class="tl-tag">Vuex / Pinia</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ITOMYCH -->
+          <div class="tl-item">
+            <div class="tl-dot dim"></div>
+            <div class="tl-card">
+              <div class="tl-top">
+                <span class="tl-role">Front-end Developer (Vue.js)</span>
+                <span class="tl-date">Feb 2022 – Apr 2022 · 3 mos</span>
+              </div>
+              <div class="tl-company">ITOMYCH STUDIO</div>
+              <div class="tl-tags"><span class="tl-tag">Vue.js</span></div>
+            </div>
+          </div>
+
+          <!-- AnyforSoft -->
+          <div class="tl-item">
+            <div class="tl-dot dim"></div>
+            <div class="tl-card">
+              <div class="tl-top">
+                <span class="tl-role">Front-end Developer (React, Vue)</span>
+                <span class="tl-date">Jul 2021 – Feb 2022 · 8 mos</span>
+              </div>
+              <div class="tl-company">AnyforSoft</div>
+              <div class="tl-tags">
+                <span class="tl-tag">React</span><span class="tl-tag">Vue.js</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- IT Svit -->
+          <div class="tl-item">
+            <div class="tl-dot dim"></div>
+            <div class="tl-card">
+              <div class="tl-top">
+                <span class="tl-role">Front-end Developer (Vue.js)</span>
+                <span class="tl-date">Jun 2020 – Jun 2021 · 1 yr 1 mo</span>
+              </div>
+              <div class="tl-company">IT Svit · Full-time</div>
+              <div class="tl-tags"><span class="tl-tag">Vue.js</span></div>
+            </div>
+          </div>
+
+          <!-- Freelance -->
+          <div class="tl-item">
+            <div class="tl-dot dim"></div>
+            <div class="tl-card">
+              <div class="tl-top">
+                <span class="tl-role">Front-end Developer</span>
+                <span class="tl-date">Mar 2020 – Jun 2020 · 4 mos</span>
+              </div>
+              <div class="tl-company">Freelance · Kharkiv, Ukraine</div>
+            </div>
+          </div>
+
+          <!-- Codica -->
+          <div class="tl-item">
+            <div class="tl-dot dim"></div>
+            <div class="tl-card">
+              <div class="tl-top">
+                <span class="tl-role">Front-end Vue.js Developer</span>
+                <span class="tl-date">Aug 2018 – Mar 2020 · 1 yr 8 mos</span>
+              </div>
+              <div class="tl-company">Codica</div>
+              <div class="tl-tags"><span class="tl-tag">Vue.js</span></div>
+            </div>
+          </div>
+
+          <!-- QPARD -->
+          <div class="tl-item">
+            <div class="tl-dot dim"></div>
+            <div class="tl-card">
+              <div class="tl-top">
+                <span class="tl-role">Front-end Vue.js Developer</span>
+                <span class="tl-date">Aug 2017 – Jul 2018 · 1 yr</span>
+              </div>
+              <div class="tl-company">QPARD · Kharkiv, Ukraine</div>
+              <div class="tl-tags"><span class="tl-tag">Vue.js</span></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </main>
-</div>
+  </div><!-- end main-layout -->
+</div><!-- end page-wrapper -->
 
-<!-- Footer -->
-<footer class="mt-auto border-t border-gh-border py-8 px-4">
-    <div class="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-        <div class="flex items-center gap-2">
-            <svg aria-hidden="true" fill="#6e7681" height="24" version="1.1" viewbox="0 0 16 16" width="24">
-                <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
-            </svg>
-            <span>© 2025 Valentin Yakovlev</span>
-        </div>
-        <div class="flex gap-4 flex-wrap justify-center">
-            <a class="hover:text-primary hover:underline" href="https://my-zodiac-ai.com" target="_blank">My Project</a>
-            <a class="hover:text-primary hover:underline" href="https://www.linkedin.com/in/valentyn-yakovliev-960303140/" target="_blank">LinkedIn</a>
-            <a class="hover:text-primary hover:underline" href="mailto:yakovlev.valentin97@gmail.com">Contact</a>
-            <a class="hover:text-primary hover:underline" href="https://github.com/vaiyav" target="_blank">GitHub</a>
-        </div>
-    </div>
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <svg height="20" width="20" viewBox="0 0 16 16" fill="#8b949e">
+      <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/>
+    </svg>
+    <span>© 2025 Valentyn Yakovliev</span>
+  </div>
+  <div class="footer-links">
+    <a href="https://my-zodiac-ai.com" target="_blank">My Project</a>
+    <a href="https://www.linkedin.com/in/valentyn-yakovliev-960303140/" target="_blank">LinkedIn</a>
+    <a href="mailto:yakovlev.valentin97@gmail.com">Contact</a>
+    <a href="https://github.com/vaiyav" target="_blank">GitHub</a>
+  </div>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
