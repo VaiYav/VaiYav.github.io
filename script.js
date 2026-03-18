@@ -77,23 +77,36 @@ function setupTilt() {
   });
 }
 
-/* ===== CONTRIBUTION HEATMAP ===== */
+/* ===== CONTRIBUTION HEATMAP (deterministic seed) ===== */
 function buildHeatmap() {
   const grid = document.getElementById('heatmap');
   if (!grid) return;
-  const weeks = 52, days = 7;
-  const cells = weeks * days;
-  for (let i = 0; i < cells; i++) {
-    const cell = document.createElement('div');
-    cell.className = 'gh-cell';
-    // weighted random: mostly 0, some activity
-    const rand = Math.random();
+  const weeks = 52, days = 7, total = weeks * days;
+
+  // Simple seeded PRNG (mulberry32)
+  function seeded(s) {
+    return function() {
+      s |= 0; s = s + 0x6D2B79F5 | 0;
+      let t = Math.imul(s ^ s >>> 15, 1 | s);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  const rng = seeded(0xDEADBEEF);
+
+  // Build activity pattern: ramp up towards week 44 (Nov 2024 launch), stay high
+  for (let i = 0; i < total; i++) {
+    const week = Math.floor(i / days);
+    const r = rng();
+    // activity weight: low at start, high from week 40 onwards
+    const weight = week < 20 ? 0.18 : week < 35 ? 0.28 : week < 44 ? 0.42 : 0.62;
     let lvl = 0;
-    if (rand > 0.72) lvl = 1;
-    if (rand > 0.85) lvl = 2;
-    if (rand > 0.93) lvl = 3;
-    if (rand > 0.97) lvl = 4;
-    cell.classList.add('gh-' + lvl);
+    if (r < weight * 0.45) lvl = 1;
+    if (r < weight * 0.28) lvl = 2;
+    if (r < weight * 0.15) lvl = 3;
+    if (r < weight * 0.06) lvl = 4;
+    const cell = document.createElement('div');
+    cell.className = 'gh-cell gh-' + lvl;
     grid.appendChild(cell);
   }
 }
