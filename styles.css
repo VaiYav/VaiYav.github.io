@@ -359,8 +359,20 @@ body::before {
   pointer-events: none;
 }
 .card:hover::before { opacity: 1; }
-.card:hover { border-color: var(--blue); box-shadow: 0 8px 32px rgba(56,156,255,0.12); transform: translateY(-3px); }
-.card.featured { border-color: var(--blue); }
+.card:hover { border-color: var(--blue); box-shadow: 0 8px 32px rgba(56,156,255,0.12); }
+.card.featured {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 1px var(--blue), 0 8px 40px rgba(56,156,255,0.18);
+}
+.card.featured::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--purple), var(--green));
+  border-radius: var(--radius) var(--radius) 0 0;
+  pointer-events: none;
+}
 
 .card-header { display: flex; align-items: center; gap: 8px; }
 .card-icon { font-size: 18px !important; color: var(--blue); }
@@ -411,7 +423,7 @@ body::before {
   position: absolute;
   left: 7px; top: 8px; bottom: 8px;
   width: 2px;
-  background: linear-gradient(to bottom, var(--blue), var(--purple), var(--border));
+  background: linear-gradient(to bottom, var(--blue), var(--purple), transparent);
 }
 
 .tl-item {
@@ -826,4 +838,52 @@ a.card:focus-visible {
   .glitch::before, .glitch::after { display: none; }
   #particle-canvas { display: none; }
   #spotlight { display: none; }
+}
+
+/* ============================================================
+   WOW ROUND 2
+   ============================================================ */
+
+/* ===== SCROLL PROGRESS BAR ===== */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--blue), var(--purple));
+  z-index: 9999;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(56,156,255,0.6);
+}
+
+/* ===== STAGGER CARDS ===== */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.stagger-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== AVATAR HOVER ===== */
+.avatar-wrap:hover .avatar {
+  transform: scale(1.04);
+  box-shadow: 0 0 0 4px rgba(56,156,255,0.25), 0 0 32px rgba(56,156,255,0.2);
+}
+.avatar {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* ===== TIMELINE STAGGER (driven by CSS var) ===== */
+.tl-item {
+  transition-delay: var(--tl-delay, 0ms);
+}
+
+/* prefers-reduced-motion: kill stagger too */
+@media (prefers-reduced-motion: reduce) {
+  .stagger-item { opacity: 1; transform: none; transition: none; }
+  .avatar { transition: none; }
+  #scroll-progress { display: none; }
 }

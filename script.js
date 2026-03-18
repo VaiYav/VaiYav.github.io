@@ -153,14 +153,14 @@ function initTerminal() {
 
   const lines = [
     { type: 'cmd',  text: 'whoami' },
-    { type: 'out',  text: 'Valentyn Yakovliev — Full-stack Product Engineer', cls: 'highlight' },
+    { type: 'out',  text: 'Valentyn Yakovliev — Full-stack Product Engineer & Founder', cls: 'highlight' },
     { type: 'cmd',  text: 'cat skills.txt' },
-    { type: 'out',  text: 'Vue 3 (95%) · TypeScript (88%) · NestJS (80%) · MongoDB · Docker', cls: '' },
+    { type: 'out',  text: 'Frontend · Backend · System Design · UI/UX · SEO · Performance · AI · Team Lead', cls: '' },
     { type: 'cmd',  text: 'cat achievements.txt' },
     { type: 'out',  text: '🚀 Built My Zodiac AI solo → 1,500 users in 4 months', cls: '' },
-    { type: 'out',  text: '⚡ 15+ microservices · 99.9% uptime · 85% test coverage', cls: 'dim' },
-    { type: 'cmd',  text: 'echo $STATUS' },
-    { type: 'out',  text: '✅ Open to work — senior / lead full-stack roles', cls: 'highlight' },
+    { type: 'out',  text: '⚡ Architecture · Backend · Frontend · Android · Stripe — all me', cls: 'dim' },
+    { type: 'cmd',  text: 'echo $SUPERPOWER' },
+    { type: 'out',  text: '✅ Full cycle: product → code → deploy → growth. Open to senior / lead roles.', cls: 'highlight' },
   ];
 
   let li = 0;
@@ -206,6 +206,37 @@ function initTerminal() {
   setTimeout(nextLine, 600);
 }
 
+/* ===== WOW R2 #1: SCROLL PROGRESS ===== */
+function initScrollProgress() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0) + '%';
+  }, { passive: true });
+}
+
+/* ===== WOW R2 #2: STAGGER CARDS ===== */
+function setupStagger() {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const delay = parseInt(el.dataset.delay || 0);
+      setTimeout(() => el.classList.add('visible'), delay);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.stagger-item').forEach(el => io.observe(el));
+}
+
+/* ===== WOW R2 #3: TIMELINE STAGGER DELAYS ===== */
+function setupTimelineStagger() {
+  document.querySelectorAll('.tl-item').forEach((el, i) => {
+    el.style.setProperty('--tl-delay', (i * 80) + 'ms');
+  });
+}
+
 /* ===== INIT ALL ===== */
 document.addEventListener('DOMContentLoaded', () => {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -213,10 +244,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!reduced) {
     initParticles();
     initSpotlight();
+    initScrollProgress();
   }
 
   initTerminal();
   buildHeatmap();
   setupObserver();
   setupTilt();
+  setupStagger();
+  setupTimelineStagger();
 });
