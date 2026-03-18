@@ -683,3 +683,147 @@ a.card:focus-visible {
   transition: top 0.2s;
 }
 .skip-link:focus { top: 0; }
+
+/* ============================================================
+   WOW EFFECTS
+   ============================================================ */
+
+/* ===== 1. PARTICLE CANVAS ===== */
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+/* ===== 2. CURSOR SPOTLIGHT ===== */
+#spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 280px at var(--mx, -999px) var(--my, -999px),
+    rgba(56, 156, 255, 0.07) 0%,
+    transparent 70%
+  );
+  transition: --mx 0.05s, --my 0.05s;
+}
+
+/* ===== 3. GLITCH ON NAME ===== */
+.glitch {
+  position: relative;
+  cursor: default;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.glitch:hover::before {
+  opacity: 0.8;
+  color: #0ff;
+  clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+  transform: translate(-3px, 2px);
+  animation: glitch-1 0.4s steps(2) forwards;
+}
+.glitch:hover::after {
+  opacity: 0.8;
+  color: #f0f;
+  clip-path: polygon(0 55%, 100% 55%, 100% 75%, 0 75%);
+  transform: translate(3px, -2px);
+  animation: glitch-2 0.4s steps(2) forwards;
+}
+@keyframes glitch-1 {
+  0%   { transform: translate(-3px, 2px) skewX(-2deg); }
+  25%  { transform: translate(3px, -2px) skewX(2deg); }
+  50%  { transform: translate(-2px, 1px) skewX(-1deg); }
+  75%  { transform: translate(2px, -1px) skewX(1deg); }
+  100% { transform: translate(0, 0); opacity: 0; }
+}
+@keyframes glitch-2 {
+  0%   { transform: translate(3px, -2px) skewX(2deg); }
+  25%  { transform: translate(-3px, 2px) skewX(-2deg); }
+  50%  { transform: translate(2px, -1px) skewX(1deg); }
+  75%  { transform: translate(-2px, 1px) skewX(-1deg); }
+  100% { transform: translate(0, 0); opacity: 0; }
+}
+
+/* ===== 4. TERMINAL HERO ===== */
+.terminal-hero {
+  background: #0d1117;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(56,156,255,0.08);
+}
+
+.term-bar {
+  background: #21262d;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+}
+
+.term-dots { display: flex; gap: 6px; }
+.term-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.term-dot--red    { background: #ff5f57; }
+.term-dot--yellow { background: #febc2e; }
+.term-dot--green  { background: #28c840; }
+
+.term-title {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  flex: 1;
+  text-align: center;
+  font-family: 'Space Grotesk', monospace;
+}
+
+.term-body {
+  padding: 20px 24px 24px;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.88rem;
+  line-height: 1.8;
+  min-height: 160px;
+}
+
+.term-line { display: flex; align-items: flex-start; gap: 8px; flex-wrap: wrap; }
+.term-prompt { color: var(--green); flex-shrink: 0; font-weight: 600; }
+.term-cmd    { color: var(--blue); }
+.term-out    { color: var(--text); padding-left: 16px; width: 100%; }
+.term-out.dim { color: var(--text-dim); }
+.term-out.highlight { color: #fff; font-weight: 600; }
+.term-cursor-inline {
+  display: inline-block;
+  width: 8px; height: 1em;
+  background: var(--blue);
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+.hero-cta { padding: 0 24px 0; }
+.terminal-hero .hero-tags { padding: 12px 24px 20px; }
+
+/* Terminal CTA sits inside terminal — remove extra top padding */
+.terminal-hero .hero-cta { margin-top: 20px; }
+.terminal-hero .hero-tags { margin-top: 0; }
+
+/* prefers-reduced-motion: disable glitch */
+@media (prefers-reduced-motion: reduce) {
+  .glitch::before, .glitch::after { display: none; }
+  #particle-canvas { display: none; }
+  #spotlight { display: none; }
+}

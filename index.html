@@ -14,6 +14,11 @@
 
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
+<!-- Particle background -->
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
+<!-- Cursor spotlight -->
+<div id="spotlight" aria-hidden="true"></div>
+
 <div class="page-wrapper">
   <div class="main-layout">
 
@@ -29,7 +34,7 @@
 
       <!-- Name -->
       <div>
-        <h1 class="name">Valentyn Yakovliev</h1>
+        <h1 class="name glitch" data-text="Valentyn Yakovliev">Valentyn Yakovliev</h1>
         <div class="handle">@vaiyav</div>
         <div class="role-badge">
           <span class="material-symbols-outlined icon-sm">terminal</span>
@@ -126,14 +131,22 @@
     <!-- ===== MAIN CONTENT ===== -->
     <main class="content" id="main-content">
 
-      <!-- ===== HERO ===== -->
-      <section class="hero fade-up" aria-label="Introduction">
-        <div class="hero-title"><span id="typing-title">Full-Stack Developer</span><span class="cursor" aria-hidden="true"></span></div>
-        <p class="hero-sub">
-          I ship products end-to-end — from Vue 3 component to NestJS microservice to production deploy.
-          Currently growing <strong class="text-white">My Zodiac AI</strong> to 1,500+ users while staying open to
-          senior or lead full-stack roles where I can own the product, not just the tickets.
-        </p>
+      <!-- ===== HERO TERMINAL ===== -->
+      <section class="hero terminal-hero fade-up" aria-label="Introduction">
+        <!-- Terminal chrome -->
+        <div class="term-bar">
+          <div class="term-dots">
+            <span class="term-dot term-dot--red"></span>
+            <span class="term-dot term-dot--yellow"></span>
+            <span class="term-dot term-dot--green"></span>
+          </div>
+          <span class="term-title">vaiyav@portfolio ~ zsh</span>
+        </div>
+        <!-- Terminal body -->
+        <div class="term-body" id="term-body" aria-live="polite">
+          <!-- Lines injected by JS -->
+        </div>
+        <!-- CTA below terminal -->
         <div class="hero-cta">
           <a class="btn-primary" href="mailto:yakovlev.valentin97@gmail.com">
             <span class="material-symbols-outlined icon-md">mail</span>
