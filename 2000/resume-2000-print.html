@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MEGA★SUPER RESUME 2000 :: Valentyn Yakovliev's official #1 website on the whole internet</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Courier+Prime:wght@400;700&display=swap');
+
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; }
+  body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 13px;
+    color: #000;
+    background:
+      repeating-linear-gradient(135deg, #0a0a6b 0 2px, transparent 2px 20px),
+      repeating-linear-gradient(45deg, #0a0a6b 0 2px, transparent 2px 20px),
+      #1a1aa8;
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  /* marquee top bar */
+  .topbar {
+    background: linear-gradient(180deg, #ff2a2a 0%, #ffd400 50%, #ff2a2a 100%);
+    color: #fff;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    border-bottom: 3px double #000;
+    padding: 3px 0;
+    text-shadow: 1px 1px 0 #000;
+    letter-spacing: 0.3px;
+  }
+  .topbar marquee { padding: 2px 0; }
+  .spark { color: #ffe600; text-shadow: 1px 1px 0 #c00; }
+
+  /* page container */
+  .page {
+    width: 1000px;
+    margin: 0 auto;
+    background: #f3e9d2;
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+    box-shadow: 0 0 0 4px #ffd400, 0 0 0 6px #000;
+  }
+
+  /* header / WordArt title */
+  .header {
+    background:
+      radial-gradient(ellipse at center, #ffd400 0%, #ff8800 60%, #ff2a2a 100%);
+    border-bottom: 4px ridge #ffd400;
+    padding: 18px 20px 12px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before, .header::after {
+    content: "★";
+    position: absolute;
+    top: 10px;
+    font-size: 46px;
+    color: #000;
+    text-shadow: 2px 2px 0 #ffd400, 4px 4px 0 #ff2a2a;
+    -webkit-text-stroke: 1px #ffd400;
+  }
+  .header::before { left: 16px; transform: rotate(-15deg); }
+  .header::after { right: 16px; transform: rotate(15deg); }
+
+  .wordart {
+    font-family: "Impact", "Arial Black", sans-serif;
+    font-size: 58px;
+    font-weight: 900;
+    line-height: 1;
+    display: inline-block;
+    background: linear-gradient(180deg, #ff00ff 0%, #ff0000 50%, #ffd400 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 2px #000;
+    text-shadow:
+      3px 3px 0 #00ffff,
+      6px 6px 0 #000;
+    letter-spacing: 2px;
+    transform: skewX(-8deg);
+    padding: 0 10px;
+  }
+  .wordart .small { font-size: 34px; vertical-align: super; color: #fff; -webkit-text-stroke: 1.5px #000; }
+  .wordart .reg { font-size: 20px; color: #fff; -webkit-text-stroke: 1px #000; vertical-align: top; }
+
+  .subtitle {
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000, 0 0 6px #ff00ff;
+    margin-top: 6px;
+  }
+
+  /* Nav tabs */
+  .nav {
+    display: flex;
+    background: #c0c0c0;
+    border-bottom: 2px solid #000;
+    padding: 4px 6px;
+    gap: 4px;
+    border-top: 2px solid #fff;
+  }
+  .nav a {
+    flex: 1;
+    text-align: center;
+    padding: 5px 6px;
+    background: linear-gradient(180deg, #fff 0%, #e0e0e0 50%, #a8a8a8 100%);
+    border: 2px outset #e0e0e0;
+    color: #000;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+  }
+  .nav a:hover { background: #ffd400; }
+  .nav a.active {
+    background: linear-gradient(180deg, #ff2a2a 0%, #c00 100%);
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+    border: 2px inset #c00;
+  }
+  .nav a .ico { font-family: "Courier New", monospace; margin-right: 3px; }
+
+  /* Main 3-column layout */
+  .main {
+    display: grid;
+    grid-template-columns: 180px 1fr 200px;
+    gap: 8px;
+    padding: 10px;
+    background: #f3e9d2;
+  }
+
+  /* Sidebar panels */
+  .panel {
+    background: #fff;
+    border: 2px solid #000;
+    margin-bottom: 8px;
+    box-shadow: 3px 3px 0 #000;
+  }
+  .panel-title {
+    background: linear-gradient(180deg, #ff00ff 0%, #8800aa 100%);
+    color: #ffff00;
+    font-family: "Comic Sans MS", cursive;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px 6px;
+    border-bottom: 1px dashed #000;
+    text-shadow: 1px 1px 0 #000;
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+  .panel-title::before, .panel-title::after {
+    content: " ★ ";
+    color: #ffd400;
+  }
+  .panel-body { padding: 8px; }
+
+  .cat-list { list-style: none; padding: 0; margin: 0; }
+  .cat-list li { padding: 3px 0; border-bottom: 1px dotted #888; }
+  .cat-list li:last-child { border-bottom: none; }
+  .cat-list a {
+    color: #0000ee;
+    text-decoration: underline;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .cat-list a:visited { color: #660099; }
+  .cat-list a:hover { color: #ff0000; background: #ffff00; }
+  .cat-list .arrow { color: #ff6600; font-weight: bold; }
+
+  /* PHOTO panel */
+  .photo-frame {
+    padding: 4px;
+    background:
+      repeating-linear-gradient(45deg, #ffd400 0 6px, #ff00ff 6px 12px, #00ccff 12px 18px);
+    border: 2px solid #000;
+    box-shadow: 3px 3px 0 #000;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .photo-inner-box {
+    background: #fff;
+    padding: 6px 6px 4px;
+    text-align: center;
+  }
+  .photo-title {
+    font-family: "Comic Sans MS", cursive;
+    font-weight: bold;
+    color: #aa0000;
+    font-size: 12px;
+    margin-bottom: 4px;
+    text-shadow: 1px 1px 0 #ffd400;
+  }
+  .photo-title::before, .photo-title::after { content: " ✦ "; color: #ff00ff; }
+  .photo {
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(180deg, #4a525a 0%, #3a4148 100%);
+    border: 2px inset #666;
+    position: relative;
+    overflow: hidden;
+  }
+  /* shirt — light blue collared */
+  .photo .shirt {
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    bottom: 0;
+    height: 34%;
+    background: linear-gradient(180deg, #b9d3ea 0%, #a3c2df 100%);
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+  }
+  .photo .shirt::before, .photo .shirt::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 26%;
+    height: 45%;
+    background: #9cb8d4;
+  }
+  .photo .shirt::before {
+    left: 28%;
+    clip-path: polygon(0 0, 100% 0, 60% 100%, 40% 60%);
+  }
+  .photo .shirt::after {
+    right: 28%;
+    clip-path: polygon(0 0, 100% 0, 60% 60%, 40% 100%);
+  }
+  .photo .shirt-btn {
+    position: absolute;
+    left: 50%;
+    bottom: 4%;
+    width: 4%;
+    height: 3%;
+    background: #7fa0bf;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 -30% 0 0 #7fa0bf;
+  }
+  /* neck */
+  .photo .neck {
+    position: absolute;
+    left: 40%;
+    top: 58%;
+    width: 20%;
+    height: 14%;
+    background: linear-gradient(180deg, #e8b894 0%, #d4a07a 100%);
+  }
+  /* head — oval */
+  .photo .head {
+    position: absolute;
+    left: 24%;
+    top: 18%;
+    width: 52%;
+    height: 52%;
+    background: radial-gradient(ellipse at 50% 40%, #f4cfa9 0%, #e8b894 65%, #c99975 100%);
+    border-radius: 48% 48% 44% 44% / 55% 55% 45% 45%;
+  }
+  /* ears */
+  .photo .head::before, .photo .head::after {
+    content: "";
+    position: absolute;
+    top: 44%;
+    width: 10%;
+    height: 16%;
+    background: #d9a784;
+    border-radius: 50%;
+  }
+  .photo .head::before { left: -5%; }
+  .photo .head::after { right: -5%; }
+  /* hair — wavy brown, parted */
+  .photo .hair {
+    position: absolute;
+    left: 20%;
+    top: 10%;
+    width: 60%;
+    height: 26%;
+    background:
+      radial-gradient(ellipse at 30% 70%, #6b4423 0 18%, transparent 19%),
+      radial-gradient(ellipse at 55% 85%, #6b4423 0 15%, transparent 16%),
+      radial-gradient(ellipse at 78% 70%, #6b4423 0 18%, transparent 19%),
+      linear-gradient(180deg, #5a3818 0%, #7a5030 70%, #8b5a3a 100%);
+    border-radius: 52% 52% 40% 40% / 70% 70% 30% 30%;
+    box-shadow: inset 0 -4px 6px rgba(0,0,0,0.25);
+  }
+  /* side sweep */
+  .photo .hair::before {
+    content: "";
+    position: absolute;
+    left: 8%;
+    top: 25%;
+    width: 35%;
+    height: 55%;
+    background: #4a2e14;
+    border-radius: 60% 30% 50% 50% / 70% 40% 50% 60%;
+    transform: rotate(-8deg);
+  }
+  .photo .hair::after {
+    content: "";
+    position: absolute;
+    right: 5%;
+    top: 35%;
+    width: 28%;
+    height: 45%;
+    background: #5a3818;
+    border-radius: 30% 70% 50% 50% / 40% 70% 50% 60%;
+    transform: rotate(10deg);
+  }
+  /* eyebrows */
+  .photo .brows::before, .photo .brows::after {
+    content: "";
+    position: absolute;
+    top: 35%;
+    width: 10%;
+    height: 1.8%;
+    background: #3a2410;
+    border-radius: 40%;
+  }
+  .photo .brows::before { left: 32%; transform: rotate(-4deg); }
+  .photo .brows::after  { right: 32%; transform: rotate(4deg); }
+  /* glasses — black rectangular frames */
+  .photo .glasses {
+    position: absolute;
+    top: 39%;
+    left: 25%;
+    width: 50%;
+    height: 9%;
+  }
+  .photo .glasses::before, .photo .glasses::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 42%;
+    height: 100%;
+    border: 2.5px solid #111;
+    border-radius: 18% 22% 22% 18% / 30% 30% 30% 30%;
+    background: rgba(220,225,230,0.12);
+    box-shadow: inset 0 0 0 0.5px #000, 0 1px 0 rgba(255,255,255,0.15);
+  }
+  .photo .glasses::before { left: 0; }
+  .photo .glasses::after  { right: 0; }
+  .photo .bridge {
+    position: absolute;
+    top: 42%;
+    left: 46%;
+    width: 8%;
+    height: 1.5%;
+    background: #111;
+  }
+  /* eyes — inside glasses */
+  .photo .eyes::before, .photo .eyes::after {
+    content: "";
+    position: absolute;
+    top: 42%;
+    width: 3.2%;
+    height: 2%;
+    background: #3a4a3a;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #1a1a1a;
+  }
+  .photo .eyes::before { left: 34%; }
+  .photo .eyes::after  { right: 34%; }
+  /* nose */
+  .photo .nose {
+    position: absolute;
+    left: 48%;
+    top: 48%;
+    width: 4%;
+    height: 7%;
+    background: linear-gradient(180deg, transparent 0%, #d9a784 100%);
+    border-radius: 40% 40% 50% 50%;
+    box-shadow: -1px 0 1px rgba(0,0,0,0.08);
+  }
+  /* mustache */
+  .photo .stache {
+    position: absolute;
+    left: 42%;
+    top: 55%;
+    width: 16%;
+    height: 2.5%;
+    background:
+      radial-gradient(ellipse at 30% 50%, #4a2e14 0 55%, transparent 60%),
+      radial-gradient(ellipse at 70% 50%, #4a2e14 0 55%, transparent 60%);
+  }
+  /* smile */
+  .photo .smile {
+    position: absolute;
+    left: 45%;
+    top: 58%;
+    width: 10%;
+    height: 2%;
+    border-bottom: 1.5px solid #8a3a30;
+    border-radius: 0 0 80% 80%;
+  }
+  /* beard — goatee + chin scruff */
+  .photo .beard {
+    position: absolute;
+    left: 30%;
+    top: 56%;
+    width: 40%;
+    height: 16%;
+    background:
+      radial-gradient(ellipse at 50% 70%, #4a2e14 0 25%, transparent 28%),
+      radial-gradient(ellipse at 25% 55%, rgba(74,46,20,0.55) 0 18%, transparent 22%),
+      radial-gradient(ellipse at 75% 55%, rgba(74,46,20,0.55) 0 18%, transparent 22%);
+  }
+  .photo .badge-signed {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    background: #ff0000;
+    color: #ffff00;
+    font-family: "Impact", sans-serif;
+    font-size: 10px;
+    padding: 2px 6px;
+    transform: rotate(-8deg);
+    border: 1px solid #000;
+    text-shadow: 1px 1px 0 #000;
+    box-shadow: 1px 1px 0 #000;
+    letter-spacing: 1px;
+  }
+  .photo .flare {
+    position: absolute;
+    left: 10%; top: 12%;
+    width: 12px; height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 12px 4px rgba(255,255,255,0.9);
+  }
+  .photo-name {
+    font-family: "Arial Black", sans-serif;
+    font-size: 14px;
+    margin-top: 4px;
+    color: #000;
+  }
+  .photo-role {
+    font-family: "Courier New", monospace;
+    font-size: 10px;
+    color: #0000aa;
+    font-weight: bold;
+    margin-top: 2px;
+  }
+  .under-construction {
+    display: block;
+    margin-top: 5px;
+    font-family: "Courier New", monospace;
+    font-size: 9px;
+    color: #000;
+    background:
+      repeating-linear-gradient(45deg, #ffd400 0 6px, #000 6px 10px);
+    padding: 2px 3px;
+    border: 1px solid #000;
+    font-weight: bold;
+  }
+  .under-construction span { background: #fff; padding: 0 3px; }
+
+  /* Visitor counter */
+  .counter-box {
+    background: #000;
+    color: #00ff00;
+    font-family: "VT323", "Courier New", monospace;
+    font-size: 28px;
+    letter-spacing: 4px;
+    text-align: center;
+    padding: 4px 0;
+    border: 2px inset #555;
+    margin: 6px 0;
+    text-shadow: 0 0 6px #00ff00;
+  }
+  .counter-label {
+    text-align: center;
+    font-size: 11px;
+    font-family: "Times New Roman", serif;
+    color: #000;
+  }
+
+  /* Badge row */
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+    margin-top: 6px;
+  }
+  .badge {
+    display: inline-block;
+    font-family: "Courier New", monospace;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 2px 4px;
+    border: 1px solid #000;
+    background: #ffd400;
+    color: #000;
+    text-transform: uppercase;
+  }
+  .badge.blue { background: #0000ee; color: #ffff00; }
+  .badge.green { background: #00aa00; color: #fff; }
+  .badge.pink { background: #ff00ff; color: #ffff00; }
+
+  /* Center column */
+  .center {
+    background: #fff;
+    border: 2px solid #000;
+    padding: 10px;
+    box-shadow: 3px 3px 0 #000;
+  }
+
+  .welcome-title {
+    text-align: center;
+    font-family: "Impact", sans-serif;
+    font-size: 34px;
+    color: #ff00ff;
+    text-shadow:
+      2px 2px 0 #ffff00,
+      4px 4px 0 #000;
+    -webkit-text-stroke: 1px #000;
+    letter-spacing: 2px;
+    margin: 4px 0 10px;
+  }
+
+  /* SUPER banner */
+  .super-banner {
+    border: 3px dashed #ff0000;
+    background: #fffbcc;
+    padding: 8px;
+    margin: 8px 0;
+    text-align: center;
+    position: relative;
+  }
+  .super-banner h3 {
+    margin: 0 0 4px;
+    font-family: "Impact", sans-serif;
+    font-size: 24px;
+    color: #ff0000;
+    -webkit-text-stroke: 1px #000;
+    text-shadow: 2px 2px 0 #ffff00;
+    letter-spacing: 2px;
+  }
+  .super-banner .tagline {
+    font-family: "Comic Sans MS", cursive;
+    font-size: 12px;
+    color: #000;
+    margin-bottom: 6px;
+  }
+  .discount-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 8px 0;
+  }
+  .discount {
+    font-family: "Impact", sans-serif;
+    font-size: 20px;
+    padding: 4px 10px;
+    color: #fff;
+    border: 2px solid #000;
+    transform: rotate(-3deg);
+    text-shadow: 1px 1px 0 #000;
+    box-shadow: 2px 2px 0 #000;
+  }
+  .discount:nth-child(1) { background: #ff00ff; }
+  .discount:nth-child(2) { background: #ff8800; transform: rotate(2deg); }
+  .discount:nth-child(3) { background: #00aa00; transform: rotate(-2deg); }
+  .discount:nth-child(4) { background: #00bbff; transform: rotate(3deg); }
+  .discount small { font-size: 11px; display: block; letter-spacing: 0; font-family: "Comic Sans MS", cursive; }
+  .hurry {
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    color: #aa0000;
+    font-weight: bold;
+    margin-top: 4px;
+  }
+
+  /* Section title */
+  .section-title {
+    text-align: center;
+    font-family: "Impact", sans-serif;
+    font-size: 22px;
+    color: #000;
+    background: #ffd400;
+    border: 2px solid #000;
+    padding: 4px 12px;
+    display: inline-block;
+    letter-spacing: 3px;
+    margin: 14px auto 10px;
+    box-shadow: 3px 3px 0 #ff00ff;
+  }
+  .section-title-wrap { text-align: center; }
+  .section-title::before { content: "🛒 "; }
+  .section-title.no-icon::before { content: none; }
+
+  /* Product / project cards */
+  .products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 6px 0;
+  }
+  .card {
+    border: 2px solid #000;
+    background: #fff;
+    padding: 6px;
+    text-align: center;
+    position: relative;
+    box-shadow: 2px 2px 0 #888;
+  }
+  .card.green { background: #dfffd4; }
+  .card.blue  { background: #d4ecff; }
+  .card.pink  { background: #ffd4ec; }
+  .card.yellow { background: #fff8c4; }
+  .card.lavender { background: #e5d4ff; }
+  .card.peach { background: #ffe0c4; }
+
+  .card .sticker {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #ff0000;
+    color: #ffff00;
+    font-family: "Impact", sans-serif;
+    font-size: 13px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(15deg);
+    border: 2px solid #000;
+    text-shadow: 1px 1px 0 #000;
+    box-shadow: 2px 2px 0 #000;
+    line-height: 0.95;
+    text-align: center;
+    z-index: 3;
+  }
+  .card .sticker.blue { background: #0000ee; color: #fff; }
+  .card .sticker.green { background: #00aa00; color: #fff; }
+
+  .screen {
+    background:
+      repeating-linear-gradient(135deg, #bbb 0 4px, #ccc 4px 8px);
+    border: 2px inset #999;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    margin-bottom: 6px;
+  }
+
+  .card-name {
+    font-family: "Comic Sans MS", cursive;
+    font-weight: bold;
+    font-size: 14px;
+    color: #0000aa;
+    text-decoration: underline;
+    margin: 2px 0;
+  }
+  .card-desc {
+    font-family: "Times New Roman", serif;
+    font-size: 11px;
+    color: #333;
+    line-height: 1.3;
+    min-height: 56px;
+    text-align: left;
+    padding: 0 2px;
+  }
+  .price-row {
+    margin-top: 4px;
+    font-family: "Arial Black", sans-serif;
+  }
+  .old-price {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 12px;
+    margin-right: 4px;
+  }
+  .new-price {
+    color: #ff0000;
+    font-size: 16px;
+    text-shadow: 1px 1px 0 #ffff00;
+  }
+  .buy-btn {
+    display: block;
+    margin: 6px auto 0;
+    background: linear-gradient(180deg, #ffff00 0%, #ffaa00 100%);
+    border: 2px outset #ffcc00;
+    padding: 4px 14px;
+    font-family: "Impact", sans-serif;
+    font-size: 13px;
+    color: #000;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 0 #fff;
+    font-weight: bold;
+  }
+  .buy-btn { text-decoration: none; }
+  .buy-btn:hover { background: linear-gradient(180deg, #ff0 0%, #f00 100%); color: #fff; }
+  .buy-btn:active { border-style: inset; }
+
+  /* About block */
+  .about {
+    margin-top: 16px;
+    border-top: 2px dashed #000;
+    padding-top: 10px;
+    font-family: "Times New Roman", serif;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .about h4 {
+    margin: 0 0 4px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+  }
+  .about h4::before { content: "📌 "; }
+  .about b { color: #aa0000; }
+  .about .em { color: #0000aa; font-weight: bold; }
+
+  /* Terminal */
+  .terminal {
+    background: #000;
+    color: #00ff00;
+    font-family: "Courier Prime", "Courier New", monospace;
+    font-size: 12px;
+    padding: 10px 12px;
+    border: 3px inset #00aa00;
+    margin: 14px 0;
+    text-shadow: 0 0 4px #00ff00;
+    line-height: 1.5;
+  }
+  .terminal .title-bar {
+    background: #00aa00;
+    color: #000;
+    font-weight: bold;
+    padding: 2px 6px;
+    margin: -10px -12px 8px;
+    text-shadow: none;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Press Start 2P", monospace;
+    font-size: 9px;
+  }
+  .terminal .prompt { color: #ffff00; }
+  .terminal .cmd { color: #fff; }
+  .terminal .out { color: #00ff00; }
+  .terminal .cyan { color: #00ffff; }
+  .terminal .pink { color: #ff00ff; }
+  .terminal .cursor {
+    display: inline-block;
+    background: #00ff00;
+    width: 8px;
+    height: 14px;
+    vertical-align: text-bottom;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* BY THE NUMBERS */
+  .numbers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin: 10px 0;
+  }
+  .num-card {
+    background: linear-gradient(180deg, #fff 0%, #ffe0f5 100%);
+    border: 2px solid #000;
+    text-align: center;
+    padding: 8px 4px;
+    box-shadow: 2px 2px 0 #ff00ff;
+  }
+  .num-card .big {
+    font-family: "Impact", sans-serif;
+    font-size: 32px;
+    color: #ff0000;
+    text-shadow: 1px 1px 0 #ffd400;
+    -webkit-text-stroke: 0.5px #000;
+    line-height: 1;
+  }
+  .num-card .lbl {
+    font-family: "Comic Sans MS", cursive;
+    font-size: 10px;
+    color: #000;
+    margin-top: 2px;
+  }
+
+  /* Right sidebar */
+  .reviews .review {
+    background: #fffbe6;
+    border: 1px dashed #aa6600;
+    padding: 6px;
+    margin-bottom: 6px;
+    font-family: "Times New Roman", serif;
+    font-size: 11px;
+    font-style: italic;
+    line-height: 1.35;
+  }
+  .reviews .review .sig {
+    text-align: right;
+    font-style: normal;
+    font-weight: bold;
+    color: #aa0000;
+    margin-top: 3px;
+  }
+
+  .subscribe-box input[type="text"],
+  .subscribe-box input[type="password"] {
+    width: 100%;
+    font-family: "Courier New", monospace;
+    padding: 2px 4px;
+    border: 2px inset #aaa;
+    margin-bottom: 4px;
+    font-size: 11px;
+  }
+  .subscribe-btn {
+    width: 100%;
+    background: linear-gradient(180deg, #00ee00, #006600);
+    color: #fff;
+    border: 2px outset #00aa00;
+    font-family: "Impact", sans-serif;
+    padding: 4px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-shadow: 1px 1px 0 #000;
+  }
+  .subscribe-btn:hover { filter: hue-rotate(40deg); }
+  .subscribe-btn:active { border-style: inset; }
+
+  .warning-box {
+    background: #ffeeee;
+    border: 3px double #ff0000;
+    padding: 6px;
+    text-align: center;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1.3;
+  }
+  .warning-box .title {
+    color: #ff0000;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .warning-box .title::before, .warning-box .title::after { content: "⚠"; margin: 0 3px; }
+  .warning-box .btn {
+    display: inline-block;
+    background: #ff0000;
+    color: #ffff00;
+    padding: 3px 8px;
+    margin-top: 4px;
+    border: 2px outset #ff6666;
+    cursor: pointer;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 #000;
+  }
+
+  /* Footer */
+  .footer-cta {
+    margin-top: 14px;
+    background: #ffffcc;
+    border: 2px dashed #000;
+    padding: 8px;
+    font-family: "Times New Roman", serif;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .footer-cta h4 { margin: 0 0 4px; font-family: Arial, sans-serif; }
+  .footer-cta h4::before { content: "✅ "; }
+
+  .bottom-marquee {
+    background: #000;
+    color: #ffff00;
+    font-family: "Press Start 2P", monospace;
+    font-size: 10px;
+    padding: 6px 0;
+    border-top: 3px ridge #ffd400;
+    border-bottom: 3px ridge #ffd400;
+  }
+  .webring {
+    text-align: center;
+    padding: 8px;
+    background: #f3e9d2;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+  }
+  .webring .pill {
+    display: inline-block;
+    margin: 3px 2px;
+    padding: 2px 6px;
+    border: 1px solid #000;
+    background: #ffd400;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .webring .pill.blue { background: #0000ee; color: #ffff00; }
+  .webring .pill.green { background: #00aa00; color: #fff; }
+  .webring .pill.pink { background: #ff00ff; color: #ffff00; }
+
+  .copyright {
+    background: #00006b;
+    color: #ffff00;
+    font-family: "Times New Roman", serif;
+    text-align: center;
+    padding: 6px;
+    font-size: 11px;
+  }
+  .copyright a { color: #00ffff; }
+
+  /* Chatbot */
+  .chatbot {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 230px;
+    background: #fff;
+    border: 2px solid #000;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 12px;
+    box-shadow: 4px 4px 0 #000;
+    z-index: 100;
+  }
+  .chatbot .chat-head {
+    background: linear-gradient(180deg, #00bbff, #0066cc);
+    color: #fff;
+    padding: 3px 6px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #000;
+  }
+  .chatbot .chat-body { padding: 8px; display: flex; gap: 6px; align-items: flex-start; }
+  .chatbot .avatar {
+    width: 34px; height: 34px; flex: 0 0 34px;
+    background: #ffd400;
+    border: 1.5px solid #000;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .chatbot .chat-actions { display: flex; gap: 4px; margin-top: 6px; }
+  .chatbot .chat-actions button {
+    background: linear-gradient(180deg, #fff, #ddd);
+    border: 2px outset #ccc;
+    padding: 2px 8px;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  .chatbot .chat-actions button:active { border-style: inset; }
+
+  a { color: #0000ee; }
+
+  .blink { animation: blink2 0.8s steps(2, start) infinite; }
+  @keyframes blink2 { to { visibility: hidden; } }
+
+  .dec-stars {
+    text-align: center;
+    color: #ffd400;
+    font-size: 14px;
+    letter-spacing: 4px;
+    margin: 4px 0;
+    text-shadow: 1px 1px 0 #000;
+  }
+
+  .tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+    margin: 6px 0 2px;
+  }
+  .tech-pills .pill2 {
+    font-family: "Arial Black", sans-serif;
+    font-size: 11px;
+    padding: 3px 8px;
+    border: 2px solid #000;
+    background: #fff;
+    transform: rotate(-1deg);
+    box-shadow: 2px 2px 0 #000;
+  }
+  .tech-pills .pill2:nth-child(2n) { transform: rotate(1.5deg); background: #ffeeff; }
+  .tech-pills .pill2:nth-child(3n) { transform: rotate(-2deg); background: #eeffee; }
+  .tech-pills .pill2:nth-child(5n) { transform: rotate(2deg); background: #eeeeff; }
+
+  .contact-box {
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .contact-box b { color: #aa0000; }
+
+  /* BIG EMAIL BANNER */
+  .email-banner {
+    display: block;
+    margin: 6px 0 10px;
+    padding: 10px 12px;
+    background:
+      repeating-linear-gradient(45deg, #ffd400 0 10px, #ff0000 10px 20px, #ffd400 20px 30px, #000 30px 34px);
+    border: 3px solid #000;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 4px 4px 0 #ff00ff, 4px 4px 0 4px #000;
+    position: relative;
+    animation: eb-wiggle 2.4s ease-in-out infinite;
+  }
+  .email-banner::before, .email-banner::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    width: 14px; height: 14px;
+    background: radial-gradient(circle, #fff 0 30%, #ffd400 35%, #ff0000 100%);
+    border-radius: 50%;
+    border: 1.5px solid #000;
+  }
+  .email-banner::before { left: 6px; }
+  .email-banner::after { right: 6px; }
+  .eb-label {
+    display: block;
+    font-family: "Impact", "Arial Black", sans-serif;
+    font-size: 18px;
+    color: #ffff00;
+    -webkit-text-stroke: 1px #000;
+    text-shadow: 2px 2px 0 #ff0000, 3px 3px 0 #000;
+    letter-spacing: 2px;
+  }
+  .eb-addr {
+    display: inline-block;
+    margin: 4px 8px 2px;
+    padding: 4px 14px;
+    background: #fff;
+    border: 2px solid #000;
+    font-family: "Courier New", monospace;
+    font-size: 20px;
+    font-weight: bold;
+    color: #0000ee;
+    text-decoration: underline;
+    text-shadow: 1px 1px 0 #ffff00;
+    box-shadow: 2px 2px 0 #000;
+    letter-spacing: 0.5px;
+  }
+  .email-banner:hover .eb-addr { background: #ffff00; color: #ff0000; }
+  .eb-sub {
+    display: block;
+    margin-top: 4px;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 11px;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+    font-weight: bold;
+  }
+  @keyframes eb-wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-0.4deg); }
+    75% { transform: rotate(0.4deg); }
+  }
+
+  /* PRINT OPTIMIZATIONS */
+  @page { size: A3 portrait; margin: 0.4cm; }
+  @media print {
+    html, body {
+      background: #1a1aa8 !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      background:
+        repeating-linear-gradient(135deg, #0a0a6b 0 2px, transparent 2px 20px),
+        repeating-linear-gradient(45deg, #0a0a6b 0 2px, transparent 2px 20px),
+        #1a1aa8 !important;
+    }
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      animation: none !important;
+      transition: none !important;
+    }
+    .page { width: 100% !important; max-width: 1000px; margin: 0 auto;
+      box-shadow: 0 0 0 4px #ffd400, 0 0 0 6px #000 !important; }
+    .chatbot { display: none !important; }
+    .blink { animation: none !important; visibility: visible !important; }
+    .cursor { display: none !important; }
+    .main { break-inside: avoid; }
+    .card, .panel, .num-card, .terminal, .super-banner, .footer-cta, .warning-box, .review {
+      break-inside: avoid;
+    }
+    a { color: #0000ee !important; text-decoration: underline; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <marquee behavior="scroll" direction="left" scrollamount="5">
+    <span class="spark">◆◆◆</span> ATTENTION !!!! HOT SPECIALIST ON THE MARKET !!!! DISCOUNTS up to 0% on test coverage !!! NEW: My Zodiac AI — 1,500+ users in 4 months !!! <span class="spark">◆◆◆</span> OPEN TO SENIOR / LEAD OFFERS <span class="spark">◆◆◆</span> 7 YEARS OF VUE.JS — TIME-TESTED !!! &nbsp;&nbsp;&nbsp;
+  </marquee>
+</div>
+
+<div class="page" id="top">
+
+  <div class="header">
+    <div class="wordart">
+      RESUME<span class="small">®</span>2026<span class="reg">™</span>
+    </div>
+    <div class="subtitle">~*~ Valentyn Yakovliev's OFFICIAL #1 site on the whole internet ~*~ online since 2018 ~*~</div>
+    <div class="dec-stars">★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★ ☆ ★</div>
+  </div>
+
+  <nav class="nav">
+    <a href="#top" class="active"><span class="ico">🏠</span>Home</a>
+    <a href="#projects"><span class="ico">📦</span>Projects</a>
+    <a href="#skills"><span class="ico">🔥</span>SKILLS!!!</a>
+    <a href="#contact"><span class="ico">📞</span>Contact</a>
+    <a href="#reviews"><span class="ico">❓</span>Reviews</a>
+    <a href="#numbers"><span class="ico">📖</span>By Numbers</a>
+    <a href="#gallery"><span class="ico">🖼️</span>Gallery</a>
+    <a href="#about"><span class="ico">👤</span>About me</a>
+  </nav>
+
+  <main class="main">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="left-col">
+
+      <!-- PHOTO -->
+      <section class="photo-frame">
+        <div class="photo-inner-box">
+          <div class="photo-title">my photo</div>
+          <div class="photo">
+            <div class="shirt"><div class="shirt-btn"></div></div>
+            <div class="neck"></div>
+            <div class="head"></div>
+            <div class="beard"></div>
+            <div class="stache"></div>
+            <div class="smile"></div>
+            <div class="nose"></div>
+            <div class="glasses"></div>
+            <div class="bridge"></div>
+            <div class="eyes"></div>
+            <div class="brows"></div>
+            <div class="hair"></div>
+            <div class="flare"></div>
+            <div class="badge-signed">LIVE!</div>
+          </div>
+          <div class="photo-name">Valentyn Yakovliev</div>
+          <div class="photo-role">// full-stack product engineer</div>
+          <div class="under-construction">
+            <span>◆ PHOTO UNDER CONSTRUCTION ◆</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title">categories</div>
+        <div class="panel-body">
+          <ul class="cat-list">
+            <li><span class="arrow">☞</span> <a href="#skills">Frontend</a></li>
+            <li><span class="arrow">☞</span> <a href="#skills">Backend</a></li>
+            <li><span class="arrow">☞</span> <a href="#projects">UI / UX Design</a></li>
+            <li><span class="arrow">☞</span> <a href="#projects">Artificial Intelligence</a></li>
+            <li><span class="arrow">☞</span> <a href="#skills">DevOps &amp; Containers</a></li>
+            <li><span class="arrow">☞</span> <a href="#projects">SEO &amp; Performance</a></li>
+            <li><span class="arrow">☞</span> <a href="#about">Team Leadership</a></li>
+            <li><span class="arrow">☞</span> <a href="#reviews">More…</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title">visitors</div>
+        <div class="panel-body" style="padding:6px;">
+          <div class="counter-box">0015002</div>
+          <div class="counter-label">you are visitor <b>#15002</b></div>
+          <hr>
+          <p style="font-size:11px; text-align:center; margin:4px 0;">
+            Best viewed in<br>
+            <b>Internet Explorer 6</b><br>
+            at 1024×768
+          </p>
+          <div class="badge-row">
+            <span class="badge">W3C HTML 4.01</span>
+            <span class="badge blue">CSS ✓</span>
+            <span class="badge green">TXT 100%</span>
+            <span class="badge pink">MAIL.RU</span>
+          </div>
+          <p style="font-size:11px; text-align:center; margin:6px 0 0;">
+            [ <a href="#top">«back</a> | <a href="#about">next»</a> ]
+          </p>
+        </div>
+      </section>
+
+      <section class="panel" id="contact">
+        <div class="panel-title">contact</div>
+        <div class="panel-body contact-box">
+          <b>✉ e-mail:</b><br>
+          yakovlev.valentin97<wbr>@gmail.com<br><br>
+          <b>🌐 site:</b><br>
+          <a href="https://my-zodiac-ai.com" target="_blank" rel="noopener">my-zodiac-ai.com</a><br><br>
+          <b>💼 LinkedIn:</b><br>
+          <a href="https://www.linkedin.com/in/vaiyav" target="_blank" rel="noopener">/in/vaiyav</a><br><br>
+          <b>🐙 github:</b><br>
+          <a href="https://github.com/vaiyav" target="_blank" rel="noopener">/vaiyav</a><br><br>
+          <b>📍 location:</b><br>
+          Ukraine (Remote)<br><br>
+          <b>🕒 working hours:</b><br>
+          24 / 7 / 365<br>
+          (except holidays<br>and lunch break)
+        </div>
+      </section>
+    </aside>
+
+    <!-- CENTER -->
+    <section class="center">
+
+      <h1 class="welcome-title">WELCOME TO MY RESUME !!!</h1>
+
+      <!-- BIG EMAIL BANNER -->
+      <a href="mailto:yakovlev.valentin97@gmail.com" class="email-banner">
+        <span class="eb-label">📧 HIRE ME NOW !!!</span>
+        <span class="eb-addr">yakovlev.valentin97@gmail.com</span>
+        <span class="eb-sub">★ click to send e-mail ★ reply within 1 business day ★</span>
+      </a>
+
+      <div class="dec-stars" style="color:#ff00ff;">✦ ✦ ✦ ✦ ✦</div>
+
+      <!-- SUPER banner -->
+      <div class="super-banner" id="skills">
+        <h3>⚡ SUPER SKILLS !!!! ⚡</h3>
+        <div class="tagline">Only until end of yesterday !!! Order yourself a full-stack engineer !!!</div>
+        <div class="discount-row">
+          <div class="discount">Vue 3<small>7+ years</small></div>
+          <div class="discount">NestJS<small>microservices</small></div>
+          <div class="discount">TypeScript<small>everywhere</small></div>
+          <div class="discount">MongoDB<small>+ Redis</small></div>
+        </div>
+        <div class="tech-pills">
+          <span class="pill2">Composition&nbsp;API</span>
+          <span class="pill2">CQRS</span>
+          <span class="pill2">Docker</span>
+          <span class="pill2">CI / CD</span>
+          <span class="pill2">UI / UX</span>
+          <span class="pill2">SEO</span>
+          <span class="pill2">Performance</span>
+          <span class="pill2">AI Integration</span>
+          <span class="pill2">Product Strategy</span>
+          <span class="pill2">Team&nbsp;Lead</span>
+        </div>
+        <div class="hurry">⚠ HURRY UP BEFORE HE GETS HIRED ⚠</div>
+      </div>
+
+      <!-- Terminal -->
+      <div class="terminal">
+        <div class="title-bar">
+          <span>vaiyav@portfolio ~ zsh</span>
+          <span>_ □ ×</span>
+        </div>
+<span class="prompt">❯</span> <span class="cmd">whoami</span>
+<span class="out">Valentyn Yakovliev — Full-stack Product Engineer &amp; Founder</span>
+
+<span class="prompt">❯</span> <span class="cmd">cat skills.txt</span>
+<span class="out">Frontend · Backend · System Design · UI/UX · SEO · Perf · AI · Team&nbsp;Lead</span>
+
+<span class="prompt">❯</span> <span class="cmd">cat achievements.txt</span>
+<span class="cyan">🚀</span> <span class="out">Built My Zodiac AI <span class="pink">solo</span> → 1,500 users in 4 months</span>
+<span class="cyan">⚡</span> <span class="out">Architecture · Backend · Frontend · Android · Stripe — all me</span>
+
+<span class="prompt">❯</span> <span class="cmd">echo $SUPERPOWER</span>
+<span class="out">✅ Full cycle: product → code → deploy → growth.</span>
+<span class="out">&nbsp;&nbsp;&nbsp;Open to senior / lead roles.</span>
+
+<span class="prompt">❯</span> <span class="cursor"></span>
+      </div>
+
+      <!-- BY THE NUMBERS -->
+      <div class="section-title-wrap" id="numbers">
+        <span class="section-title no-icon">📊 BY THE NUMBERS — OUR HOTTEST TOP</span>
+      </div>
+      <div class="numbers">
+        <div class="num-card"><div class="big">7+</div><div class="lbl">years with Vue.js</div></div>
+        <div class="num-card"><div class="big">1500+</div><div class="lbl">users on the platform</div></div>
+        <div class="num-card"><div class="big">60%</div><div class="lbl">faster with AI tooling</div></div>
+        <div class="num-card"><div class="big">1000+</div><div class="lbl">tests written</div></div>
+      </div>
+
+      <!-- PROJECT OF THE DAY -->
+      <div class="section-title-wrap" id="projects">
+        <span class="section-title">PROJECT OF THE DAY</span>
+      </div>
+
+      <div class="products">
+
+        <div class="card blue">
+          <div class="sticker">HIT!</div>
+          <div class="screen">📊</div>
+          <div class="card-name">oboard-crm</div>
+          <div class="card-desc">
+            Enterprise OKR platform. Owned the frontend — workflow editors,
+            real-time dashboards, and a component library used across the whole product.
+          </div>
+          <div class="price-row">
+            <span class="old-price">jQuery</span>
+            <span class="new-price">Vue 3 + TS</span>
+          </div>
+          <a class="buy-btn" href="mailto:yakovlev.valentin97@gmail.com?subject=HIRE%20ME%20%21%21%21">DETAILS!!!</a>
+        </div>
+
+        <div class="card green">
+          <div class="sticker blue">AI !</div>
+          <div class="screen">🤖</div>
+          <div class="card-name">windsurf-workflows</div>
+          <div class="card-desc">
+            Personal AI dev tooling. Prompt templates, code generation rules,
+            test scaffolding. From idea to working feature — 60% faster.
+          </div>
+          <div class="price-row">
+            <span class="old-price">by hand</span>
+            <span class="new-price">−60% time</span>
+          </div>
+          <a class="buy-btn" href="mailto:yakovlev.valentin97@gmail.com?subject=HIRE%20ME%20%21%21%21">DETAILS!!!</a>
+        </div>
+
+        <div class="card pink">
+          <div class="sticker green">NEW</div>
+          <div class="screen">📦</div>
+          <div class="card-name">eda-microservices-template</div>
+          <div class="card-desc">
+            Skip the boilerplate. EDA + CQRS + Docker + tests, all wired up.
+            Clone and ship.
+          </div>
+          <div class="price-row">
+            <span class="old-price">2 weeks</span>
+            <span class="new-price">0 minutes</span>
+          </div>
+          <a class="buy-btn" href="mailto:yakovlev.valentin97@gmail.com?subject=HIRE%20ME%20%21%21%21">DETAILS!!!</a>
+        </div>
+
+        <div class="card yellow">
+          <div class="sticker">-100%</div>
+          <div class="screen">🔮</div>
+          <div class="card-name">My Zodiac AI</div>
+          <div class="card-desc">
+            My own AI product. Architecture, backend, frontend, Android, Stripe —
+            all solo. 1,500+ users in 4 months.
+          </div>
+          <div class="price-row">
+            <span class="old-price">idea</span>
+            <span class="new-price">1,500+ users</span>
+          </div>
+          <a class="buy-btn" href="mailto:yakovlev.valentin97@gmail.com?subject=HIRE%20ME%20%21%21%21">BUY !!!</a>
+        </div>
+
+        <div class="card lavender">
+          <div class="sticker blue">SOLO</div>
+          <div class="screen">🎨</div>
+          <div class="card-name">UI / UX Design System</div>
+          <div class="card-desc">
+            Component library used across the whole product. Design tokens,
+            accessibility, dark mode — all included.
+          </div>
+          <div class="price-row">
+            <span class="old-price">chaos</span>
+            <span class="new-price">consistency</span>
+          </div>
+          <a class="buy-btn" href="mailto:yakovlev.valentin97@gmail.com?subject=HIRE%20ME%20%21%21%21">DETAILS!!!</a>
+        </div>
+
+        <div class="card peach">
+          <div class="sticker">TOP</div>
+          <div class="screen">🚀</div>
+          <div class="card-name">Growth &amp; SEO</div>
+          <div class="card-desc">
+            I don't just write code — I bring users in. Performance, SEO, analytics, A/B.
+            Full cycle: product → code → deploy → growth.
+          </div>
+          <div class="price-row">
+            <span class="old-price">0 users</span>
+            <span class="new-price">1,500+</span>
+          </div>
+          <a class="buy-btn" href="mailto:yakovlev.valentin97@gmail.com?subject=HIRE%20ME%20%21%21%21">DETAILS!!!</a>
+        </div>
+
+      </div>
+
+      <div class="about" id="about">
+        <h4>About our candidate</h4>
+        My name is <b>Valentyn Yakovliev</b> and I'm the engineer who does it all himself:
+        from <span class="em">architecture</span> to <span class="em">design</span>,
+        from backend to growth. Working in <b>IT number ONE!!!</b> Monday through Friday
+        (except weekends, holidays, and lunch). Commits shipped by post or "whatever works". ⚡
+        <b>PAYMENT ON DELIVERY OF THE PRODUCT!!!</b> 7 years on the market and not a single complaint*.
+        <div style="font-size:10px; color:#666; margin-top:4px;">
+          * there were complaints, but we didn't read them
+        </div>
+      </div>
+
+    </section>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="right-col">
+
+      <section class="panel reviews" id="reviews">
+        <div class="panel-title">reviews</div>
+        <div class="panel-body">
+          <div class="review">
+            "Ordered a full-stack engineer, got a real one — writes code, writes tests,
+            even designs the UI himself. Highly recommend!"
+            <div class="sig">— Startup N.</div>
+          </div>
+          <div class="review">
+            "Said he'd do it — did it. 1,500 users in 4 months, I didn't believe it
+            until I logged in myself."
+            <div class="sig">— Oleh, 34 y.o.</div>
+          </div>
+          <div class="review">
+            "Was skeptical, ordered a pet-project — got it production-ready,
+            with CI/CD and tests. Now only hiring him!!"
+            <div class="sig">— Mariya K.</div>
+          </div>
+          <div class="review">
+            "7 years of Vue and zero jQuery. Clean. ★★★★★"
+            <div class="sig">— Anonymous</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel subscribe-box">
+        <div class="panel-title">subscribe!</div>
+        <div class="panel-body">
+          <p style="font-size:11px; margin:0 0 6px; text-align:center;">
+            📧 Be the first to know about new projects and commits!
+          </p>
+          <input type="text" placeholder="your@email.com">
+          <input type="password" placeholder="password (just in case)">
+          <button class="subscribe-btn">SUBSCRIBE!</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title">status</div>
+        <div class="panel-body" style="text-align:center;">
+          <div style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#00ff00; box-shadow:0 0 8px #00ff00; vertical-align:middle;"></div>
+          <span style="font-family:Arial, sans-serif; font-weight:bold; color:#008800; font-size:12px; vertical-align:middle;">
+            ONLINE
+          </span>
+          <p style="font-size:11px; margin:6px 0 0;">
+            <b class="blink" style="color:#ff0000;">OPEN TO WORK !!!</b><br>
+            <span style="font-family:'Comic Sans MS', cursive;">looking for senior / lead role</span>
+          </p>
+        </div>
+      </section>
+
+      <section class="warning-box">
+        <div class="title">ATTENTION!!!</div>
+        Your team is INFECTED<br>
+        with technical debt!!<br>
+        clean it up <b>for free*</b>
+        <br>
+        <a href="mailto:yakovlev.valentin97@gmail.com?subject=HIRE%20ME%20%21%21%21" class="btn">HIRE!</a>
+        <div style="font-size:9px; color:#666; margin-top:4px;">
+          *for a reasonable salary
+        </div>
+      </section>
+
+      <section class="panel" id="gallery">
+        <div class="panel-title">buttons 88×31</div>
+        <div class="panel-body" style="text-align:center; font-family:'Courier New', monospace; font-size:9px; line-height:1.1;">
+          <div style="display:inline-block; width:88px; height:31px; background:linear-gradient(90deg,#ff00ff,#00ffff); border:1px solid #000; color:#fff; padding:2px; margin:2px; font-weight:bold;">
+            VUE.JS<br>POWERED
+          </div>
+          <div style="display:inline-block; width:88px; height:31px; background:#000; color:#0f0; border:1px solid #000; padding:2px; margin:2px; font-weight:bold;">
+            TYPESCRIPT<br>INSIDE
+          </div>
+          <div style="display:inline-block; width:88px; height:31px; background:#ff0000; color:#fff; border:1px solid #000; padding:2px; margin:2px; font-weight:bold;">
+            NEST.JS<br>READY
+          </div>
+          <div style="display:inline-block; width:88px; height:31px; background:#ffd400; color:#000; border:1px solid #000; padding:2px; margin:2px; font-weight:bold;">
+            DOCKERIZED<br>™
+          </div>
+        </div>
+      </section>
+
+    </aside>
+
+  </main>
+
+  <!-- Hire-me CTA footer -->
+  <div style="padding: 0 10px 10px;">
+    <div class="footer-cta">
+      <h4>Contact the candidate directly (no middlemen!)</h4>
+      Write to <b>yakovlev.valentin97@gmail.com</b> — I reply within one business day,
+      and if it's really urgent — even faster. Portfolio: <a href="https://my-zodiac-ai.com" target="_blank" rel="noopener">my-zodiac-ai.com</a> ·
+      LinkedIn: <a href="https://www.linkedin.com/in/vaiyav" target="_blank" rel="noopener">/in/vaiyav</a> · GitHub: <a href="https://github.com/vaiyav" target="_blank" rel="noopener">/vaiyav</a>.
+      <br>
+      ⚡ <b>Free 30-minute call</b> to discuss your project !!!
+    </div>
+  </div>
+
+  <div class="bottom-marquee">
+    <marquee behavior="scroll" direction="left" scrollamount="4">
+      ★ BEST CANDIDATE 2026 &nbsp;&nbsp; ★ NETSCAPE APPROVED &nbsp;&nbsp; ★ HTML 3.2 VALID &nbsp;&nbsp; ★ ZODIAC AI ™ &nbsp;&nbsp; ★ COOL ★ &nbsp;&nbsp; ★ 100% HUMAN NOT A BOT &nbsp;&nbsp; ★ VERIFIED 7 YEARS OF EXPERIENCE &nbsp;&nbsp;
+    </marquee>
+  </div>
+
+  <div class="webring">
+    This site is part of the <b>FULL-STACK WEBRING</b> ::
+    <a href="#" class="pill">« prev</a>
+    <a href="#" class="pill blue">random</a>
+    <a href="#" class="pill green">list</a>
+    <a href="#" class="pill pink">next »</a>
+  </div>
+
+  <div class="copyright">
+    © 2018 — 2026 MegaSuperYakovliev™®© · ICQ: 007-228-1337 · 1-800-HIRE-ME ·
+    <i>Powered by Enthusiasm &amp; ☕</i>
+  </div>
+
+</div>
+
+<!-- Chatbot -->
+<div class="chatbot" id="chatbot">
+  <div class="chat-head">
+    <span>💬 Assistant</span>
+    <span style="cursor:pointer;" onclick="document.getElementById('chatbot').style.display='none'">×</span>
+  </div>
+  <div class="chat-body">
+    <div class="avatar">📎</div>
+    <div>
+      Hi! Looks like you want to hire someone. Can I help?
+      <div class="chat-actions">
+        <button>Yes</button>
+        <button>No</button>
+        <button>Later</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  try {
+    const n = parseInt(localStorage.getItem('visCount') || '15001', 10) + 1;
+    localStorage.setItem('visCount', n);
+    const el = document.querySelector('.counter-box');
+    if (el) el.textContent = String(n).padStart(7, '0');
+    const lbl = document.querySelector('.counter-label b');
+    if (lbl) lbl.textContent = '#' + n;
+  } catch (e) {}
+</script>
+
+<script>
+  (async () => {
+    try { await document.fonts.ready; } catch (e) {}
+    await new Promise(r => {
+      if (document.readyState === 'complete') r();
+      else window.addEventListener('load', r, { once: true });
+    });
+    await new Promise(r => setTimeout(r, 500));
+    window.print();
+  })();
+</script>
+</body>
+</html>
