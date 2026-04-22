@@ -1,0 +1,17 @@
+{
+  "name": "Valentyn Yakovliev — Portfolio",
+  "short_name": "VaiYav",
+  "description": "Full-Stack Product Engineer & Founder from Ukraine",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#00ff41",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,14 +1,574 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Valentyn Yakovliev</title>
-  <meta http-equiv="refresh" content="0; url=2000/resume-2000.html"/>
-  <link rel="canonical" href="2000/resume-2000.html"/>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGgSURBVFiF7ZexTgJREIZ/70VB0fjAqI0WFhZqZaWFhY0P4GNo5QP4ABY+gq2VjYWVjY2NjVoZWdlYaaGFBQlRcHfGmEsCyeV2YZEvmczO/5+ZnZ25AxwHjuNQq9Wo1WpUq1V830cphVIKEYGIEJGjXwdQSqGUQinF+9s7T09P1Ot1isUiURShtT72egC01mit8TyParVKu91GKUWhUMBxHAzDOKgHwPd9PM+j2WzSarUwxlAqlbBtm0Kh8CnEfuu01riuS7vdpt1u45zDtm0cxzl4QA5QrVZ5eXlhMpmgtSaTyZDJZMjlcgAopQ7qAcjn83Q6HUajEePxGGMMy+WSyWTCYrEAYD6fH9QDsNlsMMbg+z7GGHzfx1rLfD5nNpsRRdFB/R+QUhJFEdbaT8RaSxzHeJ73ZUQIIYjjeJ8Q/08QhuE+If4nIaX0ZUQIIVj/Q/4D/gPWcQ8X7yE8XAAAAABJRU5ErkJggg=="/>
+  <link rel="apple-touch-icon" href="/favicon.svg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <meta name="theme-color" content="#00ff41"/>
+  <meta name="msapplication-TileColor" content="#0d1117"/>
+
+  <title>Valentyn Yakovliev — The Choice | Full-Stack Product Engineer</title>
+
+  <!-- SEO core -->
+  <meta name="description" content="Valentyn Yakovliev — Full-Stack Product Engineer & Founder from Ukraine. Choose your path: enterprise resume or creative portfolio. 7+ years Vue.js, NestJS, TypeScript. Built My Zodiac AI solo."/>
+  <meta name="keywords" content="Valentyn Yakovliev, Full-Stack Engineer, Vue.js developer, NestJS developer, TypeScript, product engineer, Ukraine developer, remote developer, My Zodiac AI, vaiyav"/>
+  <meta name="author" content="Valentyn Yakovliev"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://vaiyav.github.io/"/>
+
+  <!-- Open Graph (Facebook, LinkedIn) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Valentyn Yakovliev — The Choice"/>
+  <meta property="og:description" content="Full-Stack Product Engineer & Founder. Two paths: enterprise or creative. 7+ years Vue.js, NestJS."/>
+  <meta property="og:url" content="https://vaiyav.github.io/"/>
+  <meta property="og:site_name" content="Valentyn Yakovliev — Portfolio"/>
+  <meta property="og:locale" content="uk_UA"/>
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="Valentyn Yakovliev — The Choice"/>
+  <meta name="twitter:description" content="Full-Stack Product Engineer. Choose your path — enterprise or creative portfolio."/>
+
+  <!-- GEO -->
+  <meta name="geo.region" content="UA"/>
+  <meta name="geo.placename" content="Ukraine"/>
+  <meta name="ICBM" content="49.0, 32.0"/>
+
+  <!-- JSON-LD: Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Valentyn Yakovliev",
+    "alternateName": "vaiyav",
+    "jobTitle": "Full-Stack Product Engineer & Founder",
+    "description": "Full-Stack Product Engineer with 7+ years of Vue.js experience. Founder of My Zodiac AI.",
+    "url": "https://vaiyav.github.io/",
+    "email": "yakovlev.valentin97@gmail.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/valentyn-yakovliev-960303140/",
+      "https://github.com/vaiyav",
+      "https://my-zodiac-ai.com"
+    ],
+    "nationality": {
+      "@type": "Country",
+      "name": "Ukraine"
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "name": "My Zodiac AI",
+      "url": "https://my-zodiac-ai.com"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --matrix-green: #00ff41;
+      --matrix-dark: #0d1117;
+      --matrix-dim: #003b00;
+      --pill-red: #ff3333;
+      --pill-blue: #389cff;
+      --pill-glow-red: rgba(255, 51, 51, 0.4);
+      --pill-glow-blue: rgba(56, 156, 255, 0.4);
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--matrix-dark);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* Matrix Rain Canvas */
+    #matrix-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    /* Scanline overlay */
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 65, 0.03) 2px,
+        rgba(0, 255, 65, 0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+      animation: scanline-move 8s linear infinite;
+    }
+
+    @keyframes scanline-move {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(4px); }
+    }
+
+    /* CRT flicker effect */
+    .crt-flicker {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 255, 65, 0.02);
+      opacity: 1;
+      pointer-events: none;
+      z-index: 2;
+      animation: flicker 0.15s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 1; }
+      52% { opacity: 0.8; }
+      54% { opacity: 1; }
+      90% { opacity: 1; }
+      92% { opacity: 0.9; }
+      94% { opacity: 1; }
+    }
+
+    /* Vignette */
+    .vignette {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.8) 100%);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Main content container */
+    .container {
+      position: relative;
+      z-index: 10;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* Glitch title */
+    .glitch-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.8rem, 2vw, 1.1rem);
+      color: var(--matrix-green);
+      letter-spacing: 0.2em;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fade-in 1s ease forwards 0.5s;
+      text-align: center;
+    }
+
+    .glitch-title::before {
+      content: '> ';
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    @keyframes fade-in {
+      to { opacity: 1; }
+    }
+
+    /* Main heading */
+    .main-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 64px;
+      text-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slide-up 1s cubic-bezier(0.4, 0, 0.2, 1) forwards 1s;
+    }
+
+    @keyframes slide-up {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Pills container */
+    .pills-container {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+      opacity: 0;
+      animation: fade-in 1s ease forwards 1.5s;
+    }
+
+    @media (min-width: 768px) {
+      .pills-container {
+        flex-direction: row;
+        gap: 80px;
+      }
+    }
+
+    /* Individual pill choice */
+    .pill-choice {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .pill-choice:hover {
+      transform: scale(1.05);
+    }
+
+    /* The pill shape */
+    .pill {
+      width: 120px;
+      height: 200px;
+      border-radius: 60px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .pill::before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      left: 20%;
+      width: 30%;
+      height: 20%;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      filter: blur(8px);
+    }
+
+    .pill-red {
+      background: linear-gradient(180deg, #ff4444 0%, #cc0000 100%);
+      box-shadow: 0 0 30px var(--pill-glow-red), inset 0 -20px 40px rgba(0,0,0,0.3);
+    }
+
+    .pill-red:hover {
+      box-shadow: 0 0 60px var(--pill-glow-red), 0 0 100px var(--pill-glow-red), inset 0 -20px 40px rgba(0,0,0,0.3);
+      transform: translateY(-8px);
+    }
+
+    .pill-blue {
+      background: linear-gradient(180deg, #4da6ff 0%, #0066cc 100%);
+      box-shadow: 0 0 30px var(--pill-glow-blue), inset 0 -20px 40px rgba(0,0,0,0.3);
+    }
+
+    .pill-blue:hover {
+      box-shadow: 0 0 60px var(--pill-glow-blue), 0 0 100px var(--pill-glow-blue), inset 0 -20px 40px rgba(0,0,0,0.3);
+      transform: translateY(-8px);
+    }
+
+    /* Pill text */
+    .pill-text {
+      text-align: center;
+      max-width: 280px;
+    }
+
+    .pill-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--matrix-dim);
+      margin-bottom: 8px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .pill-choice:hover .pill-label-red {
+      color: var(--pill-red);
+    }
+
+    .pill-choice:hover .pill-label-blue {
+      color: var(--pill-blue);
+    }
+
+    .pill-desc {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.5;
+      transition: all 0.3s ease;
+    }
+
+    .pill-choice:hover .pill-desc-red {
+      color: #fff;
+      text-shadow: 0 0 20px var(--pill-glow-red);
+    }
+
+    .pill-choice:hover .pill-desc-blue {
+      color: #fff;
+      text-shadow: 0 0 20px var(--pill-glow-blue);
+    }
+
+    /* Typewriter effect for descriptions */
+    .typewriter {
+      overflow: hidden;
+      border-right: 2px solid var(--matrix-green);
+      white-space: nowrap;
+      animation: typing 2s steps(30) forwards, blink-caret 0.75s step-end infinite;
+      width: 0;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink-caret {
+      50% { border-color: transparent; }
+    }
+
+    /* Footer */
+    .footer {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: rgba(0, 255, 65, 0.6);
+      z-index: 10;
+      opacity: 0;
+      animation: fade-in 1s ease forwards 3s;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    }
+
+    .footer span {
+      color: var(--matrix-green);
+    }
+
+    /* Particles on hover */
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    .pill-choice:hover .particle {
+      animation: particle-float 1s ease-out forwards;
+    }
+
+    @keyframes particle-float {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0);
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 767px) {
+      .pill {
+        width: 80px;
+        height: 140px;
+      }
+
+      .pill-desc {
+        font-size: 0.95rem;
+      }
+
+      .main-heading {
+        margin-bottom: 40px;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .typewriter { width: 100%; border: none; }
+    }
+  </style>
 </head>
 <body>
-  <p>Redirecting… <a href="2000/resume-2000.html">click here if not redirected</a></p>
-  <script>window.location.replace('2000/resume-2000.html');</script>
+  <canvas id="matrix-canvas"></canvas>
+  <div class="scanlines"></div>
+  <div class="crt-flicker"></div>
+  <div class="vignette"></div>
+
+  <div class="container">
+    <div class="glitch-title">Вітаю у матриці мого резюме</div>
+
+    <h1 class="main-heading">Зробіть свій вибір</h1>
+
+    <div class="pills-container">
+      <!-- Blue Pill - Enterprise -->
+      <a href="v1/index.html" class="pill-choice" aria-label="Enterprise version">
+        <div class="pill pill-blue">
+          <svg class="particles" viewBox="0 0 120 200">
+            <circle class="particle" cx="60" cy="100" r="2" style="--tx: -30px; --ty: -50px; background: var(--pill-blue);" fill="#389cff"/>
+            <circle class="particle" cx="60" cy="100" r="2" style="--tx: 30px; --ty: -40px; animation-delay: 0.1s; background: var(--pill-blue);" fill="#389cff"/>
+            <circle class="particle" cx="60" cy="100" r="2" style="--tx: -20px; --ty: 60px; animation-delay: 0.2s; background: var(--pill-blue);" fill="#389cff"/>
+            <circle class="particle" cx="60" cy="100" r="2" style="--tx: 40px; --ty: 50px; animation-delay: 0.3s; background: var(--pill-blue);" fill="#389cff"/>
+            <circle class="particle" cx="60" cy="100" r="2" style="--tx: 0px; --ty: -70px; animation-delay: 0.15s; background: var(--pill-blue);" fill="#389cff"/>
+          </svg>
+        </div>
+        <div class="pill-text">
+          <div class="pill-label pill-label-blue">Шлях конформізму</div>
+          <div class="pill-desc pill-desc-blue">Він хотів потрапити<br>в ентерпрайз</div>
+        </div>
+      </a>
+
+      <!-- Red Pill - Happy/Alternative -->
+      <a href="2000/resume-2000.html" class="pill-choice" aria-label="Happy version">
+        <div class="pill pill-red">
+          <svg class="particles" viewBox="0 0 120 200">
+            <circle class="particle" cx="60" cy="100" r="2" style="--tx: -35px; --ty: -45px; background: var(--pill-red);" fill="#ff3333"/>
+            <circle class="particle" cx="60" cy="100" r="2" style="--tx: 25px; --ty: -55px; animation-delay: 0.1s; background: var(--pill-red);" fill="#ff3333"/>
+            <circle class="particle" cx="60" cy="100" r="2" style="--tx: -25px; --ty: 55px; animation-delay: 0.2s; background: var(--pill-red);" fill="#ff3333"/>
+            <circle class="particle" cx="60" cy="100" r="2" style="--tx: 35px; --ty: 45px; animation-delay: 0.3s; background: var(--pill-red);" fill="#ff3333"/>
+            <circle class="particle" cx="60" cy="100" r="2" style="--tx: 0px; --ty: 65px; animation-delay: 0.15s; background: var(--pill-red);" fill="#ff3333"/>
+          </svg>
+        </div>
+        <div class="pill-text">
+          <div class="pill-label pill-label-red">Шлях свободи</div>
+          <div class="pill-desc pill-desc-red">Він обрав<br>бути щасливим</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>●</span> Valentyn Yakovliev <span>●</span>
+  </div>
+
+  <script>
+    // Matrix Rain Effect
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    const columns = [];
+    const fontSize = 14;
+    const chars = '日ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾑﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾑ0123456789ABCDEF';
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      const colCount = Math.ceil(width / fontSize);
+      columns.length = 0;
+      for (let i = 0; i < colCount; i++) {
+        columns[i] = Math.random() * -100;
+      }
+    }
+
+    function draw() {
+      ctx.fillStyle = 'rgba(13, 17, 23, 0.05)';
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.fillStyle = '#00ff41';
+      ctx.font = fontSize + 'px JetBrains Mono';
+
+      for (let i = 0; i < columns.length; i++) {
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        const x = i * fontSize;
+        const y = columns[i] * fontSize;
+
+        // Fade effect for characters higher up
+        const fade = Math.max(0.1, 1 - (columns[i] * fontSize) / (height * 0.8));
+        ctx.fillStyle = `rgba(0, 255, 65, ${fade})`;
+        ctx.fillText(char, x, y);
+
+        if (y > height && Math.random() > 0.975) {
+          columns[i] = 0;
+        }
+        columns[i]++;
+      }
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    setInterval(draw, 50);
+
+    // Mouse interaction - spotlight effect
+    const spotlight = document.createElement('div');
+    spotlight.style.cssText = `
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      background: radial-gradient(
+        circle 300px at var(--mx, 50%) var(--my, 50%),
+        transparent 0%,
+        rgba(13, 17, 23, 0.4) 100%
+      );
+      transition: background 0.1s ease;
+    `;
+    document.body.appendChild(spotlight);
+
+    document.addEventListener('mousemove', (e) => {
+      spotlight.style.setProperty('--mx', e.clientX + 'px');
+      spotlight.style.setProperty('--my', e.clientY + 'px');
+    });
+
+    // Glitch effect on title hover
+    const title = document.querySelector('.glitch-title');
+    const originalText = title.textContent;
+
+    title.addEventListener('mouseenter', () => {
+      const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+      let iterations = 0;
+      const interval = setInterval(() => {
+        title.textContent = originalText
+          .split('')
+          .map((char, index) => {
+            if (index < iterations) return originalText[index];
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join('');
+
+        if (iterations >= originalText.length) {
+          clearInterval(interval);
+          title.textContent = originalText;
+        }
+        iterations += 1/3;
+      }, 30);
+    });
+  </script>
 </body>
 </html>
