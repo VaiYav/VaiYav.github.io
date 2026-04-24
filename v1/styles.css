@@ -887,3 +887,288 @@ a.card:focus-visible {
   .avatar { transition: none; }
   #scroll-progress { display: none; }
 }
+
+/* ============================================================
+   PDF TOGGLE & QUICK FACTS
+   ============================================================ */
+
+/* Nuxt skill bar color */
+.skill-bar--nuxt {
+  background: linear-gradient(90deg, #00dc82, #00e896);
+}
+
+/* PDF Toggle */
+.pdf-toggle-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pdf-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--bg2);
+  border-radius: var(--radius);
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition);
+}
+
+.pdf-toggle:hover {
+  background: var(--border);
+}
+
+.pdf-toggle input {
+  display: none;
+}
+
+.pdf-toggle-slider {
+  width: 48px;
+  height: 24px;
+  background: var(--border);
+  border-radius: 12px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.pdf-toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--text);
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: var(--transition);
+}
+
+.pdf-toggle input:checked + .pdf-toggle-slider {
+  background: var(--blue);
+}
+
+.pdf-toggle input:checked + .pdf-toggle-slider::before {
+  transform: translateX(24px);
+}
+
+.pdf-toggle-label {
+  font-size: 0.85rem;
+  color: var(--text);
+  transition: var(--transition);
+}
+
+.pdf-toggle input:checked ~ .pdf-toggle-label:first-of-type {
+  color: var(--text-dim);
+}
+
+.pdf-toggle input:checked ~ .pdf-toggle-label:last-of-type {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.print-btn {
+  width: 100%;
+  padding: 10px 16px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.print-btn:hover {
+  background: var(--border);
+  border-color: var(--border-hover);
+}
+
+/* Quick Facts */
+.facts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.fact-icon {
+  font-size: 18px;
+  color: var(--blue);
+}
+
+/* Timeline Bullets */
+.tl-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+
+.tl-bullets li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.tl-bullets li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* ============================================================
+   PDF MODE & PRINT STYLES
+   ============================================================ */
+
+body.pdf-mode {
+  /* Hide canvas and effects in PDF mode */
+}
+
+body.pdf-mode #particle-canvas,
+body.pdf-mode #spotlight,
+body.pdf-mode #scroll-progress {
+  display: none !important;
+}
+
+body.pdf-mode .glitch::before,
+body.pdf-mode .glitch::after {
+  display: none;
+}
+
+body.pdf-mode .avatar-ring,
+body.pdf-mode .avatar-ring-mask {
+  animation: none;
+}
+
+body.pdf-mode .fade-up {
+  opacity: 1;
+  transform: none;
+}
+
+body.pdf-mode .stagger-item {
+  opacity: 1;
+  transform: none;
+}
+
+body.pdf-mode .hero-tags {
+  display: none;
+}
+
+body.pdf-mode .term-cursor-inline {
+  animation: none;
+}
+
+@media print {
+  /* Hide canvas and background effects */
+  #particle-canvas,
+  #spotlight,
+  #scroll-progress {
+    display: none !important;
+  }
+
+  /* Hide animations */
+  .glitch::before,
+  .glitch::after {
+    display: none;
+  }
+
+  .avatar-ring,
+  .avatar-ring-mask {
+    animation: none;
+  }
+
+  .fade-up,
+  .stagger-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Layout changes for print */
+  .sidebar {
+    position: static;
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+    margin-bottom: 32px;
+  }
+
+  .main-layout {
+    flex-direction: column;
+  }
+
+  .page-wrapper {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  /* Hide interactive elements */
+  .pdf-toggle-wrap,
+  .print-btn,
+  .hero-tags,
+  .hero-cta,
+  .contribution-grid,
+  .heatmap-wrap,
+  .heatmap-legend {
+    display: none !important;
+  }
+
+  /* Simplify colors for print */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  body::before {
+    display: none;
+  }
+
+  .side-card,
+  .tl-card,
+  .card {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+  }
+
+  .skill-track {
+    background: #eee !important;
+  }
+
+  /* Links should show URL */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  /* Page breaks */
+  section {
+    break-inside: avoid;
+  }
+
+  .tl-item {
+    break-inside: avoid;
+  }
+
+  .card {
+    break-inside: avoid;
+  }
+}

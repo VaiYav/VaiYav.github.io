@@ -165,6 +165,23 @@
         </div>
       </div>
 
+      <!-- PDF Toggle -->
+      <div class="side-card fade-up">
+        <div class="side-card-title">View Mode</div>
+        <div class="pdf-toggle-wrap">
+          <label class="pdf-toggle">
+            <input type="checkbox" id="pdf-toggle">
+            <span class="pdf-toggle-slider"></span>
+            <span class="pdf-toggle-label">🖥️ Web</span>
+            <span class="pdf-toggle-label">📄 PDF</span>
+          </label>
+        </div>
+        <button class="print-btn" id="print-btn" aria-label="Print resume as PDF">
+          <span class="material-symbols-outlined icon-sm">print</span>
+          Print Resume
+        </button>
+      </div>
+
       <!-- Skills -->
       <div class="side-card fade-up">
         <div class="side-card-title">Core Skills</div>
@@ -172,6 +189,10 @@
           <div class="skill-row">
             <div class="skill-head"><span>Vue.js / Vue 3</span><span>95%</span></div>
             <div class="skill-track"><div class="skill-bar skill-bar--vue" data-pct="95"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-head"><span>Nuxt 3 / Nuxt 4</span><span>90%</span></div>
+            <div class="skill-track"><div class="skill-bar skill-bar--nuxt" data-pct="90"></div></div>
           </div>
           <div class="skill-row">
             <div class="skill-head"><span>TypeScript</span><span>88%</span></div>
@@ -188,6 +209,29 @@
           <div class="skill-row">
             <div class="skill-head"><span>Docker / Microservices</span><span>72%</span></div>
             <div class="skill-track"><div class="skill-bar skill-bar--docker" data-pct="72"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Facts -->
+      <div class="side-card fade-up">
+        <div class="side-card-title">Quick Facts</div>
+        <div class="facts-list">
+          <div class="fact-item">
+            <span class="material-symbols-outlined fact-icon">location_on</span>
+            <span>Ukraine (Remote)</span>
+          </div>
+          <div class="fact-item">
+            <span class="material-symbols-outlined fact-icon">language</span>
+            <span>English, Ukrainian</span>
+          </div>
+          <div class="fact-item">
+            <span class="material-symbols-outlined fact-icon">schedule</span>
+            <span>GMT+2 / GMT+3</span>
+          </div>
+          <div class="fact-item">
+            <span class="material-symbols-outlined fact-icon">work</span>
+            <span>Full-time / Contract</span>
           </div>
         </div>
       </div>
@@ -229,7 +273,7 @@
           </a>
         </div>
         <div class="hero-tags">
-          <span class="hero-tag">Vue 3 · Composition API</span>
+          <span class="hero-tag">Vue 3 · Nuxt 3/4 · Composition API</span>
           <span class="hero-tag">NestJS · Microservices</span>
           <span class="hero-tag">TypeScript</span>
           <span class="hero-tag">MongoDB · Redis</span>
@@ -358,15 +402,20 @@
             <div class="tl-dot" aria-hidden="true"></div>
             <div class="tl-card">
               <div class="tl-top">
-                <span class="tl-role">Founder &amp; Full-Stack Developer</span>
-                <span class="tl-date">Nov 2024 – Present · 16 mos</span>
+                <span class="tl-role">Full-Stack Engineer</span>
+                <span class="tl-date">2024 – Present</span>
               </div>
-              <div class="tl-company">My Zodiac AI · Startup</div>
-              <p class="tl-desc">Took the product from idea to 1,500+ paying users in 4 months — solo. Designed the architecture, built 15+ microservices, wired AI APIs and Stripe, and shipped on both Web and Android.</p>
+              <div class="tl-company">Soulwise AI · AI-powered astrology platform (100K+ users)</div>
+              <ul class="tl-bullets">
+                <li>Performance: ↓36% bundle size (250KB → 160KB) through Vite code splitting and i18n lazy loading</li>
+                <li>Architecture: Achieved 100% TypeScript strict coverage; implemented FSD architecture with 14 isolated features, removed 3,500+ lines of duplicate code</li>
+                <li>Mobile: Launched native iOS and Android applications using Capacitor with shared codebase; deployed to App Store and Google Play</li>
+                <li>AI Integration: Built AI-powered features integrating OpenAI, Anthropic Claude, and Google Gemini APIs; implemented RAG architecture with Qdrant vector database</li>
+                <li>Real-Time: Architected WebSocket-based real-time updates and push notification system using Redis and BullMQ message queues</li>
+                <li>Testing: Established comprehensive testing strategy with Vitest (unit/integration) and Playwright (E2E); implemented CI/CD quality gates</li>
+              </ul>
               <div class="tl-tags">
-                <span class="tl-tag">Vue 3</span><span class="tl-tag">NestJS</span>
-                <span class="tl-tag">MongoDB</span><span class="tl-tag">Microservices</span>
-                <span class="tl-tag">Stripe</span><span class="tl-tag">Capacitor</span>
+                <span class="tl-tag">Vue 3</span><span class="tl-tag">Nuxt 3/4</span><span class="tl-tag">NestJS</span><span class="tl-tag">TypeScript</span><span class="tl-tag">MongoDB</span><span class="tl-tag">OpenAI</span>
               </div>
             </div>
           </div>
@@ -376,14 +425,21 @@
             <div class="tl-dot" aria-hidden="true"></div>
             <div class="tl-card">
               <div class="tl-top">
-                <span class="tl-role">Front-end Vue.js Developer</span>
-                <span class="tl-date">May 2022 – May 2025 · 3 yrs</span>
+                <span class="tl-role">Senior Frontend Developer / Feature Owner</span>
+                <span class="tl-date">2020 – 2024 · 4 years</span>
               </div>
-              <div class="tl-company">Oboard · Full-time</div>
-              <p class="tl-desc">Led Vue 3 frontend of an enterprise OKR platform — component library, real-time dashboards, performance audits, and junior dev mentorship. The person who got things done.</p>
+              <div class="tl-company">Oboard · B2B SaaS for OKR-based team management (Team: 2 frontend + 5 backend engineers)</div>
+              <ul class="tl-bullets">
+                <li>Feature Ownership: Owned end-to-end delivery of OKR dashboard and analytics features — from technical design through QA to production; collaborated directly with C-level executives on product roadmap and prioritization</li>
+                <li>Frontend Architecture: Led modernization of Vue.js frontend stack through multiple major version migrations; established code review quality gates as primary reviewer for 100% of frontend changes</li>
+                <li>Platform Integrations: Delivered embedded webapp solutions integrating with Monday.com, Salesforce, and Atlassian (Jira/Confluence) ecosystems; architected micro-frontend approach for multi-platform deployment</li>
+                <li>Build & Deployment: Created custom build pipelines supporting 5+ deployment targets: standalone webapp, Monday.com embedded app, Salesforce integration, Atlassian marketplace apps, and mobile-responsive versions</li>
+                <li>Payment & Monetization: Implemented payment system integration for subscription management and billing workflows</li>
+                <li>Developer Experience: During sprint gaps, developed 3+ internal tools including automation macros for QA team and developer productivity utilities; reduced repetitive manual tasks by ~40%</li>
+                <li>Team Leadership: As senior member of 2-person frontend team, provided technical guidance and code review for all frontend features; collaborated with 5 backend engineers on API design and data contracts</li>
+              </ul>
               <div class="tl-tags">
-                <span class="tl-tag">Vue 3</span><span class="tl-tag">TypeScript</span>
-                <span class="tl-tag">Quasar</span><span class="tl-tag">Vuex / Pinia</span>
+                <span class="tl-tag">Vue 3</span><span class="tl-tag">Nuxt 3/4</span><span class="tl-tag">TypeScript</span><span class="tl-tag">Quasar</span><span class="tl-tag">Pinia</span>
               </div>
             </div>
           </div>

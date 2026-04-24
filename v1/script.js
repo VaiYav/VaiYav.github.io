@@ -237,6 +237,22 @@ function setupTimelineStagger() {
   });
 }
 
+/* ===== PDF TOGGLE FUNCTIONALITY ===== */
+function setupPDFToggle() {
+  const pdfToggle = document.getElementById('pdf-toggle');
+  const printBtn = document.getElementById('print-btn');
+  
+  if (!pdfToggle || !printBtn) return;
+
+  pdfToggle.addEventListener('change', () => {
+    document.body.classList.toggle('pdf-mode', pdfToggle.checked);
+  });
+
+  printBtn.addEventListener('click', () => {
+    window.print();
+  });
+}
+
 /* ===== INIT ALL ===== */
 document.addEventListener('DOMContentLoaded', () => {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -253,4 +269,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setupTilt();
   setupStagger();
   setupTimelineStagger();
+  setupPDFToggle();
 });
