@@ -1,0 +1,1703 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Valentyn Yakovliev — Full-Stack Product Engineer</title>
+<meta name="description" content="Valentyn Yakovliev — Full-Stack Product Engineer who owns product, engineering, design and growth end-to-end." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet" />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="canonical" href="https://vaiyav.github.io/v2/" />
+<meta name="robots" content="index, follow" />
+<meta property="og:type" content="profile" />
+<meta property="og:title" content="Valentyn Yakovliev — Full-Stack Product Engineer & Founder" />
+<meta property="og:description" content="7+ years Vue.js · NestJS · TypeScript · Built My Zodiac AI solo · Open to Senior/Lead remote roles." />
+<meta property="og:url" content="https://vaiyav.github.io/v2/" />
+<meta property="og:site_name" content="Valentyn Yakovliev — Portfolio" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Valentyn Yakovliev — Full-Stack Product Engineer" />
+<meta name="twitter:description" content="7+ years Vue.js · NestJS · TypeScript · Built My Zodiac AI solo · Open to Senior/Lead remote." />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Valentyn Yakovliev",
+  "jobTitle": "Full-Stack Product Engineer & Founder",
+  "url": "https://vaiyav.github.io/v2/",
+  "email": "yakovlev.valentin97@gmail.com",
+  "sameAs": [
+    "https://www.linkedin.com/in/valentyn-yakovliev-960303140/",
+    "https://github.com/vaiyav",
+    "https://my-zodiac-ai.com"
+  ]
+}
+</script>
+
+<style>
+/* =========================================================
+   SYSTEM
+   ========================================================= */
+:root {
+  /* Warm neutral palette — low-saturation whites/blacks */
+  --bg: #fafaf7;
+  --bg-soft: #f3f1ec;
+  --surface: #ffffff;
+  --ink: #14140f;
+  --ink-soft: #3a392f;
+  --ink-muted: #6b6a5e;
+  --rule: #d9d6ce;
+  --rule-soft: #e7e4db;
+  --accent: #b04a1d;   /* single restrained accent */
+  --accent-ink: #7d3413;
+
+  /* Type */
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body:    "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+  /* Density (tweakable) */
+  --density-scale: 1;            /* 0.85 compact · 1 comfortable · 1.15 spacious */
+  --gap-xl: calc(56px * var(--density-scale));
+  --gap-lg: calc(32px * var(--density-scale));
+  --gap-md: calc(20px * var(--density-scale));
+  --gap-sm: calc(12px * var(--density-scale));
+  --gap-xs: calc(8px  * var(--density-scale));
+
+  --fs-body: 15.5px;
+  --fs-small: 13px;
+  --fs-label: 11.5px;
+  --lh-body: 1.55;
+
+  --radius: 4px;
+
+  /* motion */
+  --dur: 180ms;
+  --ease: cubic-bezier(.2,.6,.2,1);
+}
+
+/* Dyslexia-friendly */
+html[data-font="dyslexic"] {
+  --font-body: "Atkinson Hyperlegible", -apple-system, sans-serif;
+  --font-display: "Atkinson Hyperlegible", Georgia, serif;
+  --lh-body: 1.65;
+}
+
+/* High contrast */
+html[data-contrast="high"] {
+  --bg: #ffffff;
+  --bg-soft: #f0f0f0;
+  --surface: #ffffff;
+  --ink: #000000;
+  --ink-soft: #000000;
+  --ink-muted: #1a1a1a;
+  --rule: #000000;
+  --rule-soft: #000000;
+  --accent: #0000cc;
+  --accent-ink: #0000cc;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01", "cv11";
+}
+
+/* Skip link */
+.skip {
+  position: absolute;
+  left: 0; top: 0;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 10px 16px;
+  font-weight: 600;
+  transform: translateY(-150%);
+  transition: transform var(--dur) var(--ease);
+  z-index: 100;
+}
+.skip:focus { transform: translateY(0); }
+
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* =========================================================
+   PAGE LAYOUT
+   ========================================================= */
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: var(--gap-xl) 56px;
+}
+
+/* Section */
+section { margin-top: var(--gap-xl); }
+section:first-of-type { margin-top: 0; }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-md);
+  padding-bottom: var(--gap-xs);
+  border-bottom: 1px solid var(--rule);
+}
+.section-head h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3vw, 36px);
+  line-height: 1;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.section-head .kicker {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-left: auto;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+header.masthead {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--gap-lg);
+  align-items: end;
+  padding-bottom: var(--gap-lg);
+  border-bottom: 2px solid var(--ink);
+}
+
+/* Photo slot */
+.photo {
+  width: 140px;
+  height: 180px;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.photo-placeholder {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+  text-align: center;
+  padding: 8px;
+  line-height: 1.5;
+}
+.photo-placeholder::before {
+  content: "";
+  display: block;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--ink-muted);
+  margin: 0 auto 10px;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 4px,
+    var(--rule) 4px,
+    var(--rule) 5px
+  );
+}
+
+.name-block .eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+  margin-bottom: var(--gap-sm);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.name-block .eyebrow::before {
+  content: "";
+  width: 8px; height: 8px;
+  background: #16a34a;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(22,163,74,.15);
+}
+
+.name-block h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(56px, 8vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--gap-sm);
+}
+
+.name-block .pitch {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.25;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 620px;
+}
+.name-block .pitch .under {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.contact-block {
+  text-align: right;
+  font-size: var(--fs-small);
+  line-height: 1.7;
+}
+.contact-block dl { margin: 0; }
+.contact-block .row {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+.contact-block dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  min-width: 80px;
+  text-align: right;
+}
+.contact-block dd {
+  margin: 0;
+  color: var(--ink);
+}
+.contact-block a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: border-color var(--dur) var(--ease);
+}
+.contact-block a:hover { border-color: var(--accent); color: var(--accent-ink); }
+
+/* =========================================================
+   TL;DR — 3 key facts
+   ========================================================= */
+.tldr {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+}
+.tldr-item {
+  padding: var(--gap-md) var(--gap-md);
+  border-right: 1px solid var(--rule);
+}
+.tldr-item:last-child { border-right: none; }
+.tldr-num {
+  font-family: var(--font-display);
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: var(--gap-xs);
+}
+.tldr-num .unit {
+  font-size: 24px;
+  color: var(--ink-muted);
+  margin-left: 2px;
+}
+.tldr-lbl {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  margin-bottom: 4px;
+}
+.tldr-desc {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* =========================================================
+   OFFERS — "What I can do for you"
+   ========================================================= */
+.offers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap-md);
+}
+.offer {
+  padding: var(--gap-md);
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  position: relative;
+}
+.offer-num {
+  position: absolute;
+  top: var(--gap-md);
+  right: var(--gap-md);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--ink-muted);
+}
+.offer h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.15;
+  margin: 0 0 var(--gap-sm);
+  letter-spacing: -0.01em;
+  max-width: 85%;
+}
+.offer p {
+  margin: 0 0 var(--gap-sm);
+  color: var(--ink-soft);
+  font-size: 14.5px;
+}
+.offer .example {
+  font-size: 13px;
+  color: var(--ink-muted);
+  padding-top: var(--gap-sm);
+  border-top: 1px dashed var(--rule);
+  margin: 0;
+}
+.offer .example strong {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 3px;
+}
+
+/* =========================================================
+   SIGNATURE METHOD (SDD / Spec Kit)
+   ========================================================= */
+.signature {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--ink);
+  background: var(--surface);
+}
+.signature-body {
+  padding: var(--gap-lg);
+  border-right: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+.signature-tag {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.signature-tag::before {
+  content: "";
+  width: 6px; height: 6px;
+  background: var(--accent);
+  display: inline-block;
+}
+.signature h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0;
+  max-width: 22ch;
+}
+.signature h3 em {
+  font-style: italic;
+  color: var(--accent-ink);
+}
+.signature-lead {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  margin: 0;
+}
+.signature-link {
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+  align-self: flex-start;
+  padding-bottom: 2px;
+}
+.signature-link:hover { color: var(--accent-ink); border-color: var(--accent); }
+
+/* Flow diagram */
+.flow {
+  padding: var(--gap-lg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  background:
+    repeating-linear-gradient(0deg, var(--bg-soft), var(--bg-soft) 1px, transparent 1px, transparent 24px);
+}
+.flow-step {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+}
+.flow-step .idx {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.08em;
+}
+.flow-step .lbl {
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--ink);
+}
+.flow-step .lbl small {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+.flow-step .arrow {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+.flow-step.is-final { border-color: var(--ink); background: var(--ink); color: var(--bg); }
+.flow-step.is-final .idx,
+.flow-step.is-final .lbl,
+.flow-step.is-final .lbl small,
+.flow-step.is-final .arrow { color: var(--bg); }
+.flow-step.is-final .lbl small { opacity: 0.7; }
+
+.signature-proofs {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--rule);
+}
+.signature-proof {
+  padding: var(--gap-md);
+  border-right: 1px solid var(--rule);
+}
+.signature-proof:last-child { border-right: 0; }
+.signature-proof .proof-k {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  margin-bottom: 4px;
+}
+.signature-proof .proof-v {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+.signature-proof .proof-v strong { font-weight: 400; }
+.signature-proof .proof-d {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+@media (max-width: 860px) {
+  .signature { grid-template-columns: 1fr; }
+  .signature-body { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .signature-proofs { grid-template-columns: 1fr; }
+  .signature-proof { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .signature-proof:last-child { border-bottom: 0; }
+}
+
+/* =========================================================
+   SKILLS — Tier list
+   ========================================================= */
+.tiers {
+  display: grid;
+  gap: var(--gap-sm);
+}
+.tier {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--gap-md);
+  padding: var(--gap-md) 0;
+  border-top: 1px solid var(--rule);
+}
+.tier:last-child { border-bottom: 1px solid var(--rule); }
+
+.tier-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.tier-rank {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.tier-rank .tier-meta {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  margin-top: var(--gap-xs);
+  font-style: normal;
+}
+.tier-desc {
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.45;
+  max-width: 200px;
+}
+
+.tier-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-content: flex-start;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: var(--radius);
+  color: var(--ink);
+}
+.chip .years {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  font-weight: 400;
+}
+.tier.core .chip {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+.tier.core .chip .years { color: rgba(255,255,255,.55); }
+.tier.strong .chip {
+  background: var(--surface);
+  border-color: var(--ink-soft);
+}
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+.timeline-wrap {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: var(--gap-md);
+}
+.timeline-legend {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--gap-xs);
+}
+
+.timeline {
+  position: relative;
+  height: 80px;
+  margin-bottom: var(--gap-sm);
+}
+.timeline-axis {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--rule);
+}
+.timeline-tick {
+  position: absolute;
+  bottom: 0;
+  width: 1px; height: 6px;
+  background: var(--rule);
+}
+.timeline-tick-label {
+  position: absolute;
+  bottom: -18px;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-muted);
+}
+
+.tl-bar {
+  position: absolute;
+  height: 22px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: transform var(--dur) var(--ease);
+}
+.tl-bar:hover { transform: translateY(-2px); }
+
+.tl-bar.lv-1 { background: var(--ink); color: var(--bg); }
+.tl-bar.lv-2 { background: var(--ink-soft); color: var(--bg); }
+.tl-bar.lv-3 { background: var(--bg-soft); color: var(--ink); border: 1px solid var(--rule); }
+.tl-bar.lv-4 { background: var(--accent); color: #fff; }
+
+.timeline-key {
+  display: flex;
+  gap: var(--gap-md);
+  margin-top: var(--gap-lg);
+  font-size: 12px;
+  color: var(--ink-muted);
+  flex-wrap: wrap;
+}
+.tk-swatch {
+  display: inline-block;
+  width: 14px; height: 14px;
+  margin-right: 6px;
+  vertical-align: -2px;
+}
+.tk-1 { background: var(--ink); }
+.tk-2 { background: var(--ink-soft); }
+.tk-3 { background: var(--bg-soft); border: 1px solid var(--rule); }
+.tk-4 { background: var(--accent); }
+
+/* =========================================================
+   EXPERIENCE DETAILS
+   ========================================================= */
+.job {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--gap-lg);
+  padding: var(--gap-md) 0;
+  border-top: 1px solid var(--rule);
+}
+.job:last-child { border-bottom: 1px solid var(--rule); }
+
+.job-meta .period {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink);
+  font-weight: 500;
+}
+.job-meta .duration {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.job-body h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.15;
+  margin: 0 0 4px;
+  letter-spacing: -0.005em;
+}
+.job-body .company {
+  font-size: 14px;
+  color: var(--ink-muted);
+  margin: 0 0 var(--gap-sm);
+}
+.job-body .company strong { color: var(--ink); font-weight: 600; }
+
+.job-body ul.plain {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--gap-sm);
+}
+.job-body ul.plain li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  font-size: 14.5px;
+  color: var(--ink-soft);
+}
+.job-body ul.plain li::before {
+  content: "→";
+  position: absolute;
+  left: 0; top: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+.job-body ul.plain li strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.job-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--gap-sm);
+}
+.job-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 3px 8px;
+  border: 1px solid var(--rule);
+  color: var(--ink-muted);
+}
+
+/* Shorter jobs */
+.job.minor .job-body h3 { font-size: 18px; }
+.job.minor .job-body .company { margin-bottom: 0; }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+  margin-top: var(--gap-xl);
+  padding-top: var(--gap-md);
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+}
+footer a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  margin: 0 6px;
+}
+footer a:hover { border-color: var(--accent); }
+
+/* =========================================================
+   A11Y + TWEAKS PANELS
+   ========================================================= */
+.a11y-dock {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.a11y-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: background var(--dur) var(--ease);
+}
+.a11y-trigger:hover { background: var(--bg-soft); }
+.a11y-trigger[aria-expanded="true"] { background: var(--ink); color: var(--bg); }
+.a11y-trigger .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+
+.a11y-bar {
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 3px;
+  min-width: 180px;
+}
+.a11y-bar.hidden { display: none; }
+.a11y-bar button {
+  border: 0;
+  background: transparent;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  transition: background var(--dur) var(--ease);
+  text-align: left;
+}
+.a11y-bar button:hover { background: var(--bg-soft); }
+.a11y-bar button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.tweaks {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  width: 260px;
+  z-index: 50;
+  font-size: 12px;
+}
+.tweaks.hidden { display: none; }
+.tweaks-head {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.tweaks-head button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--ink-muted);
+}
+.tweaks-body { padding: 12px 14px; }
+.tweak-row { margin-bottom: 12px; }
+.tweak-row:last-child { margin-bottom: 0; }
+.tweak-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  margin-bottom: 6px;
+  display: block;
+}
+.seg {
+  display: flex;
+  border: 1px solid var(--rule);
+}
+.seg button {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  padding: 7px 6px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--ink);
+  border-right: 1px solid var(--rule);
+  transition: background var(--dur) var(--ease);
+}
+.seg button:last-child { border-right: 0; }
+.seg button:hover { background: var(--bg-soft); }
+.seg button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+}
+.print-btn {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: opacity var(--dur) var(--ease);
+}
+.print-btn:hover { opacity: 0.85; }
+
+/* Back to home link */
+.back-home {
+  position: fixed; bottom: 16px; left: 16px; z-index: 100;
+  font-family: var(--font-mono); font-size: 12px; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--ink-muted); text-decoration: none;
+  border-bottom: 1px solid var(--rule); padding-bottom: 1px;
+  transition: color 180ms, border-color 180ms;
+}
+.back-home:hover { color: var(--accent-ink); border-color: var(--accent); }
+@media print { .back-home { display: none; } }
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+/* Give masthead room so the fixed a11y trigger never clips contact info */
+header.masthead { padding-top: 44px; }
+
+@media (max-width: 1180px) {
+  header.masthead { padding-top: 48px; }
+}
+
+@media (max-width: 860px) {
+  .page { padding: 32px 20px; }
+  header.masthead { grid-template-columns: auto 1fr; gap: var(--gap-md); padding-top: 52px; }
+  .photo { width: 96px; height: 120px; }
+  .name-block { grid-column: 2; }
+  .contact-block { grid-column: 1 / -1; text-align: left; }
+  .contact-block .row { justify-content: flex-start; }
+  .contact-block dt { text-align: left; min-width: 72px; }
+  .tldr { grid-template-columns: 1fr; }
+  .tldr-item { border-right: none; border-bottom: 1px solid var(--rule); }
+  .tldr-item:last-child { border-bottom: none; }
+  .offers { grid-template-columns: 1fr; }
+  .tier { grid-template-columns: 1fr; }
+  .job { grid-template-columns: 1fr; gap: var(--gap-sm); }
+  .tweaks { position: static; width: auto; margin: 16px 0; }
+}
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+@media print {
+  @page { size: A4; margin: 14mm 14mm; }
+  html, body { background: #fff !important; color: #000 !important; }
+  .no-print { display: none !important; }
+  .page { max-width: none; margin: 0; padding: 0; }
+
+  header.masthead { page-break-after: avoid; }
+  section { page-break-inside: avoid; }
+  .job { page-break-inside: avoid; }
+  .offer { page-break-inside: avoid; }
+
+  a { color: #000 !important; text-decoration: none !important; border-bottom: 0 !important; }
+
+  /* Shared print tuning */
+  :root {
+    --bg: #fff;
+    --bg-soft: #f5f5f5;
+    --surface: #fff;
+    --ink: #000;
+    --ink-soft: #222;
+    --ink-muted: #555;
+    --rule: #bbb;
+    --rule-soft: #ddd;
+  }
+
+  .name-block h1 { font-size: 48px !important; }
+  .name-block .pitch { font-size: 18px !important; }
+  .section-head h2 { font-size: 22px !important; }
+  .tldr-num { font-size: 40px !important; }
+  .offer h3 { font-size: 18px !important; }
+  .job-body h3 { font-size: 16px !important; }
+  .tier-rank { font-size: 26px !important; }
+
+  /* === Print modes === */
+  html[data-print="1page"] {
+    --gap-xl: 18px; --gap-lg: 12px; --gap-md: 10px; --gap-sm: 6px; --gap-xs: 4px;
+    font-size: 10.5px;
+  }
+  html[data-print="1page"] .name-block h1 { font-size: 36px !important; }
+  html[data-print="1page"] .name-block .pitch { font-size: 14px !important; }
+  html[data-print="1page"] .tldr-num { font-size: 28px !important; }
+  html[data-print="1page"] .offer h3 { font-size: 14px !important; }
+  html[data-print="1page"] .offer p { font-size: 11px; }
+  html[data-print="1page"] .offer .example { display: none; }
+  html[data-print="1page"] .job-body ul.plain li { font-size: 10.5px; }
+  html[data-print="1page"] .tier-rank { font-size: 18px !important; }
+  html[data-print="1page"] .section-head h2 { font-size: 18px !important; }
+  html[data-print="1page"] .job.minor { display: none; }
+  html[data-print="1page"] #timeline-section { display: none; }
+
+  html[data-print="2page"] {
+    --gap-xl: 28px; --gap-lg: 18px; --gap-md: 14px; --gap-sm: 9px;
+    font-size: 11.5px;
+  }
+  html[data-print="2page"] .offer .example { font-size: 10.5px; }
+  html[data-print="2page"] .job.minor .job-body ul { display: none; }
+
+  html[data-print="detailed"] {
+    --gap-xl: 36px; --gap-lg: 22px; --gap-md: 16px;
+    font-size: 12px;
+  }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main-content">Skip to main content</a>
+
+<!-- ============ A11Y TOGGLES ============ -->
+<div class="a11y-dock no-print">
+  <button type="button" class="a11y-trigger" id="a11y-trigger" aria-expanded="false" aria-controls="a11y-bar" aria-label="Accessibility and display options">
+    <span class="dot" aria-hidden="true"></span>
+    <span>A11y · Settings</span>
+  </button>
+  <div class="a11y-bar hidden" id="a11y-bar" role="toolbar" aria-label="Accessibility options">
+    <button type="button" id="toggle-contrast" aria-pressed="false" title="High contrast mode">High contrast</button>
+    <button type="button" id="toggle-dyslexic" aria-pressed="false" title="Dyslexia-friendly font">Dyslexic font</button>
+    <button type="button" id="toggle-motion" aria-pressed="false" title="Reduce motion">Reduce motion</button>
+    <button type="button" id="toggle-tweaks" aria-pressed="false" title="Density &amp; print options">Density &amp; print…</button>
+  </div>
+</div>
+
+<!-- ============ TWEAKS PANEL ============ -->
+<aside class="tweaks hidden no-print" id="tweaks-panel" aria-label="Display settings" aria-hidden="true">
+  <div class="tweaks-head">
+    <span>Settings</span>
+    <button type="button" id="close-tweaks" aria-label="Close settings">×</button>
+  </div>
+  <div class="tweaks-body">
+    <div class="tweak-row">
+      <span class="tweak-label" id="density-label">Density</span>
+      <div class="seg" role="group" aria-labelledby="density-label" id="seg-density">
+        <button type="button" data-density="compact"     aria-pressed="false">Compact</button>
+        <button type="button" data-density="comfortable" aria-pressed="true">Comfort</button>
+        <button type="button" data-density="spacious"    aria-pressed="false">Spacious</button>
+      </div>
+    </div>
+    <div class="tweak-row">
+      <span class="tweak-label" id="print-label">Print mode</span>
+      <div class="seg" role="group" aria-labelledby="print-label" id="seg-print">
+        <button type="button" data-print="1page"    aria-pressed="false">1-page</button>
+        <button type="button" data-print="2page"    aria-pressed="true">2-page</button>
+        <button type="button" data-print="detailed" aria-pressed="false">Detailed</button>
+      </div>
+    </div>
+    <div class="tweak-row">
+      <button type="button" class="print-btn" id="print-btn">Print / Save as PDF</button>
+    </div>
+  </div>
+</aside>
+
+<a href="/" class="back-home no-print" aria-label="Back to home">← Home</a>
+
+<main class="page" id="main-content">
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="masthead">
+    <figure class="photo" aria-label="Valentyn Yakovliev photo">
+      <img src="../assets/unnamed.jpg" alt="Valentyn Yakovliev" />
+    </figure>
+    <div class="name-block">
+      <div class="eyebrow" aria-label="Status: Open to work">
+        <span>Available · Open to work</span>
+      </div>
+      <h1>Valentyn<br />Yakovliev</h1>
+      <p class="pitch">
+        Full-Stack Product Engineer who <span class="under">owns the whole thing</span> — product, engineering, design, and growth.
+      </p>
+    </div>
+
+    <div class="contact-block" aria-label="Contact information">
+      <dl>
+        <div class="row"><dt>Location</dt><dd>Ukraine · Remote · GMT+2</dd></div>
+        <div class="row"><dt>Email</dt> <dd><a href="mailto:yakovlev.valentin97@gmail.com">yakovlev.valentin97@gmail.com</a></dd></div>
+        <div class="row"><dt>Web</dt>   <dd><a href="https://my-zodiac-ai.com">my-zodiac-ai.com</a></dd></div>
+        <div class="row"><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/valentyn-yakovliev-960303140/">/in/valentyn-yakovliev</a></dd></div>
+        <div class="row"><dt>GitHub</dt><dd><a href="https://github.com/vaiyav">github.com/vaiyav</a></dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       TL;DR — 3 facts
+       ============================================================ -->
+  <section aria-labelledby="tldr-h">
+    <div class="section-head">
+      <h2 id="tldr-h">In 10 seconds</h2>
+      <span class="kicker">The short version</span>
+    </div>
+    <div class="tldr">
+      <div class="tldr-item">
+        <div class="tldr-lbl">Experience</div>
+        <div class="tldr-num">8<span class="unit">yrs</span></div>
+        <p class="tldr-desc">Shipping web products with <strong>Vue.js</strong> — from seed-stage startups to enterprise B2B SaaS.</p>
+      </div>
+      <div class="tldr-item">
+        <div class="tldr-lbl">What I do</div>
+        <div class="tldr-num">0&nbsp;→&nbsp;1</div>
+        <p class="tldr-desc">I take ideas from blank page to <strong>live product</strong> — design, code, launch, and iterate.</p>
+      </div>
+      <div class="tldr-item">
+        <div class="tldr-lbl">Right now</div>
+        <div class="tldr-num">Solo<span class="unit">founder</span></div>
+        <p class="tldr-desc">Built <strong>My Zodiac AI</strong> end-to-end: web app, native Android, payments, AI features.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHAT I CAN DO FOR YOU
+       ============================================================ -->
+  <section aria-labelledby="offers-h">
+    <div class="section-head">
+      <h2 id="offers-h">What I can do for you</h2>
+      <span class="kicker">Plain English</span>
+    </div>
+    <div class="offers">
+      <article class="offer">
+        <span class="offer-num">01</span>
+        <h3>Build a product from scratch and ship it.</h3>
+        <p>Give me a Figma or just an idea. I write the code, design the screens, wire up payments, deploy it, and keep it running. No handoffs, no gaps.</p>
+        <p class="example"><strong>Proof</strong>My Zodiac AI — built alone, launched, real paying users.</p>
+      </article>
+
+      <article class="offer">
+        <span class="offer-num">02</span>
+        <h3>Be the only engineer a small team needs on the frontend.</h3>
+        <p>One person who decides the architecture, writes the code, reviews the pull requests, talks to designers and backend, and unblocks everyone. Senior-level judgment without the politics of a big team.</p>
+        <p class="example"><strong>What it looks like</strong>At Oboard I was this person for 4 years — reviewed every frontend change, owned the design system, and shipped the product into Monday, Salesforce, Jira and Confluence from one codebase.</p>
+      </article>
+
+      <article class="offer">
+        <span class="offer-num">03</span>
+        <h3>Own a whole feature area, end to end.</h3>
+        <p>From first conversation with stakeholders, through design and code, to QA and production. I talk directly to founders and C-levels — not just to engineers.</p>
+        <p class="example"><strong>Proof</strong>Owned the OKR dashboard at Oboard for 4 years; reviewed <strong>100%</strong> of frontend changes.</p>
+      </article>
+
+      <article class="offer">
+        <span class="offer-num">04</span>
+        <h3>Add AI to your product without it being a gimmick.</h3>
+        <p>I've shipped real AI features (OpenAI, Claude, Gemini) with search, chat, and context — the useful kind, not the demo kind. Plus the infra around it: queues, caching, cost control.</p>
+        <p class="example"><strong>Proof</strong>RAG system on Qdrant + multi-provider LLM routing in production.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SIGNATURE METHOD — SDD / Spec Kit
+       ============================================================ -->
+  <section aria-labelledby="method-h">
+    <div class="section-head">
+      <h2 id="method-h">How I ship fast without cutting corners</h2>
+      <span class="kicker">My method · SDD</span>
+    </div>
+
+    <div class="signature">
+      <div class="signature-body">
+        <span class="signature-tag">Spec-Driven Development</span>
+        <h3>I built my own <em>SDD framework</em> on top of GitHub Spec Kit — and I ship with it.</h3>
+        <p class="signature-lead">
+          Most teams either over-plan and never ship, or ship fast and break things.
+          My framework forces every feature through a short, structured spec first
+          — then AI tooling generates the scaffolding, tests, and first pass of code
+          against that spec. Result: <strong>faster delivery, fewer bugs, real docs from day one.</strong>
+        </p>
+        <p class="signature-lead">
+          This isn't theory — I dogfooded it to build My Zodiac AI solo and accelerated
+          feature work at Soulwise. Same framework, two different contexts.
+        </p>
+        <a class="signature-link" href="https://github.com/VaiYav/speckit-product-forge" rel="noopener">github.com/VaiYav/speckit-product-forge →</a>
+      </div>
+
+      <div class="flow" aria-label="Spec-Driven Development flow">
+        <div class="flow-step"><span class="idx">01</span><span class="lbl">Spec<small>Write the contract — what, why, edge cases</small></span><span class="arrow">↓</span></div>
+        <div class="flow-step"><span class="idx">02</span><span class="lbl">Plan<small>AI breaks spec into tasks + file layout</small></span><span class="arrow">↓</span></div>
+        <div class="flow-step"><span class="idx">03</span><span class="lbl">Generate<small>Scaffolding, types, tests — all from spec</small></span><span class="arrow">↓</span></div>
+        <div class="flow-step"><span class="idx">04</span><span class="lbl">Implement<small>I write the real code against generated tests</small></span><span class="arrow">↓</span></div>
+        <div class="flow-step is-final"><span class="idx">05</span><span class="lbl">Ship<small>Spec is now the docs — nothing goes stale</small></span><span class="arrow">✓</span></div>
+      </div>
+
+      <div class="signature-proofs">
+        <div class="signature-proof">
+          <div class="proof-k">Built with it</div>
+          <div class="proof-v"><strong>My Zodiac AI</strong></div>
+          <div class="proof-d">Solo product, shipped end-to-end — web + native Android.</div>
+        </div>
+        <div class="signature-proof">
+          <div class="proof-k">Applied at</div>
+          <div class="proof-v"><strong>Soulwise AI</strong></div>
+          <div class="proof-d">Features shipped faster with tests written first, not last.</div>
+        </div>
+        <div class="signature-proof">
+          <div class="proof-k">Open source</div>
+          <div class="proof-v"><strong>speckit-product-forge</strong></div>
+          <div class="proof-d">Extending GitHub's Spec Kit for real product teams.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SKILLS — Tier list
+       ============================================================ -->
+  <section aria-labelledby="skills-h">
+    <div class="section-head">
+      <h2 id="skills-h">Skills, honestly</h2>
+      <span class="kicker">What I'm actually good at</span>
+    </div>
+
+    <div class="tiers">
+
+      <div class="tier core">
+        <div class="tier-label">
+          <div class="tier-rank">Core<em class="tier-meta">Expert · Daily use</em></div>
+          <p class="tier-desc">I've built real products with these. Ask me anything.</p>
+        </div>
+        <div class="tier-chips">
+          <span class="chip">Vue.js 2 / 3 <span class="years">8 yrs</span></span>
+          <span class="chip">Nuxt 3 / 4 <span class="years">4 yrs</span></span>
+          <span class="chip">TypeScript <span class="years">5 yrs</span></span>
+          <span class="chip">JavaScript / HTML / CSS <span class="years">8 yrs</span></span>
+          <span class="chip">Composition API</span>
+          <span class="chip">Pinia / Vuex</span>
+          <span class="chip">Responsive / Mobile web</span>
+        </div>
+      </div>
+
+      <div class="tier strong">
+        <div class="tier-label">
+          <div class="tier-rank">Strong<em class="tier-meta">Ship-ready</em></div>
+          <p class="tier-desc">I've used these in production and would again tomorrow.</p>
+        </div>
+        <div class="tier-chips">
+          <span class="chip">NestJS</span>
+          <span class="chip">Node.js</span>
+          <span class="chip">MongoDB</span>
+          <span class="chip">Redis</span>
+          <span class="chip">REST &amp; WebSockets</span>
+          <span class="chip">Stripe / Payments</span>
+          <span class="chip">Capacitor (iOS / Android)</span>
+          <span class="chip">OpenAI · Claude · Gemini</span>
+          <span class="chip">RAG · Qdrant</span>
+          <span class="chip">Testing (Vitest, Playwright)</span>
+          <span class="chip">Product &amp; UX design</span>
+          <span class="chip">SEO &amp; performance</span>
+        </div>
+      </div>
+
+      <div class="tier working">
+        <div class="tier-label">
+          <div class="tier-rank">Working<em class="tier-meta">Comfortable</em></div>
+          <p class="tier-desc">I can pick up tickets here without slowing the team down.</p>
+        </div>
+        <div class="tier-chips">
+          <span class="chip">Docker &amp; CI/CD</span>
+          <span class="chip">Event-driven architecture</span>
+          <span class="chip">BullMQ / Queues</span>
+          <span class="chip">React</span>
+          <span class="chip">Quasar</span>
+          <span class="chip">Monday.com / Salesforce / Jira apps</span>
+          <span class="chip">Team mentoring &amp; code review</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TIMELINE
+       ============================================================ -->
+  <section id="timeline-section" aria-labelledby="timeline-h">
+    <div class="section-head">
+      <h2 id="timeline-h">Career at a glance</h2>
+      <span class="kicker">2017 — Today</span>
+    </div>
+
+    <div class="timeline-wrap">
+      <div class="timeline-legend">
+        <span>Past</span>
+        <span>Present</span>
+      </div>
+
+      <!-- Timeline visual: 2017.5 → 2026.5 = 9 yr span. width% = ((start - 2017.5)/9)*100 -->
+      <div class="timeline" role="img" aria-label="Visual timeline of jobs from 2017 to 2026">
+        <div class="timeline-axis"></div>
+
+        <!-- Ticks at yearly -->
+        <div class="timeline-tick" style="left: 0%;">     <span class="timeline-tick-label">'17</span></div>
+        <div class="timeline-tick" style="left: 11.11%;"> <span class="timeline-tick-label">'18</span></div>
+        <div class="timeline-tick" style="left: 22.22%;"> <span class="timeline-tick-label">'19</span></div>
+        <div class="timeline-tick" style="left: 33.33%;"> <span class="timeline-tick-label">'20</span></div>
+        <div class="timeline-tick" style="left: 44.44%;"> <span class="timeline-tick-label">'21</span></div>
+        <div class="timeline-tick" style="left: 55.55%;"> <span class="timeline-tick-label">'22</span></div>
+        <div class="timeline-tick" style="left: 66.66%;"> <span class="timeline-tick-label">'23</span></div>
+        <div class="timeline-tick" style="left: 77.77%;"> <span class="timeline-tick-label">'24</span></div>
+        <div class="timeline-tick" style="left: 88.88%;"> <span class="timeline-tick-label">'25</span></div>
+
+        <!-- Axis 2017.5 → 2026.5; 1 yr = 11.11% -->
+        <!-- Soulwise: 2025 Jul → Present  (2025.5 → 2026.5) -->
+        <div class="tl-bar lv-4" style="top: 0px;  left: 88.89%; width: 11.11%;">Soulwise AI · Full-Stack</div>
+
+        <!-- Oboard: ~2022 → 2025 (≈4 yrs) -->
+        <div class="tl-bar lv-1" style="top: 26px; left: 50%; width: 38.89%;">Oboard · Senior Frontend / Feature Owner</div>
+
+        <!-- Earlier jobs row (lv-2 / lv-3) -->
+        <!-- ITOMYCH: 2022 Feb → 2022 Apr -->
+        <div class="tl-bar lv-3" style="top: 52px; left: 51.11%; width: 2.3%;" title="ITOMYCH"></div>
+        <!-- AnyforSoft: 2021 Jul → 2022 Feb -->
+        <div class="tl-bar lv-2" style="top: 52px; left: 45.55%; width: 5.6%;">AnyforSoft</div>
+        <!-- IT Svit: 2020 Jun → 2021 Jun -->
+        <div class="tl-bar lv-3" style="top: 52px; left: 33.33%; width: 11.11%;">IT Svit</div>
+        <!-- Codica: 2018 Aug → 2020 Mar -->
+        <div class="tl-bar lv-2" style="top: 52px; left: 12.22%; width: 17.78%;">Codica</div>
+        <!-- QPARD: 2017 Aug → 2018 Jul -->
+        <div class="tl-bar lv-3" style="top: 52px; left: 1.11%; width: 10.55%;">QPARD</div>
+      </div>
+
+      <div class="timeline-key">
+        <span><span class="tk-swatch tk-4"></span> Current role</span>
+        <span><span class="tk-swatch tk-1"></span> Long-term (4 yrs)</span>
+        <span><span class="tk-swatch tk-2"></span> Mid (1–2 yrs)</span>
+        <span><span class="tk-swatch tk-3"></span> Short-term / contract</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EXPERIENCE — DETAILS
+       ============================================================ -->
+  <section aria-labelledby="exp-h">
+    <div class="section-head">
+      <h2 id="exp-h">Experience in detail</h2>
+      <span class="kicker">Most recent first</span>
+    </div>
+
+    <article class="job">
+      <div class="job-meta">
+        <div class="period">2025 — Present</div>
+        <span class="duration">1 year</span>
+      </div>
+      <div class="job-body">
+        <h3>Full-Stack Engineer</h3>
+        <p class="company"><strong>Soulwise AI</strong> · AI-powered astrology platform (100k+ users)</p>
+        <ul class="plain">
+          <li><strong>Made the app 36% faster to load</strong> (bundle shrunk from 250 KB to 160 KB) by splitting code smarter and loading translations only when needed.</li>
+          <li><strong>Cleaned up the codebase:</strong> full TypeScript strict mode across the project; reorganised the code into 14 clear feature modules and deleted 3,500+ lines of duplicates.</li>
+          <li><strong>Shipped native iOS and Android apps</strong> using Capacitor with one shared codebase — both live on App Store and Google Play.</li>
+          <li><strong>Built real AI features</strong> connecting OpenAI, Anthropic Claude, and Google Gemini, with a vector-search layer (Qdrant) so the AI has real context, not just vibes.</li>
+          <li><strong>Real-time updates and notifications</strong> via WebSockets and background queues (Redis + BullMQ), so users see changes instantly.</li>
+          <li><strong>Set up the testing + CI quality gates</strong> — Vitest for unit tests, Playwright for full end-to-end — so broken code can't reach production.</li>
+        </ul>
+        <div class="job-tags">
+          <span class="job-tag">Vue 3</span>
+          <span class="job-tag">Nuxt 3/4</span>
+          <span class="job-tag">NestJS</span>
+          <span class="job-tag">TypeScript</span>
+          <span class="job-tag">MongoDB</span>
+          <span class="job-tag">OpenAI / Claude / Gemini</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="job-meta">
+        <div class="period">2022 — 2025</div>
+        <span class="duration">~4 years</span>
+      </div>
+      <div class="job-body">
+        <h3>Senior Frontend Developer · Feature Owner</h3>
+        <p class="company"><strong>Oboard</strong> · B2B SaaS for company goal-setting (OKRs) · Team of 2 frontend + 5 backend engineers</p>
+        <ul class="plain">
+          <li><strong>Owned a whole feature from idea to launch:</strong> the OKR dashboard and analytics. Talked directly with C-level execs about what to build next.</li>
+          <li><strong>Modernised the frontend</strong> across several major framework upgrades; was the primary reviewer on <strong>every</strong> frontend change for quality control.</li>
+          <li><strong>Shipped the product inside other platforms</strong> — Monday.com, Salesforce, Jira, and Confluence — so customers could use it where they already worked.</li>
+          <li><strong>Built the build pipeline</strong> that produces 5+ versions of the app from one codebase: standalone webapp, Monday embed, Salesforce app, Atlassian apps, and mobile.</li>
+          <li><strong>Integrated payments</strong> and subscription billing.</li>
+          <li><strong>Built 3+ internal tools</strong> for the QA and dev team during sprint gaps — cut repetitive manual work by roughly 40%.</li>
+          <li><strong>Mentored and reviewed</strong> across the frontend team; partnered with 5 backend engineers on API shape and data contracts.</li>
+        </ul>
+        <div class="job-tags">
+          <span class="job-tag">Vue 3</span>
+          <span class="job-tag">Nuxt 3/4</span>
+          <span class="job-tag">TypeScript</span>
+          <span class="job-tag">Quasar</span>
+          <span class="job-tag">Pinia</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="job minor">
+      <div class="job-meta">
+        <div class="period">Feb — Apr 2022</div>
+        <span class="duration">3 months · contract</span>
+      </div>
+      <div class="job-body">
+        <h3>Frontend Developer (Vue.js)</h3>
+        <p class="company"><strong>ITOMYCH Studio</strong></p>
+        <div class="job-tags"><span class="job-tag">Vue.js</span></div>
+      </div>
+    </article>
+
+    <article class="job minor">
+      <div class="job-meta">
+        <div class="period">Jul 2021 — Feb 2022</div>
+        <span class="duration">8 months</span>
+      </div>
+      <div class="job-body">
+        <h3>Frontend Developer (React, Vue)</h3>
+        <p class="company"><strong>AnyforSoft</strong></p>
+        <div class="job-tags">
+          <span class="job-tag">React</span>
+          <span class="job-tag">Vue.js</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="job minor">
+      <div class="job-meta">
+        <div class="period">Jun 2020 — Jun 2021</div>
+        <span class="duration">1 year 1 month</span>
+      </div>
+      <div class="job-body">
+        <h3>Frontend Developer (Vue.js)</h3>
+        <p class="company"><strong>IT Svit</strong> · Full-time</p>
+        <div class="job-tags"><span class="job-tag">Vue.js</span></div>
+      </div>
+    </article>
+
+    <article class="job minor">
+      <div class="job-meta">
+        <div class="period">Mar — Jun 2020</div>
+        <span class="duration">4 months</span>
+      </div>
+      <div class="job-body">
+        <h3>Frontend Developer</h3>
+        <p class="company"><strong>Freelance</strong> · Kharkiv, Ukraine</p>
+      </div>
+    </article>
+
+    <article class="job minor">
+      <div class="job-meta">
+        <div class="period">Aug 2018 — Mar 2020</div>
+        <span class="duration">1 year 8 months</span>
+      </div>
+      <div class="job-body">
+        <h3>Frontend Vue.js Developer</h3>
+        <p class="company"><strong>Codica</strong></p>
+        <div class="job-tags"><span class="job-tag">Vue.js</span></div>
+      </div>
+    </article>
+
+    <article class="job minor">
+      <div class="job-meta">
+        <div class="period">Aug 2017 — Jul 2018</div>
+        <span class="duration">1 year</span>
+      </div>
+      <div class="job-body">
+        <h3>Frontend Vue.js Developer</h3>
+        <p class="company"><strong>QPARD</strong> · Kharkiv, Ukraine</p>
+        <div class="job-tags"><span class="job-tag">Vue.js</span></div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer>
+    <span>© 2026 Valentyn Yakovliev</span>
+    <span>
+      <a href="mailto:yakovlev.valentin97@gmail.com">Email</a>·
+      <a href="https://www.linkedin.com/in/valentyn-yakovliev-960303140/">LinkedIn</a>·
+      <a href="https://github.com/vaiyav">GitHub</a>·
+      <a href="https://my-zodiac-ai.com">My Zodiac AI</a>
+    </span>
+  </footer>
+
+</main>
+
+<script>
+(function () {
+  var html = document.documentElement;
+
+  /* ========== A11Y TRIGGER (collapsible) ========== */
+  var trigger = document.getElementById('a11y-trigger');
+  var bar = document.getElementById('a11y-bar');
+  function setBar(open) {
+    if (open) {
+      bar.classList.remove('hidden');
+      trigger.setAttribute('aria-expanded', 'true');
+    } else {
+      bar.classList.add('hidden');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+  }
+  trigger.addEventListener('click', function () {
+    setBar(bar.classList.contains('hidden'));
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !bar.classList.contains('hidden')) {
+      setBar(false);
+      trigger.focus();
+    }
+  });
+
+  /* ========== A11Y TOGGLES ========== */
+  function toggleAttr(btn, attr, onValue) {
+    var pressed = btn.getAttribute('aria-pressed') === 'true';
+    var next = !pressed;
+    btn.setAttribute('aria-pressed', String(next));
+    if (next) html.setAttribute(attr, onValue);
+    else      html.removeAttribute(attr);
+    try { localStorage.setItem('resume:' + attr, next ? onValue : ''); } catch (e) {}
+  }
+
+  // restore
+  try {
+    var savedContrast = localStorage.getItem('resume:data-contrast');
+    if (savedContrast) { html.setAttribute('data-contrast', savedContrast); document.getElementById('toggle-contrast').setAttribute('aria-pressed','true'); }
+    var savedFont = localStorage.getItem('resume:data-font');
+    if (savedFont) { html.setAttribute('data-font', savedFont); document.getElementById('toggle-dyslexic').setAttribute('aria-pressed','true'); }
+    var savedMotion = localStorage.getItem('resume:data-motion');
+    if (savedMotion) { html.setAttribute('data-motion', savedMotion); document.getElementById('toggle-motion').setAttribute('aria-pressed','true'); }
+  } catch (e) {}
+
+  document.getElementById('toggle-contrast').addEventListener('click', function () {
+    toggleAttr(this, 'data-contrast', 'high');
+  });
+  document.getElementById('toggle-dyslexic').addEventListener('click', function () {
+    toggleAttr(this, 'data-font', 'dyslexic');
+  });
+  document.getElementById('toggle-motion').addEventListener('click', function () {
+    toggleAttr(this, 'data-motion', 'reduced');
+  });
+
+  /* ========== TWEAKS PANEL ========== */
+  var tweaksBtn = document.getElementById('toggle-tweaks');
+  var panel = document.getElementById('tweaks-panel');
+  var closeTweaks = document.getElementById('close-tweaks');
+
+  function setPanel(open) {
+    if (open) {
+      panel.classList.remove('hidden');
+      panel.setAttribute('aria-hidden','false');
+      tweaksBtn.setAttribute('aria-pressed','true');
+    } else {
+      panel.classList.add('hidden');
+      panel.setAttribute('aria-hidden','true');
+      tweaksBtn.setAttribute('aria-pressed','false');
+    }
+  }
+  tweaksBtn.addEventListener('click', function () {
+    setPanel(panel.classList.contains('hidden'));
+  });
+  closeTweaks.addEventListener('click', function () { setPanel(false); });
+
+  /* ========== DENSITY ========== */
+  var densityScales = { compact: 0.82, comfortable: 1, spacious: 1.18 };
+  function setDensity(name) {
+    html.style.setProperty('--density-scale', densityScales[name] || 1);
+    var btns = document.querySelectorAll('#seg-density button');
+    btns.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-density') === name));
+    });
+    try { localStorage.setItem('resume:density', name); } catch (e) {}
+  }
+  document.querySelectorAll('#seg-density button').forEach(function (b) {
+    b.addEventListener('click', function () { setDensity(b.getAttribute('data-density')); });
+  });
+  try {
+    var sd = localStorage.getItem('resume:density');
+    if (sd && densityScales[sd]) setDensity(sd);
+  } catch (e) {}
+
+  /* ========== PRINT MODE ========== */
+  function setPrint(mode) {
+    html.setAttribute('data-print', mode);
+    var btns = document.querySelectorAll('#seg-print button');
+    btns.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-print') === mode));
+    });
+    try { localStorage.setItem('resume:print', mode); } catch (e) {}
+  }
+  document.querySelectorAll('#seg-print button').forEach(function (b) {
+    b.addEventListener('click', function () { setPrint(b.getAttribute('data-print')); });
+  });
+  try {
+    var sp = localStorage.getItem('resume:print');
+    setPrint(sp || '2page');
+  } catch (e) {
+    setPrint('2page');
+  }
+
+  /* ========== PRINT BUTTON ========== */
+  document.getElementById('print-btn').addEventListener('click', function () {
+    window.print();
+  });
+
+})();
+</script>
+
+</body>
+</html>
