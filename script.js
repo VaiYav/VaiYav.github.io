@@ -157,7 +157,7 @@ function initTerminal() {
     { type: 'cmd',  text: 'cat skills.txt' },
     { type: 'out',  text: 'Frontend · Backend · System Design · UI/UX · SEO · Performance · AI · Team Lead', cls: '' },
     { type: 'cmd',  text: 'cat achievements.txt' },
-    { type: 'out',  text: '🚀 Built My Zodiac AI solo → 1,500 users in 4 months', cls: '' },
+    { type: 'out',  text: '🚀 Built a consumer AI SaaS solo → 1,500 users in 4 months', cls: '' },
     { type: 'out',  text: '⚡ Architecture · Backend · Frontend · Android · Stripe — all me', cls: 'dim' },
     { type: 'cmd',  text: 'echo $SUPERPOWER' },
     { type: 'out',  text: '✅ Full cycle: product → code → deploy → growth. Open to senior / lead roles.', cls: 'highlight' },
