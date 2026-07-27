@@ -23,13 +23,13 @@ LLMs · AI Agents · Agentic systems · LangChain · LangGraph · Agents SDK · 
 SDD · TDD · BDD · Claude Code · Codex · Windsurf · Devin · Agent workflows & skills
 
 **Data, infrastructure & quality**
-MongoDB · PostgreSQL · Redis · REST APIs · WebSockets (real-time) · RabbitMQ · Kafka · BullMQ (task queues) · Docker · CI/CD · Vitest · Playwright · Event-driven architecture
+MongoDB · PostgreSQL · Redis · REST APIs · WebSockets (real-time) · RabbitMQ · Kafka · BullMQ (task queues) · Docker · CI/CD · Testing strategy (Vitest, Playwright, E2E) · Event-driven architecture · FSD · DDD · EDA · Hexagonal · Micro-frontends
 
 **Integrations & Observability**
 Stripe / subscription billing · Monday.com · Salesforce · Jira & Confluence apps · Sentry · New Relic · PostHog · Amplitude
 
-**Product & leadership**
-Product & UX design · SEO & performance · Mentoring & code review · Technical leadership · 0 → 1 product launch
+**Product, leadership & growth**
+Product & UX design · AI agent design & creation · Multi-agent orchestration · Human-in-the-loop · SEO / AEO / GEO · ASO · i18n / l10n · Localization at scale · Content & copywriting · Marketing automation · Social media automation · CRO / A/B testing · Analytics & attribution · Mentoring & code review · Technical leadership · 0 → 1 product launch
 
 > Framework-agnostic — the underlying patterns are the same, so I move between React, Vue, Angular and Svelte easily.
 
@@ -77,7 +77,7 @@ My own open-source **"Spec-Driven Development" framework**, built on top of GitH
 **AI Integration Consultant — Independent** · 2025 – Present
 Helping product teams (3 clients) add AI without the hype. I design AI adoption roadmaps, build internal AI agents for development teams (automated code review, documentation, planning helpers), and advise on agent architecture, RAG and cost control.
 
-**Full-Stack Engineer — AI-powered consumer platform** (100k+ users) · 2025 – Present
+**Full-Stack Engineer — Soulwise AI** (AI-powered consumer platform, 10k+ users) · 2025 – Present
 Built real AI features and agent flows connected to OpenAI, Claude and Gemini with a vector-search layer. Shipped native iOS & Android apps from one codebase (Capacitor). Made the app 36% faster to load, moved the whole project to strict TypeScript, and set up automated testing so broken code can't reach users.
 
 **Senior Frontend Developer & Feature Owner — Oboard** (B2B goal-setting / OKR software) · 2022 – 2025 (~4 years)
@@ -90,7 +90,7 @@ Frontend Developer (Vue.js / React) at ITOMYCH Studio, AnyforSoft, IT Svit, Codi
 
 ## At a glance
 
-- **8+ years** building and shipping web products.
+- **8+ years** building and shipping web, mobile and desktop products.
 - **2+ years** focused on AI, LLMs and agent systems in production.
 - Took multiple products from **0 → 1** (blank page to live, paying users).
 - Comfortable as a **solo owner** or the senior engineer a small team is built around.
