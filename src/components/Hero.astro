@@ -6,7 +6,7 @@ interface Props { locale?: Locale }
 const { locale = 'en' } = Astro.props;
 const text = copy[locale];
 ---
-<section class="frame hero">
+<section class="frame hero" data-reveal="hero">
   <div class="hero-grid">
     <div>
       <p class="eyebrow">{text.role}</p>
@@ -19,7 +19,7 @@ const text = copy[locale];
       <p class="hero-note">{text.heroNote}</p>
     </div>
     <figure class="portrait-block">
-      <div class="portrait-frame"><Image src={portrait} alt="Portrait of Valentyn Yakovliev" width={796} height={1024} loading="eager" fetchpriority="high" /></div>
+      <div class="portrait-frame" data-reveal="portrait"><Image src={portrait} alt="Portrait of Valentyn Yakovliev" width={796} height={1024} loading="eager" fetchpriority="high" /></div>
       <figcaption class="portrait-caption"><span>Valentyn Yakovliev</span><span>Product builder</span></figcaption>
     </figure>
   </div>

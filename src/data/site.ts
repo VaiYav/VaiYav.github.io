@@ -74,7 +74,7 @@ export const copy = {
 export type Copy = (typeof copy)[Locale];
 
 export const links = {
-  cv: '/resume-recruiter/resume-recruiter.html',
+  cv: '/valentyn-yakovliev-recruiter-resume.html',
   email: 'mailto:yakovlev.valentin97@gmail.com',
   linkedin: 'https://www.linkedin.com/in/valentyn-yakovliev-960303140/',
   github: 'https://github.com/vaiyav',
