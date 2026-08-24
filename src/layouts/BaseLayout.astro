@@ -1,0 +1,55 @@
+---
+import { copy, links, localePath, locales, siteUrl, type Locale } from '../data/site';
+import portrait from '../../assets/unnamed.jpg';
+import '../styles/global.css';
+
+interface Props {
+  locale?: Locale;
+  title?: string;
+  description?: string;
+  path?: string;
+  type?: 'WebPage' | 'ProfilePage' | 'CollectionPage' | 'Article';
+}
+
+const { locale = 'en', title, description, path = '', type = 'WebPage' } = Astro.props;
+const text = copy[locale];
+const canonical = `${siteUrl}${localePath(locale, path)}`;
+const portraitUrl = new URL(portrait.src, Astro.site ?? siteUrl).href;
+const alternateLinks = locales.map((item) => ({ locale: item, href: `${siteUrl}${localePath(item, path)}` }));
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'Person', '@id': `${siteUrl}/#person`, name: 'Valentyn Yakovliev', alternateName: 'VaiYav', jobTitle: 'Product Engineer & AI Systems Builder', url: siteUrl, image: portraitUrl, sameAs: [links.linkedin, links.github], knowsAbout: ['Product Engineering', 'AI Agents', 'RAG', 'TypeScript', 'Vue.js', 'React', 'Node.js', 'NestJS', 'Python', 'FastAPI', 'Product Strategy', 'Technical Leadership'] },
+    { '@type': type, '@id': `${canonical}#page`, url: canonical, name: title ?? text.title, description: description ?? text.description, inLanguage: locale, isPartOf: { '@id': `${siteUrl}/#website` }, about: { '@id': `${siteUrl}/#person` } },
+    { '@type': 'WebSite', '@id': `${siteUrl}/#website`, url: siteUrl, name: 'Valentyn Yakovliev', inLanguage: locale, publisher: { '@id': `${siteUrl}/#person` } },
+  ],
+};
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title ?? text.title}</title>
+    <meta name="description" content={description ?? text.description} />
+    <meta name="author" content="Valentyn Yakovliev" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+    {alternateLinks.map(({ locale: alternate, href }) => <link rel="alternate" hreflang={alternate} href={href} />)}
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}${localePath('en', path)}`} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={title ?? text.title} />
+    <meta property="og:description" content={description ?? text.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Valentyn Yakovliev" />
+    <meta property="og:image" content={portraitUrl} />
+    <meta property="og:image:alt" content="Portrait of Valentyn Yakovliev" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

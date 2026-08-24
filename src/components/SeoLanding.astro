@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import { copy, links, localePath, type Locale } from '../data/site';
+import { Image } from 'astro:assets';
+import portrait from '../../assets/unnamed.jpg';
+type Topic = 'ai-engineer' | 'full-stack-engineer' | 'product-engineer';
+interface Props { locale?: Locale; topic: Topic }
+const { locale = 'en', topic } = Astro.props;
+const text = copy[locale];
+const topics = {
+  'ai-engineer': { en: ['AI agent engineer', 'Production AI systems with clear ownership', 'I design and build AI agent workflows, retrieval-backed features and evaluation-aware product systems that have a job beyond a demo.'], uk: ['AI-інженер', 'Production AI-системи з чіткою відповідальністю', 'Проєктую та створюю агентні сценарії, retrieval-функції й продуктові AI-системи, які мають конкретну задачу, а не лише демо.'], ru: ['AI-инженер', 'Production AI-системы с понятной ответственностью', 'Проектирую и создаю агентные сценарии, retrieval-функции и продуктовые AI-системы с конкретной задачей, а не только демо.'] },
+  'full-stack-engineer': { en: ['Full-Stack Product Engineer', 'One owner across the product boundary', 'I build web products end to end: interface, backend, integrations, payments, deployment and the operational details that make the release real.'], uk: ['Full-Stack Product Engineer', 'Один відповідальний за межі продукту', 'Створюю веб-продукти end to end: інтерфейс, backend, інтеграції, платежі, deployment та операційні деталі реального релізу.'], ru: ['Full-Stack Product Engineer', 'Один ответственный за границу продукта', 'Создаю веб-продукты end to end: интерфейс, backend, интеграции, платежи, deployment и операционные детали настоящего релиза.'] },
+  'product-engineer': { en: ['Product Engineer', 'Product judgment carried through to production', 'I connect product decisions, interface design and engineering delivery so small teams can move from ambiguity to evidence instead of accumulating disconnected work.'], uk: ['Product Engineer', 'Продуктові рішення, доведені до production', 'Поєдную продуктові рішення, дизайн інтерфейсу та інженерний delivery, щоб малі команди рухалися від невизначеності до доказів.'], ru: ['Product Engineer', 'Продуктовые решения, доведённые до production', 'Соединяю продуктовые решения, дизайн интерфейса и инженерный delivery, чтобы небольшие команды двигались от неопределённости к доказательствам.'] },
+} as const;
+const item = topics[topic][locale];
+const title = `${item[0]} — Valentyn Yakovliev`;
+const description = item[2];
+---
+<BaseLayout locale={locale} title={title} description={description} path={topic}>
+  <div class="site-shell"><a class="skip-link" href="#content">Skip to content</a><SiteHeader locale={locale} path={topic} /><main id="content">
+    <section class="frame hero"><div class="hero-grid"><div><p class="eyebrow">{text.role}</p><h1>{item[1]}</h1><p class="hero-copy">{item[2]}</p><div class="hero-actions"><a class="primary-button" href={links.cv}>{text.primary}</a><a class="email-link" href={links.email}>{text.email}</a></div></div><figure class="portrait-block"><div class="portrait-frame"><Image src={portrait} alt="Portrait of Valentyn Yakovliev" width={796} height={1024} /></div></figure></div></section>
+    <section class="frame section"><div class="section-header"><div><p class="section-index">01 — {item[0]}</p><h2>{text.whatTitle}</h2></div><p class="section-intro">{description}</p></div><div class="answer-grid"><article><h3>{text.stackTitle}</h3><p>{text.stackText}</p></article><article><h3>{text.experienceTitle}</h3><p>{text.experienceText}</p></article><article><h3>{text.whoTitle}</h3><p>{text.whoText}</p></article><article><h3>{text.availabilityTitle}</h3><p>{text.availabilityText}</p></article></div></section>
+    <section class="method-section"><div class="frame section"><div class="section-header"><div><p class="section-index">02 — Product rescue</p><h2>{text.methodTitle}</h2></div><p class="section-intro method-intro">{text.methodText}</p></div><a class="light-button" href={localePath(locale)}>{text.productLink}</a></div></section>
+  </main><footer class="frame footer"><span>{text.footer}</span><span><a href={links.linkedin}>LinkedIn ↗</a> · <a href={links.github}>GitHub ↗</a></span></footer></div>
+</BaseLayout>

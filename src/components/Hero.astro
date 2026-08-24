@@ -1,0 +1,26 @@
+---
+import { copy, links, type Locale } from '../data/site';
+import { Image } from 'astro:assets';
+import portrait from '../../assets/unnamed.jpg';
+interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const text = copy[locale];
+---
+<section class="frame hero">
+  <div class="hero-grid">
+    <div>
+      <p class="eyebrow">{text.role}</p>
+      <h1 set:html={text.hero}></h1>
+      <p class="hero-copy">{text.heroText}</p>
+      <div class="hero-actions">
+        <a class="primary-button" href={links.cv}>{text.primary}</a>
+        <a class="email-link" href={links.email}>{text.email}</a>
+      </div>
+      <p class="hero-note">{text.heroNote}</p>
+    </div>
+    <figure class="portrait-block">
+      <div class="portrait-frame"><Image src={portrait} alt="Portrait of Valentyn Yakovliev" width={796} height={1024} loading="eager" fetchpriority="high" /></div>
+      <figcaption class="portrait-caption"><span>Valentyn Yakovliev</span><span>Product builder</span></figcaption>
+    </figure>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+---
+import { localePath, type Locale } from '../data/site';
+interface Props { locale?: Locale; path?: string }
+const { locale = 'en', path = '' } = Astro.props;
+---
+<header class="topbar frame">
+  <a class="wordmark" href={localePath(locale)}>Valentyn Yakovliev <span>Product rescue</span></a>
+  <nav class="topnav" aria-label="Primary navigation">
+    <a href={localePath(locale, 'ai-engineer')}>AI systems</a>
+    <a href={localePath(locale, 'blog')}>Notes</a>
+    <a href="/resume-recruiter/resume-recruiter.html">Recruiter CV</a>
+  </nav>
+  <div class="language-switcher" role="group" aria-label="Choose language">
+    <a class:list={{ active: locale === 'en' }} href={localePath('en', path)}>EN</a>
+    <a class:list={{ active: locale === 'uk' }} href={localePath('uk', path)}>UK</a>
+    <a class:list={{ active: locale === 'ru' }} href={localePath('ru', path)}>RU</a>
+  </div>
+</header>

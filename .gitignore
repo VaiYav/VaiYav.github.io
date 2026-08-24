@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+public/assets/unnamed.jpg
+public/v2/index.html
+public/2000/resume-2000.html
+public/resume-recruiter/resume-recruiter.html

@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /interviews/
+Disallow: /2000/scraps/
+Disallow: /2000/uploads/
+Disallow: /v1/
+Disallow: /v2/integration_engineer.html
+Disallow: /betterme.html
+Disallow: /betterme_cover.html
+Disallow: /dsua.html
+Disallow: /softermii.html
+Disallow: /visiquate.html
+Disallow: /integration_engineer.html
+Disallow: /.serena/
+Disallow: /.remember/
+
+Sitemap: https://vaiyav.online/sitemap.xml

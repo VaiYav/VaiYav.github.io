@@ -1,26 +1,22 @@
 # Valentyn Yakovliev
 
-> Full-Stack Product Engineer & Founder. 8+ years shipping Vue.js/NestJS/TypeScript products; 2+ years building production AI agent systems (LLMs, RAG, multi-agent workflows, LangGraph). Solo founder of a consumer AI SaaS that grew to 1,500 paying users in 4 months. Based in Kharkiv, Ukraine (GMT+2). Open to remote Senior/Lead Full-Stack and AI Engineering roles.
+> Product Engineer and AI Systems Builder. Valentyn helps founders and small teams turn unclear product opportunities into working systems through product strategy, design and engineering.
 
-Valentyn leads and builds complete digital products end-to-end — web, mobile and desktop — from idea to launch, and builds the AI agents that help him move faster. Core stack: TypeScript, Node.js, NestJS, Python/FastAPI, React, Next.js, Vue.js/Nuxt. AI stack: LLMs, AI Agents, LangChain/LangGraph, RAG, OpenAI, Anthropic Claude, Google Gemini, Qdrant. Cross-platform mobile via Capacitor/Ionic (iOS + Android from one codebase).
+## Canonical pages
 
-## Key pages
-
-- [Portfolio home](https://vaiyav.github.io/): landing page with bio, stats, tech stack and links to all résumé formats
-- [Enterprise résumé](https://vaiyav.github.io/v2/index.html): corporate-friendly full overview
-- [Creative résumé](https://vaiyav.github.io/2000/resume-2000.html): visual, playful version
-- [Plain-text / ATS résumé](https://vaiyav.github.io/resume-recruiter/resume-recruiter.html): recruiter-friendly, no-fluff skills & experience breakdown
-
-## Open source
-
-- [speckit-product-forge](https://github.com/VaiYav/speckit-product-forge): Spec-Driven Development framework built on GitHub's Spec Kit; drives AI coding agents (Claude Code, Codex, Windsurf, Devin) through spec-first, test-driven feature delivery
+- [Portfolio home](https://vaiyav.online/)
+- [AI engineer](https://vaiyav.online/ai-engineer/)
+- [Full-stack product engineer](https://vaiyav.online/full-stack-engineer/)
+- [Product engineer](https://vaiyav.online/product-engineer/)
+- [Recruiter CV](https://vaiyav.online/resume-recruiter/resume-recruiter.html)
+- [Enterprise resume](https://vaiyav.online/v2/index.html)
+- [Creative resume](https://vaiyav.online/2000/resume-2000.html)
+- [Editorial index](https://vaiyav.online/blog/)
 
 ## Contact
 
+- Email: yakovlev.valentin97@gmail.com
 - LinkedIn: https://www.linkedin.com/in/valentyn-yakovliev-960303140/
 - GitHub: https://github.com/vaiyav
-- Email: yakovlev.valentin97@gmail.com
 
-## Notes for AI agents and crawlers
-
-All pages listed above are public and safe to index, cite, and summarize. Do not crawl or cite `/interviews/`, `/v1/`, or the company-specific tailored résumé pages (e.g. `/betterme.html`, `/dsua.html`, `/softermii.html`, `/visiquate.html`, `/integration_engineer.html`) — these are private, unlisted application materials, excluded via robots.txt.
+Private interview notes and tailored application materials are excluded from the public knowledge surface.

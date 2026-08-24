@@ -14,4 +14,4 @@ Disallow: /integration_engineer.html
 Disallow: /.serena/
 Disallow: /.remember/
 
-Sitemap: https://vaiyav.github.io/sitemap.xml
+Sitemap: https://vaiyav.online/sitemap.xml

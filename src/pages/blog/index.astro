@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import { copy, links } from '../../data/site';
+const text = copy.en;
+const topics = ['AI systems in production', 'Product rescue and decision-making', 'Full-stack product engineering', 'SEO, AEO and GEO for builders'];
+---
+<BaseLayout title="Notes — Valentyn Yakovliev" description="Editorial notes on product engineering, AI systems, product rescue and shipping software." path="blog" type="CollectionPage">
+  <div class="site-shell"><a class="skip-link" href="#content">Skip to content</a><SiteHeader path="blog" /><main id="content"><section class="frame hero"><p class="eyebrow">Editorial index · coming next</p><h1>Notes from the product boundary.</h1><p class="hero-copy">A planned knowledge base about building products, AI systems and the decisions that make releases real. Drafts are intentionally not indexable.</p><div class="hero-actions"><a class="primary-button" href={links.email}>Suggest a conversation</a></div></section><section class="frame section"><div class="section-header"><div><p class="section-index">Topics</p><h2>What will be covered.</h2></div><p class="section-intro">Each article will be published only when it contains original, useful evidence.</p></div><div class="answer-grid">{topics.map((topic) => <article><h3>{topic}</h3><p>Editorial brief prepared. Publication follows research and a clear reader question.</p></article>)}</div><p class="section-intro"><a href="/blog/topics/">Browse topic briefs →</a></p></section></main><footer class="frame footer"><span>{text.footer}</span><span><a href={links.linkedin}>LinkedIn ↗</a> · <a href={links.github}>GitHub ↗</a></span></footer></div>
+</BaseLayout>

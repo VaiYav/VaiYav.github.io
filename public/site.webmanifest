@@ -1,0 +1,10 @@
+{
+  "name": "Valentyn Yakovliev — Portfolio",
+  "short_name": "VaiYav",
+  "description": "Product Engineer and AI Systems Builder",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f4ef",
+  "theme_color": "#f6c945",
+  "icons": [{"src":"/favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
