@@ -8,11 +8,11 @@
 
 Структура: **контекст → 3 плоскости → почему вы**.
 
-> **Контекст (10 сек).** Я Full-Stack Product Engineer, 8 лет. Последние 1.5 года живу на пересечении AI и продукта. Делю работу на три плоскости: продакт-инжиниринг, AI-интеграции, и AI-тулинг для других инженеров.
+> **Контекст (10 сек).** Я Full-Stack Product Engineer, 8+ лет. Последние 2+ года работаю на пересечении AI и продукта. Делю работу на три плоскости: продакт-инжиниринг, AI-интеграции и AI-тулинг для других инженеров.
 >
 > **Продакт-инжиниринг (30 сек).** 4 года в Oboard — SaaS для OKR. Sеньор-фронт + feature owner: OKR-дашборд и аналитика от стейкхолдеров до прода, дизайн-система, embed в Monday/Salesforce/Jira/Confluence — 5 версий из одной кодбазы. Параллельно 3+ внутренних тулзы для QA, сэкономили ~40% manual work. Это и есть скилл который вы описываете в вакансии — внутренние тулзы для нетехнических команд.
 >
-> **AI-интеграции (40 сек).** С 2025 — Soulwise AI как Full-Stack Engineer. Астрология, 100k+ юзеров, web + Capacitor iOS/Android, NestJS + MongoDB. Построил RAG на Qdrant, multi-provider роутинг OpenAI/Claude/Gemini с fallback, prompt caching, batch API для генерации гороскопов на масштабе. Bundle ужал 250→160 KB, -36%. Параллельно консультирую 3 продакт-команды по AI-roadmap — выбор провайдеров, dependency-матрицы, integration playbooks. И solo SaaS My Zodiac AI: от 0 до 1500 платящих за 4 месяца, без команды.
+> **AI-интеграции (40 сек).** С 2025 — Soulwise AI как Full-Stack Engineer. AI-платформа с 10k+ пользователями, web + Capacitor iOS/Android, NestJS + MongoDB. Построил RAG на Qdrant, multi-provider роутинг OpenAI/Claude/Gemini с fallback, prompt caching и batch API для генерации контенту. Bundle ужал 250→160 KB, -36%. Параллельно консультирую 3 продуктовые команды по AI-roadmap — выбор провайдеров, dependency-матрицы и integration playbooks. И solo SaaS My Zodiac AI: от 0 до 1500 платящих за 4 месяца, без команды.
 >
 > **AI-тулинг (20 сек).** speckit-product-forge — мой open-source. Расширение GitHub Spec Kit. 8 плагинов, 127 skills, 19 sub-agents для Claude Code. Это не "пробовал" — это мой production-workflow ежедневно.
 >
@@ -75,7 +75,7 @@ Source → Queue → Workers → Cache → Cascading LLM (Haiku→Sonnet→o1)
 
 ## Версия 30-sec (резерв — если рекрутер всё-таки появится позже)
 
-> "Меня зовут Валентин. 8 лет full-stack, 1.5 года на пересечении AI и продукта. Сейчас одновременно строю Soulwise AI (астрология, 100k+ юзеров, Full-Stack Engineer), консультирую 3 команды по AI-интеграциям, и веду свой open-source — speckit-product-forge с 127 skills и 19 sub-agents для Claude Code. Параллельно solo SaaS My Zodiac AI: 0 → 1500 платящих за 4 месяца. Под вашу вакансию мэтч плотный."
+> "Меня зовут Валентин. 8+ лет full-stack, 2+ года на пересечении AI и продукта. Сейчас одновременно строю Soulwise AI — AI-платформу с 10k+ пользователями, консультирую 3 команды по AI-интеграциям и веду свой open-source speckit-product-forge с 127 skills и 19 sub-agents для Claude Code. Параллельно solo SaaS My Zodiac AI: 0 → 1500 платящих за 4 месяца. Под вашу вакансию мэтч плотный."
 
 ## Tips по подаче
 

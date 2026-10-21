@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import { copy, legal, legalCopy, links, type Locale } from '../data/site';
+interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const text = copy[locale];
+const legalText = legalCopy[locale];
+const skip = locale === 'en' ? 'Skip to content' : locale === 'uk' ? 'Перейти до змісту' : 'Перейти к содержанию';
+const title = `${legalText.title} — ${legal.legalName}`;
+const description = locale === 'en'
+  ? `Legal information for ${legal.legalName}: taxpayer number ${legal.taxId}, registered address ${legal.address}.`
+  : locale === 'uk'
+    ? `Правова інформація: ${legal.legalName}, РНОКПП ${legal.taxId}, місцезнаходження — ${legal.address}.`
+    : `Юридическая информация: ${legal.legalName}, РНОКПП ${legal.taxId}, место нахождения — ${legal.address}.`;
+---
+<BaseLayout locale={locale} title={title} description={description} path="legal" type="WebPage">
+  <div class="site-shell">
+    <a class="skip-link" href="#content">{skip}</a>
+    <SiteHeader locale={locale} path="legal" />
+    <main id="content">
+      <section class="frame hero legal-hero">
+        <p class="eyebrow">{legalText.eyebrow}</p>
+        <h1>{legalText.heading}</h1>
+        <p class="hero-copy">{legalText.intro}</p>
+      </section>
+      <section class="frame section">
+        <dl class="legal-grid">
+          <div class="legal-item"><dt>{legalText.name}</dt><dd><strong>{legal.legalName}</strong></dd></div>
+          <div class="legal-item"><dt>{legalText.nameLatin}</dt><dd>{legal.legalNameLatin}</dd></div>
+          <div class="legal-item"><dt>{legalText.taxId}</dt><dd>{legal.taxId}</dd></div>
+          <div class="legal-item"><dt>{legalText.address}</dt><dd>{legal.address}</dd></div>
+          <div class="legal-item"><dt>{legalText.edr}</dt><dd>{legal.edrNumber}</dd></div>
+          <div class="legal-item"><dt>{legalText.edrDate}</dt><dd>{legal.edrEntryDate}</dd></div>
+          <div class="legal-item"><dt>{legalText.phone}</dt><dd><a href={`tel:${legal.phoneHref}`}>{legal.phone}</a></dd></div>
+          <div class="legal-item"><dt>{legalText.email}</dt><dd><a href={`mailto:${legal.email}`}>{legal.email}</a></dd></div>
+        </dl>
+        <p class="legal-note">{legalText.note}</p>
+        <p class="legal-source"><strong>{legalText.source}:</strong> {legalText.sourceText}</p>
+      </section>
+      <section class="frame contact-section" data-reveal>
+        <div class="contact-frame">
+          <p class="eyebrow">{legalText.footerEntity}</p>
+          <h2>{text.contactTitle}</h2>
+          <p>{text.contactText}</p>
+          <div class="hero-actions">
+            <a class="primary-button" href={links.cv}>{text.primary}</a>
+            <a class="email-link" href={links.email}>{text.email}</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <SiteFooter locale={locale} />
+  </div>
+</BaseLayout>

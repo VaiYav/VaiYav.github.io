@@ -5,9 +5,9 @@
 
 ## Короткий рассказ — 60-75 секунд (~180 слов)
 
-> "Я Валентин, Full-Stack Product Engineer, 8 лет коммерческого опыта. Сейчас работаю на трёх плоскостях параллельно.
+> "Я Валентин, Full-Stack Product Engineer, 8+ лет коммерческого опыта. Сейчас работаю на трёх плоскостях параллельно.
 >
-> Первая — **Soulwise AI** как Full-Stack Engineer. AI-астрология, 100 тысяч плюс юзеров, web и мобильные. Там я построил RAG на Qdrant, multi-provider роутинг между OpenAI, Claude и Gemini с fallback, prompt caching, и batch-генерацию контента. Бандл с 250 до 160 KB ужал, минус 36%.
+> Первая — **Soulwise AI** как Full-Stack Engineer. AI-астрология, 10k+ пользователей, web и мобильные. Там я построил RAG на Qdrant, multi-provider роутинг между OpenAI, Claude и Gemini с fallback, prompt caching и batch-генерацию контента. Бандл с 250 до 160 KB ужал, минус 36%.
 >
 > Вторая — **консалтинг**. Помогаю трём продакт-командам внедрять AI: выбор провайдеров, dependency-матрицы, integration playbook'и. Цель — чтобы команда через 2-4 недели сама вела AI-фичу.
 >

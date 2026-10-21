@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
 import { copy, links, localePath, type Locale } from '../data/site';
 import { Image } from 'astro:assets';
 import portrait from '../../assets/unnamed.jpg';
@@ -22,5 +23,5 @@ const description = item[2];
     <section class="frame hero"><div class="hero-grid"><div><p class="eyebrow">{text.role}</p><h1>{item[1]}</h1><p class="hero-copy">{item[2]}</p><div class="hero-actions"><a class="primary-button" href={links.cv}>{text.primary}</a><a class="email-link" href={links.email}>{text.email}</a></div></div><figure class="portrait-block"><div class="portrait-frame"><Image src={portrait} alt="Portrait of Valentyn Yakovliev" width={796} height={1024} /></div></figure></div></section>
     <section class="frame section"><div class="section-header"><div><p class="section-index">01 — {item[0]}</p><h2>{text.whatTitle}</h2></div><p class="section-intro">{description}</p></div><div class="answer-grid"><article><h3>{text.stackTitle}</h3><p>{text.stackText}</p></article><article><h3>{text.experienceTitle}</h3><p>{text.experienceText}</p></article><article><h3>{text.whoTitle}</h3><p>{text.whoText}</p></article><article><h3>{text.availabilityTitle}</h3><p>{text.availabilityText}</p></article></div></section>
     <section class="method-section"><div class="frame section"><div class="section-header"><div><p class="section-index">02 — Product rescue</p><h2>{text.methodTitle}</h2></div><p class="section-intro method-intro">{text.methodText}</p></div><a class="light-button" href={localePath(locale)}>{text.productLink}</a></div></section>
-  </main><footer class="frame footer"><span>{text.footer}</span><span><a href={links.linkedin}>LinkedIn ↗</a> · <a href={links.github}>GitHub ↗</a></span></footer></div>
+  </main><SiteFooter locale="en" /></div>
 </BaseLayout>

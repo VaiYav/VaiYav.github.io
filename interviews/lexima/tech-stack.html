@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lexima — Техстек</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Lexima — Технічний стек: що знати</h1>
+      <p class="muted">Глибокий розбір стеку з вакансії: React, Koa.js, Ruby on Rails, PostgreSQL, Redis, RabbitMQ, K8s/GitLab CI, LLM APIs, Helicone.</p>
+    </header>
+
+    <nav>
+      <a href="index.html">Головна</a>
+      <a href="company.html">Компанія &amp; вакансія</a>
+      <a href="tech-stack.html" class="active">Техстек</a>
+      <a href="llm-production.html">LLM у продакшені</a>
+      <a href="interview-prep.html">Підготовка до інтерв'ю</a>
+    </nav>
+
+    <h2>Загальна архітектура (як може виглядати продукт)</h2>
+    <div class="card">
+      <pre><code>┌─────────────────────────────────────────────────────────────┐
+│  React (TypeScript)                                         │
+│  • React Context — глобальний UI/auth/filters state         │
+│  • TanStack Query — серверний стан, кешування, мутації      │
+│  • UI для AI-фіч: чат, стрімінг, форми, дашборди            │
+└───────────────────────┬─────────────────────────────────────┘
+                        │ REST / SSE / WebSockets
+┌───────────────────────▼─────────────────────────────────────┐
+│  Ruby on Rails — API / бізнес-логіка / admin                │
+│  • RESTful controllers, serializers, policies               │
+│  • ActiveRecord + PostgreSQL                                │
+│  • Sidekiq або RabbitMQ для фонових задач                   │
+│  • Redis — кеш / сесії / rate limit / PubSub                │
+└──────────────┬────────────────────────┬─────────────────────┘
+               │                        │
+  ┌────────────▼────────────┐  ┌────────▼────────────┐
+  │  PostgreSQL             │  │  Redis / RabbitMQ   │
+  │  • данні, JSONB, FTS    │  │  • кеш, черги, PubSub│
+  └─────────────────────────┘  └─────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────────┐
+│  LLM-шар                                                    │
+│  • Koa.js (Node) — lightweight LLM proxy / adapter / stream   │
+│  • Helicone — logging, cost, cache, alerts                  │
+│  • OpenAI / Grok / etc. через unified adapter               │
+└─────────────────────────────────────────────────────────────┘
+</code></pre>
+    </div>
+
+    <h2>React + TypeScript</h2>
+    <div class="card">
+      <h3>React Context</h3>
+      <ul>
+        <li><strong>Коли використовувати:</strong> інфрідентно змінний глобальний стан: тема, мова, auth, feature flags, UI layout. <em>Не</em> для часто оновлюваних даних.</li>
+        <li><strong>Чому:</strong> кожне оновлення Context ререндерить усіх споживачів. Для частих оновлень — Zustand/Redux Toolkit або колокальний стан.</li>
+        <li><strong>Патерн:</strong> розділяти контексти за доменом (AuthContext, ThemeContext, FeatureFlagsContext), а не один гігантський.</li>
+        <li><strong>Інтерв'ю:</strong> «Я використовую Context для статичних/рідкісних глобальних речей, а TanStack Query — для всього, що приходить з сервера».</li>
+      </ul>
+      <h3>TanStack Query (React Query)</h3>
+      <ul>
+        <li><strong>Server state:</strong> автоматичне кешування, background refetch, stale-while-revalidate, deduplication, retries.</li>
+        <li><strong>Mutation:</strong> optimistic updates, rollback on error, invalidation via <code>queryClient.invalidateQueries</code>.</li>
+        <li><strong>Для AI:</strong> тривалі мутації, streaming responses, polling статусу довгих LLM-задач.</li>
+        <li><strong>Питання на співбесіді:</strong> як обробляєш помилки, які <code>staleTime</code>/<code>cacheTime</code> вибираєш, як invalidates після mutation, як робиш optimistic UI?</li>
+      </ul>
+    </div>
+
+    <h2>Koa.js</h2>
+    <div class="card">
+      <p>Koa — мінімалістичний Node.js-фреймворк. Ймовірно, використовується для LLM-проксі/адаптера або окремого мікросервісу.</p>
+      <ul>
+        <li><strong>Контекст:</strong> все — req, res, state — лежить в <code>ctx</code>. Middleware — async функції <code>(ctx, next) =></code>.</li>
+        <li><strong>Cascading middleware:</strong> middleware йдуть по черзі, потім «розгортаються» назад. Порядок реєстрації критичний.</li>
+        <li><strong>Екосистема:</strong> <code>@koa/router</code>, <code>koa-bodyparser</code>, <code>@koa/cors</code>, <code>koa-helmet</code>, <code>koa-compress</code>.</li>
+        <li><strong>Для LLM:</strong> stream response від провайдера через <code>ctx.body = readableStream</code>, rate limiting, validation, transform payload.</li>
+      </ul>
+      <pre><code>// Приклад middleware-ланцюжка (Koa)
+app.use(helmet());
+app.use(cors({ origin: process.env.ALLOWED_ORIGINS }));
+app.use(rateLimit({ windowMs: 60_000, max: 100 }));
+app.use(bodyParser({ jsonLimit: '1mb' }));
+app.use(authMiddleware);
+app.use(routes.routes()).use(routes.allowedMethods());
+</code></pre>
+      <p><strong>Що сказати:</strong> «Koa хороша, коли треба максимальний контроль над request lifecycle, наприклад для stream-проксі між фронтендом і LLM API, з проміжним логуванням у Helicone».</p>
+    </div>
+
+    <h2>Ruby on Rails</h2>
+    <div class="card">
+      <h3>Контролери та API</h3>
+      <ul>
+        <li>RESTful ресурси, <code>before_action</code>, серіалізатори (ActiveModel::Serializer / jbuilder / fast_jsonapi), policy objects.</li>
+        <li>Версіонування API через namespace або Accept-Version header.</li>
+        <li>Обробка помилок:统一ний формат JSON, логування, instrumentation.</li>
+      </ul>
+      <h3>Моделі та БД</h3>
+      <ul>
+        <li>ActiveRecord, міграції, валідації, scopes, transactions.</li>
+        <li>PostgreSQL: JSONB для гнучких схем, масиви, full-text search, CTE, оконні функції.</li>
+        <li>N+1: eager load (<code>includes</code>, <code>preload</code>, <code>joins</code>), bullet gem, log analysis.</li>
+      </ul>
+      <h3>Background jobs</h3>
+      <ul>
+        <li><strong>Sidekiq</strong> (Redis): дедлайнс, retries, queues, dead set, unique jobs.</li>
+        <li><strong>RabbitMQ</strong> (в стеку): брокер повідомлень для decoupling між сервісами, event bus, durable queues.</li>
+        <li>Ідемпотентність: pass ID, not objects; idempotency key; lock row; unique lock з TTL.</li>
+      </ul>
+      <h3>Тестування (RSpec)</h3>
+      <ul>
+        <li>Unit, request, integration, feature tests. FactoryBot, Faker, VCR/WebMock для зовнішніх API.</li>
+        <li>Shared examples, custom matchers, test doubles, mocking Sidekiq/RabbitMQ.</li>
+        <li>Для LLM: mock HTTP-клієнта, golden-set assertions, freeze часу/UUID.</li>
+      </ul>
+    </div>
+
+    <h2>PostgreSQL</h2>
+    <div class="card">
+      <ul>
+        <li><strong>Оптимізація запитів:</strong> EXPLAIN ANALYZE, індекси (B-tree, GIN, GiST), partial/composite indexes, covering indexes.</li>
+        <li><strong>JSONB:</strong> схема, що еволюціонує, але не без гранич: GIN-індекси, оператори <code>@></code>, <code>?</code>.</li>
+        <li><strong>Full-text search:</strong> <code>to_tsvector</code> + <code>to_tsquery</code>, власні dict, ts_rank, збережені векторні колонки.</li>
+        <li><strong>pgvector:</strong> не вказаний явно, але якщо робиш RAG — запитай, чи планують pgvector (ivfflat/hnsw). Або окремий векторний store.</li>
+        <li><strong>Питання:</strong> як боротися з блокуваннями, deadlocks, long transactions, vacuum, partitioning для великих таблиць.</li>
+      </ul>
+    </div>
+
+    <h2>Redis &amp; RabbitMQ</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h4>Redis</h4>
+        <ul>
+          <li>Кеш (Rails.cache / redis-store).</li>
+          <li>Сесії, rate limit (sliding window).</li>
+          <li>Pub/Sub для real-time notifications.</li>
+          <li>Sidekiq-черги.</li>
+          <li>Cache invalidation стратегії: key-based, TTL, cache tags.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>RabbitMQ</h4>
+        <ul>
+          <li>Message broker, а не просто черга.</li>
+          <li>Exchanges (direct, topic, fanout), durable queues, ack/nack.</li>
+          <li>Decoupling сервісів: продюсер не знає про споживачів.</li>
+          <li>Порівняно з Sidekiq: RabbitMQ краще для міжсервісної комунікації, Sidekiq — для внутрішніх background jobs.</li>
+          <li>Dead letter exchanges, retry with TTL, idempotency.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>LLM-інтеграція</h2>
+    <div class="card">
+      <h3>Уніфікований адаптер для OpenAI / Grok / etc.</h3>
+      <ul>
+        <li>Абстракція над різними провайдерами: спільний інтерфейс, адаптери під кожен API.</li>
+        <li>Обробка streaming: Server-Sent Events (SSE) або raw chunked responses.</li>
+        <li>Таймаути, retries, exponential backoff, circuit breaker.</li>
+        <li>Rate limiting, token budgeting, model routing (strong vs cheap).</li>
+      </ul>
+      <h3>Helicone</h3>
+      <ul>
+        <li>Proxy-інтеграція: змінити <code>baseURL</code> на <code>https://oai.helicone.ai/v1</code> + <code>Helicone-Auth</code> header.</li>
+        <li>Логування, вартість, латентність, токени, кастомні property.</li>
+        <li>Edge-кешування: <code>Helicone-Cache-Enabled: true</code>, <code>Cache-Control</code>.</li>
+        <li>LLM security: <code>Helicone-LLM-Security-Enabled: true</code>.</li>
+        <li>Alerts через Slack/email/webhook на threshold.</li>
+      </ul>
+    </div>
+
+    <h2>Контейнеризація та CI/CD</h2>
+    <div class="card">
+      <h3>Kubernetes</h3>
+      <ul>
+        <li>Deployment, Service, Ingress, ConfigMap/Secrets, HPA, PDB, readiness/liveness probes.</li>
+        <li>Migrations: як Job/init container, щоб не ганяти з кожного пода одночасно.</li>
+        <li>Secrets: Kubernetes Secrets + external secret operator (Vault, AWS SM), ніколи не комітити.</li>
+      </ul>
+      <h3>GitLab CI</h3>
+      <ul>
+        <li>Етапи: build → test → lint/security scan → publish image → deploy.</li>
+        <li>Docker image з commit SHA tag, кешування, BuildKit.</li>
+        <li>Тести: RSpec, Jest, статичний аналіз (ESLint, RuboCop).</li>
+        <li>Security: Trivy, SAST, secret detection.</li>
+        <li>Deploy: або прямий kubectl, або краще — GitOps (ArgoCD/Flux): CI пушить зміну тегу в git, reconciler накатує.</li>
+      </ul>
+      <p><strong>Для Rails + React:</strong> multi-stage Dockerfile — build stage з Node, runtime — Ruby only. <code>SECRET_KEY_BASE_DUMMY=1</code> для assets:precompile.</p>
+    </div>
+
+    <h2>Jest (фронтенд-тести)</h2>
+    <div class="card">
+      <ul>
+        <li>Unit: pure functions, hooks, utilities. Mock TanStack Query, MSW для API.</li>
+        <li>Component: React Testing Library, user-centric queries, avoid implementation details.</li>
+        <li>Integration: test flows, optimistic updates, error boundaries.</li>
+        <li>Coverage: aim for high-value paths, а не 100% ради цифри.</li>
+      </ul>
+    </div>
+
+    <h2>Типові питання на співбесіду по стеку</h2>
+    <ol>
+      <li>Як би ви реалізували streaming-відповідь LLM від бекенду до React?</li>
+      <li>Як обробляєте помилки та retries при виклику OpenAI API з Rails/Koa?</li>
+      <li>Розкажіть про ваш досвід з React Context та TanStack Query. Як розподіляєте стан?</li>
+      <li>Як би ви спроєктували REST API для AI-функції (chat, generate, classify)?</li>
+      <li>Як тестуєте LLM-інтеграцію? Як mock'ите зовнішні API?</li>
+      <li>Sidekiq vs RabbitMQ: коли що використовувати?</li>
+      <li>Як оптимізуєте SQL-запит, який повільний? (EXPLAIN, індекси, N+1, partitioning).</li>
+      <li>Як деплоїте Rails + React у Kubernetes? Як ганяєте міграції?</li>
+      <li>Як забезпечуєте безпеку секретів у GitLab CI / K8s?</li>
+    </ol>
+
+    <footer>
+      <p>Джерела: вакансія DOU, LinkedIn CTO, публічні best-practice гайди по Koa, Rails, React Query, K8s, Helicone.</p>
+    </footer>
+  </div>
+</body>
+</html>

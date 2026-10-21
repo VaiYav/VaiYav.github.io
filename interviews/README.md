@@ -7,6 +7,12 @@
 ```
 interviews/
 ├── README.md                          # этот файл
+├── robeauty-head-of-it/               # RoBeauty · Head of IT
+│   ├── index.html                     # ⚡ quick cheat sheet
+│   ├── company.html                   # разбор компании, рынка, стека
+│   ├── role.html                      # роль, питч, вопросы, STAR
+│   ├── agents.html                    # AI-агент playbook
+│   └── style.css
 ├── genesis-ai-fullstack/              # Genesis · AI Full-Stack Engineer
 │   ├── 00-vacancy.md                  # текст вакансии + разбор требований
 │   ├── 01-fit-analysis.md             # мэтч моего опыта с вакансией + гэпы
@@ -17,6 +23,8 @@ interviews/
 │   ├── 06-test-task.md                # тестовое задание (TBD)
 │   ├── 07-notes-bar-raising.md        # заметки: финал с CTO (TBD)
 │   ├── 99-followup.md                 # follow-up письма (TBD)
+│   ├── evidence-ledger.md              # каноничные факты и честные gap-ответы
+│   ├── mock-interview.md               # прогон по шести блокам интервью
 │   └── CHEATSHEET-QUICK.md            # ⚡ 1-страничник перед каждым звонком
 ├── _cheatsheets/                      # тематические шит-шиты (универсальные)
 │   ├── 00-index.md
@@ -50,7 +58,7 @@ interviews/
 
 ## Следующие шаги
 
-- [ ] Дописать 02-self-pitch.md после первого звонка с рекрутером (под их акцент)
+- [ ] Обновлять 02-self-pitch.md после каждого звонка по фактическому feedback
 - [ ] Закрыть LangGraph: пройти туториал и собрать minimal agent (см. cheat sheet 03)
 - [ ] Освежить XGBoost: один Kaggle-like notebook (см. cheat sheet 04)
 - [ ] LoRA: прогнать один fine-tune на колабе (см. cheat sheet 05)

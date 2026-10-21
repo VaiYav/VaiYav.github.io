@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lexima — Підготовка до інтерв'ю</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Lexima — Підготовка до інтерв'ю</h1>
+      <p class="muted">Ймовірні питання, структура self-pitch, запитання, які варто поставити, та чек-лист перед дзвінком.</p>
+    </header>
+
+    <nav>
+      <a href="index.html">Головна</a>
+      <a href="company.html">Компанія &amp; вакансія</a>
+      <a href="tech-stack.html">Техстек</a>
+      <a href="llm-production.html">LLM у продакшені</a>
+      <a href="interview-prep.html" class="active">Підготовка до інтерв'ю</a>
+    </nav>
+
+    <h2>Формат співбесіди (прогноз)</h2>
+    <div class="card">
+      <p>Зазвичай 2–3 етапи:</p>
+      <ol>
+        <li><strong>HR / Recruiter call (15–30 хв).</strong> Мотивація, досвід, очікування по ЗП, англійська.</li>
+        <li><strong>Technical interview (60–90 хв).</strong> Розбір досвіду з LLM, питання по стеку, можливо live coding або system design.</li>
+        <li><strong>Final interview (CTO / Team Lead).</strong> Архітектура, AI-роадмап, культурна fit, запитання.</li>
+      </ol>
+    </div>
+
+    <h2>Self-pitch: структура</h2>
+    <div class="card">
+      <p>Бажаний обсяг — 2–3 хвилини. Формула:</p>
+      <ol>
+        <li><strong>Хто я (10–15 с):</strong> «Я software engineer з X+ роками досвіду, останні Y років працюю з full-stack AI-рішеннями».</li>
+        <li><strong>Що я вмію (40–60 с):</strong> перелічи 2–3 найсильніші навички, що збігаються з вакансією: production LLM, React+Rails, eval/observability, RAG, cost optimization.</li>
+        <li><strong>Доказ (60–90 с):</strong> STAR-історія — конкретна фіча, що зробив, який був виклик, який результат.</li>
+        <li><strong>Чому Lexima (15–20 с):</strong> з'єднай їхній стек/продукт зі своїм досвідом.</li>
+      </ol>
+
+      <h3>Приклад self-pitch</h3>
+      <blockquote>
+        «Я software engineer з 5-річним full-stack досвідом, останні 2 роки фокусуюсь на production LLM. Мій останній проєкт — внутрішній AI-асистент для автоматизації клієнтських запитів. Бекенд — Ruby on Rails + PostgreSQL, фронтенд — React + TanStack Query. Ми інтегрували OpenAI через Helicone, налаштували RAG з Qdrant, побудували eval на Ragas, і зменшили вартість запитів на 40% за рахунок caching + model routing. Я звик закривати задачі end-to-end: від UI до інфраструктури. Lexima цікавить, бо у вас вже працює AI в продакшені, і я хочу посилити цей напрямок».
+      </blockquote>
+    </div>
+
+    <h2>Ймовірні питання та шаблони відповідей</h2>
+    <div class="card">
+      <h3>1. «Розкажіть про ваш досвід з LLM у продакшені»</h3>
+      <ul>
+        <li>Вибери одну фічу.</li>
+        <li>Що робила, який стек, який був обсяг.</li>
+        <li>Які проблеми: cost, latency, quality, reliability.</li>
+        <li>Які рішення: model routing, caching, eval, fallback.</li>
+        <li>Результат: метрики (зниження cost, покращення accuracy, зменшення latency).</li>
+      </ul>
+
+      <h3>2. «Як ви оцінюєте якість LLM-виводу?»</h3>
+      <p>«У мене три лінії оборони: (1) unit-тести на валідацію JSON-схеми, (2) reference-free метрики (faithfulness, answer relevancy) у моніторингу, (3) offline eval з golden set (answer correctness, factual correctness) у CI. Ragas/Promptfoo. Окремо збираємо human feedback і пускаємо LLM-as-judge на підмножину трафіку».</p>
+
+      <h3>3. «Як ви оптимізували вартість/швидкість?»</h3>
+      <p>«Спочатку вимірюємо: Helicone показує cost/latency по feature/model/user. Потім: (1) кеш частих запитів, (2) вибираємо дешевшу модель для простих задач, (3) скорочуємо промпти та зменшуємо max_tokens, (4) batching для async, (5) streaming для UX. Після кожної зміни — eval, щоб не втратити якість».</p>
+
+      <h3>4. «Що робите при hallucinations?»</h3>
+      <p>«Залежить від домену. Для factual задач: RAG + вимога ґрунтуватися на retrieved context + faithfulness guard. Якщо score низький — fallback. Для creative — самокритика/верифікація. Також system prompt hardening, output validation, prompt injection filters».</p>
+
+      <h3>5. «Як ви проєктуєте REST API для AI-функції?»</h3>
+      <p>«POST /api/ai/generate з job-об'єктом: повертаю {id, status} для довгих запитів. Клієнт polls GET /api/ai/jobs/:id або слухає SSE. Якщо real-time — SSE. Валідація вхідних даних, rate limits, idempotency key. Логування в Helicone».</p>
+
+      <h3>6. «Розкажіть про ваш досвід з React Context і TanStack Query»</h3>
+      <p>«Context — для інфрідентного глобального стану (auth, theme, feature flags). TanStack Query — для всього серверного: кеш, refetch, mutations, optimistic updates. Для AI-чату інколи використовую Zustand для локального message-стану, бо він змінюється кожен токен».</p>
+
+      <h3>7. «Чому хочете працювати в Lexima?»</h3>
+      <p>«Мене цікавить комбінація: вже працюючий AI-продукт, full-stack стек React/Rails/Koa, і фокус на внутрішню автоматизацію. Я хочу не просто писати код, а масштабувати AI-напрямок, вимірювати його impact і зменшувати вартість. Lexima — саме таке середовище: шукають інженера, який може закрити задачу end-to-end».</p>
+
+      <h3>8. «Як ви вчитеся/тримаєте руку на пульсі?»</h3>
+      <p>«Читаю release notes OpenAI/Anthropic/xAI, тестую нові моделі в prompt playground, аналізую експерименти, підписаний на технічні блоги (Helicone, Langfuse, OpenAI). Швидко збираю PoC і міряю на real data».</p>
+    </div>
+
+    <h2>Чек-лист підготовки</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h4>Технічна підготовка</h4>
+        <ul>
+          <li>Повторити: React Context re-renders, TanStack Query lifecycle, Koa middleware order.</li>
+          <li>Rails: REST API, ActiveRecord N+1, transactions, background jobs.</li>
+          <li>PostgreSQL: EXPLAIN, індекси, JSONB, FTS, pgvector (для RAG).</li>
+          <li>Redis/RabbitMQ: кеш, черги, Pub/Sub, idempotency.</li>
+          <li>K8s/GitLab CI: deploy pipeline, migrations, secrets.</li>
+          <li>LLM: prompt patterns, eval metrics, RAG, Helicone.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Практичні навички</h4>
+        <ul>
+          <li>Приготувати 2–3 STAR-історії про LLM в продакшені.</li>
+          <li>Намалювати архітектуру RAG або streaming LLM на листочку/Excalidraw.</li>
+          <li>Вміти пояснити trade-off: cost vs latency vs quality.</li>
+          <li>Вміти обґрунтувати вибір інструмента (Helicone vs Langfuse vs LangSmith).</li>
+          <li>Повторити базові алгоритми/структури даних, якщо буде live coding.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Запитання, які варто поставити</h2>
+    <div class="card">
+      <h3>Про продукт</h3>
+      <ul>
+        <li>Який саме бізнес-процес зараз автоматизує AI? Який happy path?</li>
+        <li>Скільки користувачів/запитів на добу? Який обсяг LLM-трафіку?</li>
+        <li>Який найбільший біль зараз: якість, cost, latency, масштабування чи тестування?</li>
+        <li>Чи є внутрішня база знань/документів, під яку плануєте RAG?</li>
+        <li>Який реальний вплив AI на бізнес? Як вимірюєте ROI?</li>
+      </ul>
+
+      <h3>Про команду та процеси</h3>
+      <ul>
+        <li>Як виглядає команда? Скільки фронтенд/бекенд/QA/DevOps/ML?</li>
+        <li>Хто буде моїм першим контактом? Як влаштований onboarding?</li>
+        <li>Який процес прийняття рішень: гіпотеза → PoC → eval → deploy?</li>
+        <li>Як часто релізите? GitLab CI + K8s вже налаштовані?</li>
+        <li>Як відбувається code review? Чи є лінтери, type check, pre-commit hooks?</li>
+      </ul>
+
+      <h3>Про AI/LLM</h3>
+      <ul>
+        <li>Які LLM-провайдери вже підключені? OpenAI, Grok, інші?</li>
+        <li>Чи є вже RAG? Якщо так — який vector store, embedding, chunking?</li>
+        <li>Як зараз eval'юація: онлайн, офлайн, golden set, human review?</li>
+        <li>Який бюджет на LLM? Як ми міряємо cost per feature?</li>
+        <li>Чи планується fine-tuning чи self-hosting моделей?</li>
+        <li>Як обробляєте prompt injection, PII, hallucinations?</li>
+      </ul>
+
+      <h3>Про роль та розвиток</h3>
+      <ul>
+        <li>Як виглядає перший місяць/90 днів? Які deliverables?</li>
+        <li>Які short-term та long-term цілі для AI-напрямку?</li>
+        <li>Чи буде можливість впливати на вибір технологій і архітектури?</li>
+        <li>Які можливості навчання, курси, конференції?</li>
+        <li>Очікування щодо англійської та міжнародної команди?</li>
+      </ul>
+    </div>
+
+    <h2>Red flags / green flags</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h4 class="danger">Red flags</h4>
+        <ul>
+          <li>«У нас AI працює, але ніхто не знає як».</li>
+          <li>Немає eval, моніторингу cost, fallback.</li>
+          <li>Звучить як «підключи ChatGPT до всього».</li>
+          <li>Вимога працювати only-ai без підтримки backend/frontend.</li>
+          <li>Відсутність CI/CD, тестів, code review.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4 class="ok">Green flags</h4>
+        <ul>
+          <li>Чітке розуміння: AI вже в продакшені, шукають посилення.</li>
+          <li>Є інструменти моніторингу (Helicone) і процес eval.</li>
+          <li>Команда цінує end-to-end ownership і експерименти.</li>
+          <li>Готові до фідбеку і дискусії trade-off.</li>
+          <li>Є зрозумілі short-term цілі для ролі.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Навігація по шпаргалці</h2>
+    <div class="card">
+      <p>Основна інформація зібрана в інших файлах:</p>
+      <ul>
+        <li><a href="company.html">Компанія &amp; вакансія</a> — факти про Lexima, продукт, команду.</li>
+        <li><a href="tech-stack.html">Техстек</a> — React, Rails, Koa, PostgreSQL, Redis, RabbitMQ, K8s, CI/CD.</li>
+        <li><a href="llm-production.html">LLM у продакшені</a> — prompt engineering, eval, RAG, cost/latency, observability.</li>
+      </ul>
+    </div>
+
+    <h2>Корисні фрази-запам'ятовувалки</h2>
+    <ul>
+      <li>«Я не просто викликаю API — я будую систему: prompt → eval → fallback → моніторинг → оптимізація».</li>
+      <li>«Метрики перш ніж оптимізація. Я не змінюю модель, поки не знаю, що саме ламається».</li>
+      <li>«AI — це feature, а не magic. Потрібні валідація, тести, rollback і чіткі контракти».</li>
+      <li>«Я обираю stack під задачу: Context для UI, TanStack Query для сервера, Zustand для швидкого message-стану».</li>
+      <li>«RAG — це 80% retrieval, 20% generation. Chunking та reranker важливіші, ніж модель».</li>
+    </ul>
+
+    <footer>
+      <p>Основа: вакансія DOU, публічна інформація про Lexima та узагальнений досвід production LLM-інтерв'ю.</p>
+    </footer>
+  </div>
+</body>
+</html>

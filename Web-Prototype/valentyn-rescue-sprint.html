@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Valentyn Yakovliev turns unclear product opportunities into working systems through product strategy, design and build.">
+    <title>Valentyn Yakovliev — Product rescue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --nb-black: #17150F;
+        --nb-offwhite: #FFFDF5;
+        --nb-white: #FFFEF8;
+        --nb-cream: #FFDC8B;
+        --nb-yellow: #F7CB46;
+        --nb-bg: var(--nb-offwhite);
+        --nb-fg: var(--nb-black);
+        --nb-surface: var(--nb-white);
+        --nb-border-color: var(--nb-black);
+        --nb-accent: var(--nb-yellow);
+        --nb-border: 4px solid var(--nb-border-color);
+        --nb-border-sm: 3px solid var(--nb-border-color);
+        --nb-shadow: 8px 8px 0 var(--nb-black);
+        --nb-shadow-sm: 4px 4px 0 var(--nb-black);
+        --nb-shadow-lg: 12px 12px 0 var(--nb-black);
+        --page-inset: clamp(14px, 1.8vw, 30px);
+        --nb-font-display: Archivo, Impact, "Arial Black", sans-serif;
+        --nb-font-body: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --nb-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        --nb-ease: cubic-bezier(.16, 1, .3, 1);
+      }
+
+      * { box-sizing: border-box; }
+      html { min-height: 100%; background: var(--nb-white); scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: var(--page-inset);
+        color: var(--nb-fg);
+        background: var(--nb-white);
+        font-family: var(--nb-font-body);
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        opacity: .23;
+        pointer-events: none;
+        background-image: radial-gradient(var(--nb-black) .75px, transparent .75px);
+        background-size: 8px 8px;
+      }
+      ::selection { background: var(--nb-yellow); color: var(--nb-black); }
+      a { color: inherit; }
+      button { font: inherit; }
+      :focus-visible { outline: 3px solid var(--nb-black); outline-offset: 4px; }
+      .method-section :focus-visible, .contact-frame :focus-visible { outline-color: var(--nb-white); }
+
+      .skip-link {
+        position: fixed;
+        inset-block-start: var(--page-inset);
+        inset-inline-start: var(--page-inset);
+        z-index: 2;
+        padding: 10px 14px;
+        color: var(--nb-black);
+        background: var(--nb-yellow);
+        border: var(--nb-border-sm);
+        box-shadow: var(--nb-shadow-sm);
+        font: 700 12px/1 var(--nb-font-mono);
+        letter-spacing: .08em;
+        text-decoration: none;
+        text-transform: uppercase;
+        transform: translateY(calc(-100% - var(--page-inset)));
+        transition: transform .15s var(--nb-ease);
+      }
+      .skip-link:focus-visible { transform: translateY(0); }
+      .site-shell { min-height: calc(100vh - (var(--page-inset) * 2)); min-height: calc(100dvh - (var(--page-inset) * 2)); overflow: clip; background: var(--nb-bg); border: var(--nb-border); box-shadow: var(--nb-shadow); }
+      .frame { max-width: 1240px; margin: 0 auto; padding-inline: 32px; }
+      .topbar {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        border-bottom: var(--nb-border-sm);
+      }
+      .wordmark {
+        font-family: var(--nb-font-display);
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: -.035em;
+        text-decoration: none;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      .wordmark span { font-family: var(--nb-font-body); font-size: 11px; letter-spacing: .08em; margin-left: 8px; }
+      .language-switcher { display: flex; gap: 7px; }
+      .lang-button {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 6px 9px;
+        color: var(--nb-fg);
+        background: var(--nb-white);
+        border: var(--nb-border-sm);
+        box-shadow: none;
+        cursor: pointer;
+        font: 700 11px/1 var(--nb-font-mono);
+        letter-spacing: .08em;
+        transition: transform .15s var(--nb-ease), box-shadow .15s var(--nb-ease), background .15s var(--nb-ease);
+      }
+      .lang-button:hover { transform: translate(-2px, -2px); box-shadow: var(--nb-shadow-sm); }
+      .lang-button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--nb-black); }
+      .lang-button[aria-pressed="true"] { background: var(--nb-black); color: var(--nb-white); }
+
+      .hero { padding: 74px 0 62px; }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.42fr) minmax(250px, .58fr);
+        align-items: end;
+        gap: 54px;
+      }
+      .eyebrow, .section-index, .meta-line, .case-tag, .deliverable-kicker {
+        margin: 0;
+        font: 700 12px/1.2 var(--nb-font-mono);
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      .eyebrow { display: inline-block; padding: 9px 10px 8px; border: var(--nb-border-sm); background: var(--nb-white); box-shadow: var(--nb-shadow-sm); }
+      .hero h1 {
+        max-width: 790px;
+        margin: 25px 0 25px;
+        font-family: var(--nb-font-display);
+        font-size: clamp(50px, 6.3vw, 92px);
+        font-weight: 900;
+        line-height: .95;
+        letter-spacing: -.055em;
+        text-transform: uppercase;
+      }
+      .hero h1, .section-title, .case-card h3, .contact-frame h2 { text-wrap: balance; }
+      .hero h1 em { font-style: normal; text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .075em; }
+      .hero-copy { max-width: 590px; margin: 0; font-size: clamp(18px, 2vw, 23px); line-height: 1.42; text-wrap: pretty; }
+      .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 32px; }
+      .primary-button, .email-link, .quiet-link {
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .primary-button {
+        padding: 12px 19px;
+        color: var(--nb-black);
+        background: var(--nb-yellow);
+        border: var(--nb-border-sm);
+        box-shadow: var(--nb-shadow-sm);
+        font-family: var(--nb-font-display);
+        font-size: 15px;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        transition: transform .15s var(--nb-ease), box-shadow .15s var(--nb-ease), background .15s var(--nb-ease);
+      }
+      .primary-button:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--nb-black); background: color-mix(in oklch, var(--nb-yellow) 89%, var(--nb-white)); }
+      .primary-button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--nb-black); }
+      .email-link { border-bottom: 2px solid var(--nb-black); font-size: 15px; }
+      .email-link:hover, .quiet-link:hover { text-decoration-thickness: 2px; text-underline-offset: 4px; }
+      .hero-note { margin: 15px 0 0; color: color-mix(in oklch, var(--nb-black) 70%, var(--nb-offwhite)); font-size: 13px; }
+
+      .portrait-block { position: relative; width: min(100%, 360px); margin-inline: auto; }
+      .portrait-frame { position: relative; padding: 13px; background: var(--nb-white); border: var(--nb-border); box-shadow: var(--nb-shadow-lg); }
+      .portrait-frame::before, .portrait-frame::after {
+        content: "";
+        position: absolute;
+        width: 34px;
+        height: 34px;
+        border: var(--nb-border-sm);
+        background: var(--nb-offwhite);
+      }
+      .portrait-frame::before { top: -12px; right: -12px; }
+      .portrait-frame::after { bottom: -12px; left: -12px; }
+      .portrait-frame img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; filter: grayscale(100%) contrast(1.07); }
+      .portrait-caption { display: flex; justify-content: space-between; gap: 16px; margin-top: 14px; font-size: 12px; font-family: var(--nb-font-mono); text-transform: uppercase; letter-spacing: .06em; }
+
+      .proof-strip { border-top: var(--nb-border); border-bottom: var(--nb-border); background: var(--nb-black); color: var(--nb-white); }
+      .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+      .proof-item { min-height: 142px; padding: 24px 26px; border-right: 3px solid var(--nb-white); }
+      .proof-item:last-child { border-right: 0; }
+      .proof-number { display: block; margin-bottom: 8px; font: 900 clamp(28px, 4vw, 44px)/1 var(--nb-font-display); letter-spacing: -.04em; }
+      .proof-label { display: block; max-width: 20ch; font-size: 14px; line-height: 1.3; }
+
+      section { scroll-margin-top: 32px; }
+      .section { padding: 112px 0; }
+      .section-header { display: grid; grid-template-columns: 1fr minmax(300px, .72fr); gap: 40px; align-items: end; margin-bottom: 47px; }
+      .section-index { margin-bottom: 16px; }
+      .section-title { max-width: 800px; margin: 0; font: 900 clamp(38px, 5vw, 72px)/.96 var(--nb-font-display); letter-spacing: -.05em; text-transform: uppercase; }
+      .section-intro { margin: 0; font-size: 18px; line-height: 1.52; }
+
+      .case-context { margin: -22px 0 27px; font-size: 13px; font-family: var(--nb-font-mono); letter-spacing: .025em; }
+      .case-list { display: grid; gap: 27px; }
+      .case-card { display: grid; grid-template-columns: 112px minmax(0, 1fr) minmax(220px, .48fr); gap: 27px; align-items: start; padding: 29px; border: var(--nb-border); background: var(--nb-white); box-shadow: var(--nb-shadow); }
+      .case-no { font: 900 clamp(42px, 5vw, 68px)/.85 var(--nb-font-display); letter-spacing: -.06em; }
+      .case-tag { margin: 2px 0 10px; }
+      .case-card h3 { max-width: 18ch; margin: 0; font: 900 clamp(25px, 3vw, 37px)/1.02 var(--nb-font-display); letter-spacing: -.035em; text-transform: uppercase; }
+      .case-description { margin: 14px 0 0; max-width: 58ch; font-size: 16px; }
+      .case-proof { padding: 19px; border: var(--nb-border-sm); background: color-mix(in oklch, var(--nb-offwhite) 88%, var(--nb-white)); }
+      .case-proof b { display: block; margin-bottom: 8px; font: 900 clamp(26px, 3vw, 38px)/1 var(--nb-font-display); letter-spacing: -.04em; }
+      .case-proof p { margin: 0; font-size: 13px; line-height: 1.38; }
+
+      .experience-section { padding-top: 0; }
+      .experience-layout { display: grid; grid-template-columns: minmax(0, 1.28fr) minmax(250px, .72fr); gap: 27px; align-items: start; }
+      .experience-ledger, .education-card { border: var(--nb-border); background: var(--nb-white); box-shadow: var(--nb-shadow); }
+      .experience-row { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 24px; padding: 24px 28px; border-bottom: var(--nb-border-sm); }
+      .experience-row:last-child { border-bottom: 0; }
+      .experience-year, .education-kicker { margin: 2px 0 0; font: 800 12px/1.2 var(--nb-font-mono); letter-spacing: .08em; text-transform: uppercase; }
+      .experience-row h3, .education-card h3 { margin: 0; font: 900 clamp(22px, 2.5vw, 31px)/1.05 var(--nb-font-display); letter-spacing: -.035em; text-transform: uppercase; }
+      .experience-row p, .education-card p { margin: 8px 0 0; font-size: 15px; line-height: 1.45; }
+      .education-card { padding: 29px; background: var(--nb-cream); }
+      .education-card h3 { margin-top: 38px; max-width: 12ch; font-size: clamp(31px, 4vw, 45px); }
+      .education-card::after { content: "MSc"; display: block; margin-top: 48px; font: 900 clamp(58px, 7vw, 88px)/.8 var(--nb-font-display); letter-spacing: -.07em; }
+
+      .method-section { background: var(--nb-black); color: var(--nb-white); border-block: var(--nb-border); }
+      .method-section .section-title { color: var(--nb-white); }
+      .method-intro { color: color-mix(in oklch, var(--nb-white) 78%, var(--nb-black)); }
+      .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+      .method-card { min-height: 284px; padding: 27px; border: 4px solid var(--nb-white); }
+      .method-step { display: inline-grid; width: 45px; height: 45px; place-items: center; margin-bottom: 56px; border: 3px solid var(--nb-white); font: 800 14px/1 var(--nb-font-mono); }
+      .method-card h3 { margin: 0 0 10px; font: 900 clamp(24px, 2.6vw, 34px)/1 var(--nb-font-display); letter-spacing: -.035em; text-transform: uppercase; }
+      .method-card p { max-width: 30ch; margin: 0; color: color-mix(in oklch, var(--nb-white) 78%, var(--nb-black)); }
+
+      .rescue-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(310px, .9fr); gap: 48px; align-items: start; }
+      .rescue-promise { padding: 32px; border: var(--nb-border); background: var(--nb-white); box-shadow: var(--nb-shadow); }
+      .rescue-promise h3 { margin: 0 0 26px; font: 900 clamp(29px, 3.5vw, 45px)/1 var(--nb-font-display); letter-spacing: -.045em; text-transform: uppercase; }
+      .deliverable-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; counter-reset: deliverables; }
+      .deliverable-list li { position: relative; padding: 19px 0 19px 56px; border-top: 3px solid var(--nb-black); counter-increment: deliverables; }
+      .deliverable-list li::before { content: "0" counter(deliverables); position: absolute; top: 19px; left: 0; font: 800 13px/1 var(--nb-font-mono); }
+      .deliverable-kicker { display: block; margin-bottom: 5px; }
+      .deliverable-list strong { display: block; font-size: 19px; line-height: 1.18; }
+      .deliverable-list span { display: block; margin-top: 5px; font-size: 14px; }
+      .rescue-aside { padding-top: 7px; }
+      .rescue-aside p { margin: 0 0 22px; font-size: clamp(19px, 2.1vw, 26px); line-height: 1.3; }
+      .compact-list { margin: 0; padding: 0; list-style: none; border-top: var(--nb-border-sm); }
+      .compact-list li { padding: 16px 0; border-bottom: var(--nb-border-sm); font-size: 14px; }
+      .compact-list b { display: block; margin-bottom: 4px; font-size: 11px; font-family: var(--nb-font-mono); letter-spacing: .08em; text-transform: uppercase; }
+
+      .contact-section { padding: 102px 0 32px; }
+      .contact-frame { padding: 48px; color: var(--nb-white); background: var(--nb-black); border: 4px solid var(--nb-white); box-shadow: 12px 12px 0 var(--nb-yellow); }
+      .contact-frame .eyebrow { color: var(--nb-black); background: var(--nb-white); }
+      .contact-frame h2 { max-width: 920px; margin: 30px 0 25px; font: 900 clamp(43px, 6vw, 83px)/.92 var(--nb-font-display); letter-spacing: -.055em; text-transform: uppercase; }
+      .contact-frame p { max-width: 56ch; margin: 0; color: color-mix(in oklch, var(--nb-white) 78%, var(--nb-black)); font-size: 18px; }
+      .contact-frame .hero-actions { margin-top: 33px; }
+      .contact-frame .email-link { color: var(--nb-white); border-color: var(--nb-white); }
+      .footer { display: flex; justify-content: space-between; gap: 24px; padding: 65px 0 31px; font: 700 11px/1.4 var(--nb-font-mono); letter-spacing: .07em; text-transform: uppercase; }
+      .quiet-link { min-height: auto; text-decoration: underline; text-underline-offset: 3px; }
+
+      .block-in { animation: block-in .45s var(--nb-ease) both; }
+      .block-in:nth-child(2) { animation-delay: .06s; }
+      .block-in:nth-child(3) { animation-delay: .12s; }
+      @keyframes block-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+      @media (max-width: 900px) {
+        .hero-grid, .section-header, .experience-layout, .rescue-layout { grid-template-columns: 1fr; }
+        .hero-grid { gap: 45px; }
+        .portrait-block { margin-inline: 0; }
+        .case-card { grid-template-columns: 78px minmax(0, 1fr); }
+        .case-proof { grid-column: 2; }
+        .method-grid { grid-template-columns: 1fr; gap: 0; }
+        .method-card { min-height: auto; border-bottom-width: 0; }
+        .method-card:last-child { border-bottom-width: 4px; }
+        .method-step { margin-bottom: 30px; }
+      }
+      @media (max-width: 640px) {
+        :root { --page-inset: 12px; }
+        .site-shell { box-shadow: var(--nb-shadow-sm); }
+        .skip-link { padding: 10px 12px; }
+        .frame { padding-inline: 20px; }
+        .topbar { display: grid; grid-template-columns: minmax(0, 1fr) max-content; min-height: 65px; align-items: safe center; }
+        .wordmark { min-inline-size: 0; font-size: 14px; line-height: .95; white-space: normal; }
+        .wordmark span { display: none; }
+        .hero { padding: 52px 0 48px; }
+        .hero h1 { max-width: 100%; font-size: clamp(44px, 12.2vw, 64px); }
+        .proof-grid { grid-template-columns: 1fr; }
+        .proof-item { min-height: 0; border-right: 0; border-bottom: 3px solid var(--nb-white); }
+        .proof-item:last-child { border-bottom: 0; }
+        .section, .contact-section { padding-top: 75px; padding-bottom: 75px; }
+        .section-header { gap: 18px; margin-bottom: 34px; }
+        .case-card { display: block; padding: 23px; }
+        .case-no { margin-bottom: 27px; }
+        .case-proof { margin-top: 24px; }
+        .experience-row { grid-template-columns: 1fr; gap: 8px; padding: 23px; }
+        .education-card h3 { margin-top: 28px; }
+        .education-card::after { margin-top: 38px; }
+        .contact-frame { padding: 29px 23px; }
+        .footer { flex-direction: column; padding-top: 55px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-shell">
+      <a class="skip-link" href="#content" data-od-id="skip-link" data-i18n="skipToContent">Skip to content</a>
+      <header class="frame topbar" data-od-id="site-header">
+        <a href="#content" class="wordmark" data-od-id="brand-home">Valentyn Yakovliev <span data-i18n="roleShort">Product rescue</span></a>
+        <div class="language-switcher" role="group" aria-label="Choose language" data-i18n-aria="languageSwitcherLabel" data-od-id="language-switcher">
+          <button class="lang-button" type="button" aria-pressed="true" data-lang="en" data-od-id="language-en">EN</button>
+          <button class="lang-button" type="button" aria-pressed="false" data-lang="uk" data-od-id="language-uk">UK</button>
+          <button class="lang-button" type="button" aria-pressed="false" data-lang="ru" data-od-id="language-ru">RU</button>
+        </div>
+      </header>
+
+      <main id="content" tabindex="-1">
+        <section class="frame hero" data-od-id="hero">
+          <div class="hero-grid">
+            <div>
+              <p class="eyebrow block-in" data-od-id="hero-eyebrow" data-i18n="eyebrow">Product audit / rescue sprint</p>
+              <h1 class="block-in" data-od-id="hero-title" data-i18n-html="heroTitle">Unclear opportunity.<br><em>Working system.</em></h1>
+              <p class="hero-copy block-in" data-od-id="hero-summary" data-i18n="heroSummary">I turn an unclear product opportunity into a working system — strategy, design and build in one accountable loop.</p>
+              <div class="hero-actions block-in" data-od-id="hero-actions">
+                <a class="primary-button" href="https://t.me/VaiYav" target="_blank" rel="noopener" data-od-id="telegram-hero" data-i18n="telegramCta">Start with a Telegram note →</a>
+                <a class="email-link" href="mailto:yakovlev.valentin97@gmail.com" data-od-id="email-hero" data-i18n="emailCta">or send context by email</a>
+              </div>
+              <p class="hero-note" data-i18n="heroNote">Remote from Ukraine · available for focused product work</p>
+            </div>
+            <figure class="portrait-block block-in" data-od-id="portrait">
+              <div class="portrait-frame"><img src="assets/valentyn-yakovliev-portrait.jpg" alt="Portrait of Valentyn Yakovliev"></div>
+              <figcaption class="portrait-caption"><span data-i18n="portraitName">Valentyn Yakovliev</span><span data-i18n="portraitRole">Product builder</span></figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="proof-strip" aria-label="Selected proof" data-od-id="proof-strip">
+          <div class="frame proof-grid">
+            <div class="proof-item" data-od-id="proof-products"><span class="proof-number">3</span><span class="proof-label" data-i18n="proofProducts">shipped products</span></div>
+            <div class="proof-item" data-od-id="proof-agent-systems"><span class="proof-number">3</span><span class="proof-label" data-i18n="proofAgents">agentic systems designed and built</span></div>
+            <div class="proof-item" data-od-id="proof-third-party"><span class="proof-number">5</span><span class="proof-label" data-i18n="proofThirdParty">third-party systems designed for client companies</span></div>
+          </div>
+        </section>
+
+        <section class="frame section" data-od-id="proof">
+          <div class="section-header">
+            <div>
+              <p class="section-index" data-i18n="proofIndex">01 — Product systems</p>
+                <h2 class="section-title" data-od-id="proof-title" data-i18n="proofTitle">The person who closes the gaps.</h2>
+            </div>
+            <p class="section-intro" data-i18n="proofIntro">Most stalled products do not need another role. They need product, design and engineering decisions made together — then carried through.</p>
+          </div>
+          <p class="case-context" data-od-id="proof-privacy-note" data-i18n="proofNote">Selected examples are anonymised. The role, scope and outcome are not.</p>
+          <div class="case-list">
+            <article class="case-card" data-od-id="case-consumer-product">
+              <div class="case-no">01</div>
+              <div>
+                <p class="case-tag" data-i18n="caseOneTag">Product builder · 0 → 1</p>
+                <h3 data-od-id="case-consumer-title" data-i18n="caseOneTitle">A real product across every layer.</h3>
+                <p class="case-description" data-i18n="caseOneDesc">Framed the product, designed the experience and built web, native mobile, payments and AI capabilities — carrying the decisions as well as delivery.</p>
+              </div>
+              <div class="case-proof"><b>0 → 1</b><p data-i18n="caseOneProof">One accountable owner from earliest ambiguity to a product people can use.</p></div>
+            </article>
+            <article class="case-card" data-od-id="case-platform">
+              <div class="case-no">02</div>
+              <div>
+                <p class="case-tag" data-i18n="caseTwoTag">Agentic systems · scale</p>
+                <h3 data-od-id="case-platform-title" data-i18n="caseTwoTitle">A 66-locale system, not a translation sprint.</h3>
+                <p class="case-description" data-i18n="caseTwoDesc">Built an agentic localization and content workflow that makes a large multilingual corpus operable: coverage, review gates, SEO rules and safe execution.</p>
+              </div>
+              <div class="case-proof"><b>66</b><p data-i18n="caseTwoProof">locales supported through an agentic localization system.</p></div>
+            </article>
+            <article class="case-card" data-od-id="case-ai-systems">
+              <div class="case-no">03</div>
+              <div>
+                <p class="case-tag" data-i18n="caseThreeTag">Technical product leadership</p>
+                <h3 data-od-id="case-ai-title" data-i18n="caseThreeTitle">AI systems that survive product reality.</h3>
+                <p class="case-description" data-i18n="caseThreeDesc">Designed and delivered agent workflows, deep-memory and retrieval-backed features, with quality gates, provider choice, cost and operational ownership included.</p>
+              </div>
+              <div class="case-proof"><b>3</b><p data-i18n="caseThreeProof">product teams advised on AI adoption and implementation. Client names intentionally withheld.</p></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="frame section experience-section" data-od-id="experience">
+          <div class="section-header">
+            <div>
+              <p class="section-index" data-i18n="experienceIndex">02 — Experience</p>
+              <h2 class="section-title" data-od-id="experience-title" data-i18n="experienceTitle">Enough range to see the system.</h2>
+            </div>
+            <p class="section-intro" data-i18n="experienceIntro">A decade of work inside product companies, studios and independent builds makes it easier to tell a hard problem from a loud one.</p>
+          </div>
+          <div class="experience-layout">
+            <div class="experience-ledger" data-od-id="experience-ledger">
+              <article class="experience-row" data-od-id="experience-current">
+                <p class="experience-year">2025 — now</p>
+                <div><h3 data-i18n="experienceOneTitle">Full-stack engineer & AI systems consultant</h3><p data-i18n="experienceOneDesc">AI-enabled consumer products, agent architecture and product delivery for small teams.</p></div>
+              </article>
+              <article class="experience-row" data-od-id="experience-b2b">
+                <p class="experience-year">2022 — 2025</p>
+                <div><h3 data-i18n="experienceTwoTitle">Oboard · full-stack product engineer</h3><p data-i18n="experienceTwoDesc">A B2B product area, platform integrations, billing and the internal systems that kept delivery moving.</p></div>
+              </article>
+              <article class="experience-row" data-od-id="experience-early">
+                <p class="experience-year">2017 — 2022</p>
+                <div><h3 data-i18n="experienceThreeTitle">Frontend engineer across product teams & studios</h3><p data-i18n="experienceThreeDesc">ITOMYCH, AnyforSoft, IT Svit, Codica and QPARD — the foundation behind 10+ years shipping web.</p></div>
+              </article>
+            </div>
+            <aside class="education-card" data-od-id="education-card">
+              <p class="education-kicker" data-i18n="educationKicker">Technical foundation</p>
+              <h3 data-od-id="education-title" data-i18n="educationTitle">Computer science</h3>
+              <p data-i18n="educationDesc">Master’s degree. Enough depth to make product decisions credible all the way down to the system boundary.</p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="method-section" data-od-id="method">
+          <div class="frame section">
+            <div class="section-header">
+              <div>
+                <p class="section-index" data-i18n="methodIndex">03 — The way I work</p>
+                <h2 class="section-title" data-od-id="method-title" data-i18n="methodTitle">Make the next move obvious.</h2>
+              </div>
+              <p class="section-intro method-intro" data-i18n="methodIntro">A rescue-sprint is deliberately narrow: enough depth to replace instinct with a shared decision, without pretending a whole product can be solved in a week.</p>
+            </div>
+            <div class="method-grid">
+              <article class="method-card" data-od-id="method-clarify"><span class="method-step">01</span><h3 data-od-id="method-clarify-title" data-i18n="methodOneTitle">Clarify</h3><p data-i18n="methodOneDesc">Find the actual user, decision and constraint behind the noisy brief.</p></article>
+              <article class="method-card" data-od-id="method-prioritize"><span class="method-step">02</span><h3 data-od-id="method-prioritize-title" data-i18n="methodTwoTitle">Prioritize</h3><p data-i18n="methodTwoDesc">Turn the unknowns into a sequence of choices that the team can own.</p></article>
+              <article class="method-card" data-od-id="method-launch"><span class="method-step">03</span><h3 data-od-id="method-launch-title" data-i18n="methodThreeTitle">Launch</h3><p data-i18n="methodThreeDesc">Define the smallest credible release and the proof it must create next.</p></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="frame section" data-od-id="rescue-sprint">
+          <div class="section-header">
+            <div>
+              <p class="section-index" data-i18n="rescueIndex">04 — The entry point</p>
+              <h2 class="section-title" data-od-id="rescue-title" data-i18n="rescueTitle">Leave with a next move, not a longer backlog.</h2>
+            </div>
+            <p class="section-intro" data-i18n="rescueIntro">Not a workshop for its own sake. It gives your team a grounded view of the problem, the decisions that matter and a launchable next step.</p>
+          </div>
+          <div class="rescue-layout">
+            <div class="rescue-promise" data-od-id="rescue-deliverables">
+              <h3 data-od-id="deliverables-title" data-i18n="deliverablesTitle">What leaves the room</h3>
+              <ol class="deliverable-list">
+                <li><span class="deliverable-kicker" data-i18n="deliverableOneKick">The problem</span><strong data-i18n="deliverableOneTitle">A clear problem framing.</strong><span data-i18n="deliverableOneDesc">What is true, what is assumed, and what must be decided.</span></li>
+                <li><span class="deliverable-kicker" data-i18n="deliverableTwoKick">The system</span><strong data-i18n="deliverableTwoTitle">A prioritized decision system.</strong><span data-i18n="deliverableTwoDesc">A sequence that links product, design and build instead of splitting them apart.</span></li>
+                <li><span class="deliverable-kicker" data-i18n="deliverableThreeKick">The release</span><strong data-i18n="deliverableThreeTitle">A realistic next-launch plan.</strong><span data-i18n="deliverableThreeDesc">The smallest release worth making, its proof, and the ownership needed to ship it.</span></li>
+              </ol>
+            </div>
+            <aside class="rescue-aside" data-od-id="rescue-fit">
+              <p data-i18n="fitLead">Best for a founder or small team with real momentum — and a moment of expensive uncertainty.</p>
+              <ul class="compact-list">
+                <li><b data-i18n="fitLabel">Good fit</b><span data-i18n="fitOne">An opportunity is real, but the product path is not.</span></li>
+                <li><b data-i18n="fitLabel">Good fit</b><span data-i18n="fitTwo">The team needs a working release, not a longer backlog.</span></li>
+                <li><b data-i18n="notFitLabel">Not the pitch</b><span data-i18n="notFit">A generic “AI transformation” deck or a set of disconnected deliverables.</span></li>
+              </ul>
+            </aside>
+          </div>
+        </section>
+
+        <section class="frame contact-section" data-od-id="contact">
+          <div class="contact-frame">
+            <p class="eyebrow" data-od-id="contact-eyebrow" data-i18n="contactEyebrow">Start with the real situation</p>
+            <h2 data-od-id="contact-title" data-i18n="contactTitle">Bring the part that is still unclear.</h2>
+            <p data-i18n="contactIntro">Send a short Telegram note with what is moving, what is stuck and what the next decision needs to unlock. I will tell you plainly whether a rescue-sprint is the right next move.</p>
+            <div class="hero-actions" data-od-id="contact-actions">
+              <a class="primary-button" href="https://t.me/VaiYav" target="_blank" rel="noopener" data-od-id="telegram-contact" data-i18n="telegramCta">Start with a Telegram note →</a>
+              <a class="email-link" href="mailto:yakovlev.valentin97@gmail.com" data-od-id="email-contact">yakovlev.valentin97@gmail.com</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="frame footer" data-od-id="footer">
+        <span>© <span id="year"></span> Valentyn Yakovliev</span>
+        <a class="quiet-link" href="https://www.linkedin.com/in/valentyn-yakovliev-960303140/" target="_blank" rel="noopener" data-od-id="linkedin-link">LinkedIn ↗</a>
+      </footer>
+    </div>
+    <script>
+      (() => {
+        const dictionary = {
+          en: {
+            roleShort: 'Product rescue', eyebrow: 'Product strategy, design & build', heroTitle: 'From a product possibility<br>to a <em>working system.</em>', heroSummary: 'I help founders and small product teams turn a resourced but unclear opportunity into a product people can use, pay for and grow with.', telegramCta: 'Discuss a rescue-sprint →', emailCta: 'or send context by email', heroNote: 'Remote from Ukraine · available for focused product work', portraitName: 'Valentyn Yakovliev', portraitRole: 'Product builder', proofExperience: 'years shipping web, mobile and desktop products', proofAi: 'years building production AI and agent systems', proofUsers: 'paying users in a product built solo, in four months', proofIndex: '01 — Proof, not a role list', proofTitle: 'The work is the point.', proofIntro: 'I work across the seams that usually slow a team down: product judgment, interface design, production engineering and the systems that let the work continue after launch.', caseOneTag: 'Founder · end to end', caseOneTitle: 'A consumer AI product, built solo.', caseOneDesc: 'Turned a concept into a real product across web, Android, payments and AI features — taking responsibility for the product as well as the code.', caseOneProof: 'paying users reached in four months. Product name intentionally withheld.', caseTwoTag: 'Feature owner · B2B platform', caseTwoTitle: 'One product area, carried from idea to launch.', caseTwoDesc: 'Owned the decisions and delivery, brought the product into major work platforms, connected payments, and built the internal tools the team needed to keep moving.', caseTwoProof: 'repetitive manual work reduced for QA, development and hiring teams.', caseThreeTag: 'AI integration · production systems', caseThreeTitle: 'AI that has a job, an owner and a path to production.', caseThreeDesc: 'Designed and built agent workflows, retrieval-backed product features, and practical AI adoption roadmaps — including quality, cost and operational responsibility.', caseThreeProof: 'product teams advised on AI adoption and implementation. Client names intentionally withheld.', methodIndex: '02 — The way I work', methodTitle: 'Make the next move obvious.', methodIntro: 'A rescue-sprint is deliberately narrow: enough depth to replace instinct with a shared decision, without pretending a whole product can be solved in a week.', methodOneTitle: 'Clarify', methodOneDesc: 'Find the actual user, decision and constraint behind the noisy brief.', methodTwoTitle: 'Prioritize', methodTwoDesc: 'Turn the unknowns into a sequence of choices that the team can own.', methodThreeTitle: 'Launch', methodThreeDesc: 'Define the smallest credible release and the proof it must create next.', rescueIndex: '03 — The entry point', rescueTitle: 'A rescue-sprint has a clear finish.', rescueIntro: 'Not a workshop for its own sake. It gives your team a grounded view of the problem, the decisions that matter and a launchable next step.', deliverablesTitle: 'What leaves the room', deliverableOneKick: 'The problem', deliverableOneTitle: 'A clear problem framing.', deliverableOneDesc: 'What is true, what is assumed, and what must be decided.', deliverableTwoKick: 'The system', deliverableTwoTitle: 'A prioritized decision system.', deliverableTwoDesc: 'A sequence that links product, design and build instead of splitting them apart.', deliverableThreeKick: 'The release', deliverableThreeTitle: 'A realistic next-launch plan.', deliverableThreeDesc: 'The smallest release worth making, its proof, and the ownership needed to ship it.', fitLead: 'Best for a founder or small team with real momentum — and a moment of expensive uncertainty.', fitLabel: 'Good fit', fitOne: 'An opportunity is real, but the product path is not.', fitTwo: 'The team needs a working release, not a longer backlog.', notFitLabel: 'Not the pitch', notFit: 'A generic “AI transformation” deck or a set of disconnected deliverables.', contactEyebrow: 'Start with the real situation', contactTitle: 'Bring the opportunity that is not clear yet.', contactIntro: 'Send a short Telegram note with what is moving, what is stuck and what the next decision needs to unlock. I will tell you plainly whether a rescue-sprint is the right next move.'
+          },
+          uk: {
+            roleShort: 'Продуктовий rescue', eyebrow: 'Продуктова стратегія, дизайн і запуск', heroTitle: 'Від продуктової можливості<br>до <em>робочої системи.</em>', heroSummary: 'Допомагаю фаундерам і невеликим продуктовим командам перетворити забезпечену, але нечітку можливість на продукт, яким користуються, за який платять і який можна розвивати.', telegramCta: 'Обговорити rescue-sprint →', emailCta: 'або надіслати контекст email-ом', heroNote: 'Працюю віддалено з України · доступний для сфокусованої продуктової роботи', portraitName: 'Valentyn Yakovliev', portraitRole: 'Продуктовий білдер', proofExperience: 'років запуску веб-, мобільних і десктопних продуктів', proofAi: 'років створення production AI та агентних систем', proofUsers: 'платних користувачів у продукті, створеному самостійно за чотири місяці', proofIndex: '01 — Докази, а не перелік ролей', proofTitle: 'Робота — головне.', proofIntro: 'Працюю на стиках, які зазвичай сповільнюють команду: продуктове судження, дизайн інтерфейсу, production-інженерія й системи, що продовжують працювати після запуску.', caseOneTag: 'Фаундер · від початку до кінця', caseOneTitle: 'Споживчий AI-продукт, створений самостійно.', caseOneDesc: 'Перетворив концепт на реальний продукт для вебу й Android з платежами та AI-функціями — відповідаючи і за продукт, і за код.', caseOneProof: 'платних користувачів за чотири місяці. Назву продукту навмисно не вказано.', caseTwoTag: 'Власник фічі · B2B-платформа', caseTwoTitle: 'Одна продуктова зона — від ідеї до запуску.', caseTwoDesc: 'Вів рішення й постачання, виводив продукт у ключові робочі платформи, підключав платежі та створював внутрішні інструменти, що допомагали команді рухатися далі.', caseTwoProof: 'менше повторюваної ручної роботи для QA, розробки та найму.', caseThreeTag: 'AI-інтеграція · production-системи', caseThreeTitle: 'AI із задачею, власником і шляхом у production.', caseThreeDesc: 'Проєктував і будував агентні сценарії, retrieval-підсилені фічі й практичні AI-roadmap — із якістю, вартістю та операційною відповідальністю.', caseThreeProof: 'продуктові команди отримали консультацію з AI-адопції та реалізації. Назви клієнтів не вказано.', methodIndex: '02 — Як я працюю', methodTitle: 'Зробити наступний крок очевидним.', methodIntro: 'Rescue-sprint навмисно вузький: достатньо глибини, щоб замінити інтуїцію спільним рішенням, але без обіцянки вирішити весь продукт за тиждень.', methodOneTitle: 'Уточнити', methodOneDesc: 'Знайти реального користувача, рішення й обмеження за шумним брифом.', methodTwoTitle: 'Пріоритизувати', methodTwoDesc: 'Перетворити невідоме на послідовність рішень, за які команда може відповідати.', methodThreeTitle: 'Запустити', methodThreeDesc: 'Визначити найменший переконливий реліз і доказ, який він має створити далі.', rescueIndex: '03 — Точка входу', rescueTitle: 'У rescue-sprint є зрозумілий фінал.', rescueIntro: 'Це не воркшоп заради воркшопу. Він дає команді тверезий погляд на проблему, важливі рішення та наступний крок, який можна запустити.', deliverablesTitle: 'Що залишається після', deliverableOneKick: 'Проблема', deliverableOneTitle: 'Чітке формулювання проблеми.', deliverableOneDesc: 'Що є правдою, що є припущенням і що треба вирішити.', deliverableTwoKick: 'Система', deliverableTwoTitle: 'Пріоритетна система рішень.', deliverableTwoDesc: 'Послідовність, яка з’єднує продукт, дизайн і розробку, а не розриває їх.', deliverableThreeKick: 'Реліз', deliverableThreeTitle: 'Реалістичний план наступного запуску.', deliverableThreeDesc: 'Найменший реліз, який варто зробити, його доказ і відповідальність, потрібна для запуску.', fitLead: 'Найкраще для фаундера або малої команди з реальним рухом — і моментом дорогої невизначеності.', fitLabel: 'Хороший fit', fitOne: 'Можливість реальна, але продуктовий шлях — ні.', fitTwo: 'Команді потрібен робочий реліз, а не довший беклог.', notFitLabel: 'Не обіцянка', notFit: 'Загальна презентація про «AI-трансформацію» або набір незв’язаних deliverables.', contactEyebrow: 'Почнімо з реальної ситуації', contactTitle: 'Принесіть можливість, яка ще не стала ясною.', contactIntro: 'Напишіть коротко в Telegram: що рухається, що застрягло і яке рішення має розблокувати наступний крок. Я прямо скажу, чи rescue-sprint — правильний формат.'
+          },
+          ru: {
+            roleShort: 'Продуктовый rescue', eyebrow: 'Продуктовая стратегия, дизайн и запуск', heroTitle: 'От продуктовой возможности<br>к <em>работающей системе.</em>', heroSummary: 'Помогаю фаундерам и небольшим продуктовым командам превратить обеспеченную, но неясную возможность в продукт, которым пользуются, за который платят и который можно развивать.', telegramCta: 'Обсудить rescue-sprint →', emailCta: 'или прислать контекст по email', heroNote: 'Работаю удалённо из Украины · доступен для сфокусированной продуктовой работы', portraitName: 'Valentyn Yakovliev', portraitRole: 'Продуктовый билдер', proofExperience: 'лет запуска веб-, мобильных и десктопных продуктов', proofAi: 'лет создания production AI и агентных систем', proofUsers: 'платящих пользователей в продукте, созданном самостоятельно за четыре месяца', proofIndex: '01 — Доказательства, не список ролей', proofTitle: 'Работа — главное.', proofIntro: 'Работаю на стыках, которые обычно замедляют команду: продуктовое суждение, дизайн интерфейса, production-инженерия и системы, которые продолжают работать после запуска.', caseOneTag: 'Фаундер · от начала до конца', caseOneTitle: 'Потребительский AI-продукт, созданный самостоятельно.', caseOneDesc: 'Превратил концепт в реальный продукт для веба и Android с платежами и AI-функциями — отвечая и за продукт, и за код.', caseOneProof: 'платящих пользователей за четыре месяца. Название продукта намеренно не раскрыто.', caseTwoTag: 'Владелец фичи · B2B-платформа', caseTwoTitle: 'Одна продуктовая зона — от идеи до запуска.', caseTwoDesc: 'Вёл решения и поставку, выводил продукт в ключевые рабочие платформы, подключал платежи и создавал внутренние инструменты, помогавшие команде двигаться дальше.', caseTwoProof: 'меньше повторяющейся ручной работы для QA, разработки и найма.', caseThreeTag: 'AI-интеграция · production-системы', caseThreeTitle: 'AI с задачей, владельцем и путём в production.', caseThreeDesc: 'Проектировал и строил агентные сценарии, retrieval-поддержанные фичи и практические AI-roadmap — с качеством, стоимостью и операционной ответственностью.', caseThreeProof: 'продуктовые команды получили консультацию по AI-адаптации и внедрению. Названия клиентов не раскрыты.', methodIndex: '02 — Как я работаю', methodTitle: 'Сделать следующий шаг очевидным.', methodIntro: 'Rescue-sprint намеренно узкий: достаточно глубины, чтобы заменить интуицию общим решением, но без обещания решить весь продукт за неделю.', methodOneTitle: 'Уточнить', methodOneDesc: 'Найти реального пользователя, решение и ограничение за шумным брифом.', methodTwoTitle: 'Приоритизировать', methodTwoDesc: 'Превратить неизвестное в последовательность решений, за которые команда может отвечать.', methodThreeTitle: 'Запустить', methodThreeDesc: 'Определить наименьший убедительный релиз и доказательство, которое он должен создать дальше.', rescueIndex: '03 — Точка входа', rescueTitle: 'У rescue-sprint есть понятный финал.', rescueIntro: 'Это не воркшоп ради воркшопа. Он даёт команде трезвый взгляд на проблему, важные решения и следующий шаг, который можно запустить.', deliverablesTitle: 'Что остаётся после', deliverableOneKick: 'Проблема', deliverableOneTitle: 'Чёткая формулировка проблемы.', deliverableOneDesc: 'Что является правдой, что является предположением и что нужно решить.', deliverableTwoKick: 'Система', deliverableTwoTitle: 'Приоритетная система решений.', deliverableTwoDesc: 'Последовательность, которая соединяет продукт, дизайн и разработку, а не разрывает их.', deliverableThreeKick: 'Релиз', deliverableThreeTitle: 'Реалистичный план следующего запуска.', deliverableThreeDesc: 'Наименьший релиз, который стоит сделать, его доказательство и ответственность, нужная для запуска.', fitLead: 'Лучше всего для фаундера или небольшой команды с реальным движением — и моментом дорогой неопределённости.', fitLabel: 'Хороший fit', fitOne: 'Возможность реальна, но продуктовый путь — нет.', fitTwo: 'Команде нужен работающий релиз, а не более длинный бэклог.', notFitLabel: 'Не обещание', notFit: 'Общая презентация про «AI-трансформацию» или набор несвязанных deliverables.', contactEyebrow: 'Начнём с реальной ситуации', contactTitle: 'Принесите возможность, которая ещё не стала ясной.', contactIntro: 'Напишите коротко в Telegram: что движется, что застряло и какое решение должно разблокировать следующий шаг. Я прямо скажу, подходит ли rescue-sprint.'
+          }
+        };
+        const editorialCopy = {
+          en: {
+            roleShort: 'Product systems', eyebrow: 'Product audit / rescue sprint', heroTitle: 'Unclear opportunity.<br><em>Working system.</em>', heroSummary: 'I turn an unclear product opportunity into a working system — strategy, design and build in one accountable loop.', telegramCta: 'Start with a Telegram note →', proofExperience: 'years shipping web products', proofUsers: 'product versions built from one codebase', proofTitle: 'The work behind the position.', proofIntro: 'Most stalled products do not need another role. They need product, design and engineering decisions made together — then carried through.', proofNote: 'Selected examples are anonymised. The role, scope and outcome are not.', caseOneTitle: 'A consumer product, from zero to paid.', caseOneDesc: 'Took a concept through product framing, design, web, native Android, payments and AI features — solo.', caseOneProof: 'paying users reached in four months.', caseTwoTitle: 'One B2B product area, carried through.', caseTwoDesc: 'Owned product decisions and delivery, brought the work into key platforms, connected payments and built the internal tools that kept the team moving.', caseThreeTitle: 'AI systems built to survive production.', caseThreeDesc: 'Designed agent workflows, retrieval-backed product features and practical adoption roadmaps — with quality, cost and operational ownership included.', rescueTitle: 'Leave with a next move, not a longer backlog.', contactTitle: 'Bring the part that is still unclear.'
+          },
+          uk: {
+            roleShort: 'Продуктові системи', eyebrow: 'Продуктовий аудит / rescue-sprint', heroTitle: 'Нечітка можливість.<br><em>Робоча система.</em>', heroSummary: 'Перетворюю нечітку продуктову можливість на робочу систему — стратегія, дизайн і розробка в одному відповідальному циклі.', telegramCta: 'Почати з повідомлення в Telegram →', proofExperience: 'років запуску веб-продуктів', proofUsers: 'версій продукту з однієї кодової бази', proofTitle: 'Робота за позицією.', proofIntro: 'Більшості продуктів, що буксують, не потрібна ще одна роль. Їм потрібні продуктове рішення, дизайн і розробка, ухвалені разом — і доведені до запуску.', proofNote: 'Приклади анонімізовані. Роль, масштаб і результат — ні.', caseOneTitle: 'Споживчий продукт: від нуля до оплат.', caseOneDesc: 'Провів концепт через формулювання продукту, дизайн, веб, нативний Android, платежі та AI-функції — самостійно.', caseOneProof: 'платних користувачів за чотири місяці.', caseTwoTitle: 'Одна B2B продуктова зона, доведена до результату.', caseTwoDesc: 'Вів продуктові рішення й delivery, вивів роботу в ключові платформи, підключив платежі та створив внутрішні інструменти, що тримали команду в русі.', caseThreeTitle: 'AI-системи, здатні жити в production.', caseThreeDesc: 'Проєктував агентні сценарії, retrieval-підсилені фічі та практичні adoption roadmap — із якістю, вартістю та операційною відповідальністю.', rescueTitle: 'Вийти з наступним кроком, а не з довшим беклогом.', contactTitle: 'Принесіть ту частину, яка досі нечітка.'
+          },
+          ru: {
+            roleShort: 'Продуктовые системы', eyebrow: 'Продуктовый аудит / rescue-sprint', heroTitle: 'Неясная возможность.<br><em>Рабочая система.</em>', heroSummary: 'Превращаю неясную продуктовую возможность в работающую систему — стратегия, дизайн и разработка в одном ответственном цикле.', telegramCta: 'Начать с сообщения в Telegram →', proofExperience: 'лет запуска веб-продуктов', proofUsers: 'версий продукта из одной кодовой базы', proofTitle: 'Работа за позицией.', proofIntro: 'Большинству буксующих продуктов не нужна ещё одна роль. Им нужны продуктовые решения, дизайн и инженерия, принятые вместе — и доведённые до запуска.', proofNote: 'Примеры анонимизированы. Роль, масштаб и результат — нет.', caseOneTitle: 'Потребительский продукт: от нуля до оплат.', caseOneDesc: 'Провёл концепт через формулировку продукта, дизайн, веб, нативный Android, платежи и AI-функции — самостоятельно.', caseOneProof: 'платящих пользователей за четыре месяца.', caseTwoTitle: 'Одна B2B продуктовая зона, доведённая до результата.', caseTwoDesc: 'Вёл продуктовые решения и delivery, вывел работу в ключевые платформы, подключил платежи и создал внутренние инструменты, удерживавшие команду в движении.', caseThreeTitle: 'AI-системы, готовые жить в production.', caseThreeDesc: 'Проектировал агентные сценарии, retrieval-поддержанные фичи и практические adoption roadmap — с качеством, стоимостью и операционной ответственностью.', rescueTitle: 'Выйти со следующим шагом, а не с более длинным бэклогом.', contactTitle: 'Принесите ту часть, которая всё ещё неясна.'
+          }
+        };
+        const enhancementCopy = {
+          en: {
+            roleShort: 'Product systems',
+            skipToContent: 'Skip to content',
+            languageSwitcherLabel: 'Choose language',
+            eyebrow: 'Product strategy, systems & delivery',
+            heroSummary: 'I turn high-potential product ambiguity into a working system — shape the decision, build the product, and orchestrate the people and agents around it.',
+            proofProducts: 'shipped products',
+            proofAgents: 'agentic systems designed and built',
+            proofThirdParty: 'third-party systems designed for client companies',
+            proofIndex: '01 — Product systems',
+            proofTitle: 'The person who closes the gaps.',
+            proofIntro: 'Teams can hire strategy, design and engineering separately. I take responsibility for the joints: the decisions, the production system and the evidence that it works.',
+            caseOneTag: 'Product builder · 0 → 1',
+            caseOneTitle: 'A real product across every layer.',
+            caseOneDesc: 'Framed the product, designed the experience and built web, native mobile, payments and AI capabilities — carrying the decisions as well as delivery.',
+            caseOneProof: 'One accountable owner from earliest ambiguity to a product people can use.',
+            caseTwoTag: 'Agentic systems · scale',
+            caseTwoTitle: 'A 66-locale system, not a translation sprint.',
+            caseTwoDesc: 'Built an agentic localization and content workflow that makes a large multilingual corpus operable: coverage, review gates, SEO rules and safe execution.',
+            caseTwoProof: 'locales supported through an agentic localization system.',
+            caseThreeTag: 'Technical product leadership',
+            caseThreeTitle: 'AI systems that survive product reality.',
+            caseThreeDesc: 'Designed and delivered agent workflows, deep-memory and retrieval-backed features, with quality gates, provider choice, cost and operational ownership included.',
+            experienceIndex: '02 — Experience',
+            experienceTitle: 'Enough range to see the system.',
+            experienceIntro: 'A decade of work inside product companies, studios and independent builds makes it easier to tell a hard problem from a loud one.',
+            experienceOneTitle: 'Full-stack engineer & AI systems consultant',
+            experienceOneDesc: 'AI-enabled consumer products, agent architecture and product delivery for small teams.',
+            experienceTwoTitle: 'Oboard · full-stack product engineer',
+            experienceTwoDesc: 'A B2B product area, platform integrations, billing and the internal systems that kept delivery moving.',
+            experienceThreeTitle: 'Frontend engineer across product teams & studios',
+            experienceThreeDesc: 'ITOMYCH, AnyforSoft, IT Svit, Codica and QPARD — the foundation behind 10+ years shipping web.',
+            educationKicker: 'Technical foundation',
+            educationTitle: 'Computer science',
+            educationDesc: 'Master’s degree. Enough depth to make product decisions credible all the way down to the system boundary.',
+            methodIndex: '03 — The way I work',
+            rescueIndex: '04 — The entry point'
+          },
+          uk: {
+            roleShort: 'Продуктові системи',
+            skipToContent: 'Перейти до змісту',
+            languageSwitcherLabel: 'Обрати мову',
+            eyebrow: 'Продуктова стратегія, системи й delivery',
+            heroSummary: 'Перетворюю сильну, але неясну продуктову можливість на робочу систему — формулюю рішення, створюю продукт і оркеструю людей та агентів навколо нього.',
+            proofProducts: 'запущені продукти',
+            proofAgents: 'агентні системи, спроєктовані й створені',
+            proofThirdParty: 'сторонніх систем, спроєктованих для клієнтських компаній',
+            proofIndex: '01 — Продуктові системи',
+            proofTitle: 'Той, хто прибирає розриви.',
+            proofIntro: 'Команда може найняти стратегію, дизайн і розробку окремо. Я беру відповідальність за стики: рішення, production-систему та доказ того, що вона працює.',
+            caseOneTag: 'Продуктовий білдер · 0 → 1',
+            caseOneTitle: 'Реальний продукт на кожному рівні.',
+            caseOneDesc: 'Сформулював продукт, спроєктував досвід і створив веб, нативний мобільний застосунок, платежі та AI-можливості — відповідаючи і за рішення, і за delivery.',
+            caseOneProof: 'Один відповідальний власник — від початкової невизначеності до продукту, яким можна користуватися.',
+            caseTwoTag: 'Агентні системи · масштаб',
+            caseTwoTitle: 'Система на 66 локалей, а не перекладацький спринт.',
+            caseTwoDesc: 'Створив агентний процес локалізації та контенту, який робить великий багатомовний корпус керованим: покриття, рев’ю-гейти, SEO-правила та безпечне виконання.',
+            caseTwoProof: 'локалей підтримує агентна система локалізації.',
+            caseThreeTag: 'Технічне продуктове лідерство',
+            caseThreeTitle: 'AI-системи, що витримують реальність продукту.',
+            caseThreeDesc: 'Проєктував і запускав агентні сценарії, функції з глибокою пам’яттю та retrieval-підсиленням — із гейтами якості, вибором провайдера, вартістю й операційною відповідальністю.',
+            experienceIndex: '02 — Досвід',
+            experienceTitle: 'Досвіду достатньо, щоб бачити всю систему.',
+            experienceIntro: 'Десятиліття в продуктових компаніях, студіях і незалежних запусках дає змогу відрізнити складну проблему від просто гучної.',
+            experienceOneTitle: 'Full-stack інженер і консультант з AI-систем',
+            experienceOneDesc: 'AI-продукти для користувачів, агентна архітектура й продуктова доставка для малих команд.',
+            experienceTwoTitle: 'Oboard · full-stack product engineer',
+            experienceTwoDesc: 'B2B продуктова зона, інтеграції з платформами, білінг і внутрішні системи, що тримали delivery у русі.',
+            experienceThreeTitle: 'Frontend інженер у продуктових командах і студіях',
+            experienceThreeDesc: 'ITOMYCH, AnyforSoft, IT Svit, Codica та QPARD — основа 10+ років веб-розробки.',
+            educationKicker: 'Технічна основа',
+            educationTitle: 'Комп’ютерні науки',
+            educationDesc: 'Магістерський ступінь. Достатньо глибини, щоб продуктові рішення були переконливими аж до межі системи.',
+            methodIndex: '03 — Як я працюю',
+            rescueIndex: '04 — Точка входу'
+          },
+          ru: {
+            roleShort: 'Продуктовые системы',
+            skipToContent: 'Перейти к содержанию',
+            languageSwitcherLabel: 'Выбрать язык',
+            eyebrow: 'Продуктовая стратегия, системы и запуск',
+            heroSummary: 'Превращаю сильную, но неясную продуктовую возможность в работающую систему — формулирую решение, создаю продукт и оркестрирую людей и агентов вокруг него.',
+            proofProducts: 'запущенных продукта',
+            proofAgents: 'агентные системы, спроектированные и созданные',
+            proofThirdParty: 'сторонних систем, спроектированных для компаний-клиентов',
+            proofIndex: '01 — Продуктовые системы',
+            proofTitle: 'Тот, кто закрывает разрывы.',
+            proofIntro: 'Команда может нанять стратегию, дизайн и разработку отдельно. Я беру ответственность за стыки: решения, production-систему и доказательство того, что она работает.',
+            caseOneTag: 'Продуктовый билдер · 0 → 1',
+            caseOneTitle: 'Реальный продукт на каждом уровне.',
+            caseOneDesc: 'Сформулировал продукт, спроектировал опыт и создал веб, нативное мобильное приложение, платежи и AI-возможности — отвечая и за решения, и за delivery.',
+            caseOneProof: 'Один ответственный владелец — от начальной неопределённости до продукта, которым можно пользоваться.',
+            caseTwoTag: 'Агентные системы · масштаб',
+            caseTwoTitle: 'Система на 66 локалей, а не переводческий спринт.',
+            caseTwoDesc: 'Создал агентный процесс локализации и контента, который делает большой многоязычный корпус управляемым: покрытие, ревью-гейты, SEO-правила и безопасное выполнение.',
+            caseTwoProof: 'локалей поддерживает агентная система локализации.',
+            caseThreeTag: 'Техническое продуктовое лидерство',
+            caseThreeTitle: 'AI-системы, выдерживающие реальность продукта.',
+            caseThreeDesc: 'Проектировал и запускал агентные сценарии, функции с глубокой памятью и retrieval-поддержкой — с гейтами качества, выбором провайдера, стоимостью и операционной ответственностью.',
+            experienceIndex: '02 — Опыт',
+            experienceTitle: 'Опыта достаточно, чтобы видеть всю систему.',
+            experienceIntro: 'Десятилетие в продуктовых компаниях, студиях и независимых запусках помогает отличить сложную проблему от просто громкой.',
+            experienceOneTitle: 'Full-stack инженер и консультант по AI-системам',
+            experienceOneDesc: 'Потребительские AI-продукты, агентная архитектура и продуктовая доставка для небольших команд.',
+            experienceTwoTitle: 'Oboard · full-stack product engineer',
+            experienceTwoDesc: 'B2B продуктовая зона, платформенные интеграции, биллинг и внутренние системы, которые держали delivery в движении.',
+            experienceThreeTitle: 'Frontend инженер в продуктовых командах и студиях',
+            experienceThreeDesc: 'ITOMYCH, AnyforSoft, IT Svit, Codica и QPARD — основа 10+ лет веб-разработки.',
+            educationKicker: 'Техническая основа',
+            educationTitle: 'Компьютерные науки',
+            educationDesc: 'Магистратура. Достаточно глубины, чтобы продуктовые решения были убедительными вплоть до границы системы.',
+            methodIndex: '03 — Как я работаю',
+            rescueIndex: '04 — Точка входа'
+          }
+        };
+        const languageButtons = document.querySelectorAll('[data-lang]');
+        const writeLanguage = (lang) => {
+          const copy = { ...(dictionary[lang] || dictionary.en), ...(editorialCopy[lang] || editorialCopy.en), ...(enhancementCopy[lang] || enhancementCopy.en) };
+          document.documentElement.lang = lang === 'uk' ? 'uk' : lang;
+          document.querySelectorAll('[data-i18n]').forEach((node) => { node.textContent = copy[node.dataset.i18n]; });
+          document.querySelectorAll('[data-i18n-html]').forEach((node) => { node.innerHTML = copy[node.dataset.i18nHtml]; });
+          document.querySelectorAll('[data-i18n-aria]').forEach((node) => { node.setAttribute('aria-label', copy[node.dataset.i18nAria]); });
+          languageButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.lang === lang)));
+          localStorage.setItem('vy-card-language', lang);
+        };
+        languageButtons.forEach((button) => button.addEventListener('click', () => writeLanguage(button.dataset.lang)));
+        document.getElementById('year').textContent = new Date().getFullYear();
+        writeLanguage(localStorage.getItem('vy-card-language') || 'en');
+      })();
+    </script>
+  </body>
+</html>

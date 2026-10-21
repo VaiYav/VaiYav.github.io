@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lexima — Шпаргалка на співбесіду</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Lexima — Software Engineer (AI/LLM)</h1>
+      <p class="muted">Шпаргалка для співбесіди на позицію з масштабування GenAI-напрямку в продукті автоматизації внутрішніх бізнес-процесів.</p>
+    </header>
+
+    <nav>
+      <a href="index.html" class="active">Головна</a>
+      <a href="company.html">Компанія &amp; вакансія</a>
+      <a href="tech-stack.html">Техстек</a>
+      <a href="llm-production.html">LLM у продакшені</a>
+      <a href="interview-prep.html">Підготовка до інтерв'ю</a>
+    </nav>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Коротко про вакансію</h3>
+        <ul>
+          <li><strong>Позиція:</strong> Software Engineer (AI/LLM), віддалено.</li>
+          <li><strong>Продукт:</strong> автоматизація внутрішніх бізнес-процесів. AI вже в продакшені.</li>
+          <li><strong>Завдання:</strong> впроваджувати новий GenAI-функціонал, масштабувати й оптимізувати вартість/якість існуючого.</li>
+          <li><strong>ЗП:</strong> конкурентна. 18 робочих днів відпустки, remote.</li>
+          <li><strong>Дедлайн відповіді:</strong> протягом 2 тижнів після відгуку.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Стек (з вакансії)</h3>
+        <p>
+          <span class="tag">React</span>
+          <span class="tag">React Context</span>
+          <span class="tag">TanStack Query</span>
+          <span class="tag">Koa.js</span>
+          <span class="tag">Ruby on Rails</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Redis</span>
+          <span class="tag">RabbitMQ</span>
+          <span class="tag">RSpec</span>
+          <span class="tag">Jest</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag">GitLab CI</span>
+          <span class="tag">LLM APIs (OpenAI/Grok etc.)</span>
+          <span class="tag">Helicone</span>
+        </p>
+      </div>
+    </div>
+
+    <h2>Швидкий план підготовки</h2>
+    <ol>
+      <li><strong class="highlight">Вивчіть компанію.</strong> Lexima — це custom software + affiliate marketing, Лондон HQ, розподілена команда, CTO — Aleksandr Dementev. <a href="company.html">Детальніше →</a></li>
+      <li><strong class="highlight">Продумайте історії про LLM.</strong> Тобі шукають не просто користувача ChatGPT, а інженера, який збирав надійні рішення end-to-end: prompt → eval → fallback → моніторинг → оптимізація вартості. <a href="llm-production.html">Детальніше →</a></li>
+      <li><strong class="highlight">Підтягніть стек.</strong> React+TanStack Query, Koa, Rails, PostgreSQL, Redis/RabbitMQ, K8s/GitLab CI. Будуть питати на дизайн, trade-offs, production gotchas. <a href="tech-stack.html">Детальніше →</a></li>
+      <li><strong class="highlight">Підготуйте запитання.</strong> Покажи зацікавленість у продукті, AI-роадмапі, процесах eval'юації та команді. <a href="interview-prep.html">Детальніше →</a></li>
+    </ol>
+
+    <h2>Ключові теми, які точно зустрінуться</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h4>1. Production LLM</h4>
+        <p>Надійність, відмовостійкість, кешування, роутинг моделей, обмеження токенів, обробка hallucinations та prompt injections.</p>
+      </div>
+      <div class="card">
+        <h4>2. Prompt engineering &amp; eval</h4>
+        <p>System/user ролі, few-shot, CoT, XML-теги, JSON-схеми, динамічні приклади. Ragas / Promptfoo, LLM-as-judge, online/offline евальюація.</p>
+      </div>
+      <div class="card">
+        <h4>3. Cost / latency / quality</h4>
+        <p>Вибір моделі, кешування (Helicone), batching, streaming, flex processing, коротші промпти, fallback на дешевші моделі.</p>
+      </div>
+      <div class="card">
+        <h4>4. RAG &amp; embeddings</h4>
+        <p>Chunking, hybrid search, reranking, версіонування ембеддингів, pgvector або зовнішній векторний стор, метрики.</p>
+      </div>
+      <div class="card">
+        <h4>5. End-to-end ownership</h4>
+        <p>Фронтенд (React/TS) + бекенд (RoR), RESTful API, background jobs, PostgreSQL, Redis, RabbitMQ, тестування (RSpec/Jest), CI/CD.</p>
+      </div>
+      <div class="card">
+        <h4>6. Reverse engineering &amp; інтеграції</h4>
+        <p>Досвід інтеграції зі сторонніми API, capturing traffic, документування контрактів, реальний час (WebSockets/SSE).</p>
+      </div>
+    </div>
+
+    <h2>Корисні фрази для співбесіди</h2>
+    <ul>
+      <li>«Я звик закривати задачі end-to-end: від обговорення вимоги до продакшену, включно з React-інтерфейсом і Rails-бекендом».</li>
+      <li>«Для LLM я завжди будую триярусний захист: input validation, prompt hardening + output validation, і eval'юація, яка ловить регресії».</li>
+      <li>«Не кожна фіча потребує GPT-4o. Я вибираю модель під задачу: дешеві для класифікації, сильні — для генерації, іноді fine-tuned, іноді RAG».</li>
+      <li>«Вартість і латентність — це не після-thought. Я вимірюю обидві метрики в Helicone/Langfuse і приймаю рішення на основі даних».</li>
+      <li>«Для RAG найбільший виграш дає якість chunking'у та reranker, а не сама модель».</li>
+    </ul>
+
+    <footer>
+      <p>Зібрано за допомогою Exa (MCP). Джерела: <a href="https://jobs.dou.ua/companies/lexima/vacancies/364492/" target="_blank">DOU вакансія</a>, <a href="https://lexima.tech/" target="_blank">lexima.tech</a>, <a href="https://lexima.uk/" target="_blank">lexima.uk</a>, публічні технічні гайди.</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-агенты для RoBeauty — Playbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">RoBeauty <span>Head of IT</span></div>
+  <nav class="nav">
+    <a href="index.html">Quick</a>
+    <a href="company.html">Компания</a>
+    <a href="role.html">Роль &amp; собес</a>
+    <a class="active" href="agents.html">AI-агенты</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <h1>AI-агент playbook для RoBeauty</h1>
+    <p class="lead">Где в D2C-косметике можно встроить агентов, чтобы снять людей и ускорить бизнес. Упор на реальные кейсы, метрики и инструменты, которые уже используют конкуренты.</p>
+  </section>
+
+  <section class="section">
+    <h2>Как выбирать, кого автоматизировать</h2>
+    <div class="card" style="border-left: 4px solid var(--blue);">
+      <p><strong>Формула приоритета:</strong> <code>Impact = Частота × Время на операцию × Стоимость ошибки ÷ Сложность автоматизации</code></p>
+      <p>Ищем процессы, которые:</p>
+      <ul>
+        <li>Повторяются много раз в день/неделю</li>
+        <li>Имеют чёткие правила, но отнимают часы</li>
+        <li>Можно откатить или контролировать человеком (HITL)</li>
+        <li>Дают быстрый ROI и доверие к агентам</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Топ-10 агентов для RoBeauty</h2>
+
+    <div class="card">
+      <h3>1. WISMO-агент (Where Is My Order?)</h3>
+      <p><span class="badge badge-red">Высокий приоритет</span> <span class="badge badge-green">Quick win</span></p>
+      <p><strong>Боль:</strong> 30–50% послекупочных обращений — «где мой заказ?». Каждый контакт стоит $5–6.</p>
+      <p><strong>Решение:</strong> AI-агент, который по номеру заказа/телефону тянет статус из Shopify/OMS, трек-номер, данные перевозчика и отвечает в мессенджере/чате.</p>
+      <p><strong>Интеграции:</strong> Shopify, Новая Почта / Укрпочта / DHL, Telegram/Viber/Messenger, Klaviyo.</p>
+      <p><strong>Метрики:</strong></p>
+      <ul>
+        <li>-30%…-50% inbound тикетов</li>
+        <li>First response: с часов до секунд</li>
+        <li>CSAT: +10–15%</li>
+      </ul>
+      <p><strong>Инструменты:</strong> n8n + LangChain, Gorgias AI, Zendesk AI, собственный бот на NestJS + Supabase.</p>
+      <p><strong>Референс:</strong> Glamnetic — Gorgias AI Agent, 91% improvement First Response Time, 4.89/5 CSAT, 12 дней ручной работы в месяц сэкономлено.</p>
+    </div>
+
+    <div class="card">
+      <h3>2. Агент возвратов и обменов</h3>
+      <p><span class="badge badge-red">Высокий приоритет</span> <span class="badge badge-green">Quick win</span></p>
+      <p><strong>Боль:</strong> Ручная проверка политики возвратов, генерация ТТН, обмены, связь с клиентом.</p>
+      <p><strong>Решение:</strong> Агент проверяет соответствие политике, собирает причину, генерирует этикетку, резервирует замену, инициирует возврат денег.</p>
+      <p><strong>Метрики:</strong> 80% возвратов без оператора, -50% cycle time, снижение ошибок при обмене.</p>
+      <p><strong>Референс:</strong> AffixedAI — multi-agent returns agent: eligibility, label, exchange, refund; -62% cost, CSAT рост.</p>
+    </div>
+
+    <div class="card">
+      <h3>3. Voice-of-Customer агент</h3>
+      <p><span class="badge badge-orange">Средний приоритет</span> <span class="badge badge-green">Quick win</span></p>
+      <p><strong>Боль:</strong> Отзывы, чаты, соцсети, тикеты — данные разрозненные, insight'ы не доходят до R&amp;D и маркетинга.</p>
+      <p><strong>Решение:</strong> Агент собирает отзывы с сайта, Google, соцсетей, поддержки; кластеризует боли и темы; еженедельно отсылает дайджест R&amp;D, маркетингу, руководству.</p>
+      <p><strong>Метрики:</strong> Тренды болей в течение 24 часов, скорость реакции на продуктовые сигналы.</p>
+      <p><strong>Инструменты:</strong> Python/Node скрипты, n8n, OpenAI embeddings, HDBSCAN/кластеризация, Looker/Notion.</p>
+    </div>
+
+    <div class="card">
+      <h3>4. Инвентарный и складской агент</h3>
+      <p><span class="badge badge-orange">Средний приоритет</span> <span class="badge badge-orange">Средняя сложность</span></p>
+      <p><strong>Боль:</strong> Учёт сырья, готовой продукции, safety stock, резервы, сроки поставок.</p>
+      <p><strong>Решение:</strong> Агент мониторит остатки, прогнозирует спрос, считает safety stock, предупреждает о необходимости закупки/производства, предлагает перемещения.</p>
+      <p><strong>Метрики:</strong> снижение out-of-stock на X%, снижение замороженных запасов, меньше split-заказов.</p>
+      <p><strong>Инструменты:</strong> SQL-запросы, Supabase, n8n, Google Sheets/1С интеграция.</p>
+    </div>
+
+    <div class="card">
+      <h3>5. Агент контента и креативов</h3>
+      <p><span class="badge badge-blue">Высокий потенциал</span> <span class="badge badge-green">Quick win</span></p>
+      <p><strong>Боль:</strong> Performance Creative Lead и Junior Creative Manager готовят много УГК, сценариев, референсов, хуков.</p>
+      <p><strong>Решение:</strong> Агент генерирует первые черновики хуков, сценариев, UGC-скриптов на основе лучших performing-креативов; переводит контент на польский/английский; тегирует и структурирует библиотеку.</p>
+      <p><strong>Метрики:</strong> 15+ часов в неделю экономии на копирайтинге, 75% faster SEO/контент, ускорение тестов.</p>
+      <p><strong>Референс:</strong> Daye North America — NinjaCat AI, 80% reduction manual data analysis, 15+ hours saved per week на product page copy, 75% faster SEO content.</p>
+    </div>
+
+    <div class="card">
+      <h3>6. Консультант по подбору продукта</h3>
+      <p><span class="badge badge-blue">Высокий потенциал</span> <span class="badge badge-green">Quick win</span></p>
+      <p><strong>Боль:</strong> Клиенты не знают, какой продукт выбрать под их тип кожи, проблему, возраст.</p>
+      <p><strong>Решение:</strong> RAG-бот с базой знаний о продуктах, составах, ингредиентах, отзывах. Задаёт 3–4 вопроса, рекомендует персональный набор.</p>
+      <p><strong>Метрики:</strong> +AOV, конверсия в корзину, снижение вопросов в поддержку.</p>
+      <p><strong>Референс:</strong> Amorepacific AMORE CHAT — сравнение продуктов, персональные рекомендации, обзоры, статус заказа. Clarins CLARA — care-бот.</p>
+    </div>
+
+    <div class="card">
+      <h3>7. Агент SLA и логистики</h3>
+      <p><span class="badge badge-orange">Средний приоритет</span> <span class="badge badge-orange">Средняя сложность</span></p>
+      <p><strong>Боль:</strong> Задержки перевозчиков, split-отправки, риск просрочки обещаний клиентам.</p>
+      <p><strong>Решение:</strong> Мониторинг всех in-flight заказов, обнаружение задержек, proactive SMS/email клиенту, reroute на другой склад/перевозчика.</p>
+      <p><strong>Метрики:</strong> -12% inbound тикетов за счёт proactive communication, +on-time delivery.</p>
+    </div>
+
+    <div class="card">
+      <h3>8. Агент локализации для Польши/ЕС</h3>
+      <p><span class="badge badge-orange">Средний приоритет</span> <span class="badge badge-orange">Средняя сложность</span></p>
+      <p><strong>Боль:</strong> Выход на новый рынок требует переводов, адаптации маркетинга, CPNP, локальных платежей и логистики.</p>
+      <p><strong>Решение:</strong> Перевод и адаптация контента, генерация локальных лендингов, мониторинг польских конкурентов, подсказки по CPNP/labeling.</p>
+      <p><strong>Метрики:</strong> скорость выхода на рынок, точность локализации, снижение ошибок в CPNP.</p>
+    </div>
+
+    <div class="card">
+      <h3>9. Агент ручных отчётов и дашбордов</h3>
+      <p><span class="badge badge-green">Quick win</span></p>
+      <p><strong>Боль:</strong> Ежедневное ручное обновление отчётов в Google Sheets / Looker.</p>
+      <p><strong>Решение:</strong> Агент собирает данные из Shopify, рекламных кабинетов, склада, считает unit-экономику и присылает утренний дайджест.</p>
+      <p><strong>Метрики:</strong> 5–10 часов в неделю экономии, один источник правды.</p>
+    </div>
+
+    <div class="card">
+      <h3>10. Code &amp; Ops агент для IT-команды</h3>
+      <p><span class="badge badge-purple">Долгосрочный</span></p>
+      <p><strong>Боль:</strong> Маленькая тех. команда, много задач, ручные релизы, отсутствие стандартов.</p>
+      <p><strong>Решение:</strong> AI code review, автоматизация релизов, генерация тестов, мониторинг ошибок, runbook'и.</p>
+      <p><strong>Метрики:</strong> -30% времени на ревью, быстрее релизы, меньше багов в прод.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Карта автоматизации по процессам</h2>
+    <table>
+      <thead>
+        <tr><th>Отдел</th><th>Процесс</th><th>Агент</th><th>Срок</th><th>ROI</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Support</td><td>WISMO</td><td>WISMO-бот</td><td>2–3 недели</td><td>Высокий</td></tr>
+        <tr><td>Support</td><td>Возвраты / обмены</td><td>Return agent</td><td>3–4 недели</td><td>Высокий</td></tr>
+        <tr><td>Support</td><td>Подбор продукта</td><td>Product consultant</td><td>2–3 недели</td><td>Высокий</td></tr>
+        <tr><td>Marketing</td><td>UGC / креативы</td><td>Content agent</td><td>2–3 недели</td><td>Средний-высокий</td></tr>
+        <tr><td>Marketing</td><td>Voice of customer</td><td>VoC agent</td><td>2–3 недели</td><td>Средний</td></tr>
+        <tr><td>Ops</td><td>Инвентарь / склад</td><td>Inventory agent</td><td>1–2 месяца</td><td>Высокий</td></tr>
+        <tr><td>Ops</td><td>SLA / доставка</td><td>Logistics agent</td><td>3–4 недели</td><td>Средний</td></tr>
+        <tr><td>Expansion</td><td>Локализация Польши</td><td>EU expansion agent</td><td>1–2 месяца</td><td>Средний</td></tr>
+        <tr><td>Leadership</td><td>Ежедневные отчёты</td><td>Reporting agent</td><td>1–2 недели</td><td>Быстрый</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>Какой стек под какого агента</h2>
+    <table>
+      <thead>
+        <tr><th>Задача</th><th>Первый выбор</th><th>Альтернатива</th><th>Почему</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AI-агент с RAG, tool use, кастом-логика</td>
+          <td><code>n8n</code> + LangChain</td>
+          <td>NestJS + Supabase</td>
+          <td>n8n даёт быстрый MVP + self-host; NestJS — продакшен и контроль</td>
+        </tr>
+        <tr>
+          <td>Сложные многошаговые workflow: учёт, ERP, routing</td>
+          <td><code>Make</code></td>
+          <td>n8n</td>
+          <td>Визуальный router, data store, дешевле Zapier</td>
+        </tr>
+        <tr>
+          <td>Простые связки: новый заказ → Google Sheets</td>
+          <td><code>Zapier</code></td>
+          <td>Make</td>
+          <td>Быстрый старт, но дорого на объёмах</td>
+        </tr>
+        <tr>
+          <td>Контент, UGC, SEO</td>
+          <td>Claude / OpenAI + n8n</td>
+          <td>Cursor / Claude Code</td>
+          <td>Генерация + RAG на success-кейсах</td>
+        </tr>
+        <tr>
+          <td>Хранение данных агентов, вебхуки</td>
+          <td><code>Supabase</code></td>
+          <td>PostgreSQL + Redis</td>
+          <td>Edge Functions, auth, real-time, быстрый старт</td>
+        </tr>
+        <tr>
+          <td>Email/SMS/маркетинг-автоматизация</td>
+          <td><code>Klaviyo</code> / <code>eSputnik</code> / <code>Omnisend</code></td>
+          <td>Make/n8n</td>
+          <td>Нативные AI-фичи и flows, интеграция с агентами</td>
+        </tr>
+        <tr>
+          <td>Observability агентов</td>
+          <td>Langfuse / LangSmith</td>
+          <td>Sentry + custom dashboard</td>
+          <td>Трассировка, стоимость, качество ответов</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>30-60-90 дней: план первых побед</h2>
+    <div class="card">
+      <h4>Первые 30 дней — Discovery</h4>
+      <ul>
+        <li>Интервью с COO, директором производства, R&amp;D, support, маркетингом</li>
+        <li>SQL-аудит: заказы, тикеты, чаты, возвраты, инвентарь</li>
+        <li>Карта процессов: что ручное, частота, часов/неделю, стоимость</li>
+        <li>Аудит текущего стека и автоматизаций</li>
+        <li>Первый quick win: ежедневный отчёт агентом или WISMO-бот MVP</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>60 дней — MVP и пилоты</h4>
+      <ul>
+        <li>Запуск WISMO-агента на Telegram/чат</li>
+        <li>Запуск Voice-of-Customer дайджеста</li>
+        <li>Пилот Return/Exchange agent на подгруппе заказов</li>
+        <li>Настройка observability: стоимость, качество, ошибки</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>90 дней — Масштабирование</h4>
+      <ul>
+        <li>Расширить WISMO на 80% обращений</li>
+        <li>Запустить product consultant на сайте</li>
+        <li>Первый инвентарный агент / safety stock алерты</li>
+        <li>Контент-агент для performance creative</li>
+        <li>Роадмап на 6 месяцев с метриками</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Референсы и бенчмарки</h2>
+    <table>
+      <thead>
+        <tr><th>Компания</th><th>Агент</th><th>Результат</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Glamnetic (beauty, D2C)</td><td>Gorgias AI Agent</td><td>40% support volume автоматом, 91% faster FRT, 12 days saved/month</td></tr>
+        <tr><td>AffixedAI D2C</td><td>Multi-agent customer service</td><td>-62% cost ($180K → $68K), CSAT вырос</td></tr>
+        <tr><td>Clarins</td><td>CLARA (Azure OpenAI)</td><td>Первый genAI care-бот в luxury beauty</td></tr>
+        <tr><td>Amorepacific</td><td>AMORE CHAT</td><td>Персональные рекомендации, статус заказа, summary отзывов</td></tr>
+        <tr><td>Daye North America</td><td>NinjaCat AI</td><td>$1.5M sales impact, 80% less manual analysis, 15+ hrs/week saved</td></tr>
+        <tr><td>Fluent Commerce</td><td>DOM agents</td><td>WISMO, SLA management, safety stock, replenishment</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>Главные риски и как их контролировать</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h4>Риски</h4>
+        <ul>
+          <li>Агент даёт неправильный ответ клиенту</li>
+          <li>Интеграция ломает существующий order flow</li>
+          <li>Команда не доверяет агенту</li>
+          <li>Стоимость LLM-коллов растёт на объёмах</li>
+          <li>CPNP/GMP/compliance в ЕС</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Контроль</h4>
+        <ul>
+          <li>Human-in-the-loop: confidence threshold + эскалация</li>
+          <li>Sandbox, staging, eval dataset, A/B test</li>
+          <li>Прозрачные метрики и дашборды</li>
+          <li>Prompt caching, small models, cascading Haiku→Sonnet</li>
+          <li>Легальный review перед публикацией в ЕС</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Как закрыть это на собеседовании</h2>
+    <blockquote>
+      «Я бы начал не с технологии, а с карты процессов. За первые 2 недели провёл бы интервью с COO, производством, поддержкой, маркетингом и SQL-аудит. Взял бы самую частую и дорогую ручную операцию — скорее всего, WISMO — и за 2–3 недели сделал бы MVP агента в n8n с подключением к Shopify и Новой Почте. Параллельно запустил бы Voice-of-Customer агент, чтобы маркетинг и R&amp;D получали еженедельный дайджест. Метрика: часы, сэкономленные команде, и процент обращений, закрытых без человека.»
+    </blockquote>
+  </section>
+
+</main>
+
+</body>
+</html>

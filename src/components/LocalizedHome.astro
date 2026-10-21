@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
 import Hero from './Hero.astro';
 import { copy, links, type Locale } from '../data/site';
 interface Props { locale?: Locale }
@@ -29,6 +30,6 @@ const text = copy[locale];
       <section class="method-section" data-reveal><div class="frame section"><div class="section-header"><div><p class="section-index">03 — Product rescue</p><h2>{text.productTitle}</h2></div><p class="section-intro method-intro">{text.productText}</p></div><div class="method-grid"><article data-reveal><span>01</span><h3>Clarify</h3><p>Find the actual user, decision and constraint behind the noisy brief.</p></article><article data-reveal><span>02</span><h3>Prioritize</h3><p>Turn the unknowns into a sequence of choices the team can own.</p></article><article data-reveal><span>03</span><h3>Launch</h3><p>Define the smallest credible release and the proof it must create.</p></article></div><a class="light-button" href={links.telegram}>{text.secondary} →</a></div></section>
       <section class="frame contact-section" data-reveal><div class="contact-frame"><p class="eyebrow">Start with the real situation</p><h2>{text.contactTitle}</h2><p>{text.contactText}</p><div class="hero-actions"><a class="primary-button" href={links.cv}>{text.primary}</a><a class="email-link" href={links.email}>{text.email}</a></div></div></section>
     </main>
-    <footer class="frame footer"><span>{text.footer}</span><span><a href={links.linkedin}>LinkedIn ↗</a> · <a href={links.github}>GitHub ↗</a></span></footer>
+    <SiteFooter locale="en" />
   </div>
 </BaseLayout>

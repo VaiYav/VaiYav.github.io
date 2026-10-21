@@ -539,7 +539,7 @@ flowchart LR
 | Проєкт | Що це | Ключові цифри / доказ |
 |---|---|---|
 | **My Zodiac AI** | SaaS-астрологія, web + Android | 1500 платних користувачів за 4 місяці, solo; 4.5★ Play Store; 16 bounded contexts (NestJS) |
-| **Soulwise AI** | Астрологічний SaaS, 100k+ користувачів | bundle 250 → 160 KB (-36%), LCP -1,2 с, conversion +8%, RAG на Qdrant |
+| **Soulwise AI** | Астрологічний SaaS, 10k+ користувачів | bundle 250 → 160 KB (-36%), LCP -1,2 с, conversion +8%, RAG на Qdrant |
 | **Content Agent Platform** | Локалізація/генерація контенту агентами | ~35k LOC Python, ~1700 тестів, 8 агент-ролей, 18 ADR, 10 локалей |
 | **QA Agent** | Автономний QA-агент | 358 Python-тестів, 67 Vitest-кейсів, LangGraph, Playwright/Schemathesis sidecar |
 | **MZAI Plugins** | Набір навичок для Claude Code/Cowork | 27 плагінів, 50+ навичок, 19 sub-агентів |

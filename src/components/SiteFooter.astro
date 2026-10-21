@@ -1,0 +1,17 @@
+---
+import { copy, legal, legalCopy, links, localePath, type Locale } from '../data/site';
+interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const text = copy[locale];
+const legalText = legalCopy[locale];
+---
+<footer class="frame footer">
+  <div class="footer-row">
+    <span>{text.footer}</span>
+    <span><a href={links.linkedin}>LinkedIn ↗</a> · <a href={links.github}>GitHub ↗</a></span>
+  </div>
+  <div class="footer-legal">
+    <p><span class="footer-legal-label">{legalText.footerEntity}:</span> <strong>{legal.legalName}</strong> · {legal.taxIdLabel} {legal.taxId} · {legal.address}</p>
+    <p><a href={localePath(locale, 'legal')}>{legalText.footerLegal} →</a> · <a href={`tel:${legal.phoneHref}`}>{legal.phone}</a> · <a href={`mailto:${legal.email}`}>{legal.email}</a></p>
+  </div>
+</footer>

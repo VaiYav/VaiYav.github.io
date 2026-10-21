@@ -12,10 +12,19 @@
 - [Enterprise resume](https://vaiyav.online/v2/index.html)
 - [Creative resume](https://vaiyav.online/2000/resume-2000.html)
 - [Editorial index](https://vaiyav.online/blog/)
+- [Legal information](https://vaiyav.online/legal/)
+
+## Legal entity
+
+- Legal name: ФОП Яковлєв Валентин Олександрович (sole proprietor, Yakovliev Valentyn Oleksandrovych)
+- Taxpayer number (РНОКПП): 541395845991
+- Registered address: Україна, 64207, Харківська область, Балаклійський район, місто Балаклія, вулиця Покровська, будинок 112
+- Unified State Register entry number: 24800000000221995 (registered 20.12.2018)
 
 ## Contact
 
 - Email: yakovlev.valentin97@gmail.com
+- Phone: +38 (095) 812-63-44
 - LinkedIn: https://www.linkedin.com/in/valentyn-yakovliev-960303140/
 - GitHub: https://github.com/vaiyav
 

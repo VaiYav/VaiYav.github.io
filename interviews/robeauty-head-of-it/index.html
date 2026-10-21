@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoBeauty Head of IT — Шпаргалка на собеседование</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">RoBeauty <span>Head of IT</span></div>
+  <nav class="nav">
+    <a class="active" href="index.html">Quick</a>
+    <a href="company.html">Компания</a>
+    <a href="role.html">Роль &amp; собес</a>
+    <a href="agents.html">AI-агенты</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <h1>RoBeauty — Head of IT</h1>
+    <p class="subtitle">Cheat sheet для собеседования. Контекст: украинский D2C бренд anti-age косметики с собственным R&amp;D и производством в Одессе, выход на Польшу и ЕС. Позиция — технический лидер, который строит и масштабирует AI-агентов, напрямую под COO.</p>
+  </section>
+
+  <section class="section">
+    <h2>Ключевые цифры (запомнить)</h2>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">Компания</div>
+        <ul>
+          <li>Основана в <strong>2020</strong> в Одессе</li>
+          <li>200 000+ клиентов в Украине и ЕС</li>
+          <li>Собственная лаборатория + производство <strong>300–500 м²</strong></li>
+          <li>40+ запатентованных формул</li>
+          <li>2 000 000+ произведенных единиц продукции</li>
+          <li>Сертификация <strong>ISO 22716 (GMP)</strong> и <strong>CPNP</strong> для ЕС</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Рост</div>
+        <ul>
+          <li>Розница растёт <strong>×2 каждый год</strong></li>
+          <li>2025 — рост <strong>×3</strong> (по LinkedIn-постам)</li>
+          <li>Выход на <strong>Польшу и рынки ЕС</strong></li>
+          <li>ТОВ «Робьюти косметикс» — выручка 2025: <strong>74,8 млн грн</strong></li>
+          <li>Штат на LinkedIn: 1–10 человек, команда распределена Украина + Чехия</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Технологии</div>
+        <ul>
+          <li>Backend: <strong>Nest.js / Node.js, PostgreSQL, Redis, Docker</strong></li>
+          <li>Frontend: <strong>Vue / React, Tilda</strong></li>
+          <li>Автоматизация: <strong>n8n, Zapier, Make</strong></li>
+          <li>Маркетинг: <strong>Klaviyo, eSputnik, Omnisend, Looker</strong></li>
+          <li>Сайт: <strong>robeauty.me</strong> (Tilda/кастом)</li>
+          <li>Плюс: <strong>Supabase, Edge Functions, GitHub</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Что они ищут (в 1 абзаце)</h2>
+    <div class="card">
+      <p>Человека, который владеет техническим контуром бизнеса целиком — от ручного процесса до работающего агента. Ключевая метрика: <strong>процессы, снятые с людей</strong>, и <strong>задачи бизнеса, закрытые в срок</strong>. Нужен не «пишущий код», а <strong>архитектор бизнес-процессов</strong>, который сам идёт в отдел, формулирует задачу, проектирует решение и доводит до продакшена с измеримым эффектом.</p>
+      <p><strong>Формальное подчинение:</strong> напрямую COO. <strong>Команда:</strong> backend + fullstack (сейчас 2 тех. человека по LinkedIn).</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Ключевые темы для разговора</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">1. AI-агенты как бизнес-результат</div>
+        <p>Не количество кода — <strong>снятые с людей часы и деньги</strong>. Примеры:</p>
+        <ul>
+          <li>Glamnetic: AI Agent в Gorgias — <strong>40% тикетов</strong> без человека, +91% First Response Time, 4.89 CSAT, 12 дней ручной работы экономится в месяц.</li>
+          <li>AffixedAI D2C: 50K заказов/мес, 12 агентов → снизили стоимость поддержки с <strong>$180K до $68K</strong> (-62%), CSAT вырос.</li>
+          <li>Clarins CLARA: Azure OpenAI, care-бот, первый в luxury beauty.</li>
+          <li>Amorepacific AMORE CHAT: RAG по отзывам, статус заказа, персональные рекомендации.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">2. Где у RoBeauty боли</div>
+        <ul>
+          <li><strong>WISMO</strong>: «Где мой заказ?» — 30–50% послекупочных обращений</li>
+          <li><strong>Возвраты / замены</strong>: ручная проверка политики, генерация этикеток</li>
+          <li><strong>Инвентарь / склад</strong>: учёт сырья, готовой продукции, резервирование</li>
+          <li><strong>Расширение в ЕС</strong>: Польша, CPNP, языки, логистика, валюты</li>
+          <li><strong>Креативы / контент</strong>: Performance Creative Lead + Junior Creative Manager — нужно много UGC, скриптов, тестов</li>
+          <li><strong>Эксперименты</strong>: CRO, система тестов, data-driven решения</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">3. Тех. стек &amp; интеграции</div>
+        <ul>
+          <li>n8n — самый сильный для кастомной логики, RAG, AI-агентов</li>
+          <li>Make — sweet spot для визуальных workflow: учёт, маршрутизация, многошаговые сценарии</li>
+          <li>Zapier — быстрый, но дорогой при объёмах; лучше для простых связок</li>
+          <li>Klaviyo/Omnisend/eSputnik — email/SMS, можно усилить AI- personalization</li>
+          <li>Supabase — edge functions, база, auth, real-time для агентов</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">4. Рынок</div>
+        <ul>
+          <li>Польша — один из самых быстрорастущих рынков косметики в ЕС (+16,8% в 2024), 5-е место по размеру</li>
+          <li>Украинский онлайн-рынок косметики растёт: интернет, K-beauty, натуральная косметика</li>
+          <li>Конкуренты: Dr. C. Tuna, Dermagiq, Joul, ProCare, Well's, Glow, Nutritive Cosmetics EU</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>30-секундный питч</h2>
+    <div class="card" style="border-left: 4px solid var(--green);">
+      <p><em>«Я строю end-to-end AI-системы, которые забирают ручную работу у команд и замыкают бизнес-задачи в срок. У меня за плечами продакшн-агенты: code-review агент снял 30% нагрузки с команды, RAG-консультант, multi-agent пайплайны. Работаю на метриках: часы, сэкономленные людям, и деньги, которые агент заработал или сберёг. RoBeauty — идеальный кейс: D2C, рост ×2–×3, своё производство, много повторяющихся процессов, куда можно встроить агентов — от WISMO до планирования сырья.»</em></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Вопросы, которые точно задам</h2>
+    <ol>
+      <li>«Какой процесс сегодня больше всего ест человеко-часов и денег?»</li>
+      <li>«Какая первая задача, если я выхожу, и что значит success через 30/60/90 дней?»</li>
+      <li>«Как устроен сейчас цикл order → склад → доставка → поддержка? Где ручные вставки?»</li>
+      <li>«Какой источник правды по данным: Shopify, 1С, Supabase, Excel, Google Sheets?»</li>
+      <li>«Как вы принимаете решения о приоритетах между маркетингом, производством и IT?»</li>
+      <li>«Какой самый болезненный интеграционный долг сейчас?»</li>
+    </ol>
+  </section>
+
+  <section class="section">
+    <h2>Топ-5 идей агентов для RoBeauty</h2>
+    <table>
+      <thead>
+        <tr><th>Агент</th><th>Боль</th><th>Метрика</th><th>Сложность</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>WISMO-бот</strong></td>
+          <td>«Где мой заказ?» — 30–50% тикетов</td>
+          <td>-40% inbound tickets, first response в секундах</td>
+          <td><span class="badge badge-green">2–3 недели</span></td>
+        </tr>
+        <tr>
+          <td><strong>Return/Exchange Agent</strong></td>
+          <td>Ручная проверка политики, этикетки, замены</td>
+          <td>80% возвратов без оператора, -50% времени</td>
+          <td><span class="badge badge-green">3–4 недели</span></td>
+        </tr>
+        <tr>
+          <td><strong>Inventory &amp; Supply Agent</strong></td>
+          <td>Контроль сырья, готовой продукции, safety stock</td>
+          <td>Меньше out-of-stock, меньше замороженных запасов</td>
+          <td><span class="badge badge-orange">1–2 месяца</span></td>
+        </tr>
+        <tr>
+          <td><strong>Voice-of-Customer Agent</strong></td>
+          <td>Отзывы, чаты, соцсети не превращаются в продуктовые insight</td>
+          <td>Еженедельный дайджест трендов и болей</td>
+          <td><span class="badge badge-green">2–3 недели</span></td>
+        </tr>
+        <tr>
+          <td><strong>EU Expansion Agent</strong></td>
+          <td>Польша/ЕС: языки, валюты, CPNP, локальные рынки</td>
+          <td>Время выхода на новый рынок, точность локализации</td>
+          <td><span class="badge badge-orange">1–2 месяца</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="section">
+    <h2>Связь с моим опытом</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Что совпадает</div>
+        <ul>
+          <li>End-to-end AI-агенты в продакшене</li>
+          <li>Nest.js/Node.js, PostgreSQL, Redis — совпадает со стеком</li>
+          <li>Vue/Nuxt, Tilda, вебхуки — могу править</li>
+          <li>SQL: сам вытаскиваю данные и считаю узкие места</li>
+          <li>n8n/Make/Zapier — опыт автоматизации процессов</li>
+          <li>Объясняю технические решения бизнесу без жаргона</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Гэпы / growth area</div>
+        <ul>
+          <li>Прямой опыт косметики / GMP / CPNP — нет, но процессы generic</li>
+          <li>Масштаб 200K+ клиентов — у меня 100K+ пользователей, масштабы сопоставимы</li>
+          <li>Польский рынок и EU logistics — уточнить у команды</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Ссылки для погружения</h2>
+    <ul>
+      <li><a href="https://robeauty.me/about-us" target="_blank">robeauty.me/about-us</a> — страница «Про нас»</li>
+      <li><a href="https://www.linkedin.com/company/robeautycosmetics" target="_blank">RoBeauty LinkedIn</a> — посты про рост ×2/×3, наборы</li>
+      <li><a href="https://djinni.co/jobs/819747-junior-creative-marketing-manager/" target="_blank">Djinni: Junior Creative Marketing Manager</a> — стиль JD, процессы</li>
+      <li><a href="https://www.groupeclarins.com/clarins-introduces-clara-ai/" target="_blank">Clarins CLARA</a> — AI care-бот в beauty</li>
+      <li><a href="https://www.gorgias.com/customers/glamnetic-support" target="_blank">Glamnetic + Gorgias AI</a> — 40% тикетов без человека</li>
+      <li><a href="https://futuremanlabs.com/blog/n8n-vs-zapier-vs-make-ecommerce-automation" target="_blank">n8n vs Make vs Zapier for E-commerce</a> — when to use what</li>
+    </ul>
+  </section>
+
+</main>
+
+</body>
+</html>

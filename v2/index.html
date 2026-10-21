@@ -832,6 +832,7 @@ footer {
   padding-top: var(--gap-md);
   border-top: 1px solid var(--rule);
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: baseline;
   font-size: 12px;
@@ -845,6 +846,13 @@ footer a {
   margin: 0 6px;
 }
 footer a:hover { border-color: var(--accent); }
+.footer-legal {
+  flex: 0 0 100%;
+  margin-top: 10px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
 
 /* =========================================================
    A11Y + TWEAKS PANELS
@@ -1667,6 +1675,11 @@ header.masthead { padding-top: 44px; }
       <a href="mailto:yakovlev.valentin97@gmail.com">Email</a>·
       <a href="https://www.linkedin.com/in/valentyn-yakovliev-960303140/">LinkedIn</a>·
       <a href="https://github.com/vaiyav">GitHub</a>
+    </span>
+    <span class="footer-legal">
+      Legal entity: ФОП Яковлєв Валентин Олександрович · РНОКПП (ІПН) 541395845991 ·
+      Україна, 64207, Харківська область, Балаклійський район, місто Балаклія, вулиця Покровська, будинок 112 ·
+      <a href="/legal/">Legal information</a>
     </span>
   </footer>
 

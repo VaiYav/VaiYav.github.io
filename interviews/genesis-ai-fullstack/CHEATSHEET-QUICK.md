@@ -38,7 +38,7 @@
 ## Ключевые числа (запомнить дословно)
 
 **My Zodiac AI:** 1,500 платящих юзеров за 4 месяца, solo, web + Android.
-**Soulwise AI:** 100k+ юзеров, бандл 250→160 KB (-36%), RAG на Qdrant.
+**Soulwise AI:** 10k+ юзеров, бандл 250→160 KB (-36%), RAG на Qdrant.
 **Oboard:** 4 года Feature Owner, 100% PR-ревью на фронте, embed в 4 платформы.
 **speckit-product-forge:** 8 плагинов, 127 skill'ов, 19 sub-agents в open-source.
 **AI Consulting:** 3 клиента, end-to-end roadmaps.

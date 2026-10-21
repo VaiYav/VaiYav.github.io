@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lexima — LLM у продакшені</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Lexima — LLM / GenAI у продакшені</h1>
+      <p class="muted">Prompt engineering, eval'юація, RAG, оптимізація cost/latency/quality, observability, надійність, self-hosting, real-time.</p>
+    </header>
+
+    <nav>
+      <a href="index.html">Головна</a>
+      <a href="company.html">Компанія &amp; вакансія</a>
+      <a href="tech-stack.html">Техстек</a>
+      <a href="llm-production.html" class="active">LLM у продакшені</a>
+      <a href="interview-prep.html">Підготовка до інтерв'ю</a>
+    </nav>
+
+    <h2>1. Prompt engineering — production патерни</h2>
+    <div class="card">
+      <h3>Системний промпт</h3>
+      <ul>
+        <li>Роль, сфера, обмеження, формат виходу, тон — у <code>system</code>.</li>
+        <li>Конкретні заборони: не узагальнення, а «НЕ роби X, замість цього зроби Y».</li>
+        <li>Версіонуйте промпти як код. Зміни — тільки з eval'юацією.</li>
+      </ul>
+      <h3>Структура повідомлень</h3>
+      <ul>
+        <li>Використовуйте XML/HTML-теги для секцій: <code>&lt;instructions&gt;</code>, <code>&lt;context&gt;</code>, <code>&lt;examples&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;reasoning&gt;</code>, <code>&lt;answer&gt;</code>.</li>
+        <li>Відокремлюйте інструкції від даних, щоб уникнути prompt injection та confusion.</li>
+      </ul>
+      <h3>Few-shot</h3>
+      <ul>
+        <li>2–3 приклади — для простих задач; 4–6 — для складних класифікацій; 7–10 — для >6 категорій.</li>
+        <li>Включайте edge cases, реальні дані, не ідеалізовані.</li>
+        <li>Динамічний few-shot: ембеддити бібліотеку прикладів і діставати top-k за схожістю.</li>
+      </ul>
+      <h3>Chain-of-thought (CoT)</h3>
+      <ul>
+        <li>«Спочатку поясни свої міркування, потім дай відповідь».</li>
+        <li>Збільшує токени та латентність — використовуй тільки коли потрібна точність.</li>
+        <li>Для Claude: окремий <code>thinking</code>; для інших — явний reasoning блок.</li>
+      </ul>
+      <h3>Structured output</h3>
+      <ul>
+        <li>Вказуй JSON-схему, prefill <code>{</code> для примусу JSON.</li>
+        <li>Валідуй вихід через Pydantic / Zod / AJV, retry з поясненням помилки.</li>
+        <li>Ніколи не довіряй raw LLM output для downstream-логіки без валідації.</li>
+      </ul>
+    </div>
+
+    <h2>2. LLM evaluation</h2>
+    <div class="card">
+      <h3>Класи метрик</h3>
+      <table>
+        <tr>
+          <th>Категорія</th>
+          <th>Метрики / інструменти</th>
+          <th>Коли</th>
+        </tr>
+        <tr>
+          <td>Retrieval (RAG)</td>
+          <td>Context Precision, Context Recall, Context Entities</td>
+          <td>Перевіряє, чи ретривер знайшов і правильно ранжував контекст</td>
+        </tr>
+        <tr>
+          <td>Generation</td>
+          <td>Faithfulness, Answer Relevancy, Response Relevancy</td>
+          <td>Чи відповідає відповідь запитанню і чи ґрунтується на контексті</td>
+        </tr>
+        <tr>
+          <td>End-to-end</td>
+          <td>Answer Correctness, Factual Correctness, Semantic Similarity</td>
+          <td>Чи фінальна відповідь правильна стосовно ground truth</td>
+        </tr>
+        <tr>
+          <td>Agents / Tools</td>
+          <td>Topic adherence, Tool call accuracy, Tool Call F1</td>
+          <td>Чи агент не злітає з теми і правильно викликає інструменти</td>
+        </tr>
+        <tr>
+          <td>Класичні</td>
+          <td>BLEU, ROUGE, CHRF, Exact Match</td>
+          <td>Коли є еталонна відповідь</td>
+        </tr>
+      </table>
+
+      <h3>Ragas — 5 основних метрик</h3>
+      <ul>
+        <li><strong>Faithfulness</strong> — чи відповідь ґрунтується на знайденому контексті? Reference-free. <span class="ok">&gt; 0.7 good</span>.</li>
+        <li><strong>Answer Relevancy</strong> — чи відповідає питанню? Reference-free.</li>
+        <li><strong>Context Precision</strong> — чи корисні чанки ранжуються найвище?</li>
+        <li><strong>Context Recall</strong> — чи знайдені всі необхідні документи?</li>
+        <li><strong>Answer Correctness</strong> — чи фінальна відповідь фактологічно правильна? Потребує ground truth.</li>
+      </ul>
+      <p><strong>Стратегія:</strong> в production моніторингу використовуй reference-free (faithfulness + answer relevancy). Для CI/regression — додавай precision, recall, correctness на labeled test set.</p>
+
+      <h3>Онлайн vs офлайн eval</h3>
+      <ul>
+        <li><strong>Offline:</strong> зарані складений golden set, запускається в CI перед деплоєм.</li>
+        <li><strong>Online:</strong> LLM-as-judge по кожному трейсу; human annotation queue; thumbs up/down; дrift detection.</li>
+        <li><strong>Hybrid:</strong> 5% трафіку на human review, решта — automated scores.</li>
+      </ul>
+
+      <h3>Практична порада</h3>
+      <blockquote>
+        «Починай з десятка ручних прикладів, які символізують реальні користувацькі сценарії. Потім автоматизуй через Ragas/Promptfoo. Без golden set ти літаєш всліпу».
+      </blockquote>
+    </div>
+
+    <h2>3. Оптимізація: cost, latency, quality</h2>
+    <div class="card">
+      <h3>Вибір моделі та роутинг</h3>
+      <table>
+        <tr>
+          <th>Задача</th>
+          <th>Моделі (приклади)</th>
+          <th>Примітки</th>
+        </tr>
+        <tr>
+          <td>Класифікація / extraction</td>
+          <td>gpt-4o-mini, gemini-flash, claude-haiku</td>
+          <td>Дешево, швидко, достатньо для структурованих задач</td>
+        </tr>
+        <tr>
+          <td>Reasoning / generation</td>
+          <td>gpt-4o, claude-sonnet, grok-2</td>
+          <td>Краща якість, дорожче, повільніше</td>
+        </tr>
+        <tr>
+          <td>Довгі контексти / RAG</td>
+          <td>claude-3.5-sonnet, gpt-4o-128k</td>
+          <td>Велике вікно, добре інструкційне слідування</td>
+        </tr>
+        <tr>
+          <td>Coding / JSON</td>
+          <td>claude-sonnet, gpt-4o</td>
+          <td>Надійніший structured output</td>
+        </tr>
+      </table>
+
+      <h3>Способи зменшити вартість</h3>
+      <ul>
+        <li><strong>Кешування:</strong> Helicone edge cache, Redis cache, semantic cache (embed query, шукати схожі).</li>
+        <li><strong>Batch API:</strong> OpenAI Batch API знижує вартість на 50% для асинхронних задач.</li>
+        <li><strong>Flex processing:</strong> OpenAI Flex — нижча ціна за рахунок латентності.</li>
+        <li><strong>Коротші промпти:</strong> видаляй зайвий контекст, summary замість повного чанка.</li>
+        <li><strong>Fine-tuning:</strong> зменшує потребу в few-shot, робить можливим дешевші моделі.</li>
+        <li><strong>Model distillation / SLM:</strong> phi-4, qwen, mistral-small для простих задач.</li>
+      </ul>
+
+      <h3>Способи зменшити латентність</h3>
+      <ul>
+        <li>Streaming: <code>stream: true</code>, SSE/WebSocket, показуй користувачеві перш токен швидше.</li>
+        <li>Менше max_tokens / stop sequences, щоб уникнути зайвої генерації.</li>
+        <li>Batching: об'єднуй запити, де можливо (provider batching).</li>
+        <li>Менші моделі для швидких задач, дорогі — тільки коли треба.</li>
+        <li>Кеш та pre-computation: часті запити → відповідь з Redis.</li>
+      </ul>
+
+      <h3>Трикутник trade-off</h3>
+      <p>Зазвичай можна обрати дві з трьох. На співбесіді говори так: <em>«Ми визначаємо, яка метрика домінує для конкретного use case: для real-time chat — latency, для bulk processing — cost, для compliance review — quality. І підбираємо модель, caching та eval під це».</em></p>
+    </div>
+
+    <h2>4. RAG &amp; embeddings</h2>
+    <div class="card">
+      <h3>Pipeline</h3>
+      <ol>
+        <li><strong>Ingestion:</strong> завантаження, парсинг (OCR для PDF/img), очищення.</li>
+        <li><strong>Chunking:</strong> document-aware (не різати таблиці/код), recursive fallback, overlap 10–20%.</li>
+        <li><strong>Embedding:</strong> OpenAI text-embedding-3 (large/small), Cohere Embed v3, BGE-M3 (self-hosted).</li>
+        <li><strong>Storage:</strong> pgvector, Qdrant, Pinecone, Weaviate, Chroma (тільки для прототипів).</li>
+        <li><strong>Retrieval:</strong> dense + sparse (BM25/Postgres FTS), reranker (Cohere Rerank, cross-encoder), Reciprocal Rank Fusion.</li>
+        <li><strong>Generation:</strong> top-k 3–5 чанків, зрозумілий prompt.</li>
+      </ol>
+
+      <h3>Ключові помилки в продакшені</h3>
+      <ul>
+        <li><strong>Поганий chunking</strong> — найбільший внесок у погану якість. Не різати семантичні одиниці.</li>
+        <li><strong>Місматч embedding-моделі</strong> — індекс і query мають бути однією версією моделі. Версіонуй.</li>
+        <li><strong>Відсутність reranker</strong> — top-k з vector search слабкі; reranker покращує precision 15–25%.</li>
+        <li><strong>Переповнення контексту</strong> — краще 3–5 якісних чанків, ніж 20 слабких.</li>
+        <li><strong>Відсутність онлайн-моніторингу</strong> — не бачиш, коли документи застаріли або embedding зламався.</li>
+      </ul>
+
+      <h3>Hybrid search</h3>
+      <p>Vector + keyword. Alpha 0.6–0.7 (на користь вектора) зазвичай оптимальний. Keyword ловить абревіатури, ID, власні терміни, які embeddings можуть пропустити.</p>
+
+      <h3>Вибір embedding-моделі</h3>
+      <table>
+        <tr><th>Модель</th><th>Dim</th><th>Мова</th><th>Коли</th></tr>
+        <tr><td>OpenAI text-embedding-3-large</td><td>3072 (truncatable)</td><td>Multi</td><td>Краща якість, vendor lock-in, платиш за токени</td></tr>
+        <tr><td>OpenAI text-embedding-3-small</td><td>1536</td><td>Multi</td><td>Дешево, добре для типових задач</td></tr>
+        <tr><td>Cohere Embed v3</td><td>1024</td><td>100+</td><td>Мультилінгва, search/query типи</td></tr>
+        <tr><td>BGE-M3</td><td>1024</td><td>100+</td><td>Self-hosted, dense+sparse, без API-cost</td></tr>
+        <tr><td>E5-Large-v2</td><td>1024</td><td>En</td><td>Легкий, швидкий, English-only</td></tr>
+      </table>
+    </div>
+
+    <h2>5. Observability: Helicone, Langfuse, LangSmith, LangChain</h2>
+    <div class="card">
+      <table>
+        <tr>
+          <th>Інструмент</th>
+          <th>Архітектура</th>
+          <th>Сильні сторони</th>
+          <th>Коли обрати</th>
+        </tr>
+        <tr>
+          <td>Helicone</td>
+          <td>Proxy — зміна baseURL, один header</td>
+          <td>5-хвилинна інтеграція, cost tracking, edge cache, gateway 100+ моделей, real-time alerts</td>
+          <td>Швидкий старт, фокус на cost/latency</td>
+        </tr>
+        <tr>
+          <td>Langfuse</td>
+          <td>SDK / OpenTelemetry</td>
+          <td>Open-source (MIT), self-host free, глибокі eval, prompt management, datasets, human annotation</td>
+          <td>Потрібна прозорість, eval, self-host, не-LangChain стек</td>
+        </tr>
+        <tr>
+          <td>LangSmith</td>
+          <td>SDK / env vars</td>
+          <td>Найкращий для LangChain/LangGraph, agent trajectory, CI/CD gating, вбудовані evaluators</td>
+          <td>Якщо весь стек — LangChain/LangGraph</td>
+        </tr>
+        <tr>
+          <td>LangChain</td>
+          <td>Фреймворк / бібліотека</td>
+          <td>Абстракції для chains, agents, RAG, tool use; швидкий PoC</td>
+          <td>Прототипи або коли команда вже на LangChain</td>
+        </tr>
+      </table>
+
+      <h3>Що моніторити</h3>
+      <ul>
+        <li>Cost per request, per user, per feature, per model.</li>
+        <li>Latency (TTFT, total), p50/p95/p99.</li>
+        <li>Token usage (input/output), cache hit rate.</li>
+        <li>Quality scores (faithfulness, relevancy, correctness) — online/offline.</li>
+        <li>Errors: rate limits, timeouts, validation failures, hallucination rate.</li>
+        <li>Prompt drift: суттєві зміни в розподілі виходів.</li>
+      </ul>
+
+      <h3>Helicone: практичні headers</h3>
+      <pre><code>headers = {
+  "Helicone-Auth": f"Bearer {HELICONE_API_KEY}",
+  "Helicone-Cache-Enabled": "true",
+  "Helicone-Property-Feature": "campaign-generator",
+  "Helicone-Property-Environment": "production",
+  "Helicone-Property-User-Type": "publisher",
+  "Helicone-LLM-Security-Enabled": "true",
+}
+</code></pre>
+      <p><strong>Custom Properties</strong> — ключ до сегментації: cost by feature, quality by user type, latency by environment.</p>
+    </div>
+
+    <h2>6. Надійність та безпека LLM</h2>
+    <div class="card">
+      <h3>Fallback та resilience</h3>
+      <ul>
+        <li>Primary → fallback model (напр. gpt-4o → claude-sonnet).</li>
+        <li>Circuit breaker при rate limit чи тривалих падіннях.</li>
+        <li>Exponential backoff + jitter, idempotency keys.</li>
+        <li>Timeout + користувацький повідомлення: «Запит обробляється, прийдемо по email».</li>
+      </ul>
+      <h3>Prompt injection та безпека</h3>
+      <ul>
+        <li>Input validation &amp; sanitization, обмеження довжини.</li>
+        <li>Відокремлення інструкцій і контенту через теги/Delimiters.</li>
+        <li>Output validation: не допускай direct execution без review.</li>
+        <li>Helicone LLM Security / PromptArmor / власний guard.</li>
+        <li>Ніколи не зберігай секрети в system prompt.</li>
+      </ul>
+      <h3>Output validation</h3>
+      <ul>
+        <li>JSON schema validation, type checking, range checks.</li>
+        <li>Faithfulness guard: перевірка, що відповідь ґрунтується на retrieved context.</li>
+        <li>Refusal detection / moderation.</li>
+      </ul>
+    </div>
+
+    <h2>7. Self-hosting та fine-tuning</h2>
+    <div class="card">
+      <h3>Self-hosting моделей</h3>
+      <ul>
+        <li>vLLM, TGI, Ollama — для inference на GPU.</li>
+        <li>Quantization (AWQ, GPTQ, GGUF) — зменшує VRAM, трохи знижує якість.</li>
+        <li>Batching (continuous batching в vLLM) для throughput.</li>
+        <li>Trade-off: ops overhead, GPU cost, latency vs API.</li>
+      </ul>
+      <h3>Fine-tuning</h3>
+      <ul>
+        <li>Доцільний, якщо: стабільний датасет, 100+ прикладів, потрібна конкретна тональність/формат, few-shot занадто дорогий.</li>
+        <li>LoRA / QLoRA — ефективні методи; full fine-tune — дорого.</li>
+        <li>Дані: quality > quantity, diversity, eval set незалежний від train.</li>
+        <li>Після fine-tuning — обов'язково run regression eval.</li>
+      </ul>
+    </div>
+
+    <h2>8. Real-time: WebSockets / SSE</h2>
+    <div class="card">
+      <h3>Коли що</h3>
+      <ul>
+        <li><strong>SSE (Server-Sent Events):</strong> односпрямований потік від сервера. Ідеальний для streaming LLM tokens у браузер. Простіший у масштабуванні (HTTP).</li>
+        <li><strong>WebSockets:</strong> дуплекс, корисний для чат-інтерфейсів, collaborative editing, real-time notifications.</li>
+      </ul>
+      <h3>Реалізація</h3>
+      <ul>
+        <li>Бекенд: Koa/Express/Rails ActionCable/AnyCable; Ruby — <code>faye-websocket</code> або <code>anycable</code>.</li>
+        <li>Фронтенд: <code>EventSource</code> для SSE, <code>WebSocket</code> API або Socket.io.</li>
+        <li>Redis Pub/Sub або RabbitMQ для broadcast між серверними інстансами.</li>
+        <li>Обробка реконекції, heartbeat, backpressure, cleanup.</li>
+      </ul>
+    </div>
+
+    <h2>9. 3rd-party integrations &amp; reverse engineering</h2>
+    <div class="card">
+      <h3>Навички, які важливі</h3>
+      <ul>
+        <li>Аналіз публічних і непублічних API: mitmproxy, Charles, Browser DevTools, curl.</li>
+        <li>Автоматизація: Playwright/Puppeteer для web scraping / headless flows.</li>
+        <li>Документування контрактів: OpenAPI, Postman колекції, sequence diagrams.</li>
+        <li>Версіонування: rate limits, pagination, retries, auth (OAuth 2.0, API keys, JWT).</li>
+      </ul>
+      <h3>Домен Lexima</h3>
+      <p>Affiliate-екосистема багата на інтеграції: рекламні мережі, трекери, платіжні системи, analytics. Реверс-інжиніринг і stable contracts — цінні навички.</p>
+    </div>
+
+    <h2>10. Типові питання на співбесіду</h2>
+    <ol>
+      <li>Розкажіть про production LLM-систему, яку ви будували. Які були ключові виклики?</li>
+      <li>Як ви оцінюєте якість LLM-виводу? Які метрики? Що робите при регресії?</li>
+      <li>Як знизити вартість LLM-функціоналу в 2–3 рази без втрати якості?</li>
+      <li>Як би ви побудували RAG для внутрішньої бази знань компанії?</li>
+      <li>Що робити, коли модель почала галюцинувати на конкретному типі запитів?</li>
+      <li>Як ви обробляєте prompt injection та безпеку?</li>
+      <li>Розкажіть про ваш досвід з Helicone / Langfuse / LangSmith.</li>
+      <li>Коли б ви обрали fine-tuning замість prompt engineering?</li>
+      <li>Як організувати streaming-відповідь для користувача?</li>
+      <li>Як інтегрували сторонній сервіс без публічної документації?</li>
+    </ol>
+
+    <footer>
+      <p>Джерела: Ragas docs, OpenAI production best practices, Helicone docs, публічні best-practice гайди по RAG, Langfuse/LangSmith/Helicone comparisons, Koa/Rails real-time patterns.</p>
+    </footer>
+  </div>
+</body>
+</html>

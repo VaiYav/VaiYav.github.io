@@ -1,5 +1,5 @@
 ---
-import { copy, links, localePath, locales, siteUrl, type Locale } from '../data/site';
+import { copy, legal, links, localePath, locales, siteUrl, type Locale } from '../data/site';
 import portrait from '../../assets/unnamed.jpg';
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
@@ -20,9 +20,10 @@ const alternateLinks = locales.map((item) => ({ locale: item, href: `${siteUrl}$
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
-    { '@type': 'Person', '@id': `${siteUrl}/#person`, name: 'Valentyn Yakovliev', alternateName: 'VaiYav', jobTitle: 'Product Engineer & AI Systems Builder', url: siteUrl, image: portraitUrl, sameAs: [links.linkedin, links.github], knowsAbout: ['Product Engineering', 'AI Agents', 'RAG', 'TypeScript', 'Vue.js', 'React', 'Node.js', 'NestJS', 'Python', 'FastAPI', 'Product Strategy', 'Technical Leadership'] },
+    { '@type': 'Person', '@id': `${siteUrl}/#person`, name: 'Valentyn Yakovliev', alternateName: 'VaiYav', jobTitle: 'Product Engineer & AI Systems Builder', url: siteUrl, image: portraitUrl, sameAs: [links.linkedin, links.github], email: legal.email, telephone: legal.phoneHref, worksFor: { '@id': `${siteUrl}/#organization` }, knowsAbout: ['Product Engineering', 'AI Agents', 'RAG', 'TypeScript', 'Vue.js', 'React', 'Node.js', 'NestJS', 'Python', 'FastAPI', 'Product Strategy', 'Technical Leadership'] },
+    { '@type': 'Organization', '@id': `${siteUrl}/#organization`, name: legal.legalName, legalName: legal.legalName, alternateName: legal.legalNameLatin, url: siteUrl, logo: `${siteUrl}/favicon.svg`, image: portraitUrl, email: legal.email, telephone: legal.phoneHref, taxID: legal.taxId, identifier: [{ '@type': 'PropertyValue', propertyID: 'EDR', name: legal.edrLabel, value: legal.edrNumber }], foundingDate: legal.edrEntryDate, address: { '@type': 'PostalAddress', streetAddress: legal.streetAddress, addressLocality: legal.addressLocality, addressRegion: legal.addressRegion, postalCode: legal.postalCode, addressCountry: legal.addressCountry }, contactPoint: [{ '@type': 'ContactPoint', contactType: 'customer service', email: legal.email, telephone: legal.phoneHref, availableLanguage: ['uk', 'en', 'ru'], areaServed: 'Worldwide' }], founder: { '@id': `${siteUrl}/#person` } },
     { '@type': type, '@id': `${canonical}#page`, url: canonical, name: title ?? text.title, description: description ?? text.description, inLanguage: locale, isPartOf: { '@id': `${siteUrl}/#website` }, about: { '@id': `${siteUrl}/#person` } },
-    { '@type': 'WebSite', '@id': `${siteUrl}/#website`, url: siteUrl, name: 'Valentyn Yakovliev', inLanguage: locale, publisher: { '@id': `${siteUrl}/#person` } },
+    { '@type': 'WebSite', '@id': `${siteUrl}/#website`, url: siteUrl, name: 'Valentyn Yakovliev', inLanguage: locale, publisher: { '@id': `${siteUrl}/#organization` } },
   ],
 };
 ---
