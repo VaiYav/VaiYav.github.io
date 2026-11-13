@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Комнаты и объекты — референс-борд</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Silkscreen&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="board.css">
+<style>
+  :root { --bg: #12071f; --panel: #1f0f38; --line: #5a1a7a; --yellow: #fff35c; --muted: #c2a8d8; }
+  h1 { color: #fdf6ff; text-shadow: -3px 0 0 #01e7f0, 4px 3px 0 #ff2e88; }
+  .tag { background: #ff2e88; color: #fdf6ff; }
+  .rowhead { margin: 40px 0 16px; }
+  .objects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .object .stage { height: auto; padding: 14px; place-items: center start; background: #3a1f6b; }
+  .states { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0; padding: 0; list-style: none; }
+  .states li { padding: 16px; background: var(--panel); border: 3px solid var(--line); color: var(--muted); font-size: .9rem; }
+  .states b { display: block; margin-bottom: 6px; color: #fdf6ff; }
+  .wide .shot { margin-bottom: 12px; }
+  @media (max-width: 900px) { .objects, .states { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<nav class="boards" aria-label="Борды">
+  <a href="index.html">01 · Первые идеи</a>
+  <a href="neon.html">02 · Neon HQ</a>
+  <a href="face.html">03 · Face Lab</a>
+  <a href="hero.html">04 · Hero Lab</a>
+  <a href="rooms.html" aria-current="page">05 · Room Lab</a>
+</nav>
+
+<header class="top">
+  <p class="tag">Референс-борд · v0.5 · комнаты и объекты</p>
+  <h1>Room Lab</h1>
+  <p class="lead">Четыре комнаты и восемнадцать интерактивных объектов. За каждым объектом стоит конкретный кусок твоего резюме: тексты взяты из него, а не придуманы.</p>
+</header>
+
+<section>
+  <h2><span>01</span> План офиса</h2>
+  <article class="wide">
+    <div class="shot"><canvas id="rMap"></canvas></div>
+    <p class="note">Номера на плане совпадают с карточками ниже. Когда герой подходит к объекту, тот получает мигающую рамку и подсказку E.</p>
+  </article>
+</section>
+
+<section>
+  <h2><span>02</span> Состояния объекта</h2>
+  <ul class="states">
+    <li><b>Idle</b>Объект живёт сам по себе: мигают лампы, бежит код на экране.</li>
+    <li><b>Рядом</b>Герой в радиусе шага: мигающая рамка и клавиша E. На тач-экране достаточно тапнуть по объекту.</li>
+    <li><b>Открыто</b>Раздел прочитан: зелёная отметка и плюс один в счётчике «найдено».</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span>03</span> Каталог объектов</h2>
+  <p class="note">На каждой карточке объект показан в трёх состояниях слева направо, под ним — что он открывает.</p>
+  <div id="catalogue"></div>
+</section>
+
+</main>
+<script src="sprites.js"></script>
+<script src="scenes.js"></script>
+<script src="neon.js"></script>
+<script src="hero.js"></script>
+<script src="rooms.js"></script>
+</body>
+</html>
