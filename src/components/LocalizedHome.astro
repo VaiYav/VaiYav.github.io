@@ -2,36 +2,72 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from './SiteHeader.astro';
 import SiteFooter from './SiteFooter.astro';
-import Hero from './Hero.astro';
+import HomeHero from './HomeHero.astro';
 import SoloProducts from './SoloProducts.astro';
+import { Image } from 'astro:assets';
+import portrait from '../../assets/unnamed.jpg';
+import { homeCopy } from '../data/home';
 import { copy, links, type Locale } from '../data/site';
 interface Props { locale?: Locale }
 const { locale = 'en' } = Astro.props;
 const text = copy[locale];
+const home = homeCopy[locale];
+const answers = [
+  { title: text.whatTitle, body: text.whatText },
+  { title: text.whoTitle, body: text.whoText },
+  { title: text.experienceTitle, body: text.experienceText },
+  { title: text.stackTitle, body: text.stackText },
+  { title: text.availabilityTitle, body: text.availabilityText },
+];
 ---
 <BaseLayout locale={locale} type="ProfilePage">
   <div class="site-shell">
-    <a class="skip-link" href="#content">Skip to content</a>
+    <a class="skip-link" href="#content">{home.skip}</a>
     <SiteHeader locale={locale} />
     <main id="content">
-      <Hero locale={locale} />
-      <section class="proof-strip" aria-label="Selected proof" data-reveal><div class="frame proof-grid"><div><strong>✓</strong><span>shipped products</span></div><div><strong>✓</strong><span>production AI systems</span></div><div><strong>✓</strong><span>web, mobile and desktop delivery</span></div></div></section>
-      <section class="frame section" data-reveal>
-        <div class="section-header"><div><p class="section-index">01 — Product systems</p><h2>{text.proofTitle}</h2></div><p class="section-intro">{text.proofIntro}</p></div>
-        <div class="case-list">
-          <article class="case-card" data-reveal><span class="case-no">01</span><div><p class="case-tag">Product builder · 0 → 1</p><h3>A real product across every layer.</h3><p>{text.whatText}</p></div><div class="case-proof"><b>0 → 1</b><p>From earliest ambiguity to a product people can use.</p></div></article>
-          <article class="case-card" data-reveal><span class="case-no">02</span><div><p class="case-tag">Agentic systems · scale</p><h3>A system that survives product reality.</h3><p>{text.stackText}</p></div><div class="case-proof"><b>AI</b><p>Quality, cost and operational ownership included.</p></div></article>
-          <article class="case-card" data-reveal><span class="case-no">03</span><div><p class="case-tag">Technical product leadership</p><h3>One accountable owner across the seams.</h3><p>{text.whoText}</p></div><div class="case-proof"><b>360°</b><p>Product, design and engineering in one loop.</p></div></article>
-        </div>
+      <HomeHero locale={locale} />
+      <section class="facts" aria-label={home.factsLabel}>
+        <ul class="frame facts-list">
+          {home.facts.map((fact) => <li><strong>{fact.lead}</strong><span>{fact.text}</span></li>)}
+        </ul>
       </section>
       <SoloProducts locale={locale} />
-      <section class="frame section info-section" data-reveal>
-        <div class="section-header"><div><p class="section-index">02 — Extractable answers</p><h2>Useful context, plainly stated.</h2></div><p class="section-intro">Short answers for a recruiter, founder or search engine that needs to understand the work quickly.</p></div>
-        <div class="answer-grid"><article><h3>{text.whatTitle}</h3><p>{text.whatText}</p></article><article><h3>{text.whoTitle}</h3><p>{text.whoText}</p></article><article><h3>{text.stackTitle}</h3><p>{text.stackText}</p></article><article><h3>{text.availabilityTitle}</h3><p>{text.availabilityText}</p></article><article><h3>{text.experienceTitle}</h3><p>{text.experienceText}</p></article></div>
+      <section class="frame section about-section" id="about" data-reveal>
+        <div class="section-header">
+          <div><p class="section-index">{home.about.index}</p><h2>{home.about.title}</h2></div>
+          <p class="section-intro">{home.about.intro}</p>
+        </div>
+        <div class="about-grid">
+          <figure class="portrait-block about-portrait">
+            <div class="portrait-frame"><Image src={portrait} alt={home.about.portraitAlt} width={796} height={1024} loading="lazy" /></div>
+            <figcaption class="about-caption">{home.about.caption}</figcaption>
+          </figure>
+          <dl class="about-list">
+            {answers.map((answer) => <div><dt>{answer.title}</dt><dd>{answer.body}</dd></div>)}
+          </dl>
+        </div>
       </section>
-      <section class="method-section" data-reveal><div class="frame section"><div class="section-header"><div><p class="section-index">03 — Product rescue</p><h2>{text.productTitle}</h2></div><p class="section-intro method-intro">{text.productText}</p></div><div class="method-grid"><article data-reveal><span>01</span><h3>Clarify</h3><p>Find the actual user, decision and constraint behind the noisy brief.</p></article><article data-reveal><span>02</span><h3>Prioritize</h3><p>Turn the unknowns into a sequence of choices the team can own.</p></article><article data-reveal><span>03</span><h3>Launch</h3><p>Define the smallest credible release and the proof it must create.</p></article></div><a class="light-button" href={links.telegram}>{text.secondary} →</a></div></section>
-      <section class="frame contact-section" data-reveal><div class="contact-frame"><p class="eyebrow">Start with the real situation</p><h2>{text.contactTitle}</h2><p>{text.contactText}</p><div class="hero-actions"><a class="primary-button" href={links.cv}>{text.primary}</a><a class="email-link" href={links.email}>{text.email}</a></div></div></section>
+      <section class="method-section" id="rescue" data-reveal>
+        <div class="frame section">
+          <div class="section-header">
+            <div><p class="section-index">{home.rescue.index}</p><h2>{text.methodTitle}</h2></div>
+            <p class="section-intro method-intro">{text.productText}</p>
+          </div>
+          <ol class="method-grid rescue-steps">
+            {home.rescue.steps.map((step, index) => <li><span>{String(index + 1).padStart(2, '0')}</span><h3>{step.title}</h3><p>{step.text}</p></li>)}
+          </ol>
+          <a class="light-button" href={links.telegram}>{text.secondary}</a>
+        </div>
+      </section>
+      <section class="frame contact-section" id="contact" data-reveal>
+        <div class="contact-frame">
+          <p class="eyebrow">{home.contactEyebrow}</p>
+          <h2>{text.contactTitle}</h2>
+          <p>{text.contactText}</p>
+          <div class="hero-actions"><a class="primary-button" href={links.cv}>{text.primary}</a><a class="email-link" href={links.email}>{text.email}</a></div>
+        </div>
+      </section>
     </main>
-    <SiteFooter locale="en" />
+    <SiteFooter locale={locale} />
   </div>
 </BaseLayout>

@@ -1,0 +1,117 @@
+/*
+ * Redesign layer, loaded after global.css.
+ * The site keeps its yellow and black poster language. The neon palette below belongs
+ * to the arcade window alone, so the game is the one loud thing on the page.
+ */
+:root {
+  --night: #1a0b2e;
+  --night-deep: #0d0518;
+  --neon-magenta: #ff2e88;
+  --neon-cyan: #01e7f0;
+  --neon-white: #fdf6ff;
+  --header-height: 76px;
+}
+
+section[id] { scroll-margin-top: calc(var(--header-height) + 12px); }
+
+/* Header */
+.topbar { gap: 18px; }
+.topnav { gap: clamp(14px, 2vw, 26px); }
+.topnav a[aria-current='page'] { border-color: currentColor; }
+.topbar-cv { padding: 9px 13px; border: var(--line-sm); background: var(--yellow); box-shadow: 3px 3px 0 var(--black); font-size: .78rem; font-weight: 700; letter-spacing: .04em; text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: transform .15s ease, box-shadow .15s ease; }
+.topbar-cv:hover, .topbar-cv:focus-visible { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--black); }
+.topbar-cv:active { transform: translate(1px, 2px); box-shadow: 1px 1px 0 var(--black); }
+.language-switcher { margin-left: 0; }
+
+/* Home hero: the pitch on the left, the arcade window on the right */
+.home-hero { padding-block: clamp(40px, 6vw, 88px); background: var(--yellow); border-bottom: var(--line); }
+.home-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 440px); gap: clamp(32px, 6vw, 88px); align-items: center; }
+.home-hero h1 { max-width: 11ch; font-size: clamp(3rem, 6.6vw, 6.6rem); }
+
+.arcade { color: var(--neon-white); background: var(--night); border: var(--line); box-shadow: var(--shadow); }
+.arcade [hidden] { display: none !important; }
+.arcade-bar { display: flex; align-items: center; gap: 10px; margin: 0; padding: 11px 16px; border-bottom: 2px solid var(--neon-magenta); background: var(--night-deep); font-size: .74rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+.arcade-dot { inline-size: 9px; block-size: 9px; border-radius: 50%; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); animation: arcade-pulse 1.8s ease-in-out infinite; }
+.arcade-screen { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--night-deep); }
+.arcade-screen img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: center 18%; filter: grayscale(1) contrast(1.3) brightness(1.1); }
+/* Two lights, as on the game's title screen: magenta from the left, cyan from the right. */
+.arcade-screen::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(100deg, var(--neon-magenta) 8%, #7a2bd0 50%, var(--neon-cyan) 92%); mix-blend-mode: multiply; }
+.arcade-screen::after { content: ''; position: absolute; inset: 0; z-index: 2; background: repeating-linear-gradient(0deg, rgb(13 5 24 / .34) 0 2px, transparent 2px 4px), radial-gradient(ellipse at center, transparent 52%, rgb(13 5 24 / .72) 100%); pointer-events: none; }
+.arcade-panel { padding: 20px 20px 22px; border-top: 2px solid var(--neon-cyan); }
+.arcade-panel h2 { font-size: clamp(1.5rem, 2.3vw, 2rem); letter-spacing: -.04em; }
+.arcade-panel p { margin: 10px 0 0; color: #d9cdea; font-size: .95rem; line-height: 1.5; }
+.arcade-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 18px; }
+.arcade-start { min-block-size: 48px; padding: 12px 18px; border: 2px solid var(--neon-white); background: var(--yellow); color: var(--black); box-shadow: 4px 4px 0 var(--neon-magenta); font: inherit; font-weight: 700; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease; }
+.arcade-start:hover, .arcade-start:focus-visible { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--neon-magenta); }
+.arcade-start:focus-visible, .arcade-fallback:focus-visible { outline: 3px solid var(--neon-cyan); outline-offset: 4px; }
+.arcade-actions .arcade-soon { margin: 0; padding: 7px 10px; border: 2px solid var(--neon-magenta); color: var(--neon-white); font-size: .78rem; font-weight: 700; }
+.arcade-fallback { color: var(--neon-white); font-size: .92rem; font-weight: 700; text-underline-offset: 4px; }
+/* Once the game script reveals the launch button, the waiting state steps aside. */
+.arcade:has([data-game-launch]:not([hidden])) .arcade-soon { display: none; }
+@keyframes arcade-pulse { 50% { opacity: .35; } }
+
+/* Facts strip */
+.facts { color: var(--white); background: var(--black); border-bottom: var(--line); }
+.facts-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 0; padding-block: 0; list-style: none; }
+.facts-list li { display: grid; gap: 4px; padding: 24px clamp(14px, 2vw, 28px); border-left: 2px solid #3a3a3a; }
+.facts-list li:first-child { padding-left: 0; border-left: 0; }
+.facts-list strong { color: var(--yellow); font-family: var(--display); font-size: clamp(1.25rem, 2vw, 1.7rem); line-height: 1.05; letter-spacing: -.035em; }
+.facts-list span { color: #d0d0ca; font-size: .9rem; }
+
+/* About */
+.about-section { border-top: var(--line); background: var(--white); }
+.about-grid { display: grid; grid-template-columns: minmax(220px, 320px) minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
+.about-portrait { margin: 0; }
+.about-portrait .portrait-frame { transform: rotate(-2deg); }
+.about-caption { margin-top: 22px; font-size: .82rem; font-weight: 700; }
+.about-list { display: grid; margin: 0; border-top: var(--line); }
+.about-list div { display: grid; grid-template-columns: minmax(130px, 200px) minmax(0, 1fr); gap: 8px 28px; padding-block: 20px; border-bottom: var(--line-sm); }
+.about-list dt { font-family: var(--display); font-size: 1.15rem; letter-spacing: -.03em; line-height: 1.15; }
+.about-list dd { max-width: 62ch; margin: 0; color: #3d3d3a; }
+
+/* Product rescue steps */
+.rescue-steps { padding: 0; list-style: none; }
+.rescue-steps li { padding: 24px; border: 2px solid var(--white); }
+.rescue-steps span { color: var(--yellow); font-family: var(--display); font-size: 2rem; }
+.rescue-steps p { color: #c6c6c0; }
+
+/* Footer */
+.footer { padding-top: 40px; }
+.footer-cols { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); gap: 32px; }
+.footer-cols p { margin: 0; }
+.footer-cols ul { display: grid; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+.footer-name { font-family: var(--display); font-size: 1.4rem; letter-spacing: -.04em; }
+.footer-brand p + p { margin-top: 6px; color: var(--muted); font-weight: 500; }
+.footer-cv { display: inline-block; margin-top: 16px; text-decoration: underline; text-underline-offset: 4px; }
+.footer-heading { color: var(--muted); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+.footer-cols a { overflow-wrap: anywhere; }
+.footer-legal { margin-top: 32px; }
+
+@media (max-width: 980px) {
+  .topnav { order: 3; width: 100%; margin-left: 0; padding-bottom: 14px; overflow-x: auto; white-space: nowrap; }
+  .topbar { flex-wrap: wrap; padding-top: 14px; row-gap: 12px; }
+  .topbar-cv { margin-left: auto; }
+  :root { --header-height: 118px; }
+  .home-hero-grid { grid-template-columns: 1fr; }
+  .arcade { max-width: 520px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-portrait { max-width: 260px; }
+}
+@media (max-width: 640px) {
+  .topbar { padding-bottom: 0; gap: 10px; }
+  .topnav { padding-bottom: 12px; }
+  .language-switcher { margin-left: 0; }
+  .topbar-cv { padding: 7px 9px; font-size: .7rem; box-shadow: 2px 2px 0 var(--black); }
+  .language-switcher a { padding: 5px 6px; }
+  .home-hero h1 { font-size: clamp(2.6rem, 13vw, 4.4rem); }
+  .facts-list { grid-template-columns: 1fr; }
+  .facts-list li { padding: 16px 0; border-left: 0; border-top: 2px solid #3a3a3a; }
+  .facts-list li:first-child { border-top: 0; }
+  .about-list div { grid-template-columns: 1fr; }
+  .rescue-steps { grid-template-columns: 1fr; }
+  .footer-cols { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .arcade-dot { animation: none; }
+  .topbar-cv, .arcade-start { transition: none; }
+}

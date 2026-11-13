@@ -6,7 +6,7 @@ const { locale = 'en' } = Astro.props;
 const text = soloProductsCopy[locale];
 const caseNumber = (index: number) => String(index + 1).padStart(2, '0');
 ---
-<section class="frame section solo-section" id="solo-products" data-reveal>
+<section class="frame section solo-section" id="products" data-reveal>
   <div class="section-header">
     <div><p class="section-index">{text.index}</p><h2>{text.title}</h2></div>
     <p class="section-intro">{text.intro}</p>
