@@ -7,8 +7,8 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ['src/game/**/*.ts', 'src/data/game/**/*.ts'],
-      // boot.ts only wires the DOM together; the end-to-end tests cover it.
-      exclude: ['src/game/boot.ts'],
+      // boot.ts and dom/ need a real browser; the end-to-end tests cover them.
+      exclude: ['src/game/boot.ts', 'src/game/dom/**'],
       thresholds: { lines: 80, functions: 80, branches: 80, statements: 80 },
     },
   },

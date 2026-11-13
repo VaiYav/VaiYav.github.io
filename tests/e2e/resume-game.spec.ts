@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
 test.describe('résumé game on the home page', () => {
   test('lists every object as plain text', async ({ page }) => {
@@ -15,7 +15,7 @@ test.describe('résumé game on the home page', () => {
     await section.getByRole('button', { name: 'Start' }).click();
     await expect(section).toHaveAttribute('data-state', 'running');
     await expect(section.getByRole('button', { name: 'Start' })).toBeHidden();
-    await expect(section.locator('[data-game-status]')).toHaveText('Game started.');
+    await expect(section.locator('[data-game-status]')).toContainText('Game started.');
     await expect(section.locator('[data-game-stage]')).toBeFocused();
     const canvas = await section.locator('canvas').evaluate((node: HTMLCanvasElement) => {
       const pixel = node.getContext('2d')?.getImageData(2, 2, 1, 1).data;
@@ -37,6 +37,62 @@ test.describe('résumé game on the home page', () => {
     await expect(page.locator('[data-game]')).toHaveAttribute('data-state', 'idle');
     await expect(page.locator('[data-game]').getByRole('button', { name: 'Start' })).toBeEnabled();
     expect(errors).toEqual([]);
+  });
+
+  test.describe('walking', () => {
+    type Probe = { hero(): { x: number; y: number; moving: boolean }; toClient(world: { x: number; y: number }): { x: number; y: number } };
+    const hero = (page: Page) => page.evaluate(() => {
+      const state = (window as unknown as { __resumeGame: Probe }).__resumeGame.hero();
+      return { x: state.x, y: state.y, moving: state.moving };
+    });
+
+    test.beforeEach(async ({ page }) => {
+      await page.goto('/');
+      await page.locator('[data-game]').getByRole('button', { name: 'Start' }).click();
+      await expect(page.locator('[data-game]')).toHaveAttribute('data-state', 'running');
+      await page.waitForFunction(() => '__resumeGame' in window);
+    });
+
+    test('moves the hero with the keyboard and stops when the key is released', async ({ page }) => {
+      const before = await hero(page);
+      await page.keyboard.down('KeyD');
+      await page.waitForTimeout(400);
+      await page.keyboard.up('KeyD');
+      const after = await hero(page);
+      expect(after.x).toBeGreaterThan(before.x + 10);
+      expect(after.y).toBeCloseTo(before.y, 1);
+      await page.waitForTimeout(150);
+      expect((await hero(page)).x).toBeCloseTo(after.x, 1);
+    });
+
+    test('does not let the hero walk through the outer wall', async ({ page }) => {
+      await page.keyboard.down('ArrowDown');
+      await page.waitForTimeout(1500);
+      await page.keyboard.up('ArrowDown');
+      const after = await hero(page);
+      expect(after.y).toBeLessThanOrEqual(169);
+      expect(after.y).toBeGreaterThan(160);
+    });
+
+    test('walks to a tapped spot on the floor', async ({ page }) => {
+      const goal = { x: 110, y: 155 };
+      const point = await page.evaluate((world) => (window as unknown as { __resumeGame: Probe }).__resumeGame.toClient(world), goal);
+      await page.mouse.click(point.x, point.y);
+      await expect.poll(async () => (await hero(page)).x, { timeout: 4000 }).toBeGreaterThan(100);
+      await expect.poll(async () => (await hero(page)).moving, { timeout: 4000 }).toBe(false);
+      const after = await hero(page);
+      expect(Math.hypot(after.x - goal.x, after.y - goal.y)).toBeLessThan(6);
+    });
+
+    test('does not scroll the page while walking', async ({ page }) => {
+      // Focusing the stage scrolls it into view smoothly; let that settle first.
+      await page.waitForTimeout(1200);
+      const before = await page.evaluate(() => window.scrollY);
+      await page.keyboard.down('ArrowDown');
+      await page.waitForTimeout(300);
+      await page.keyboard.up('ArrowDown');
+      expect(await page.evaluate(() => window.scrollY)).toBe(before);
+    });
   });
 
   test('keeps the recruiter CV one click away', async ({ page }) => {

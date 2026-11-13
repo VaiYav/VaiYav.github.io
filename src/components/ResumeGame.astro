@@ -84,7 +84,7 @@ import { WORLD } from '../game/engine/viewport';
         if (ticket !== generation || !root.isConnected) return;
         handle = bootGame(canvas, stage);
         root.dataset.state = 'running';
-        status.textContent = 'Game started.';
+        status.textContent = 'Game started. Walk with WASD or the arrow keys, or tap the floor.';
         stage.focus();
       } catch (cause) {
         // The text version below carries the same content; the reason stays on the element for debugging.
@@ -107,7 +107,7 @@ import { WORLD } from '../game/engine/viewport';
   .game-stage { position: relative; display: none; place-items: center; min-height: 240px; margin-bottom: 42px; border: var(--line); background: #1a0b2e; box-shadow: var(--shadow-sm); overflow: hidden; }
   /* Shown only once the script has bound the section, so no-JS visitors never see a dead Start button. */
   [data-bound='true'] .game-stage { display: grid; }
-  .game-stage canvas { display: block; max-width: 100%; height: auto; image-rendering: pixelated; }
+  .game-stage canvas { display: block; max-width: 100%; height: auto; image-rendering: pixelated; cursor: pointer; touch-action: manipulation; }
   .game-cover { position: absolute; inset: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px; padding: 20px; background: rgba(13, 5, 24, .82); }
   .game-cover button { font: inherit; font-weight: 700; cursor: pointer; }
   .game-skip { color: var(--white); font-weight: 700; text-underline-offset: 4px; }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { HERO_SPEED, createHero, stepHero, walkFrame } from '../../src/game/world/hero';
+import { HERO_SPEED, createHero, stepHero, walkFrame, type HeroState } from '../../src/game/world/hero';
 import type { Rect } from '../../src/game/world/collision';
 
 const none = { x: 0, y: 0 };
@@ -32,7 +32,7 @@ describe('stepHero', () => {
   });
 
   it('walks to a tapped target and stops there', () => {
-    let hero = { ...createHero({ x: 0, y: 0 }), target: { x: 30, y: 0 } };
+    let hero: HeroState = { ...createHero({ x: 0, y: 0 }), target: { x: 30, y: 0 } };
     for (let i = 0; i < 100 && hero.target; i++) hero = stepHero(hero, none, 0.05, open);
     expect(hero.x).toBeCloseTo(30);
     expect(hero.target).toBeNull();
@@ -41,7 +41,7 @@ describe('stepHero', () => {
 
   it('gives up on a target it cannot reach', () => {
     const wall: Rect = { x: 20, y: -100, w: 4, h: 200 };
-    let hero = { ...createHero({ x: 0, y: 0 }), target: { x: 60, y: 0 } };
+    let hero: HeroState = { ...createHero({ x: 0, y: 0 }), target: { x: 60, y: 0 } };
     for (let i = 0; i < 200 && hero.target; i++) hero = stepHero(hero, none, 0.05, [wall]);
     expect(hero.target).toBeNull();
     expect(hero.x).toBeLessThan(20);
