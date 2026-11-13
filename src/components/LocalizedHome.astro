@@ -31,6 +31,7 @@ const answers = [
           {home.facts.map((fact) => <li><strong>{fact.lead}</strong><span>{fact.text}</span></li>)}
         </ul>
       </section>
+      {/* Game slot: when the game branch lands, `{gameEnabled && <ResumeGame />}` goes here. */}
       <SoloProducts locale={locale} />
       <section class="frame section about-section" id="about" data-reveal>
         <div class="section-header">
