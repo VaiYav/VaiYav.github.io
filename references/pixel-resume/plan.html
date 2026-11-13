@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Стек и план сборки — референс-борд</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="board.css">
+<style>
+  :root { --bg: #12071f; --panel: #1f0f38; --line: #5a1a7a; --yellow: #fff35c; --muted: #c2a8d8; }
+  h1 { color: #fdf6ff; text-shadow: -3px 0 0 #01e7f0, 4px 3px 0 #ff2e88; }
+  .tag { background: #ff2e88; color: #fdf6ff; }
+  .verdict { padding: 20px; background: var(--panel); border: 3px solid var(--yellow); }
+  .verdict p { margin: 0 0 10px; max-width: 72ch; }
+  .verdict p:last-child { margin: 0; color: var(--muted); }
+  .bars { display: grid; gap: 10px; margin: 0; padding: 20px; list-style: none; background: var(--panel); border: 3px solid var(--line); }
+  .bars li { display: grid; grid-template-columns: 190px 1fr 90px; gap: 12px; align-items: center; font-size: .9rem; }
+  .bars .track { height: 18px; background: #12071f; }
+  .bars .fill { height: 100%; background: #ff2e88; }
+  .bars .pick .fill { background: var(--yellow); }
+  .bars .pick { font-weight: 700; }
+  .bars span:last-child { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+  .cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .box { padding: 18px; background: var(--panel); border: 3px solid var(--line); }
+  .box h3 { margin: 0 0 10px; font-size: 1.05rem; }
+  .box ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: .92rem; }
+  .box li { margin-bottom: 6px; }
+  .box li b, .box li code { color: #fdf6ff; }
+  pre { margin: 0; padding: 18px; overflow-x: auto; background: #0d0518; border: 3px solid var(--line); color: #fdf6ff; font: .85rem/1.6 ui-monospace, Menlo, monospace; }
+  pre i { color: var(--muted); font-style: normal; }
+  .steps { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; counter-reset: m -1; }
+  .steps li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; padding: 16px; background: var(--panel); border: 3px solid var(--line); counter-increment: m; }
+  .steps li::before { content: 'M' counter(m); color: var(--yellow); font: 700 1.6rem var(--pixel); }
+  .steps b { display: block; margin-bottom: 4px; }
+  .steps p { margin: 0; color: var(--muted); font-size: .92rem; }
+  .steps em { display: block; margin-top: 6px; color: #01e7f0; font-size: .85rem; font-style: normal; }
+  @media (max-width: 900px) { .cols { grid-template-columns: 1fr; } .bars li { grid-template-columns: 1fr; gap: 4px; } .bars span:last-child { text-align: left; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<nav class="boards" aria-label="Борды">
+  <a href="index.html">01 · Первые идеи</a>
+  <a href="neon.html">02 · Neon HQ</a>
+  <a href="face.html">03 · Face Lab</a>
+  <a href="hero.html">04 · Hero Lab</a>
+  <a href="rooms.html">05 · Room Lab</a>
+  <a href="plan.html" aria-current="page">06 · Стек и план</a>
+</nav>
+
+<header class="top">
+  <p class="tag">Референс-борд · v0.6 · стек и план сборки</p>
+  <h1>Build Plan</h1>
+  <p class="lead">Чем собирать Neon HQ и в каком порядке. Решение опирается на то, что уже нарисовано на бордах, и на замеры веса библиотек.</p>
+</header>
+
+<section>
+  <h2><span>01</span> Рекомендация</h2>
+  <div class="verdict">
+    <p><b>TypeScript и Canvas 2D без игрового движка, отдельной страницей в текущем сайте на Astro.</b></p>
+    <p>Игра маленькая: четыре комнаты, восемнадцать объектов, один герой, столкновения только с прямоугольниками. Всё, что для неё нужно, уже написано в референсах на чистом canvas: спрайты, повороты, камера, диалог, звук. Движок добавил бы сотни килобайт ради возможностей, которыми мы не пользуемся.</p>
+    <p>three.js тоже не нужен: после перехода к виду сверху в сцене не осталось ничего трёхмерного.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span>02</span> Вес вариантов</h2>
+  <ul class="bars">
+    <li class="pick"><span>Свой код на Canvas 2D</span><span class="track"><span class="fill" style="display:block;width:4.2%"></span></span><span>≈ 15 КБ</span></li>
+    <li><span>Kaplay 3001.0.19</span><span class="track"><span class="fill" style="display:block;width:19.7%"></span></span><span>69 КБ</span></li>
+    <li><span>PixiJS 8.23.0</span><span class="track"><span class="fill" style="display:block;width:72.2%"></span></span><span>255 КБ</span></li>
+    <li><span>Phaser 4.2.1</span><span class="track"><span class="fill" style="display:block;width:100%"></span></span><span>353 КБ</span></li>
+  </ul>
+  <p class="note">Размер после gzip. Библиотеки замерены по готовым сборкам из npm, свой код — по текущим файлам референсов (спрайты, сцена, герой, объекты, музыка) без минификации. PixiJS при этом только рисует: ввод, столкновения и звук всё равно писать самим.</p>
+  <p class="note">Движок стоит вернуть в разговор, если игра вырастет: враги, физика, редактор уровней, десятки экранов. Тогда кандидат — Kaplay.</p>
+</section>
+
+<section>
+  <h2><span>03</span> Как это встроено в сайт</h2>
+  <div class="cols">
+    <div class="box">
+      <h3>Страница и загрузка</h3>
+      <ul>
+        <li>Новая страница <code>/play/</code>; главная получает кнопку «Play the résumé».</li>
+        <li>Код игры подгружается только после нажатия Start, главная страница не тяжелеет.</li>
+        <li>На сайте включён <code>ClientRouter</code>, поэтому игра запускается по событию <code>astro:page-load</code> и останавливается по <code>astro:before-swap</code>.</li>
+        <li>До релиза страница закрыта от индексации и не попадает в sitemap.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Резюме остаётся резюме</h3>
+      <ul>
+        <li>Все тексты разделов лежат на странице обычным HTML; canvas — надстройка над ними.</li>
+        <li>Без JavaScript, при <code>prefers-reduced-motion</code> и для поисковиков показывается этот список.</li>
+        <li>«Recruiter CV» — второй пункт меню, ESC ведёт туда из любого места.</li>
+        <li>Диалоги рисуются HTML-поверх canvas: чёткий текст, кириллица, читалки экрана.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Управление</h3>
+      <ul>
+        <li>Клавиатура: WASD или стрелки, E или Enter — открыть, ESC — выйти.</li>
+        <li>Тач и мышь: тап по полу — идти, тап по объекту — подойти и открыть.</li>
+        <li>Tab проходит по объектам как по обычным кнопкам.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Ассеты</h3>
+      <ul>
+        <li>Спрайты остаются кодом: сетки с палитрой, без картинок.</li>
+        <li>Портрет запекается при сборке в три готовых кадра, фото в игру не отгружается.</li>
+        <li>Музыка — пока свой синтез на Web Audio, выключена до нажатия кнопки.</li>
+        <li>Пиксельный шрифт Silkscreen не умеет кириллицу: в canvas только латиница, остальное в HTML.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span>04</span> Структура кода</h2>
+<pre>src/pages/play.astro          <i>страница: HTML-версия разделов + canvas</i>
+src/data/game/content.ts      <i>тексты 18 объектов по языкам</i>
+src/data/game/map.ts          <i>комнаты, стены, двери, позиции объектов</i>
+src/game/engine/              <i>цикл, ввод, камера, запуск и остановка</i>
+src/game/world/               <i>столкновения, «рядом / открыто», прогресс</i>
+src/game/render/              <i>спрайты, герой, объекты, фон, портрет</i>
+src/game/ui/                  <i>титул, диалог, счётчик, подсказки</i>
+src/game/audio/               <i>синт-луп</i>
+scripts/bake-portrait.mjs     <i>фото → три кадра портрета</i>
+tests/                        <i>Vitest для логики, Playwright для сценария</i></pre>
+  <p class="note">Файлы короткие и по одной задаче, как требуют твои правила: логика мира отделена от рисования, поэтому её можно тестировать без браузера.</p>
+</section>
+
+<section>
+  <h2><span>05</span> Этапы</h2>
+  <ol class="steps">
+    <li><div><b>Каркас</b><p>Страница <code>/play/</code> с HTML-версией разделов, пустой canvas, запуск и остановка при навигации, Vitest и Playwright в проекте.</p><em>Готово, когда: страница открывается, без JS виден список разделов.</em></div></li>
+    <li><div><b>Мир</b><p>Данные карты, полы, стены, объекты, герой с анимациями, столкновения, качающаяся камера.</p><em>Готово, когда: по офису можно ходить с клавиатуры и тачем, сквозь стены пройти нельзя.</em></div></li>
+    <li><div><b>Взаимодействие</b><p>Состояния «рядом» и «открыто», диалог с говорящим портретом, счётчик найденного, финал после 18 из 18.</p><em>Готово, когда: любой раздел резюме открывается и читается в игре.</em></div></li>
+    <li><div><b>Титул, звук, выход</b><p>Титульный экран с меню, кнопка музыки, ESC и пункт «Recruiter CV».</p><em>Готово, когда: гость за один шаг попадает либо в игру, либо в обычное резюме.</em></div></li>
+    <li><div><b>Тексты и языки</b><p>Вычитка твоих формулировок, английская версия как основная, затем украинская и русская.</p><em>Готово, когда: тексты утверждены тобой и совпадают с резюме.</em></div></li>
+    <li><div><b>Полировка и релиз</b><p>Скорость, доступность, сквозной тест сценария, кнопка на главной, sitemap, открытие для индексации.</p><em>Готово, когда: игра проходит проверку на телефоне и ссылка стоит на главной.</em></div></li>
+  </ol>
+</section>
+
+<section>
+  <h2><span>06</span> Что нужно решить тебе</h2>
+  <ul class="decisions">
+    <li class="open"><b>Адрес</b><code>/play/</code>, <code>/hq/</code> или сама главная страница.</li>
+    <li class="open"><b>Языки на старте</b>Только английский или сразу три.</li>
+    <li class="open"><b>Музыка</b>Свой синтез, ИИ-сервис или готовый трек.</li>
+    <li class="open"><b>Тесты</b>В репозитории их нет. План добавляет Vitest и Playwright — подтверди.</li>
+  </ul>
+</section>
+
+</main>
+</body>
+</html>
