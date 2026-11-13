@@ -33,7 +33,7 @@ export const rooms: Readonly<Record<RoomId, RoomContent>> = {
 /* Facts and wording come from resume-recruiter/resume-recruiter.md. */
 export const gameObjects: readonly GameObjectContent[] = [
   {
-    id: 'desk-soulwise', room: 'office', title: 'My Zodiac AI / Soulwise · 2025 – Present',
+    id: 'desk-soulwise', room: 'office', title: 'Soulwise · 2025 – Present',
     body: 'Founder and solo product engineer of my own AI-powered consumer platform with 10k+ users. I built its AI features on OpenAI, Claude and Gemini with vector search, shipped native iOS and Android apps from one codebase, and made the app 36% faster to load.',
   },
   {
@@ -74,9 +74,9 @@ export const gameObjects: readonly GameObjectContent[] = [
   },
   {
     id: 'arcade-saas', room: 'lounge', title: 'Solo products',
-    body: 'Three live consumer products where I am the whole team: My Zodiac AI with Soulwise (AI astrology and wellness, 5K+ downloads on Google Play), Owlark (energy and sleep rhythm, live on iOS and the web) and Lunarbor (a mood, habit and cycle journal, live on Android).',
+    body: 'Three live consumer products where I am the whole team: Soulwise (an AI cycle and wellness app, 5K+ downloads on Google Play), Owlark (energy and sleep rhythm, live on iOS and the web) and Lunarbor (a mood, habit and cycle journal, live on Android).',
     links: [
-      { label: 'My Zodiac AI', href: 'https://my-zodiac-ai.com/' },
+      { label: 'Soulwise', href: 'https://play.google.com/store/apps/details?id=org.yakovliev.myzodiacai' },
       { label: 'Owlark', href: 'https://owlark.app/' },
       { label: 'Lunarbor', href: 'https://lunarbor.app/' },
     ],

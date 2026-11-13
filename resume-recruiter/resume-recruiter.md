@@ -66,10 +66,9 @@ I'm a full-stack engineer who leads products end-to-end — from a blank page to
 
 Three live consumer products where I am the whole team: product decisions, design, web and mobile engineering, subscriptions, store releases and the marketing site.
 
-**My Zodiac AI + Soulwise** — AI astrology web app and its cycle & wellness app for Android · *Web live · Android live · Soulwise: 5K+ downloads on Google Play*
-[my-zodiac-ai.com](https://my-zodiac-ai.com/) · [Soulwise on Google Play](https://play.google.com/store/apps/details?id=org.yakovliev.myzodiacai)
-- Natal charts calculated with Swiss Ephemeris and drawn as an interactive D3 chart wheel, then explained by AI in plain language.
-- Soulwise on Android: 30-second mood and cycle check-ins, and an AI companion that remembers them.
+**Soulwise** — AI cycle & wellness app for Android · *Android live · 5K+ downloads on Google Play*
+[Soulwise on Google Play](https://play.google.com/store/apps/details?id=org.yakovliev.myzodiacai)
+- 30-second mood and cycle check-ins, and an AI companion that remembers them.
 - Freemium model with a daily free quota and a Premium subscription; cycle data encrypted with a personal key.
 
 **Owlark** — energy & sleep rhythm app: find your best hours without a wearable · *iOS live · Web app live · Android in closed testing*
@@ -101,7 +100,7 @@ My own open-source **"Spec-Driven Development" framework**, built on top of GitH
 **AI Integration Consultant — Independent** · 2025 – Present
 Helping product teams (3 clients) add AI without the hype. I design AI adoption roadmaps, build internal AI agents for development teams (automated code review, documentation, planning helpers), and advise on agent architecture, RAG and cost control.
 
-**Founder & Solo Product Engineer — My Zodiac AI / Soulwise** (my own AI-powered consumer platform, 10k+ users) · 2025 – Present
+**Founder & Solo Product Engineer — Soulwise** (my own AI-powered consumer platform, 10k+ users) · 2025 – Present
 Founded and run the product alone. Built real AI features and agent flows connected to OpenAI, Claude and Gemini with a vector-search layer. Shipped native iOS & Android apps from one codebase (Capacitor). Made the app 36% faster to load, moved the whole project to strict TypeScript, and set up automated testing so broken code can't reach users.
 
 **Senior Frontend Developer & Feature Owner — Oboard** (B2B goal-setting / OKR software) · 2022 – 2025 (~4 years)

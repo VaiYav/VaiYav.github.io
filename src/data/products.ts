@@ -46,28 +46,22 @@ export const soloProductsCopy: Readonly<Record<Locale, { index: string; title: s
 
 export const soloProducts: readonly SoloProduct[] = [
   {
-    id: 'my-zodiac-ai',
-    name: 'My Zodiac AI',
+    id: 'soulwise',
+    name: 'Soulwise',
     kind: {
-      en: 'AI astrology web app with Soulwise, its cycle & wellness app for Android',
-      uk: 'AI-астрологія у вебі та Soulwise — застосунок про цикл і самопочуття для Android',
-      ru: 'AI-астрология в вебе и Soulwise — приложение о цикле и самочувствии для Android',
+      en: 'AI cycle & wellness app for Android',
+      uk: 'AI-застосунок про цикл і самопочуття для Android',
+      ru: 'AI-приложение о цикле и самочувствии для Android',
     },
     statuses: [
-      { label: same('Web · live'), live: true },
       { label: same('Android · live'), live: true },
-      { label: same('Soulwise · 5K+ on Google Play'), live: false },
+      { label: same('5K+ on Google Play'), live: false },
     ],
     points: [
       {
-        en: 'Natal charts calculated with Swiss Ephemeris and drawn as an interactive D3 chart wheel, then explained by AI in plain language.',
-        uk: 'Натальні карти рахуються через Swiss Ephemeris, малюються інтерактивним колом на D3, а AI пояснює їх простою мовою.',
-        ru: 'Натальные карты считаются через Swiss Ephemeris, рисуются интерактивным кругом на D3, а AI объясняет их простым языком.',
-      },
-      {
-        en: 'Soulwise on Android: 30-second mood and cycle check-ins, and an AI companion that remembers them.',
-        uk: 'Soulwise на Android: 30-секундні чек-іни настрою та циклу й AI-компаньйон, який їх памʼятає.',
-        ru: 'Soulwise на Android: 30-секундные чек-ины настроения и цикла и AI-компаньон, который их помнит.',
+        en: '30-second mood and cycle check-ins, and an AI companion that remembers them.',
+        uk: '30-секундні чек-іни настрою та циклу й AI-компаньйон, який їх памʼятає.',
+        ru: '30-секундные чек-ины настроения и цикла и AI-компаньон, который их помнит.',
       },
       {
         en: 'Freemium model with a daily free quota and a Premium subscription; cycle data encrypted with a personal key.',
@@ -76,7 +70,6 @@ export const soloProducts: readonly SoloProduct[] = [
       },
     ],
     links: [
-      { label: 'my-zodiac-ai.com', href: 'https://my-zodiac-ai.com/' },
       { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=org.yakovliev.myzodiacai' },
     ],
   },

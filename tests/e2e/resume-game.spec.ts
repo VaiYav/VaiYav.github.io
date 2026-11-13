@@ -7,7 +7,7 @@ test.describe('résumé game on the home page', () => {
     await expect(section.getByRole('heading', { name: 'Interactive résumé: Neon HQ' })).toHaveCount(1);
     await expect(section.getByText('Walk through the work.')).toHaveCount(0);
     await expect(section.locator('[data-object]')).toHaveCount(18);
-    await expect(section.locator('.game-text').getByText('My Zodiac AI / Soulwise · 2025 – Present')).toBeVisible();
+    await expect(section.locator('.game-text').getByText('Soulwise · 2025 – Present')).toBeVisible();
   });
 
   test('starts the canvas on Start, paints it and moves focus to the stage', async ({ page }) => {
