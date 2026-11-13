@@ -101,8 +101,8 @@ My own open-source **"Spec-Driven Development" framework**, built on top of GitH
 **AI Integration Consultant — Independent** · 2025 – Present
 Helping product teams (3 clients) add AI without the hype. I design AI adoption roadmaps, build internal AI agents for development teams (automated code review, documentation, planning helpers), and advise on agent architecture, RAG and cost control.
 
-**Full-Stack Engineer — Soulwise AI** (AI-powered consumer platform, 10k+ users) · 2025 – Present
-Built real AI features and agent flows connected to OpenAI, Claude and Gemini with a vector-search layer. Shipped native iOS & Android apps from one codebase (Capacitor). Made the app 36% faster to load, moved the whole project to strict TypeScript, and set up automated testing so broken code can't reach users.
+**Founder & Solo Product Engineer — My Zodiac AI / Soulwise** (my own AI-powered consumer platform, 10k+ users) · 2025 – Present
+Founded and run the product alone. Built real AI features and agent flows connected to OpenAI, Claude and Gemini with a vector-search layer. Shipped native iOS & Android apps from one codebase (Capacitor). Made the app 36% faster to load, moved the whole project to strict TypeScript, and set up automated testing so broken code can't reach users.
 
 **Senior Frontend Developer & Feature Owner — Oboard** (B2B goal-setting / OKR software) · 2022 – 2025 (~4 years)
 Owned a whole product area from idea to launch and talked directly with C-level executives. Was the primary reviewer on every frontend change, shipped the product inside Monday.com, Salesforce, Jira and Confluence, integrated payments, and built internal tools that cut manual work by ~40%.
