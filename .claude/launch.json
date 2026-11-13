@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["astro", "dev", "--host", "127.0.0.1", "--port", "4331"],
+      "port": 4331
+    },
+    {
       "name": "pixel-references",
       "runtimeExecutable": "python3",
       "runtimeArgs": ["references/pixel-resume/serve.py", "4399"],

@@ -1,0 +1,113 @@
+---
+import { objectsByRoom, roomOrder, rooms } from '../data/game/content';
+import { links } from '../data/site';
+import { WORLD } from '../game/engine/viewport';
+---
+<section class="frame section game-section" id="play" data-game data-state="idle" aria-labelledby="game-title">
+  <div class="section-header">
+    <div>
+      <p class="section-index">Interactive résumé</p>
+      <h2 id="game-title">Walk through the work.</h2>
+    </div>
+    <p class="section-intro">A small office you can explore: every object opens a part of my résumé. Prefer plain text? Everything is listed below, and the recruiter CV is one click away.</p>
+  </div>
+
+  <div class="game-stage" data-game-stage>
+    <canvas data-game-canvas width={WORLD.width} height={WORLD.height} aria-hidden="true"></canvas>
+    <div class="game-cover">
+      <button type="button" class="light-button" data-game-start>Start</button>
+      <a class="game-skip" href={links.cv}>Recruiter CV</a>
+    </div>
+    <p class="game-error" data-game-error role="alert" hidden>The game could not start in this browser. The same content is listed below.</p>
+  </div>
+
+  <div class="game-text">
+    <h3>Everything in the office, as text</h3>
+    <div class="game-rooms">
+      {roomOrder.map((room) => (
+        <section aria-labelledby={`room-${room}`}>
+          <p class="case-tag">{rooms[room].blurb}</p>
+          <h4 id={`room-${room}`}>{rooms[room].title}</h4>
+          <dl>
+            {objectsByRoom(room).map((object) => (
+              <div data-object={object.id}>
+                <dt>{object.title}</dt>
+                <dd>
+                  {object.body}
+                  {object.links && (
+                    <span class="game-links">
+                      {object.links.map((link) => <a href={link.href}>{link.label}</a>)}
+                    </span>
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import type { GameHandle } from '../game/boot';
+
+  let handle: GameHandle | null = null;
+
+  const teardown = () => {
+    handle?.dispose();
+    handle = null;
+  };
+
+  const setup = () => {
+    const root = document.querySelector<HTMLElement>('[data-game]');
+    if (!root || root.dataset.bound === 'true') return;
+    const stage = root.querySelector<HTMLElement>('[data-game-stage]');
+    const canvas = root.querySelector<HTMLCanvasElement>('[data-game-canvas]');
+    const start = root.querySelector<HTMLButtonElement>('[data-game-start]');
+    const error = root.querySelector<HTMLElement>('[data-game-error]');
+    if (!stage || !canvas || !start || !error) return;
+    root.dataset.bound = 'true';
+
+    start.addEventListener('click', async () => {
+      start.disabled = true;
+      try {
+        const { bootGame } = await import('../game/boot');
+        teardown();
+        handle = bootGame(canvas, stage);
+        root.dataset.state = 'running';
+      } catch {
+        // The text version below carries the same content, so the visitor loses nothing.
+        root.dataset.state = 'error';
+        error.hidden = false;
+        start.disabled = false;
+      }
+    });
+  };
+
+  document.addEventListener('astro:page-load', setup);
+  document.addEventListener('astro:before-swap', teardown);
+  setup();
+</script>
+
+<style>
+  .game-section { border-top: var(--line); background: var(--white); }
+  .game-stage { position: relative; display: none; place-items: center; min-height: 240px; margin-bottom: 42px; border: var(--line); background: #1a0b2e; box-shadow: var(--shadow-sm); overflow: hidden; }
+  :global(html.js) .game-stage { display: grid; }
+  .game-stage canvas { display: block; max-width: 100%; height: auto; image-rendering: pixelated; }
+  .game-cover { position: absolute; inset: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px; padding: 20px; background: rgba(13, 5, 24, .82); }
+  .game-cover button { font: inherit; font-weight: 700; cursor: pointer; }
+  .game-skip { color: var(--white); font-weight: 700; text-underline-offset: 4px; }
+  [data-state='running'] .game-cover { display: none; }
+  .game-error { position: absolute; left: 0; right: 0; bottom: 0; margin: 0; padding: 12px 16px; background: var(--yellow); border-top: var(--line-sm); font-weight: 600; }
+  .game-text h3 { margin-bottom: 24px; }
+  .game-rooms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: var(--line-sm); border-left: var(--line-sm); }
+  .game-rooms section { padding: 22px; border-right: var(--line-sm); border-bottom: var(--line-sm); }
+  .game-rooms h4 { margin: 0 0 14px; font-family: var(--display); font-size: 1.4rem; letter-spacing: -.04em; }
+  .game-rooms dl { display: grid; gap: 14px; margin: 0; }
+  .game-rooms dt { font-weight: 700; }
+  .game-rooms dd { margin: 4px 0 0; color: var(--muted); font-size: .92rem; }
+  .game-links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; }
+  .game-links a { color: var(--ink); font-weight: 700; text-underline-offset: 4px; }
+  @media (max-width: 900px) { .game-rooms { grid-template-columns: 1fr; } }
+</style>

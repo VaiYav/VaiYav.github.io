@@ -4,6 +4,8 @@ import SiteHeader from './SiteHeader.astro';
 import SiteFooter from './SiteFooter.astro';
 import Hero from './Hero.astro';
 import { copy, links, type Locale } from '../data/site';
+import ResumeGame from './ResumeGame.astro';
+import { gameEnabled } from '../data/game/flags';
 interface Props { locale?: Locale }
 const { locale = 'en' } = Astro.props;
 const text = copy[locale];
@@ -15,6 +17,7 @@ const text = copy[locale];
     <main id="content">
       <Hero locale={locale} />
       <section class="proof-strip" aria-label="Selected proof" data-reveal><div class="frame proof-grid"><div><strong>✓</strong><span>shipped products</span></div><div><strong>✓</strong><span>production AI systems</span></div><div><strong>✓</strong><span>web, mobile and desktop delivery</span></div></div></section>
+      {gameEnabled && <ResumeGame />}
       <section class="frame section" data-reveal>
         <div class="section-header"><div><p class="section-index">01 — Product systems</p><h2>{text.proofTitle}</h2></div><p class="section-intro">{text.proofIntro}</p></div>
         <div class="case-list">

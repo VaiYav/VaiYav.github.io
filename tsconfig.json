@@ -4,5 +4,5 @@
     "jsx": "preserve",
     "jsxImportSource": "react"
   },
-  "exclude": ["script.js", "v1/script.js", "dist", ".astro", "node_modules"]
+  "exclude": ["script.js", "v1/script.js", "references", "dist", ".astro", "node_modules"]
 }
