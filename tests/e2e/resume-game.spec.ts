@@ -4,9 +4,10 @@ test.describe('résumé game on the home page', () => {
   test('lists every object as plain text', async ({ page }) => {
     await page.goto('/');
     const section = page.locator('[data-game]');
-    await expect(section.getByRole('heading', { name: 'Walk through the work.' })).toBeVisible();
+    await expect(section.getByRole('heading', { name: 'Interactive résumé: Neon HQ' })).toHaveCount(1);
+    await expect(section.getByText('Walk through the work.')).toHaveCount(0);
     await expect(section.locator('[data-object]')).toHaveCount(18);
-    await expect(section.locator('.game-text').getByText('Soulwise AI · 2025 – Present')).toBeVisible();
+    await expect(section.locator('.game-text').getByText('My Zodiac AI / Soulwise · 2025 – Present')).toBeVisible();
   });
 
   test('starts the canvas on Start, paints it and moves focus to the stage', async ({ page }) => {

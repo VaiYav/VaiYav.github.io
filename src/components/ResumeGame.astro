@@ -4,13 +4,8 @@ import { links } from '../data/site';
 import { WORLD } from '../game/engine/viewport';
 ---
 <section class="frame section game-section" id="play" lang="en" data-game data-state="idle" aria-labelledby="game-title">
-  <div class="section-header">
-    <div>
-      <p class="section-index">Interactive résumé</p>
-      <h2 id="game-title">Walk through the work.</h2>
-    </div>
-    <p class="section-intro">A small office you can explore: every object opens a part of my résumé. Prefer plain text? Everything is listed below, and the recruiter CV is one click away.</p>
-  </div>
+  {/* The arcade window in the page hero carries the visible title; this one names the section for assistive tech. */}
+  <h2 id="game-title" class="game-heading">Interactive résumé: Neon HQ</h2>
 
   <div class="game-stage" data-game-stage tabindex="-1" role="group" aria-label="Résumé game">
     <canvas data-game-canvas width={WORLD.width} height={WORLD.height} aria-hidden="true"></canvas>
@@ -47,7 +42,7 @@ import { WORLD } from '../game/engine/viewport';
       {gameObjects.map((object) => <li><button type="button" data-open-object={object.id}>{object.title}</button></li>)}
     </ul>
     <div data-game-finale hidden>
-      <span data-title>All {gameObjects.length} found — that is the whole résumé.</span>
+      <span data-title>All {gameObjects.length} found. That is the whole résumé.</span>
       <span data-body>Thanks for walking through it. If the work looks like a fit, the recruiter CV has everything on one page, and I answer email quickly.</span>
       <a href={links.cv}>Open the recruiter CV</a>
       <a href={links.email}>Email me</a>
@@ -149,7 +144,7 @@ import { WORLD } from '../game/engine/viewport';
   @media (max-width: 520px) { .game-portrait { width: 64px; height: 64px; } .game-dialog { padding: 10px; gap: 8px 10px; } .game-dialog p { font-size: .88rem; } }
   .game-stage:fullscreen { width: 100vw; height: 100vh; margin: 0; border: 0; }
   .game-stage:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
-  .game-status { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .game-heading, .game-status { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .game-error { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; margin: 0; padding: 12px 16px; background: var(--yellow); border-top: var(--line-sm); font-weight: 600; }
   .game-text h3 { margin-bottom: 24px; }
   .game-rooms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: var(--line-sm); border-left: var(--line-sm); }

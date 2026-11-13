@@ -33,16 +33,16 @@ export const rooms: Readonly<Record<RoomId, RoomContent>> = {
 /* Facts and wording come from resume-recruiter/resume-recruiter.md. */
 export const gameObjects: readonly GameObjectContent[] = [
   {
-    id: 'desk-soulwise', room: 'office', title: 'Soulwise AI · 2025 – Present',
-    body: 'Full-Stack Engineer on an AI-powered consumer platform with 10k+ users. Built AI features on OpenAI, Claude and Gemini with vector search, shipped native iOS and Android apps from one codebase, and made the app 36% faster to load.',
+    id: 'desk-soulwise', room: 'office', title: 'My Zodiac AI / Soulwise · 2025 – Present',
+    body: 'Founder and solo product engineer of my own AI-powered consumer platform with 10k+ users. I built its AI features on OpenAI, Claude and Gemini with vector search, shipped native iOS and Android apps from one codebase, and made the app 36% faster to load.',
   },
   {
     id: 'desk-oboard', room: 'office', title: 'Oboard · 2022 – 2025',
-    body: 'Senior Frontend Developer and Feature Owner on B2B OKR software. Owned a product area from idea to launch, shipped the product inside Monday.com, Salesforce, Jira and Confluence, and integrated payments.',
+    body: 'Senior Frontend Developer and Feature Owner on B2B OKR software. I owned a product area from idea to launch, reviewed every frontend change, shipped the product inside Monday.com, Salesforce, Jira and Confluence, and integrated payments.',
   },
   {
     id: 'archive-earlier', room: 'office', title: 'Earlier roles · 2017 – 2022',
-    body: 'Frontend Developer (Vue.js / React) at ITOMYCH Studio, AnyforSoft, IT Svit, Codica and QPARD, shipping web products for startups and agencies.',
+    body: 'Frontend Developer (Vue.js and React) at ITOMYCH Studio, AnyforSoft, IT Svit, Codica and QPARD: 5+ years shipping web products for startups and agencies.',
   },
   {
     id: 'bookshelf-skills', room: 'office', title: 'Skills',
@@ -50,7 +50,7 @@ export const gameObjects: readonly GameObjectContent[] = [
   },
   {
     id: 'whiteboard-method', room: 'office', title: 'How I work',
-    body: 'Spec first, tests first. I work with SDD, TDD and BDD, and I have packaged that workflow into reusable skills for AI coding agents.',
+    body: 'Spec first, tests first. I work with SDD, TDD and BDD, and I have packaged that workflow into reusable skills for AI coding agents: Claude Code, Codex, Windsurf and Devin.',
   },
   {
     id: 'rack-seo', room: 'server', title: 'SEO agent',
@@ -73,8 +73,13 @@ export const gameObjects: readonly GameObjectContent[] = [
     body: 'AI features connected to OpenAI, Claude and Gemini, with a Qdrant vector-search layer so answers come from real data, plus multi-provider fallback and cost control.',
   },
   {
-    id: 'arcade-saas', room: 'lounge', title: 'Solo SaaS',
-    body: 'A full software-as-a-service product built solo, end to end: web app, native Android app, payments and AI features, with real paying users.',
+    id: 'arcade-saas', room: 'lounge', title: 'Solo products',
+    body: 'Three live consumer products where I am the whole team: My Zodiac AI with Soulwise (AI astrology and wellness, 5K+ downloads on Google Play), Owlark (energy and sleep rhythm, live on iOS and the web) and Lunarbor (a mood, habit and cycle journal, live on Android).',
+    links: [
+      { label: 'My Zodiac AI', href: 'https://my-zodiac-ai.com/' },
+      { label: 'Owlark', href: 'https://owlark.app/' },
+      { label: 'Lunarbor', href: 'https://lunarbor.app/' },
+    ],
   },
   {
     id: 'arcade-forge', room: 'lounge', title: 'speckit-product-forge',
@@ -82,8 +87,8 @@ export const gameObjects: readonly GameObjectContent[] = [
     links: [{ label: 'View on GitHub', href: 'https://github.com/VaiYav/speckit-product-forge' }],
   },
   {
-    id: 'arcade-multi', room: 'lounge', title: 'Five products, one codebase',
-    body: 'One product running as 5+ versions from a single codebase: a standalone web app, a Monday.com add-on, a Salesforce app, Atlassian apps and mobile.',
+    id: 'arcade-multi', room: 'lounge', title: 'One codebase, 5+ versions',
+    body: 'One product that runs as 5+ versions from a single codebase: a standalone web app, a Monday.com add-on, a Salesforce app, Atlassian apps and mobile.',
   },
   {
     id: 'shelf-results', room: 'lounge', title: 'Results',
@@ -99,7 +104,7 @@ export const gameObjects: readonly GameObjectContent[] = [
   },
   {
     id: 'mailbox-contact', room: 'lobby', title: 'Contact',
-    body: 'Email, LinkedIn, GitHub or Telegram — whichever is easiest for you.',
+    body: 'Email, LinkedIn, GitHub or Telegram: whichever is easiest for you.',
     links: [
       { label: 'Email', href: links.email },
       { label: 'LinkedIn', href: links.linkedin },
