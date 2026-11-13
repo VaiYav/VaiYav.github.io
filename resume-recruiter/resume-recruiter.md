@@ -64,9 +64,9 @@ I'm a full-stack engineer who leads products end-to-end — from a blank page to
 
 ## Solo products — built and shipped alone
 
-Three live consumer products where I am the whole team: product decisions, design, web and mobile engineering, AI features, subscriptions, store releases and the marketing site.
+Three live consumer products where I am the whole team: product decisions, design, web and mobile engineering, subscriptions, store releases and the marketing site.
 
-**My Zodiac AI + Soulwise** — AI astrology web app and its cycle & wellness app for Android · *Web live · Android live · 5K+ downloads*
+**My Zodiac AI + Soulwise** — AI astrology web app and its cycle & wellness app for Android · *Web live · Android live · Soulwise: 5K+ downloads on Google Play*
 [my-zodiac-ai.com](https://my-zodiac-ai.com/) · [Soulwise on Google Play](https://play.google.com/store/apps/details?id=org.yakovliev.myzodiacai)
 - Natal charts calculated with Swiss Ephemeris and drawn as an interactive D3 chart wheel, then explained by AI in plain language.
 - Soulwise on Android: 30-second mood and cycle check-ins, and an AI companion that remembers them.
@@ -76,7 +76,7 @@ Three live consumer products where I am the whole team: product decisions, desig
 [owlark.app](https://owlark.app/) · [Owlark on the App Store](https://apps.apple.com/us/app/owlark-energy-sleep-rhythm/id6831557343)
 - A two-minute quiz based on the validated rMEQ and μMCTQ questionnaires becomes an hour-by-hour energy curve and a daily plan for light, coffee and sleep.
 - Optional read-only Apple Health and Health Connect import, home-screen widgets and a consent-based view for two.
-- Every tip cites its study; monthly and yearly in-app subscriptions with a free trial.
+- Every tip cites its study; monthly and yearly in-app subscriptions, with a free trial on the yearly plan.
 
 **Lunarbor** — mood, habit & cycle journal where a floating garden grows from your days · *Android live · iOS coming soon*
 [lunarbor.app](https://lunarbor.app/) · [Lunarbor on Google Play](https://play.google.com/store/apps/details?id=com.myzodiac.companion)

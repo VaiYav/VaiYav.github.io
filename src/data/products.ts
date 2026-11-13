@@ -27,19 +27,19 @@ export const soloProductsCopy: Readonly<Record<Locale, { index: string; title: s
   en: {
     index: 'Live now — solo products',
     title: 'Built and shipped alone.',
-    intro: 'Three live consumer products where I am the whole team: product decisions, design, web and mobile engineering, AI features, subscriptions, store releases and the marketing site.',
+    intro: 'Three live consumer products where I am the whole team: product decisions, design, web and mobile engineering, subscriptions, store releases and the marketing site.',
     caseLabel: 'Case',
   },
   uk: {
     index: 'Вже працюють — соло-продукти',
     title: 'Зроблено й запущено самотужки.',
-    intro: 'Три живі споживчі продукти, де вся команда — це я: продуктові рішення, дизайн, веб- і мобільна розробка, AI-функції, підписки, релізи в сторах і маркетинговий сайт.',
+    intro: 'Три живі споживчі продукти, де вся команда — це я: продуктові рішення, дизайн, веб- і мобільна розробка, підписки, релізи в сторах і маркетинговий сайт.',
     caseLabel: 'Кейс',
   },
   ru: {
     index: 'Уже работают — соло-продукты',
     title: 'Сделано и запущено в одиночку.',
-    intro: 'Три живых потребительских продукта, где вся команда — это я: продуктовые решения, дизайн, веб- и мобильная разработка, AI-функции, подписки, релизы в сторах и маркетинговый сайт.',
+    intro: 'Три живых потребительских продукта, где вся команда — это я: продуктовые решения, дизайн, веб- и мобильная разработка, подписки, релизы в сторах и маркетинговый сайт.',
     caseLabel: 'Кейс',
   },
 };
@@ -56,7 +56,7 @@ export const soloProducts: readonly SoloProduct[] = [
     statuses: [
       { label: same('Web · live'), live: true },
       { label: same('Android · live'), live: true },
-      { label: { en: '5K+ downloads', uk: '5K+ встановлень', ru: '5K+ установок' }, live: false },
+      { label: same('Soulwise · 5K+ on Google Play'), live: false },
     ],
     points: [
       {
@@ -105,9 +105,9 @@ export const soloProducts: readonly SoloProduct[] = [
         ru: 'Необязательный импорт из Apple Health и Health Connect только на чтение, виджеты на главном экране и режим для двоих по согласию.',
       },
       {
-        en: 'Every tip cites its study; monthly and yearly in-app subscriptions with a free trial.',
-        uk: 'Кожна порада посилається на дослідження; місячна й річна підписки в застосунку з пробним періодом.',
-        ru: 'Каждый совет ссылается на исследование; месячная и годовая подписки в приложении с пробным периодом.',
+        en: 'Every tip cites its study; monthly and yearly in-app subscriptions, with a free trial on the yearly plan.',
+        uk: 'Кожна порада посилається на дослідження; місячна й річна підписки в застосунку, пробний період — на річному плані.',
+        ru: 'Каждый совет ссылается на исследование; месячная и годовая подписки в приложении, пробный период — на годовом плане.',
       },
     ],
     links: [
