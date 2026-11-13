@@ -8,6 +8,8 @@ export interface Controls {
   intent(): Point;
   /** Page coordinates of the latest tap since the last call, or null. */
   takeTap(): Point | null;
+  /** Lets go of every held key, for when the game pauses. */
+  release(): void;
   dispose(): void;
 }
 
@@ -58,6 +60,7 @@ export function bindControls(stage: HTMLElement, canvas: HTMLCanvasElement, onAc
 
   return {
     intent: () => intentFromKeys(pressed),
+    release,
     takeTap: () => {
       const latest = tap;
       tap = null;

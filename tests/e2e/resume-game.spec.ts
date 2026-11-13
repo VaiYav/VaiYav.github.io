@@ -240,9 +240,14 @@ test.describe('résumé game on the home page', () => {
       await page.waitForFunction(() => '__resumeGame' in window);
       await section.getByRole('button', { name: 'Exit full screen' }).click();
       await expect.poll(() => page.evaluate(() => document.fullscreenElement === null)).toBe(true);
+      // Stand next to the exit first, so that E would open something if the pause let it through.
+      await page.keyboard.down('KeyS');
+      await expect(section.locator('[data-game-hint]')).toContainText('Recruiter CV');
+      await page.keyboard.up('KeyS');
       await page.keyboard.press('Escape');
       await expect(section).toHaveAttribute('data-state', 'paused');
       const resume = section.getByRole('button', { name: 'Resume' });
+      expect(await section.locator('[data-game-objects]').evaluate((node: HTMLElement) => node.inert)).toBe(true);
       await expect(resume).toBeFocused();
       await expect(section.locator('[data-game-subtitle]')).toHaveText('Paused');
       await expect(section.locator('[data-game-cover]').getByRole('link', { name: 'Recruiter CV' })).toBeVisible();
@@ -256,10 +261,29 @@ test.describe('résumé game on the home page', () => {
       await resume.click();
       await expect(section).toHaveAttribute('data-state', 'running');
       await expect(section.locator('[data-game-stage]')).toBeFocused();
+      // A key pressed during the pause must not carry over: the hero stands until a new key goes down.
+      await page.waitForTimeout(200);
+      expect(await heroX(page)).toBe(before);
       await page.keyboard.down('KeyD');
       await page.waitForTimeout(300);
       await page.keyboard.up('KeyD');
       expect(await heroX(page)).toBeGreaterThan(before + 5);
+    });
+
+    test('brings the game back with Escape even when a dialogue was open under the menu', async ({ page }) => {
+      await page.goto('/');
+      const section = page.locator('[data-game]');
+      await section.getByRole('button', { name: 'Start' }).click();
+      await page.waitForFunction(() => '__resumeGame' in window);
+      await section.getByRole('button', { name: 'Exit full screen' }).click();
+      await section.locator('[data-open-object="exit-cv"]').focus();
+      await page.keyboard.press('Enter');
+      await expect(section.locator('[data-game-dialog]')).toBeVisible();
+      await section.getByRole('button', { name: 'Menu' }).click();
+      await expect(section).toHaveAttribute('data-state', 'paused');
+      await page.keyboard.press('Escape');
+      await expect(section).toHaveAttribute('data-state', 'running');
+      await expect(section.locator('[data-game-dialog]')).toBeVisible();
     });
 
     test('opens the menu from its button and closes it again with Escape', async ({ page }) => {
@@ -284,7 +308,6 @@ test.describe('résumé game on the home page', () => {
       expect(await musicState(page)).toBe('off');
       await music.click();
       await expect(music).toHaveAttribute('aria-pressed', 'true');
-      await expect(music).toHaveText('Music: on');
       await expect.poll(() => musicState(page)).toBe('running');
       await section.getByRole('button', { name: 'Menu' }).click();
       await expect.poll(() => musicState(page)).toBe('suspended');

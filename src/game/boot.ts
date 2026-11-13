@@ -124,11 +124,14 @@ export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement, section: 
   });
   // Bound last, so nothing above can throw and leave its listeners behind.
   const controls = bindControls(host, canvas, (action) => {
-    if (action === 'close' && !game.open) { options.onMenu(); return; }
+    // While paused the only key that does anything is Escape, and it always brings the game back.
+    if (action === 'close' && (paused || !game.open)) { options.onMenu(); return; }
     if (!paused) change(action === 'close' ? closeDialog(game, world) : interact(game, world));
   });
   const setPaused = (next: boolean) => {
     paused = next;
+    controls.release();
+    controls.takeTap();
     syncLoop();
   };
   const dispose = () => {

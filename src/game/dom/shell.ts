@@ -75,6 +75,8 @@ export function mountShell(root: HTMLElement): () => void {
 
   const setState = (state: State) => {
     root.dataset.state = state;
+    // Under the menu the game must be out of reach of Tab and of screen readers.
+    for (const layer of stage.querySelectorAll<HTMLElement>('[data-game-layer]')) layer.inert = state !== 'running';
     start.textContent = state === 'paused' ? TEXT.resume : TEXT.start;
     parts.subtitle.textContent = state === 'paused' ? TEXT.pausedTitle : TEXT.subtitle;
   };
@@ -92,7 +94,8 @@ export function mountShell(root: HTMLElement): () => void {
     handle?.resume();
     setState('running');
     status.textContent = TEXT.resumed;
-    showStage();
+    // No scrolling here: the visitor may have moved the page while the menu was up.
+    stage.focus({ preventScroll: true });
   };
   const toggleMenu = () => {
     if (root.dataset.state === 'running') pause();
@@ -130,14 +133,14 @@ export function mountShell(root: HTMLElement): () => void {
   const launch = () => {
     screen.enter();
     if (root.dataset.state === 'running') showStage();
-    else if (root.dataset.state === 'paused') resume();
+    else if (root.dataset.state === 'paused') { resume(); showStage(); }
     else if (!start.disabled) void boot();
   };
   const toggleMusic = () => {
     try {
       const playing = handle?.toggleMusic() ?? false;
+      // The label stays the same; the pressed state alone says whether it is on.
       parts.music.setAttribute('aria-pressed', String(playing));
-      parts.music.textContent = playing ? 'Music: on' : 'Music: off';
     } catch {
       parts.music.hidden = true;
       status.textContent = TEXT.noMusic;

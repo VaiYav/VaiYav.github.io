@@ -126,7 +126,6 @@ export function createMusic(): Music {
   /** Brings the sound in line with the on/off choice and the pause. */
   const apply = () => {
     const audible = on && !paused;
-    if (audible && !rig) rig = buildRig();
     const current = rig;
     if (!current) return;
     stopTimer();
@@ -141,6 +140,8 @@ export function createMusic(): Music {
     toggle() {
       on = !on;
       try {
+        // Built here and nowhere else: a browser only lets sound start from inside a click.
+        if (on && !rig) rig = buildRig();
         apply();
       } catch (error) {
         on = false;
