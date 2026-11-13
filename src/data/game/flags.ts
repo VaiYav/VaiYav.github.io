@@ -4,9 +4,9 @@ export interface GameFlagEnv {
 }
 
 /**
- * The résumé game is shown in local development, and in a production build only
- * when PUBLIC_RESUME_GAME is exactly "on". It stays off the live site until it is ready.
+ * The résumé game is on the live site. A production build can leave it out with
+ * PUBLIC_RESUME_GAME=off, as a kill switch; development always shows it.
  */
-export const isGameEnabled = (env: GameFlagEnv): boolean => env.DEV === true || env.PUBLIC_RESUME_GAME === 'on';
+export const isGameEnabled = (env: GameFlagEnv): boolean => env.DEV === true || env.PUBLIC_RESUME_GAME !== 'off';
 
 export const gameEnabled: boolean = isGameEnabled(import.meta.env);

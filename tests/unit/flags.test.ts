@@ -6,15 +6,20 @@ describe('isGameEnabled', () => {
     expect(isGameEnabled({ DEV: true })).toBe(true);
   });
 
-  it('is off in a production build by default', () => {
-    expect(isGameEnabled({ DEV: false })).toBe(false);
-    expect(isGameEnabled({})).toBe(false);
+  it('is on in a production build by default, whatever host builds it', () => {
+    expect(isGameEnabled({ DEV: false })).toBe(true);
+    expect(isGameEnabled({})).toBe(true);
+    expect(isGameEnabled({ DEV: false, PUBLIC_RESUME_GAME: 'on' })).toBe(true);
   });
 
-  it('turns on in production only for the exact value "on"', () => {
-    expect(isGameEnabled({ DEV: false, PUBLIC_RESUME_GAME: 'on' })).toBe(true);
-    for (const value of ['', 'off', 'true', '1', 'ON']) {
-      expect(isGameEnabled({ DEV: false, PUBLIC_RESUME_GAME: value }), value).toBe(false);
+  it('can be switched off for a production build with the exact value "off"', () => {
+    expect(isGameEnabled({ DEV: false, PUBLIC_RESUME_GAME: 'off' })).toBe(false);
+    for (const value of ['', 'OFF', 'false', '0']) {
+      expect(isGameEnabled({ DEV: false, PUBLIC_RESUME_GAME: value }), value).toBe(true);
     }
+  });
+
+  it('stays on in development even when switched off', () => {
+    expect(isGameEnabled({ DEV: true, PUBLIC_RESUME_GAME: 'off' })).toBe(true);
   });
 });

@@ -25,9 +25,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-        env:
-          # Puts the résumé game on the live home page (src/data/game/flags.ts).
-          PUBLIC_RESUME_GAME: 'on'
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
