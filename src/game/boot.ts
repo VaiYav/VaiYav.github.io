@@ -93,8 +93,10 @@ export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement, section: 
     draw();
   });
   const syncLoop = () => {
-    if (onScreen && !document.hidden) loop.start();
-    else loop.stop();
+    if (onScreen && !document.hidden) { loop.start(); return; }
+    loop.stop();
+    // A tap made while paused must not fire when the game comes back.
+    controls.takeTap();
   };
   const removeProbe = import.meta.env.DEV ? installProbe(canvas, () => ({ game, camera: camera() })) : () => undefined;
 

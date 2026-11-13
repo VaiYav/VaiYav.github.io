@@ -172,6 +172,24 @@ test.describe('résumé game on the home page', () => {
       await expect(dialog).toBeHidden();
     });
 
+    test('keeps the keys alive when E closes the dialogue from a link inside it', async ({ page }) => {
+      const stage = page.locator('[data-game-stage]');
+      const dialog = stage.locator('[data-game-dialog]');
+      await stage.locator('[data-open-object="exit-cv"]').focus();
+      await page.keyboard.press('Enter');
+      await expect(stage.locator('[data-game-status]')).toContainText('Recruiter CV');
+      await dialog.getByRole('link', { name: 'Open the recruiter CV' }).focus();
+      await page.keyboard.press('KeyE');
+      await expect(dialog).toBeHidden();
+      await expect(stage).toBeFocused();
+      const x = () => page.evaluate(() => (window as unknown as { __resumeGame: { hero(): { x: number } } }).__resumeGame.hero().x);
+      const before = await x();
+      await page.keyboard.down('KeyD');
+      await page.waitForTimeout(300);
+      await page.keyboard.up('KeyD');
+      expect(await x()).toBeGreaterThan(before + 5);
+    });
+
     test('keeps the longest text readable and closable on a small stage', async ({ page }) => {
       await page.locator('[data-game]').getByRole('button', { name: 'Exit full screen' }).click();
       await page.setViewportSize({ width: 390, height: 700 });

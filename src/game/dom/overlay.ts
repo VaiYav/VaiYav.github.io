@@ -66,6 +66,15 @@ export function bindOverlay(section: HTMLElement, stage: HTMLElement, still: boo
   const count = need<HTMLElement>(stage, '[data-game-count]');
   const hint = need<HTMLElement>(stage, '[data-game-hint]');
   const objects = need<HTMLElement>(stage, '[data-game-objects]');
+  const status = need<HTMLElement>(stage, '[data-game-status]');
+  // Read once, up front: a gap in the page markup fails here, at start, and not in the middle of a frame.
+  const ids = [...objects.querySelectorAll<HTMLElement>('[data-open-object]')].map((button) => button.dataset.openObject ?? '');
+  const entries = new Map([...ids, FINALE].map((id) => [id, readEntry(section, id)]));
+  const entryFor = (id: string): Entry => {
+    const entry = entries.get(id);
+    if (!entry) throw new Error(`The game has no text for "${id}".`);
+    return entry;
+  };
   const portrait = need<HTMLCanvasElement>(dialog, '[data-game-portrait]').getContext('2d');
   if (!portrait) throw new Error('Canvas 2D is not available in this browser.');
 
@@ -80,18 +89,20 @@ export function bindOverlay(section: HTMLElement, stage: HTMLElement, still: boo
     paintSprite(portrait, portraitSprite(frame), PORTRAIT_COLORS);
   };
   const showDialog = (id: string, time: number) => {
-    const entry = readEntry(section, id);
+    const entry = entryFor(id);
     room.textContent = entry.room;
     title.textContent = entry.title;
     body.textContent = entry.body;
     links.replaceChildren(...linkNodes(entry));
     links.hidden = entry.links.length === 0;
     dialog.scrollTop = 0;
+    // The status region is always on the page, so screen readers announce what was opened.
+    status.textContent = `${entry.title}. ${entry.body}`;
     talkUntil = time + talkSeconds(entry.body.length);
   };
   const showHint = (near: string | null) => {
     hint.hidden = near === null;
-    if (near) hint.textContent = `E or tap · ${readEntry(section, near).title}`;
+    if (near) hint.textContent = `E or tap · ${entryFor(near).title}`;
   };
   const onObjectClick = (event: MouseEvent) => {
     const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-open-object]') : null;
@@ -104,7 +115,10 @@ export function bindOverlay(section: HTMLElement, stage: HTMLElement, still: boo
   return {
     sync(view) {
       if (view.open !== shown.open) {
+        // Closing from a link or button inside the dialogue would drop focus to the page and kill the keys.
+        const focusInside = view.open === null && dialog.contains(document.activeElement);
         dialog.hidden = view.open === null;
+        if (focusInside) stage.focus({ preventScroll: true });
         if (view.open) showDialog(view.open, view.time);
       }
       if (view.near !== shown.near) showHint(view.near);

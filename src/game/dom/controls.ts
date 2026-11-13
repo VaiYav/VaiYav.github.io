@@ -38,7 +38,9 @@ export function bindControls(stage: HTMLElement, canvas: HTMLCanvasElement, onAc
       if (action === 'interact') event.preventDefault();
       return;
     }
-    if (!isMoveKey(event.code)) return;
+    // Inside the dialogue the arrow keys scroll its text.
+    const inDialog = event.target instanceof Element && event.target.closest('[data-game-dialog]') !== null;
+    if (!isMoveKey(event.code) || inDialog) return;
     event.preventDefault();
     pressed = new Set([...pressed, event.code]);
   };
