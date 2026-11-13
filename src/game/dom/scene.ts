@@ -4,6 +4,7 @@ import { WORLD } from '../engine/viewport';
 import { drawBackdrop } from '../render/background';
 import { drawFloors, drawWalls } from '../render/floor';
 import { heroFrame, type HeroAnim } from '../render/hero';
+import { drawFoundMarker, drawNearMarker } from '../render/markers';
 import { OBJECT_ART, couch } from '../render/objects';
 import { fillOn, frameAt, offset } from '../render/painter';
 import { HERO_PALETTE, NEON, SHADOW } from '../render/palette';
@@ -14,6 +15,9 @@ export interface SceneFrame {
   readonly time: number;
   readonly hero: HeroState;
   readonly camera: Camera;
+  /** Id of the object the hero can use right now. */
+  readonly near: string | null;
+  readonly found: ReadonlySet<string>;
 }
 
 export interface Scene {
@@ -29,6 +33,7 @@ interface HeroArt {
 const WALK_FRAMES = 8;
 const IDLE_FRAMES = 2;
 const IDLE_FPS = 2;
+const MARKER_FPS = 4;
 const SHADOW_OFFSET = { x: 2, y: 3 } as const;
 /** The sway never moves the building's edge further than this, so the backdrop is skipped deeper inside. */
 const SWAY_MARGIN = 8;
@@ -82,7 +87,7 @@ export function createScene(): Scene {
   const idle = heroArt('idle', IDLE_FRAMES);
   const fill = fillOn(world.ctx);
 
-  const drawWorld = ({ time, hero }: SceneFrame) => {
+  const drawWorld = ({ time, hero, near, found }: SceneFrame) => {
     world.ctx.clearRect(0, 0, WORLD.width, WORLD.height);
     world.ctx.drawImage(ground, 0, 0);
     couch(offset(fill, COUCH.x, COUCH.y), time);
@@ -90,6 +95,10 @@ export function createScene(): Scene {
     const art = hero.moving ? walk[walkFrame(hero.distance)] : idle[frameAt(time, IDLE_FPS) % IDLE_FRAMES];
     drawTurned(world.ctx, art.shadow, hero.x + SHADOW_OFFSET.x, hero.y + SHADOW_OFFSET.y, hero.angle);
     drawTurned(world.ctx, art.body, hero.x, hero.y, hero.angle);
+    for (const placement of PLACEMENTS) {
+      if (placement.id === near) drawNearMarker(fill, placement, frameAt(time, MARKER_FPS) % 2 === 1);
+      else if (found.has(placement.id)) drawFoundMarker(fill, placement);
+    }
   };
 
   return {

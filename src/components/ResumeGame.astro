@@ -1,5 +1,5 @@
 ---
-import { objectsByRoom, roomOrder, rooms } from '../data/game/content';
+import { gameObjects, objectsByRoom, roomOrder, rooms } from '../data/game/content';
 import { links } from '../data/site';
 import { WORLD } from '../game/engine/viewport';
 ---
@@ -19,6 +19,27 @@ import { WORLD } from '../game/engine/viewport';
       <a class="game-skip" href={links.cv}>Recruiter CV</a>
     </div>
     <button type="button" class="game-fullscreen" data-game-fullscreen hidden>Full screen</button>
+    <p class="game-hud" data-game-hud><span data-game-count>0</span> / {gameObjects.length} found</p>
+    <p class="game-hint" data-game-hint hidden></p>
+    <div class="game-dialog" data-game-dialog role="region" aria-label="Résumé entry" aria-live="polite" hidden>
+      <canvas class="game-portrait" data-game-portrait width="48" height="48" aria-hidden="true"></canvas>
+      <div class="game-dialog-text">
+        <p class="game-dialog-room" data-game-dialog-room></p>
+        <h3 data-game-dialog-title></h3>
+        <p data-game-dialog-body></p>
+        <p class="game-links" data-game-dialog-links></p>
+      </div>
+      <button type="button" class="game-dialog-close" data-game-dialog-close>Close <kbd>E</kbd></button>
+    </div>
+    <ul class="game-objects" data-game-objects aria-label="Open an object directly">
+      {gameObjects.map((object) => <li><button type="button" data-open-object={object.id}>{object.title}</button></li>)}
+    </ul>
+    <div data-game-finale hidden>
+      <span data-title>All {gameObjects.length} found — that is the whole résumé.</span>
+      <span data-body>Thanks for walking through it. If the work looks like a fit, the recruiter CV has everything on one page, and I answer email quickly.</span>
+      <a href={links.cv}>Open the recruiter CV</a>
+      <a href={links.email}>Email me</a>
+    </div>
     <p class="game-status" data-game-status role="status"></p>
     <p class="game-error" data-game-error role="alert" hidden>The game could not start in this browser. The same content is listed below.</p>
   </div>
@@ -33,8 +54,8 @@ import { WORLD } from '../game/engine/viewport';
           <dl>
             {objectsByRoom(room).map((object) => (
               <div data-object={object.id}>
-                <dt>{object.title}</dt>
-                <dd>
+                <dt data-title>{object.title}</dt>
+                <dd data-body>
                   {object.body}
                   {object.links && (
                     <span class="game-links">
@@ -101,9 +122,9 @@ import { WORLD } from '../game/engine/viewport';
       try {
         const { bootGame } = await import('../game/boot');
         if (ticket !== generation || !root.isConnected) return;
-        handle = bootGame(canvas, stage);
+        handle = bootGame(canvas, stage, root);
         root.dataset.state = 'running';
-        status.textContent = 'Game started. Walk with WASD or the arrow keys, or tap the floor.';
+        status.textContent = 'Game started. Walk with WASD or the arrow keys, or tap the floor. Press E next to an object to open it, or tap the object.';
         // A tab stop, so keyboard players can come back to the game after leaving it.
         stage.tabIndex = 0;
         if (fullscreen) fullscreen.hidden = !canFullscreen;
@@ -151,6 +172,28 @@ import { WORLD } from '../game/engine/viewport';
   [data-state='running'] .game-cover { display: none; }
   .game-fullscreen { position: absolute; top: 10px; right: 10px; padding: 6px 10px; border: 2px solid #fdf6ff; background: rgba(13, 5, 24, .82); color: #fdf6ff; font: inherit; font-size: .8rem; font-weight: 700; cursor: pointer; }
   .game-fullscreen:hover, .game-fullscreen:focus-visible { background: #fff35c; border-color: #fff35c; color: #0d0518; }
+  .game-hud, .game-hint { position: absolute; margin: 0; padding: 6px 10px; border: 2px solid #fdf6ff; background: rgba(13, 5, 24, .82); color: #fdf6ff; font-size: .8rem; font-weight: 700; display: none; }
+  .game-hud { top: 10px; left: 10px; }
+  .game-hint { left: 50%; bottom: 10px; max-width: calc(100% - 20px); transform: translateX(-50%); border-color: #fff35c; color: #fff35c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  [data-state='running'] .game-hud, [data-state='running'] .game-hint:not([hidden]) { display: block; }
+  .game-dialog { position: absolute; left: 8px; right: 8px; bottom: 8px; max-height: calc(100% - 16px); overflow: auto; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px 16px; align-items: start; padding: 14px; border: 3px solid #fdf6ff; background: #0d0518; color: #fdf6ff; box-shadow: 6px 6px 0 #ff2e88; }
+  .game-dialog[hidden] { display: none; }
+  .game-portrait { width: 96px; height: 96px; image-rendering: pixelated; background: #5a1a7a; border: 2px solid #01e7f0; }
+  .game-dialog-room { margin: 0 0 4px; color: #01e7f0; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .game-dialog h3 { margin: 0 0 8px; color: #fff35c; font-size: 1.15rem; line-height: 1.2; }
+  .game-dialog p { margin: 0; font-size: .95rem; line-height: 1.5; }
+  .game-dialog .game-links { margin-top: 10px; }
+  .game-dialog .game-links[hidden] { display: none; }
+  .game-dialog .game-links a { color: #fff35c; }
+  .game-dialog-close { grid-column: 1 / -1; justify-self: end; padding: 6px 12px; border: 2px solid #fdf6ff; background: #fdf6ff; color: #0d0518; font: inherit; font-size: .85rem; font-weight: 700; cursor: pointer; }
+  .game-dialog-close kbd { margin-left: 6px; padding: 0 5px; border: 1px solid #0d0518; font: inherit; font-size: .75rem; }
+  .game-dialog :focus-visible, .game-objects :focus-visible { outline: 3px solid #fff35c; outline-offset: 2px; }
+  /* Keyboard and screen-reader shortcut to every object; a button shows itself while it has focus. */
+  .game-objects { position: absolute; top: 46px; left: 10px; display: none; margin: 0; padding: 0; list-style: none; }
+  [data-state='running'] .game-objects { display: block; }
+  .game-objects button { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 2px solid #fff35c; background: #0d0518; color: #fff35c; font: inherit; font-size: .8rem; font-weight: 700; }
+  .game-objects button:focus-visible { width: auto; height: auto; margin: 0; padding: 6px 10px; clip-path: none; }
+  @media (max-width: 520px) { .game-portrait { width: 64px; height: 64px; } .game-dialog { padding: 10px; gap: 8px 10px; } .game-dialog p { font-size: .88rem; } }
   .game-stage:fullscreen { width: 100vw; height: 100vh; margin: 0; border: 0; }
   .game-stage:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
   .game-status { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

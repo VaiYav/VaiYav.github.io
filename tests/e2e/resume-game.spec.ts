@@ -6,7 +6,7 @@ test.describe('résumé game on the home page', () => {
     const section = page.locator('[data-game]');
     await expect(section.getByRole('heading', { name: 'Walk through the work.' })).toBeVisible();
     await expect(section.locator('[data-object]')).toHaveCount(18);
-    await expect(section.getByText('Soulwise AI · 2025 – Present')).toBeVisible();
+    await expect(section.locator('.game-text').getByText('Soulwise AI · 2025 – Present')).toBeVisible();
   });
 
   test('starts the canvas on Start, paints it and moves focus to the stage', async ({ page }) => {
@@ -17,7 +17,7 @@ test.describe('résumé game on the home page', () => {
     await expect(section.getByRole('button', { name: 'Start' })).toBeHidden();
     await expect(section.locator('[data-game-status]')).toContainText('Game started.');
     await expect(section.locator('[data-game-stage]')).toBeFocused();
-    const canvas = await section.locator('canvas').evaluate((node: HTMLCanvasElement) => {
+    const canvas = await section.locator('[data-game-canvas]').evaluate((node: HTMLCanvasElement) => {
       const pixel = node.getContext('2d')?.getImageData(2, 2, 1, 1).data;
       return { width: node.width, alpha: pixel ? pixel[3] : 0 };
     });
@@ -98,6 +98,102 @@ test.describe('résumé game on the home page', () => {
     });
   });
 
+  test.describe('opening objects', () => {
+    type Probe = { open(): string | null; found(): number; toClient(world: { x: number; y: number }): { x: number; y: number } };
+    const probe = <T>(page: Page, read: (game: Probe) => T) => page.evaluate(`(${read})(window.__resumeGame)`) as Promise<T>;
+
+    test.beforeEach(async ({ page }) => {
+      await page.goto('/');
+      await page.locator('[data-game]').getByRole('button', { name: 'Start' }).click();
+      await expect(page.locator('[data-game]')).toHaveAttribute('data-state', 'running');
+      await page.waitForFunction(() => '__resumeGame' in window);
+    });
+
+    test('opens the object next to the hero with E, shows its text and counts it', async ({ page }) => {
+      const stage = page.locator('[data-game-stage]');
+      const dialog = stage.locator('[data-game-dialog]');
+      await expect(stage.locator('[data-game-hud]')).toHaveText('0 / 18 found');
+      await page.keyboard.down('KeyS');
+      await expect(stage.locator('[data-game-hint]')).toContainText('Recruiter CV');
+      await page.keyboard.up('KeyS');
+      await page.keyboard.press('KeyE');
+      await expect(dialog).toBeVisible();
+      await expect(dialog.getByRole('heading')).toHaveText('Recruiter CV');
+      await expect(dialog.getByRole('link', { name: 'Open the recruiter CV' })).toHaveAttribute('href', /recruiter-resume/);
+      await expect(stage.locator('[data-game-hud]')).toHaveText('1 / 18 found');
+      const painted = await dialog.locator('canvas').evaluate((node: HTMLCanvasElement) => {
+        const data = node.getContext('2d')?.getImageData(0, 0, node.width, node.height).data ?? [];
+        let solid = 0;
+        for (let i = 3; i < data.length; i += 4) if (data[i] === 255) solid += 1;
+        return solid;
+      });
+      expect(painted).toBeGreaterThan(800);
+      // The hero stays put while the dialogue is open, and E closes it again.
+      const before = await page.evaluate(() => (window as unknown as { __resumeGame: { hero(): { x: number } } }).__resumeGame.hero().x);
+      await page.keyboard.down('KeyD');
+      await page.waitForTimeout(250);
+      await page.keyboard.up('KeyD');
+      expect(await page.evaluate(() => (window as unknown as { __resumeGame: { hero(): { x: number } } }).__resumeGame.hero().x)).toBe(before);
+      await page.keyboard.press('KeyE');
+      await expect(dialog).toBeHidden();
+      await expect(stage.locator('[data-game-hud]')).toHaveText('1 / 18 found');
+    });
+
+    test('walks around the walls to a tapped object in another room and opens it', async ({ page }) => {
+      test.setTimeout(30_000);
+      const point = await probe(page, (game) => game.toClient({ x: 219, y: 26 }));
+      await page.mouse.click(point.x, point.y);
+      expect(await probe(page, (game) => game.open())).toBeNull();
+      await expect.poll(() => probe(page, (game) => game.open()), { timeout: 15_000 }).toBe('rack-qa');
+      const dialog = page.locator('[data-game-dialog]');
+      await expect(dialog.getByRole('heading')).toHaveText('QA agent');
+      await expect(dialog.locator('[data-game-dialog-room]')).toHaveText('Server room');
+      await dialog.getByRole('button', { name: 'Close' }).click();
+      await expect(dialog).toBeHidden();
+      await expect(page.locator('[data-game-stage]')).toBeFocused();
+    });
+
+    test('opens every object from the keyboard list and ends with the finale', async ({ page }) => {
+      const stage = page.locator('[data-game-stage]');
+      const dialog = stage.locator('[data-game-dialog]');
+      const buttons = stage.locator('[data-open-object]');
+      await expect(buttons).toHaveCount(18);
+      for (let i = 0; i < 18; i++) {
+        await buttons.nth(i).focus();
+        await page.keyboard.press('Enter');
+        await expect(dialog).toBeVisible();
+        if (i < 17) await page.keyboard.press('KeyE');
+      }
+      await expect(stage.locator('[data-game-hud]')).toHaveText('18 / 18 found');
+      await page.keyboard.press('KeyE');
+      await expect(dialog.getByRole('heading')).toContainText('All 18 found');
+      await expect(dialog.getByRole('link', { name: 'Email me' })).toHaveAttribute('href', /^mailto:/);
+      await page.keyboard.press('KeyE');
+      await expect(dialog).toBeHidden();
+    });
+
+    test('keeps the longest text readable and closable on a small stage', async ({ page }) => {
+      await page.locator('[data-game]').getByRole('button', { name: 'Exit full screen' }).click();
+      await page.setViewportSize({ width: 390, height: 700 });
+      const stage = page.locator('[data-game-stage]');
+      const longest = await page.locator('[data-object]').evaluateAll((nodes) =>
+        nodes.map((node) => ({ id: node.getAttribute('data-object') ?? '', size: node.textContent?.length ?? 0 })).sort((a, b) => b.size - a.size)[0].id);
+      await stage.locator(`[data-open-object="${longest}"]`).focus();
+      await page.keyboard.press('Enter');
+      const dialog = stage.locator('[data-game-dialog]');
+      await expect(dialog).toBeVisible();
+      const fits = await dialog.evaluate((node) => {
+        const stageBox = (node.parentElement as HTMLElement).getBoundingClientRect();
+        const box = node.getBoundingClientRect();
+        return box.top >= stageBox.top - 1 && box.bottom <= stageBox.bottom + 1 && box.left >= stageBox.left - 1 && box.right <= stageBox.right + 1;
+      });
+      expect(fits).toBe(true);
+      await dialog.getByRole('button', { name: 'Close' }).scrollIntoViewIfNeeded();
+      await dialog.getByRole('button', { name: 'Close' }).click();
+      await expect(dialog).toBeHidden();
+    });
+  });
+
   test.describe('on a phone', () => {
     test.use({ hasTouch: true, viewport: { width: 390, height: 780 } });
 
@@ -131,7 +227,7 @@ test.describe('résumé game on the home page', () => {
     await expect(section.locator('[data-game-stage]')).toBeFocused();
     await expect.poll(() => page.evaluate(() => document.fullscreenElement?.hasAttribute('data-game-stage') ?? false)).toBe(true);
     await expect(section.getByRole('button', { name: 'Exit full screen' })).toBeVisible();
-    const fit = await section.locator('canvas').evaluate((node: HTMLCanvasElement) => ({ height: node.height, screen: window.innerHeight }));
+    const fit = await section.locator('[data-game-canvas]').evaluate((node: HTMLCanvasElement) => ({ height: node.height, screen: window.innerHeight }));
     expect(fit.height).toBeLessThanOrEqual(fit.screen);
     await section.getByRole('button', { name: 'Exit full screen' }).click();
     await expect.poll(() => page.evaluate(() => document.fullscreenElement === null)).toBe(true);
