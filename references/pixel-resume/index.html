@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Pixel Valentyn — референс-борд</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Silkscreen&family=Archivo:wght@800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="board.css">
+</head>
+<body>
+<main class="wrap">
+
+<header class="top">
+  <p class="tag">Референс-борд · v0.1 · нарисовано кодом</p>
+  <h1>Pixel Valentyn</h1>
+  <p class="lead">Первые референсы для резюме-игры: четыре варианта персонажа и четыре концепции сцены. Всё на этой странице — живые canvas-спрайты, а не картинки: любой вариант можно сразу превратить в спрайт-лист.</p>
+</header>
+
+<section>
+  <h2><span>01</span> Персонаж</h2>
+  <div class="cues">
+    <p><b>Что делает его узнаваемым.</b> На 16–48 пикселях читается всего пять признаков, поэтому на них всё и построено:</p>
+    <ul>
+      <li><i style="background:#4a3426"></i>зачёсанный вверх каштановый чуб</li>
+      <li><i style="background:#111"></i>чёрные прямоугольные очки</li>
+      <li><i style="background:#a87b5c"></i>усы и лёгкая щетина</li>
+      <li><i style="background:#a9c8ee"></i>голубая рубашка с воротником</li>
+      <li><i style="background:#f6c945"></i>жёлтый акцент бренда в реквизите</li>
+    </ul>
+  </div>
+
+  <div class="chars">
+    <figure class="card">
+      <div class="stage"><canvas id="charA"></canvas></div>
+      <figcaption><b>A · Чиби 16×24</b>Большая голова, минимум деталей. Для вида сверху и маленького «компаньона» на сайте. Самый дешёвый в анимации.</figcaption>
+    </figure>
+    <figure class="card">
+      <div class="stage"><canvas id="charB"></canvas></div>
+      <figcaption><b>B · Герой 32×48</b>Основной игровой спрайт: читаются очки, усы, воротник. Хватает места для поз и реквизита.</figcaption>
+    </figure>
+    <figure class="card">
+      <div class="stage"><canvas id="charC"></canvas></div>
+      <figcaption><b>C · Портрет 48×48</b>Крупный план для диалоговых окон и «карточки игрока». Моргает.</figcaption>
+    </figure>
+    <figure class="card light">
+      <div class="stage"><canvas id="charD"></canvas></div>
+      <figcaption><b>D · В палитре бренда</b>Тот же спрайт B в трёх цветах текущего сайта: чёрный, белый, жёлтый. Палитра меняется одной таблицей.</figcaption>
+    </figure>
+  </div>
+
+  <h3>Позы варианта B</h3>
+  <div class="poses">
+    <figure><canvas id="poseIdle"></canvas><figcaption>idle</figcaption></figure>
+    <figure><canvas id="poseWalk"></canvas><figcaption>walk</figcaption></figure>
+    <figure><canvas id="poseCode"></canvas><figcaption>code</figcaption></figure>
+    <figure><canvas id="poseShip"></canvas><figcaption>ship it</figcaption></figure>
+    <figure><canvas id="poseWave"></canvas><figcaption>wave</figcaption></figure>
+    <figure><canvas id="poseBots"></canvas><figcaption>AI-агенты</figcaption></figure>
+  </div>
+  <p class="note">Агенты — отдельные мини-персонажи: в резюме их четыре (SEO, контент, QA, соцсети), и это готовые «напарники» героя в любой концепции.</p>
+</section>
+
+<section>
+  <h2><span>02</span> Концепции</h2>
+
+  <article class="concept">
+    <div class="shot"><canvas id="s1"></canvas></div>
+    <div class="body">
+      <h3>1 · Career Run <em>сайд-скроллер</em></h3>
+      <p>Скролл страницы двигает героя по ночному городу. Указатели — этапы карьеры с 2017 года, монетки — технологии, уровень растёт вместе с опытом.</p>
+      <dl>
+        <dt>Плюс</dt><dd>Линейная история, работает от обычного скролла, отлично ложится на мобильный.</dd>
+        <dt>Минус</dt><dd>Жанр часто встречается в портфолио; нужен боковой walk-цикл.</dd>
+        <dt>Стек</dt><dd>Canvas 2D или PixiJS, остров в Astro.</dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="concept">
+    <div class="shot"><canvas id="s2"></canvas></div>
+    <div class="body">
+      <h3>2 · Agent HQ <em>комната, вид сверху</em></h3>
+      <p>Герой ходит по своему офису. Предметы — разделы резюме: стол — опыт, полка — навыки, серверная стойка — AI-агенты, автомат — проекты, дверь — контакты. Тексты выходят в диалоговом окне с портретом.</p>
+      <dl>
+        <dt>Плюс</dt><dd>Свободное исследование, агенты-роботы живут в сцене, история «я и мой флот агентов» уникальна.</dd>
+        <dt>Минус</dt><dd>Больше всего ассетов; на тач-экране нужен tap-to-walk.</dd>
+        <dt>Стек</dt><dd>Phaser 3 или Kaplay, тайлмап в Tiled.</dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="concept">
+    <div class="shot"><canvas id="s3"></canvas></div>
+    <div class="body">
+      <h3>3 · Voxel Desk <em>3D-диорама</em></h3>
+      <p>Плавающий остров-кабинет, который можно вращать. Герой — воксельная фигурка, клик по объекту приближает камеру и открывает раздел.</p>
+      <dl>
+        <dt>Плюс</dt><dd>Самый сильный «вау» и единственный вариант, где three.js действительно нужен.</dd>
+        <dt>Минус</dt><dd>Тяжелее по весу и на слабых телефонах; пиксельный персонаж превращается в воксельного.</dd>
+        <dt>Стек</dt><dd>three.js + React Three Fiber, модели в MagicaVoxel.</dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="concept">
+    <div class="shot mockshot">
+      <div class="mock">
+        <div class="mock-bar"><b>VALENTYN YAKOVLIEV</b><span>Work · Method · Contact</span></div>
+        <div class="mock-hero">
+          <div>
+            <span class="eyebrow">Product strategy, systems &amp; delivery</span>
+            <p class="mock-h">From a product possibility to a working system.</p>
+            <span class="btn">View recruiter CV →</span>
+          </div>
+          <div class="mock-char">
+            <div class="bubble">Scroll down. I'll walk you through.</div>
+            <canvas id="s4"></canvas>
+          </div>
+        </div>
+        <div class="mock-strip"><b>8+</b> years <b>0→1</b> launches <b>4</b> AI agents</div>
+      </div>
+    </div>
+    <div class="body">
+      <h3>4 · Companion <em>персонаж на текущем сайте</em></h3>
+      <p>Сайт остаётся сайтом. Пиксельный герой в палитре бренда ходит по рамкам секций, реагирует на скролл и наведение, комментирует кейсы и машет у кнопки CV.</p>
+      <dl>
+        <dt>Плюс</dt><dd>Ноль риска для SEO и рекрутеров, быстро делается, усиливает текущий дизайн.</dd>
+        <dt>Минус</dt><dd>Это анимация, а не игра.</dd>
+        <dt>Стек</dt><dd>Спрайт-лист + CSS <code>steps()</code> и немного ванильного JS.</dd>
+      </dl>
+    </div>
+  </article>
+</section>
+
+<section>
+  <h2><span>03</span> Стек: коротко</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Вариант</th><th>Для чего</th><th>Вес</th><th>Когда брать</th></tr></thead>
+    <tbody>
+      <tr><td>CSS <code>steps()</code> + JS</td><td>Спрайт-анимации поверх обычной страницы</td><td>почти 0</td><td>Концепция 4</td></tr>
+      <tr><td>Canvas 2D / PixiJS</td><td>Параллакс, скролл-сцены, частицы</td><td>малый</td><td>Концепция 1</td></tr>
+      <tr><td>Phaser 3 / Kaplay</td><td>Настоящая 2D-игра: тайлмапы, коллизии, диалоги</td><td>средний</td><td>Концепция 2</td></tr>
+      <tr><td>three.js + R3F</td><td>3D-сцена, камера, свет, воксели</td><td>большой</td><td>Концепция 3</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Во всех вариантах игра живёт как отдельный остров в Astro и грузится лениво. Обычное резюме для рекрутера остаётся в один клик, а при <code>prefers-reduced-motion</code> и без JS показывается текущая статичная версия.</p>
+</section>
+
+</main>
+<script src="sprites.js"></script>
+<script src="scenes.js"></script>
+</body>
+</html>
