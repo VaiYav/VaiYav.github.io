@@ -5,7 +5,7 @@ import { bindOverlay } from './dom/overlay';
 import { createScene } from './dom/scene';
 import { cameraAt, clientToView, viewToWorld, worldToView, type Camera } from './engine/camera';
 import { createLoop } from './engine/loop';
-import { WORLD, fitScale } from './engine/viewport';
+import { WORLD, canvasSize } from './engine/viewport';
 import type { Point } from './world/collision';
 import { closeDialog, createGame, interact, nearId, openObject, stepGame, tapWorld, type GameState, type World } from './world/game';
 import type { HeroState } from './world/hero';
@@ -95,7 +95,10 @@ export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement, section: 
   });
   const resize = () => {
     // In full screen the stage has a height of its own, so the world must fit that too.
-    const scale = document.fullscreenElement === host ? fitScale(host.clientWidth, host.clientHeight) : fitScale(host.clientWidth);
+    const height = document.fullscreenElement === host ? host.clientHeight : Number.POSITIVE_INFINITY;
+    const { cssWidth, cssHeight, scale } = canvasSize(host.clientWidth, height, window.devicePixelRatio);
+    canvas.style.width = `${cssWidth}px`;
+    canvas.style.height = `${cssHeight}px`;
     canvas.width = WORLD.width * scale;
     canvas.height = WORLD.height * scale;
     ctx.setTransform(scale, 0, 0, scale, 0, 0);

@@ -26,7 +26,7 @@ import { WORLD } from '../game/engine/viewport';
       <button type="button" data-game-music aria-pressed="false">♪ Music</button>
       <button type="button" data-game-fullscreen hidden>Full screen</button>
     </div>
-    <p class="game-hud" data-game-hud><span data-game-count>0</span> / {gameObjects.length} found</p>
+    <p class="game-hud" data-game-hud><span data-game-count>0</span> / {gameObjects.length}<span class="game-hud-word"> found</span></p>
     <p class="game-hint" data-game-hint hidden></p>
     <div class="game-dialog" data-game-dialog data-game-layer role="region" aria-label="Résumé entry" hidden>
       <canvas class="game-portrait" data-game-portrait width="48" height="48" aria-hidden="true"></canvas>
@@ -119,12 +119,12 @@ import { WORLD } from '../game/engine/viewport';
   .game-tools button { padding: 6px 10px; border: 2px solid #fdf6ff; background: rgba(13, 5, 24, .82); color: #fdf6ff; font: inherit; font-size: .8rem; font-weight: 700; cursor: pointer; }
   .game-tools button[hidden] { display: none; }
   .game-tools button:hover, .game-tools button:focus-visible, .game-tools button[aria-pressed='true'] { background: #fff35c; border-color: #fff35c; color: #0d0518; }
-  @media (max-width: 520px) { .game-title-face { width: 72px; height: 72px; } .game-keys { display: none; } .game-tools button { padding: 5px 7px; font-size: .72rem; } .game-hud { top: 44px; } .game-objects { top: 80px; } }
+  @media (max-width: 520px) { .game-title-face { width: 72px; height: 72px; } .game-keys { display: none; } .game-tools button { padding: 5px 7px; font-size: .72rem; } .game-hud-word { display: none; } .game-objects { top: 46px; } [data-state='running'] .game-stage { padding-top: 46px; } }
   .game-hud, .game-hint { position: absolute; margin: 0; padding: 6px 10px; border: 2px solid #fdf6ff; background: rgba(13, 5, 24, .82); color: #fdf6ff; font-size: .8rem; font-weight: 700; display: none; }
   .game-hud { top: 10px; left: 10px; }
   .game-hint { left: 50%; bottom: 10px; max-width: calc(100% - 20px); transform: translateX(-50%); border-color: #fff35c; color: #fff35c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   [data-state='running'] .game-hud, [data-state='running'] .game-hint:not([hidden]) { display: block; }
-  .game-dialog { position: absolute; left: 8px; right: 8px; bottom: 8px; max-height: calc(100% - 16px); overflow: auto; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px 16px; align-items: start; padding: 14px; border: 3px solid #fdf6ff; background: #0d0518; color: #fdf6ff; box-shadow: 6px 6px 0 #ff2e88; }
+  .game-dialog { position: absolute; z-index: 2; left: 8px; right: 8px; bottom: 8px; max-height: calc(100% - 16px); overflow: auto; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px 16px; align-items: start; padding: 14px; border: 3px solid #fdf6ff; background: #0d0518; color: #fdf6ff; box-shadow: 6px 6px 0 #ff2e88; }
   .game-dialog[hidden] { display: none; }
   .game-portrait { width: 96px; height: 96px; image-rendering: pixelated; background: #5a1a7a; border: 2px solid #01e7f0; }
   .game-dialog-room { margin: 0 0 4px; color: #01e7f0; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }

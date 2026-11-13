@@ -331,6 +331,16 @@ test.describe('résumé game on the home page', () => {
       await page.waitForFunction(() => '__resumeGame' in window);
       // Let the smooth scroll to the focused stage finish, so the tap lands where it was aimed.
       await page.waitForTimeout(1200);
+      // The office fills the phone's width instead of staying at one pixel per pixel.
+      const shown = await page.locator('[data-game-canvas]').evaluate((node) => node.getBoundingClientRect().width);
+      expect(shown).toBeGreaterThan(330);
+      // The counter and the buttons sit above the map, not over it.
+      const layout = await page.evaluate(() => {
+        const box = (selector: string) => (document.querySelector(selector) as HTMLElement).getBoundingClientRect();
+        return { map: box('[data-game-canvas]').top, tools: box('.game-tools').bottom, hud: box('[data-game-hud]').bottom };
+      });
+      expect(layout.map).toBeGreaterThanOrEqual(layout.tools);
+      expect(layout.map).toBeGreaterThanOrEqual(layout.hud);
       const goal = { x: 110, y: 155 };
       const point = await page.evaluate((world) => (window as unknown as { __resumeGame: Probe }).__resumeGame.toClient(world), goal);
       await page.touchscreen.tap(point.x, point.y);
@@ -353,7 +363,7 @@ test.describe('résumé game on the home page', () => {
     await expect(section.locator('[data-game-stage]')).toBeFocused();
     await expect.poll(() => page.evaluate(() => document.fullscreenElement?.hasAttribute('data-game-stage') ?? false)).toBe(true);
     await expect(section.getByRole('button', { name: 'Exit full screen' })).toBeVisible();
-    const fit = await section.locator('[data-game-canvas]').evaluate((node: HTMLCanvasElement) => ({ height: node.height, screen: window.innerHeight }));
+    const fit = await section.locator('[data-game-canvas]').evaluate((node: HTMLCanvasElement) => ({ height: node.getBoundingClientRect().height, screen: window.innerHeight }));
     expect(fit.height).toBeLessThanOrEqual(fit.screen);
     await section.getByRole('button', { name: 'Exit full screen' }).click();
     await expect.poll(() => page.evaluate(() => document.fullscreenElement === null)).toBe(true);
