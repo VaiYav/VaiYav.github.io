@@ -1,0 +1,36 @@
+---
+import { soloProducts, soloProductsCopy } from '../data/products';
+import type { Locale } from '../data/site';
+interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const text = soloProductsCopy[locale];
+const caseNumber = (index: number) => String(index + 1).padStart(2, '0');
+---
+<section class="frame section solo-section" id="solo-products" data-reveal>
+  <div class="section-header">
+    <div><p class="section-index">{text.index}</p><h2>{text.title}</h2></div>
+    <p class="section-intro">{text.intro}</p>
+  </div>
+  <div class="solo-grid">
+    {soloProducts.map((product, index) => (
+      <article class="solo-card" data-reveal>
+        <header class="solo-head">
+          <p class="solo-no">{text.caseLabel} {caseNumber(index)}</p>
+          <h3>{product.name}</h3>
+          <p class="solo-kind">{product.kind[locale]}</p>
+        </header>
+        <div class="solo-body">
+          <ul class="solo-chips">
+            {product.statuses.map((status) => <li class:list={{ 'is-live': status.live }}>{status.label[locale]}</li>)}
+          </ul>
+          <ul class="solo-points">
+            {product.points.map((point) => <li>{point[locale]}</li>)}
+          </ul>
+        </div>
+        <div class="solo-links">
+          {product.links.map((link) => <a href={link.href} target="_blank" rel="noopener">{link.label} ↗</a>)}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

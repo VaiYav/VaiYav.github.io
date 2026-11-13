@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from './SiteHeader.astro';
 import SiteFooter from './SiteFooter.astro';
 import Hero from './Hero.astro';
+import SoloProducts from './SoloProducts.astro';
 import { copy, links, type Locale } from '../data/site';
 interface Props { locale?: Locale }
 const { locale = 'en' } = Astro.props;
@@ -23,6 +24,7 @@ const text = copy[locale];
           <article class="case-card" data-reveal><span class="case-no">03</span><div><p class="case-tag">Technical product leadership</p><h3>One accountable owner across the seams.</h3><p>{text.whoText}</p></div><div class="case-proof"><b>360°</b><p>Product, design and engineering in one loop.</p></div></article>
         </div>
       </section>
+      <SoloProducts locale={locale} />
       <section class="frame section info-section" data-reveal>
         <div class="section-header"><div><p class="section-index">02 — Extractable answers</p><h2>Useful context, plainly stated.</h2></div><p class="section-intro">Short answers for a recruiter, founder or search engine that needs to understand the work quickly.</p></div>
         <div class="answer-grid"><article><h3>{text.whatTitle}</h3><p>{text.whatText}</p></article><article><h3>{text.whoTitle}</h3><p>{text.whoText}</p></article><article><h3>{text.stackTitle}</h3><p>{text.stackText}</p></article><article><h3>{text.availabilityTitle}</h3><p>{text.availabilityText}</p></article><article><h3>{text.experienceTitle}</h3><p>{text.experienceText}</p></article></div>
