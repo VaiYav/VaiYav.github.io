@@ -29,7 +29,7 @@ section[id] { scroll-margin-top: calc(var(--header-height) + 12px); }
 /* Home hero: the pitch on the left, the arcade window on the right */
 .home-hero { padding-block: clamp(40px, 6vw, 88px); background: var(--yellow); border-bottom: var(--line); }
 .home-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 440px); gap: clamp(32px, 6vw, 88px); align-items: center; }
-.home-hero h1 { max-width: 11ch; font-size: clamp(3rem, 6.6vw, 6.6rem); }
+.home-hero h1 { max-width: 13ch; font-size: clamp(2.8rem, 5.5vw, 6rem); }
 
 .arcade { color: var(--neon-white); background: var(--night); border: var(--line); box-shadow: var(--shadow); }
 .arcade [hidden] { display: none !important; }
@@ -123,3 +123,20 @@ section[id] { scroll-margin-top: calc(var(--header-height) + 12px); }
 h1, h2 { overflow-wrap: break-word; }
 .hero h1 { max-width: 15ch; font-size: clamp(2.4rem, 5.4vw, 5.2rem); }
 @media (max-width: 640px) { .hero h1 { font-size: clamp(2.1rem, 9.6vw, 3.4rem); } }
+
+/* Narrow screens: the arcade window moves up, straight under the headline, so the game stays in the first screen. */
+@media (max-width: 980px) {
+  .home-hero-grid { gap: 0; }
+  .home-hero-copy { display: contents; }
+  .home-hero-copy > .eyebrow { order: 1; justify-self: start; }
+  .home-hero-copy > h1 { order: 2; }
+  .home-hero-grid > .arcade { order: 3; margin-top: 28px; }
+  .home-hero-copy > .hero-copy { order: 4; }
+  .home-hero-copy > .hero-actions { order: 5; }
+  .home-hero-copy > .hero-note { order: 6; }
+}
+@media (max-width: 640px) {
+  .topnav { gap: 13px; font-size: .7rem; letter-spacing: .02em; }
+  .home-hero { padding-top: 28px; }
+  .home-hero h1 { font-size: clamp(2.3rem, 11vw, 3.6rem); }
+}
