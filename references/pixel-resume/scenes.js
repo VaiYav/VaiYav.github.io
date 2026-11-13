@@ -278,7 +278,7 @@ mount('s3', 960, 600, 1, (c, t, R, T) => {
   items.sort((a, b) => a.key - b.key).forEach((it) => it.draw());
 
   tag('AI AGENTS', 1.05, 1.05, z0 + 3.5); tag('SKILLS', 4.4, 0.7, z0 + 3.1);
-  tag('EXPERIENCE', 1.3, 5.9, z0 + 2.5); tag('PROJECTS', 6.5, 6.2, z0 + 2.9);
+  tag('EXPERIENCE', 1.3, 5.9, z0 + 2.5); tag('PROJECTS', 7.4, 7.1, z0 + 2.2);
   c.font = '16px Silkscreen, monospace'; c.textAlign = 'left'; c.fillStyle = '#8d90b0';
   c.fillText('DRAG TO ROTATE - CLICK AN OBJECT', 24, 580);
 });

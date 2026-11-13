@@ -10,14 +10,14 @@ code { font-family: ui-monospace, Menlo, monospace; font-size: .9em; color: var(
 .wrap { max-width: 1120px; margin: 0 auto; padding: 40px 16px 80px; }
 
 .top { margin-bottom: 56px; }
-.tag { display: inline-block; margin: 0 0 16px; padding: 4px 10px; background: var(--yellow); color: var(--black); font-family: var(--pixel); font-size: .85rem; }
+.tag { display: inline-block; margin: 0 0 16px; padding: 4px 10px; background: var(--yellow); color: var(--black); font-family: var(--body); font-weight: 700; font-size: .85rem; }
 h1 { margin: 0; font-family: var(--pixel); font-weight: 700; font-size: clamp(2.6rem, 9vw, 5.5rem); line-height: 1; color: var(--yellow); text-shadow: 4px 4px 0 var(--black); }
 .lead { max-width: 62ch; margin: 20px 0 0; color: var(--muted); font-size: 1.05rem; }
 
 section { margin-bottom: 72px; }
-h2 { margin: 0 0 24px; padding-bottom: 12px; border-bottom: 3px solid var(--line); font-family: var(--pixel); font-size: 1.9rem; font-weight: 700; }
+h2 { margin: 0 0 24px; padding-bottom: 12px; border-bottom: 3px solid var(--line); font-family: var(--body); font-weight: 700; font-size: 1.9rem; font-weight: 700; }
 h2 span { margin-right: 10px; color: var(--yellow); }
-h3 { margin: 36px 0 16px; font-family: var(--pixel); font-size: 1.3rem; font-weight: 700; }
+h3 { margin: 36px 0 16px; font-family: var(--body); font-weight: 700; font-size: 1.3rem; font-weight: 700; }
 h3 em { margin-left: 8px; color: var(--muted); font-size: .8em; font-style: normal; font-weight: 500; }
 .note { max-width: 70ch; margin: 16px 0 0; color: var(--muted); font-size: .92rem; }
 
@@ -32,7 +32,7 @@ h3 em { margin-left: 8px; color: var(--muted); font-size: .8em; font-style: norm
 .card .stage { display: grid; place-items: center; height: 340px; padding: 16px; background: repeating-conic-gradient(#232750 0 25%, #1d2040 0 50%) 0 0 / 24px 24px; }
 .card.light .stage { background: var(--yellow); }
 .card figcaption { padding: 14px 16px 18px; color: var(--muted); font-size: .88rem; }
-.card figcaption b { display: block; margin-bottom: 6px; color: var(--text); font-family: var(--pixel); font-size: 1.1rem; }
+.card figcaption b { display: block; margin-bottom: 6px; color: var(--text); font-family: var(--body); font-weight: 700; font-size: 1.1rem; }
 
 .poses { display: flex; flex-wrap: wrap; gap: 12px; }
 .poses figure { margin: 0; padding: 12px 12px 8px; background: var(--panel); border: 3px solid var(--line); text-align: center; }
@@ -44,7 +44,7 @@ h3 em { margin-left: 8px; color: var(--muted); font-size: .8em; font-style: norm
 .body h3 { margin-top: 0; }
 .body p { margin: 0 0 14px; }
 dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 0; font-size: .9rem; }
-dt { color: var(--yellow); font-family: var(--pixel); }
+dt { color: var(--yellow); font-family: var(--body); font-weight: 700; }
 dd { margin: 0; color: var(--muted); }
 
 .mockshot { background: #f5f4ef; }
@@ -64,7 +64,7 @@ dd { margin: 0; color: var(--muted); }
 .tablewrap { overflow-x: auto; border: 3px solid var(--line); }
 table { width: 100%; min-width: 620px; border-collapse: collapse; background: var(--panel); font-size: .9rem; }
 th, td { padding: 12px 14px; text-align: left; border-bottom: 2px solid var(--line); }
-th { color: var(--yellow); font-family: var(--pixel); font-weight: 700; }
+th { color: var(--yellow); font-family: var(--body); font-weight: 700; font-weight: 700; }
 td { color: var(--muted); }
 td:first-child { color: var(--text); }
 tr:last-child td { border-bottom: 0; }
