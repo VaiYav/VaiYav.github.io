@@ -10,6 +10,9 @@
   --neon-cyan: #01e7f0;
   --neon-white: #fdf6ff;
   --header-height: 76px;
+  /* Archivo and Space Grotesk have no Cyrillic; these two take over for uk and ru glyphs. */
+  --display: 'Archivo', 'Inter Tight', Impact, sans-serif;
+  --body: 'Space Grotesk', 'Onest', Arial, sans-serif;
 }
 
 section[id] { scroll-margin-top: calc(var(--header-height) + 12px); }
@@ -91,7 +94,7 @@ section[id] { scroll-margin-top: calc(var(--header-height) + 12px); }
   .topnav { order: 3; width: 100%; margin-left: 0; padding-bottom: 14px; overflow-x: auto; white-space: nowrap; }
   .topbar { flex-wrap: wrap; padding-top: 14px; row-gap: 12px; }
   .topbar-cv { margin-left: auto; }
-  :root { --header-height: 118px; }
+  :root { --header-height: 112px; }
   .home-hero-grid { grid-template-columns: 1fr; }
   .arcade { max-width: 520px; }
   .about-grid { grid-template-columns: 1fr; }
@@ -100,9 +103,9 @@ section[id] { scroll-margin-top: calc(var(--header-height) + 12px); }
 @media (max-width: 640px) {
   .topbar { padding-bottom: 0; gap: 10px; }
   .topnav { padding-bottom: 12px; }
-  .language-switcher { margin-left: 0; }
-  .topbar-cv { padding: 7px 9px; font-size: .7rem; box-shadow: 2px 2px 0 var(--black); }
-  .language-switcher a { padding: 5px 6px; }
+  /* The hero's first button is the same CV link, so the header copy steps aside on phones. */
+  .topbar-cv { display: none; }
+  .language-switcher { margin-left: auto; }
   .home-hero h1 { font-size: clamp(2.6rem, 13vw, 4.4rem); }
   .facts-list { grid-template-columns: 1fr; }
   .facts-list li { padding: 16px 0; border-left: 0; border-top: 2px solid #3a3a3a; }
@@ -115,3 +118,8 @@ section[id] { scroll-margin-top: calc(var(--header-height) + 12px); }
   .arcade-dot { animation: none; }
   .topbar-cv, .arcade-start { transition: none; }
 }
+
+/* Inner pages: long Ukrainian and Russian words must wrap instead of leaving the frame. */
+h1, h2 { overflow-wrap: break-word; }
+.hero h1 { max-width: 15ch; font-size: clamp(2.4rem, 5.4vw, 5.2rem); }
+@media (max-width: 640px) { .hero h1 { font-size: clamp(2.1rem, 9.6vw, 3.4rem); } }
