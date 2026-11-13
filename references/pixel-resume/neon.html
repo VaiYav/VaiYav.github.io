@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Neon HQ — референс-борд</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Silkscreen&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="board.css">
+<style>
+  :root { --bg: #12071f; --panel: #1f0f38; --line: #5a1a7a; --yellow: #fff35c; --muted: #c2a8d8; }
+  h1 { color: #fdf6ff; text-shadow: -3px 0 0 #01e7f0, 4px 3px 0 #ff2e88; }
+  .tag { background: #ff2e88; color: #fdf6ff; }
+  .back { display: inline-block; margin-top: 18px; color: #01e7f0; font-weight: 700; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 20px; padding: 0; list-style: none; }
+  .swatches li { width: 84px; padding: 44px 8px 8px; border: 3px solid #0d0518; font: 700 .7rem ui-monospace, Menlo, monospace; color: #0d0518; }
+  .swatches li.dark { color: #fdf6ff; }
+  .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0; padding: 0; list-style: none; }
+  .rules li { padding: 16px; background: var(--panel); border: 3px solid var(--line); color: var(--muted); font-size: .9rem; }
+  .rules b { display: block; margin-bottom: 6px; color: #fdf6ff; }
+  .sheet { display: grid; grid-template-columns: auto auto 1fr; gap: 16px; align-items: start; }
+  .sheet .stage { height: auto; padding: 20px; background: #0d0518; }
+  .strips { display: grid; gap: 16px; }
+  .strips .card .stage { justify-items: start; }
+  .wide { margin-bottom: 36px; }
+  .wide .shot { margin-bottom: 16px; }
+  .play { margin-top: 4px; padding: 12px 18px; background: #fff35c; color: #0d0518; border: 3px solid #0d0518; box-shadow: 4px 4px 0 #ff2e88; font: 700 1rem var(--body); cursor: pointer; }
+  .play:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #ff2e88; }
+  .play:focus-visible { outline: 3px solid #01e7f0; outline-offset: 3px; }
+  .wide .body { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 900px) { .rules, .sheet, .wide .body { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<header class="top">
+  <p class="tag">Референс-борд · v0.2 · неон, вид сверху</p>
+  <h1>Neon HQ</h1>
+  <p class="lead">Тема кабинета из Voxel Desk, но целиком пиксельная: вид строго сверху, кислотный неон, грубый пиксель, качающаяся камера. Ориентир по настроению — Hotline Miami; персонажи, арт и интерфейс при этом свои.</p>
+  <a class="back" href="index.html">← первый борд</a>
+</header>
+
+<section>
+  <h2><span>01</span> Правила стиля</h2>
+  <ul class="swatches">
+    <li class="dark" style="background:#1a0b2e">#1a0b2e</li>
+    <li class="dark" style="background:#5a1a7a">#5a1a7a</li>
+    <li style="background:#ff2e88">#ff2e88</li>
+    <li style="background:#ff71ce">#ff71ce</li>
+    <li style="background:#01e7f0">#01e7f0</li>
+    <li style="background:#fff35c">#fff35c</li>
+    <li style="background:#ff8a3d">#ff8a3d</li>
+    <li style="background:#fdf6ff">#fdf6ff</li>
+  </ul>
+  <ul class="rules">
+    <li><b>Камера сверху и живая</b>Мир слегка покачивается и поворачивается, фон за стенами — бегущие дизерные полосы.</li>
+    <li><b>Спрайты вращаются свободно</b>Один спрайт на все направления: его просто поворачивают, и пиксели «ломаются» — это часть эстетики.</li>
+    <li><b>Плоский цвет, жёсткая тень</b>Никаких градиентов: чистые заливки, тёмная обводка, тень сдвигом на один пиксель.</li>
+    <li><b>Комнаты читаются по полу</b>У каждой зоны резюме свой цвет и узор пола, стены белые и тонкие.</li>
+    <li><b>Текст с двойным сдвигом</b>Крупные надписи с циановой и маджентовой тенью, наклон, лёгкая пульсация.</li>
+    <li><b>Лицо живёт в портрете</b>Сверху героя узнают по чубу и очкам, а сходство даёт крупный портрет в диалогах и на титуле.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span>02</span> Персонаж</h2>
+  <div class="sheet">
+    <figure class="card">
+      <div class="stage"><canvas id="nHero"></canvas></div>
+      <figcaption><b>Герой сверху, 24×24</b>Чуб, дужка очков, нос, голубые плечи.</figcaption>
+    </figure>
+    <figure class="card">
+      <div class="stage"><canvas id="nPortrait"></canvas></div>
+      <figcaption><b>Портрет, 48×48</b>Маджентовый свет слева, циановый контур справа.</figcaption>
+    </figure>
+    <div class="strips">
+      <figure class="card">
+        <div class="stage"><canvas id="nDirs"></canvas></div>
+        <figcaption><b>Восемь направлений</b>Один и тот же спрайт, повёрнутый с шагом 45°.</figcaption>
+      </figure>
+      <figure class="card">
+        <div class="stage"><canvas id="nPoses"></canvas></div>
+        <figcaption><b>Idle · walk · code · агенты</b>Ноутбук светится в руках; четыре агента-робота с цветом по роли.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span>03</span> Сцены</h2>
+
+  <article class="wide">
+    <div class="shot"><canvas id="n1"></canvas></div>
+    <div class="body">
+      <div>
+        <h3>Agent HQ <em>игровой экран</em></h3>
+        <p>Офис из четырёх комнат. Фиолетовая — опыт и навыки, бирюзовая серверная — AI-агенты, малиновый лаунж с автоматами — проекты, деревянное лобби — контакты.</p>
+      </div>
+      <dl>
+        <dt>Герой</dt><dd>Ходит по комнатам, подходит к объекту и открывает раздел резюме.</dd>
+        <dt>Агенты</dt><dd>Четыре робота кружат по серверной и лаунжу, у каждого своя реплика.</dd>
+        <dt>Выход</dt><dd>ESC или кнопка сразу ведут на обычное резюме.</dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="wide">
+    <div class="shot"><canvas id="n2"></canvas></div>
+    <div class="body">
+      <div>
+        <h3>Титульный экран <em>первое, что видит гость</em></h3>
+        <p>Имя с двойной тенью, портрет в рамке, меню из трёх пунктов. «Recruiter CV» стоит вторым пунктом, чтобы до текста резюме был один шаг.</p>
+      </div>
+      <dl>
+        <dt>Движение</dt><dd>Бегущие полосы фона, пульс заголовка, мигающий курсор, моргание портрета.</dd>
+        <dt>Звук</dt><dd>Опционально: короткий синт-луп, выключен по умолчанию.</dd>
+      </dl>
+    </div>
+  </article>
+</section>
+
+<section>
+  <h2><span>04</span> Музыка</h2>
+  <div class="cues">
+    <p><b>Набросок звука.</b> Этот луп сгенерирован прямо в браузере через Web Audio: бас, арпеджио, пэд и драм-машина на 112 BPM. Сэмплов и чужих записей в нём нет, поэтому вопроса прав не возникает.</p>
+    <button id="musicToggle" class="play" type="button" aria-pressed="false">▶ Включить луп</button>
+  </div>
+  <ul class="rules" style="margin-top:16px">
+    <li><b>Синтезировать самим</b>Как здесь: несколько килобайт кода, полный контроль, можно менять музыку по комнатам. Звучит проще студийного трека.</li>
+    <li><b>Сгенерировать ИИ-сервисом</b>Богаче по звуку. Перед публикацией нужно проверить, что тариф сервиса даёт право на публичное использование.</li>
+    <li><b>Взять готовый трек</b>Synthwave под лицензией CC0 или CC BY из открытых библиотек. Для CC BY нужна подпись автора на странице.</li>
+  </ul>
+  <p class="note">В игре звук выключен по умолчанию и включается кнопкой: браузеры всё равно блокируют автозапуск, а рекрутёр может открыть страницу в офисе.</p>
+</section>
+
+</main>
+<script src="sprites.js"></script>
+<script src="scenes.js"></script>
+<script src="neon.js"></script>
+<script src="music.js"></script>
+</body>
+</html>
