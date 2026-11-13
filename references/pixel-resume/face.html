@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Лицо и портрет — референс-борд</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="board.css">
+<style>
+  :root { --bg: #12071f; --panel: #1f0f38; --line: #5a1a7a; --yellow: #fff35c; --muted: #c2a8d8; }
+  h1 { color: #fdf6ff; text-shadow: -3px 0 0 #01e7f0, 4px 3px 0 #ff2e88; }
+  .tag { background: #ff2e88; color: #fdf6ff; }
+  .back { display: inline-block; margin-top: 18px; color: #01e7f0; font-weight: 700; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .face { margin: 0; background: var(--panel); border: 3px solid var(--line); }
+  .face canvas { width: 100%; aspect-ratio: 1; }
+  .face figcaption { padding: 10px 12px 12px; color: var(--muted); font-size: .85rem; }
+  .face figcaption b { display: block; color: #fdf6ff; }
+  .rowhead { margin: 40px 0 6px; }
+  .rowhead + p { margin: 0 0 16px; max-width: 70ch; color: var(--muted); font-size: .92rem; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: s; }
+  .steps li { padding: 16px; background: var(--panel); border: 3px solid var(--line); color: var(--muted); font-size: .9rem; counter-increment: s; }
+  .steps b { display: block; margin-bottom: 6px; color: #fdf6ff; }
+  .steps b::before { content: counter(s) '. '; color: var(--yellow); }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } .steps { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<header class="top">
+  <p class="tag">Референс-борд · v0.3 · лицо</p>
+  <h1>Face Lab</h1>
+  <p class="lead">Портрет теперь строится из твоей настоящей фотографии, а не рисуется по приметам. Всё считается локально в браузере: фото никуда не отправляется.</p>
+  <a class="back" href="neon.html">← Neon HQ</a>
+  <p id="faceStatus" class="note"></p>
+</header>
+
+<section>
+  <h2><span>01</span> Как это сделано</h2>
+  <ol class="steps">
+    <li><b>Уменьшение</b>Кадр обрезается до лица и усредняется в сетку от 32 до 96 пикселей по стороне.</li>
+    <li><b>Вырезание фона</b>Серый студийный фон заливается от краёв кадра и заменяется на фон стиля.</li>
+    <li><b>Перевод в палитру</b>Каждый пиксель попадает в один из 2–17 цветов стиля, переходы закрываются дизерингом.</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span>02</span> Варианты</h2>
+
+  <h3 class="rowhead">A · Неон, горячая гамма</h3>
+  <p>Яркость фото разложена по одной шкале: чернила, фиолетовый, маджента, оранжевый, жёлтый.</p>
+  <div class="grid">
+    <figure class="face"><canvas data-face="hot" data-size="32"></canvas><figcaption><b>32×32</b>иконка, HUD</figcaption></figure>
+    <figure class="face"><canvas data-face="hot" data-size="48"></canvas><figcaption><b>48×48</b>диалоговое окно</figcaption></figure>
+    <figure class="face"><canvas data-face="hot" data-size="64"></canvas><figcaption><b>64×64</b>титульный экран</figcaption></figure>
+    <figure class="face"><canvas data-face="hot" data-size="96"></canvas><figcaption><b>96×96</b>крупный план</figcaption></figure>
+  </div>
+
+  <h3 class="rowhead">B · Неон, два света</h3>
+  <p>Левая половина лица уходит в маджентовую шкалу, правая в циановую, граница размыта дизерингом.</p>
+  <div class="grid">
+    <figure class="face"><canvas data-face="split" data-size="32"></canvas><figcaption><b>32×32</b></figcaption></figure>
+    <figure class="face"><canvas data-face="split" data-size="48"></canvas><figcaption><b>48×48</b></figcaption></figure>
+    <figure class="face"><canvas data-face="split" data-size="64"></canvas><figcaption><b>64×64</b></figcaption></figure>
+    <figure class="face"><canvas data-face="split" data-size="96"></canvas><figcaption><b>96×96</b></figcaption></figure>
+  </div>
+
+  <h3 class="rowhead">C · Натуральные цвета</h3>
+  <p>Семнадцать цветов из палитры первого борда: кожа, волосы, оправа, рубашка.</p>
+  <div class="grid">
+    <figure class="face"><canvas data-face="natural" data-size="32"></canvas><figcaption><b>32×32</b></figcaption></figure>
+    <figure class="face"><canvas data-face="natural" data-size="48"></canvas><figcaption><b>48×48</b></figcaption></figure>
+    <figure class="face"><canvas data-face="natural" data-size="64"></canvas><figcaption><b>64×64</b></figcaption></figure>
+    <figure class="face"><canvas data-face="natural" data-size="96"></canvas><figcaption><b>96×96</b></figcaption></figure>
+  </div>
+
+  <h3 class="rowhead">D · Палитра сайта, 1 бит</h3>
+  <p>Чёрный и белый с дизерингом на жёлтой плашке бренда.</p>
+  <div class="grid">
+    <figure class="face"><canvas data-face="brand" data-size="32"></canvas><figcaption><b>32×32</b></figcaption></figure>
+    <figure class="face"><canvas data-face="brand" data-size="48"></canvas><figcaption><b>48×48</b></figcaption></figure>
+    <figure class="face"><canvas data-face="brand" data-size="64"></canvas><figcaption><b>64×64</b></figcaption></figure>
+    <figure class="face"><canvas data-face="brand" data-size="96"></canvas><figcaption><b>96×96</b></figcaption></figure>
+  </div>
+</section>
+
+</main>
+<script src="face.js"></script>
+</body>
+</html>

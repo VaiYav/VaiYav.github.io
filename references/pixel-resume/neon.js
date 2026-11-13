@@ -73,13 +73,14 @@ function scanlines(R, w, h) {
   for (let y = 0; y < h; y += 2) R(0, y, w, 0.5, 'rgba(13,5,24,.28)');
 }
 
-/* Portrait: the 48×48 bust relit with a magenta key light and a cyan rim. */
+/* Portrait: the photo-based face from face.js when loaded, otherwise the hand-drawn bust relit in neon. */
 const LIT = {
   mid: { ...PAL, S: '#f0a57a', s: '#c46a6a', L: '#ffd9b0', u: '#d98a70', M: '#8a4a4a', m: '#a8324a', H: '#3a1f3d', h: '#5c2f4f', l: '#8f4a5c', B: '#5b8fe0', b: '#3a5fb8', C: '#9cc4ff', G: NEON.ink, E: NEON.ink, W: NEON.white },
   key: { ...PAL, S: '#ff9fb5', s: '#e0608f', L: '#ffd0e0', u: '#f080a0', M: '#a03a6a', m: '#c02a5a', H: '#7a2a6a', h: '#b0408a', l: NEON.pink, B: '#b07ae8', b: '#8a4fd0', C: '#e0b0ff', G: NEON.ink, E: NEON.ink, W: NEON.white },
   rim: { ...PAL, S: '#7fb8c8', s: '#4a8a9a', L: '#b0e8f0', u: '#5fa0b0', M: '#2f5a6a', m: '#3a5a7a', H: '#12304a', h: '#1a5a6a', l: NEON.cyan, B: '#2ad0e0', b: NEON.teal, C: '#a0f8ff', G: NEON.ink, E: NEON.ink, W: '#a0f8ff' },
 };
 function neonBust(ctx, ox, oy, t) {
+  if (window.pixelFace) { window.pixelFace.draw(ctx, 'split', 48, ox, oy, t); return; }
   const s = bust(blinkAt(t));
   for (let y = 0; y < s.h; y++) {
     for (let x = 0; x < s.w; x++) {
