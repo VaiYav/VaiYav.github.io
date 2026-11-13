@@ -255,7 +255,8 @@ function drawDialogue(ctx, R, T, t) {
       drawRot(bctx, outlined(topBot(col, frame(t, 4) + i)), x, y, a + Math.PI);
     });
     const hero = along(ROUTE, t * 26);
-    drawRot(bctx, outlined(topHero({ step: frame(t, 7) % 4 })), hero.x, hero.y, hero.a);
+    if (typeof heroTop === 'function') drawHero(bctx, heroTop({ anim: 'walk', f: frame(t, 10) % 8 }), hero.x, hero.y, hero.a);
+    else drawRot(bctx, outlined(topHero({ step: frame(t, 7) % 4 })), hero.x, hero.y, hero.a);
 
     ctx.save();
     ctx.translate(WORLD.w / 2, WORLD.h / 2);
