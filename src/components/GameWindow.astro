@@ -1,0 +1,33 @@
+---
+/*
+ * The arcade window in the home hero: a launcher for the résumé game.
+ *
+ * Contract with the game (src/components/ResumeGame.astro on the game branch):
+ * the game script un-hides and binds every `[data-game-launch]` button on the page.
+ * Until the game is on the page the button stays hidden and the window shows its
+ * "in development" state with a working link to the CV. Nothing here uses the game's
+ * own hooks (`data-game`, `data-game-stage`, `#play`, `.game-*`), so the two cannot collide.
+ */
+import { Image } from 'astro:assets';
+import portrait from '../../assets/unnamed.jpg';
+import { homeCopy } from '../data/home';
+import { links, type Locale } from '../data/site';
+interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const text = homeCopy[locale].arcade;
+---
+<aside class="arcade" aria-labelledby="arcade-title">
+  <p class="arcade-bar"><span class="arcade-dot" aria-hidden="true"></span>{text.label}</p>
+  <div class="arcade-screen">
+    <Image src={portrait} alt={text.coverAlt} width={640} height={823} loading="eager" fetchpriority="high" />
+  </div>
+  <div class="arcade-panel">
+    <h2 id="arcade-title">{text.title}</h2>
+    <p>{text.text}</p>
+    <div class="arcade-actions">
+      <button type="button" class="arcade-start" data-game-launch hidden>▶ {text.start}</button>
+      <p class="arcade-soon">{text.soon}</p>
+      <a class="arcade-fallback" href={links.cv}>{text.fallback}</a>
+    </div>
+  </div>
+</aside>

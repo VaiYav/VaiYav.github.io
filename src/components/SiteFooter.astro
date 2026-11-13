@@ -1,17 +1,43 @@
 ---
+import { homeCopy } from '../data/home';
 import { copy, legal, legalCopy, links, localePath, type Locale } from '../data/site';
 interface Props { locale?: Locale }
 const { locale = 'en' } = Astro.props;
 const text = copy[locale];
+const home = homeCopy[locale];
 const legalText = legalCopy[locale];
+const pages = [
+  { label: home.nav.products, href: `${localePath(locale)}#products` },
+  { label: home.footer.ai, href: localePath(locale, 'ai-engineer') },
+  { label: home.footer.fullStack, href: localePath(locale, 'full-stack-engineer') },
+  { label: home.footer.product, href: localePath(locale, 'product-engineer') },
+  { label: home.nav.notes, href: localePath(locale, 'blog') },
+];
+const contacts = [
+  { label: legal.email, href: links.email },
+  { label: home.footer.telegram, href: links.telegram },
+  { label: 'LinkedIn', href: links.linkedin },
+  { label: 'GitHub', href: links.github },
+];
 ---
 <footer class="frame footer">
-  <div class="footer-row">
-    <span>{text.footer}</span>
-    <span><a href={links.linkedin}>LinkedIn ↗</a> · <a href={links.github}>GitHub ↗</a></span>
+  <div class="footer-cols">
+    <div class="footer-brand">
+      <p class="footer-name">Valentyn Yakovliev</p>
+      <p>{text.footer.split(' · ')[1] ?? text.title}</p>
+      <a class="footer-cv" href={links.cv}>{home.nav.cv}</a>
+    </div>
+    <nav aria-label={home.footer.pages}>
+      <p class="footer-heading">{home.footer.pages}</p>
+      <ul>{pages.map((page) => <li><a href={page.href}>{page.label}</a></li>)}</ul>
+    </nav>
+    <div>
+      <p class="footer-heading">{home.footer.contact}</p>
+      <ul>{contacts.map((contact) => <li><a href={contact.href}>{contact.label}</a></li>)}</ul>
+    </div>
   </div>
   <div class="footer-legal">
     <p><span class="footer-legal-label">{legalText.footerEntity}:</span> <strong>{legal.legalName}</strong> · {legal.taxIdLabel} {legal.taxId} · {legal.address}</p>
-    <p><a href={localePath(locale, 'legal')}>{legalText.footerLegal} →</a> · <a href={`tel:${legal.phoneHref}`}>{legal.phone}</a> · <a href={`mailto:${legal.email}`}>{legal.email}</a></p>
+    <p><a href={localePath(locale, 'legal')}>{legalText.footerLegal}</a> · <a href={`tel:${legal.phoneHref}`}>{legal.phone}</a></p>
   </div>
 </footer>

@@ -3,6 +3,7 @@ import { copy, legal, links, localePath, locales, siteUrl, type Locale } from '.
 import portrait from '../../assets/unnamed.jpg';
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
+import '../styles/redesign.css';
 
 interface Props {
   locale?: Locale;
@@ -75,7 +76,7 @@ const jsonLd = {
       document.addEventListener('astro:page-load', initReveal);
       initReveal();
 
-      const pressSelector = '.primary-button, .light-button, .email-link, .topnav a, .language-switcher a, .footer a';
+      const pressSelector = '.primary-button, .light-button, .topbar-cv, .email-link, .topnav a, .language-switcher a, .footer a';
       const replayPress = (element: HTMLElement) => {
         element.classList.remove('is-pressed');
         void element.offsetWidth;

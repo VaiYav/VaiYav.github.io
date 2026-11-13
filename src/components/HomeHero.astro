@@ -1,0 +1,22 @@
+---
+import GameWindow from './GameWindow.astro';
+import { copy, links, type Locale } from '../data/site';
+interface Props { locale?: Locale }
+const { locale = 'en' } = Astro.props;
+const text = copy[locale];
+---
+<section class="frame home-hero" data-reveal="hero">
+  <div class="home-hero-grid">
+    <div class="home-hero-copy">
+      <p class="eyebrow">{text.role}</p>
+      <h1 set:html={text.hero}></h1>
+      <p class="hero-copy">{text.heroText}</p>
+      <div class="hero-actions">
+        <a class="primary-button" href={links.cv}>{text.primary}</a>
+        <a class="email-link" href={links.email}>{text.email}</a>
+      </div>
+      <p class="hero-note">{text.heroNote}</p>
+    </div>
+    <GameWindow locale={locale} />
+  </div>
+</section>

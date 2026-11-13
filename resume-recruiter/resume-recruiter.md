@@ -62,6 +62,30 @@ I'm a full-stack engineer who leads products end-to-end — from a blank page to
 
 ---
 
+## Solo products — built and shipped alone
+
+Three live consumer products where I am the whole team: product decisions, design, web and mobile engineering, subscriptions, store releases and the marketing site.
+
+**My Zodiac AI + Soulwise** — AI astrology web app and its cycle & wellness app for Android · *Web live · Android live · Soulwise: 5K+ downloads on Google Play*
+[my-zodiac-ai.com](https://my-zodiac-ai.com/) · [Soulwise on Google Play](https://play.google.com/store/apps/details?id=org.yakovliev.myzodiacai)
+- Natal charts calculated with Swiss Ephemeris and drawn as an interactive D3 chart wheel, then explained by AI in plain language.
+- Soulwise on Android: 30-second mood and cycle check-ins, and an AI companion that remembers them.
+- Freemium model with a daily free quota and a Premium subscription; cycle data encrypted with a personal key.
+
+**Owlark** — energy & sleep rhythm app: find your best hours without a wearable · *iOS live · Web app live · Android in closed testing*
+[owlark.app](https://owlark.app/) · [Owlark on the App Store](https://apps.apple.com/us/app/owlark-energy-sleep-rhythm/id6831557343)
+- A two-minute quiz based on the validated rMEQ and μMCTQ questionnaires becomes an hour-by-hour energy curve and a daily plan for light, coffee and sleep.
+- Optional read-only Apple Health and Health Connect import, home-screen widgets and a consent-based view for two.
+- Every tip cites its study; monthly and yearly in-app subscriptions, with a free trial on the yearly plan.
+
+**Lunarbor** — mood, habit & cycle journal where a floating garden grows from your days · *Android live · iOS coming soon*
+[lunarbor.app](https://lunarbor.app/) · [Lunarbor on Google Play](https://play.google.com/store/apps/details?id=com.myzodiac.companion)
+- A one-minute daily check-in drives a game layer: an island that grows, levels, companions and a year drawn as a dome of stars.
+- Selene, an AI companion with a free daily quota and a Premium tier; partner linking by invite that shares only today's phase.
+- Privacy by design: cycle data encrypted on the phone, notes encrypted with the user's own key, hosting in Germany.
+
+---
+
 ## ⭐ Open Source — speckit-product-forge
 
 **[github.com/VaiYav/speckit-product-forge](https://github.com/VaiYav/speckit-product-forge)**
@@ -77,8 +101,8 @@ My own open-source **"Spec-Driven Development" framework**, built on top of GitH
 **AI Integration Consultant — Independent** · 2025 – Present
 Helping product teams (3 clients) add AI without the hype. I design AI adoption roadmaps, build internal AI agents for development teams (automated code review, documentation, planning helpers), and advise on agent architecture, RAG and cost control.
 
-**Full-Stack Engineer — Soulwise AI** (AI-powered consumer platform, 10k+ users) · 2025 – Present
-Built real AI features and agent flows connected to OpenAI, Claude and Gemini with a vector-search layer. Shipped native iOS & Android apps from one codebase (Capacitor). Made the app 36% faster to load, moved the whole project to strict TypeScript, and set up automated testing so broken code can't reach users.
+**Founder & Solo Product Engineer — My Zodiac AI / Soulwise** (my own AI-powered consumer platform, 10k+ users) · 2025 – Present
+Founded and run the product alone. Built real AI features and agent flows connected to OpenAI, Claude and Gemini with a vector-search layer. Shipped native iOS & Android apps from one codebase (Capacitor). Made the app 36% faster to load, moved the whole project to strict TypeScript, and set up automated testing so broken code can't reach users.
 
 **Senior Frontend Developer & Feature Owner — Oboard** (B2B goal-setting / OKR software) · 2022 – 2025 (~4 years)
 Owned a whole product area from idea to launch and talked directly with C-level executives. Was the primary reviewer on every frontend change, shipped the product inside Monday.com, Salesforce, Jira and Confluence, integrated payments, and built internal tools that cut manual work by ~40%.

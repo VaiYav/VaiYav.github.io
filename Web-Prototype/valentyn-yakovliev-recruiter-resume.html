@@ -154,6 +154,26 @@
       .credential-list dt { margin-bottom: 4px; font: 700 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
       .credential-list dd { margin: 0; font-size: 15px; line-height: 1.35; }
 
+      .products-intro { margin-bottom: 26px; }
+      .products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+      .product { display: flex; flex-direction: column; background: var(--surface); border: var(--border-heavy); box-shadow: var(--shadow-sm); break-inside: avoid; }
+      .product-head { padding: 16px 18px 18px; background: var(--signal); border-bottom: var(--border); }
+      .product:nth-child(2) .product-head { background: var(--cream); }
+      .product:nth-child(3) .product-head { color: var(--paper); background: var(--ink); }
+      .product-no { margin: 0 0 22px; font: 700 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+      .product h3 { margin: 0; font: 900 clamp(22px, 2.3vw, 27px)/1 var(--display); letter-spacing: -.03em; text-transform: uppercase; }
+      .product-kind { margin: 8px 0 0; font-size: 14px; font-weight: 600; line-height: 1.3; }
+      .product-body { flex: 1; padding: 16px 18px 18px; }
+      .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; padding: 0; list-style: none; }
+      .chips li { padding: 5px 7px; border: 2px solid var(--ink); font: 700 10.5px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+      .chips .is-live { color: var(--paper); background: var(--ink); }
+      .product-points { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.45; }
+      .product-points li { position: relative; padding-inline-start: 19px; }
+      .product-points li::before { content: "—"; position: absolute; inset-inline-start: 0; font-weight: 700; }
+      .product-links { display: grid; gap: 7px; margin: 0; padding: 13px 18px 15px; border-top: var(--border); list-style: none; font: 700 12px/1.3 var(--mono); letter-spacing: .03em; }
+      .product-links span { display: block; margin-bottom: 2px; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
+      .product-links a { overflow-wrap: anywhere; }
+
       .footnote { padding-block: 24px 38px; font: 700 11px/1.45 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
       .footnote-legal { display: block; margin-top: 12px; font: 500 11px/1.6 var(--body); letter-spacing: 0; text-transform: none; opacity: .75; }
       .footnote-legal a { color: inherit; }
@@ -171,7 +191,7 @@
         .section-head, .experience { grid-template-columns: 1fr; gap: 10px; }
         .section-head { margin-bottom: 18px; }
         .experience { padding-block: 23px; }
-        .skills { grid-template-columns: 1fr; }
+        .skills, .products { grid-template-columns: 1fr; }
       }
 
       @media print {
@@ -192,7 +212,15 @@
         .section-head { grid-template-columns: 30mm minmax(0, 1fr); }
         .experience { grid-template-columns: 30mm minmax(0, 1fr); }
         .experience ul { gap: 1.5mm; }
-        .skill-group, .education { box-shadow: none; }
+        .skill-group, .education, .product { box-shadow: none; }
+        .products { grid-template-columns: 1fr; gap: 4mm; }
+        .product { display: grid; grid-template-columns: 48mm minmax(0, 1fr); }
+        .product-head { grid-row: span 2; border-bottom: 0; border-inline-end: var(--border); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .product-no { margin-bottom: 6mm; }
+        .product h3 { font-size: 17pt; }
+        .product-kind, .product-points, .product-links { font-size: 11pt; }
+        .chips li { font-size: 8.5pt; }
+        .chips .is-live { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         a { text-decoration: none; }
       }
 
@@ -248,9 +276,9 @@
             <article class="experience" data-od-id="experience-consumer-ai">
               <p class="dates"><time datetime="2025">2025</time> — Present</p>
               <div>
-                <h3 class="company">Confidential consumer AI platform <span>Full-stack Product Engineer</span></h3>
+                <h3 class="company">My Zodiac AI &amp; Soulwise <span>Founder &amp; solo Product Engineer · own product</span></h3>
                 <ul>
-                  <li>Own product features from framing and interface design through web, native mobile, payments, AI capability and release quality.</li>
+                  <li>Founded and run the product alone: framing, interface design, web, native mobile, payments, AI capability and release quality.</li>
                   <li>Built agent flows across multiple providers and retrieval, shipped cross-platform apps, and improved loading performance by 36%.</li>
                 </ul>
               </div>
@@ -277,8 +305,83 @@
           </div>
         </section>
 
+        <section class="section" data-od-id="solo-products">
+          <div class="section-head"><p class="eyebrow">03 — Solo products</p><h2>Built and shipped alone</h2></div>
+          <p class="summary products-intro" data-od-id="solo-products-intro">Three live consumer products where I am the whole team: product decisions, UX and visual design, web and mobile engineering, subscriptions, store releases and the marketing site.</p>
+          <div class="products" data-od-id="solo-products-grid">
+            <article class="product" data-od-id="product-my-zodiac-ai">
+              <header class="product-head">
+                <p class="product-no">Case 01</p>
+                <h3>My Zodiac AI</h3>
+                <p class="product-kind">AI astrology web app with Soulwise, its cycle &amp; wellness app for Android</p>
+              </header>
+              <div class="product-body">
+                <ul class="chips" aria-label="Status">
+                  <li class="is-live">Web · live</li>
+                  <li class="is-live">Android · live</li>
+                  <li>Soulwise · 5K+ on Google Play</li>
+                </ul>
+                <ul class="product-points">
+                  <li>Natal charts calculated with Swiss Ephemeris and drawn as an interactive D3 chart wheel, then explained by AI in plain language.</li>
+                  <li>Soulwise on Android: 30-second mood and cycle check-ins, and an AI companion that remembers them.</li>
+                  <li>Freemium model with a daily free quota and a Premium subscription; cycle data encrypted with a personal key.</li>
+                </ul>
+              </div>
+              <ul class="product-links" aria-label="Links">
+                <li><span>Web</span><a href="https://my-zodiac-ai.com/">my-zodiac-ai.com</a></li>
+                <li><span>Google Play</span><a href="https://play.google.com/store/apps/details?id=org.yakovliev.myzodiacai">Soulwise: Cycle &amp; Wellness</a></li>
+              </ul>
+            </article>
+            <article class="product" data-od-id="product-owlark">
+              <header class="product-head">
+                <p class="product-no">Case 02</p>
+                <h3>Owlark</h3>
+                <p class="product-kind">Energy &amp; sleep rhythm app: find your best hours without a wearable</p>
+              </header>
+              <div class="product-body">
+                <ul class="chips" aria-label="Status">
+                  <li class="is-live">iOS · live</li>
+                  <li class="is-live">Web app · live</li>
+                  <li>Android · closed testing</li>
+                </ul>
+                <ul class="product-points">
+                  <li>A two-minute quiz based on the validated rMEQ and μMCTQ questionnaires becomes an hour-by-hour energy curve and a daily plan for light, coffee and sleep.</li>
+                  <li>Optional read-only Apple Health and Health Connect import, home-screen widgets and a consent-based view for two.</li>
+                  <li>Every tip cites its study; monthly and yearly in-app subscriptions, with a free trial on the yearly plan.</li>
+                </ul>
+              </div>
+              <ul class="product-links" aria-label="Links">
+                <li><span>Web</span><a href="https://owlark.app/">owlark.app</a></li>
+                <li><span>App Store</span><a href="https://apps.apple.com/us/app/owlark-energy-sleep-rhythm/id6831557343">Owlark: Energy &amp; Sleep Rhythm</a></li>
+              </ul>
+            </article>
+            <article class="product" data-od-id="product-lunarbor">
+              <header class="product-head">
+                <p class="product-no">Case 03</p>
+                <h3>Lunarbor</h3>
+                <p class="product-kind">Mood, habit &amp; cycle journal where a floating garden grows from your days</p>
+              </header>
+              <div class="product-body">
+                <ul class="chips" aria-label="Status">
+                  <li class="is-live">Android · live</li>
+                  <li>iOS · coming soon</li>
+                </ul>
+                <ul class="product-points">
+                  <li>A one-minute daily check-in drives a game layer: an island that grows, levels, companions and a year drawn as a dome of stars.</li>
+                  <li>Selene, an AI companion with a free daily quota and a Premium tier; partner linking by invite that shares only today's phase.</li>
+                  <li>Privacy by design: cycle data encrypted on the phone, notes encrypted with the user's own key, hosting in Germany.</li>
+                </ul>
+              </div>
+              <ul class="product-links" aria-label="Links">
+                <li><span>Web</span><a href="https://lunarbor.app/">lunarbor.app</a></li>
+                <li><span>Google Play</span><a href="https://play.google.com/store/apps/details?id=com.myzodiac.companion">Lunarbor: Mood, Habit &amp; Cycle</a></li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
         <section class="section" data-od-id="skills-section">
-          <div class="section-head"><p class="eyebrow">03 — Expertise</p><h2>Technical skills</h2></div>
+          <div class="section-head"><p class="eyebrow">04 — Expertise</p><h2>Technical skills</h2></div>
           <div class="capability-layout">
             <div class="skills" data-od-id="skills-grid">
               <article class="skill-group" data-od-id="skill-languages"><h3>Languages</h3><p>TypeScript, JavaScript, Python, HTML, CSS and SQL.</p></article>
@@ -307,8 +410,8 @@
         </section>
 
         <section class="section" data-od-id="selected-systems">
-          <div class="section-head"><p class="eyebrow">04 — Selected systems</p><h2>What I build</h2></div>
-          <p class="summary">Agentic localization across 66 locales; deep-memory and retrieval-backed AI product features; cross-platform products from one codebase; and reusable spec-driven workflows that turn requirements into tested delivery. Personal product names are intentionally withheld; the scope and responsibility are not.</p>
+          <div class="section-head"><p class="eyebrow">05 — Selected systems</p><h2>What I build</h2></div>
+          <p class="summary">Agentic localization across 66 locales; deep-memory and retrieval-backed AI product features; cross-platform products from one codebase; and reusable spec-driven workflows that turn requirements into tested delivery. The solo products above are live and linked, so the scope can be checked directly.</p>
         </section>
       </main>
 

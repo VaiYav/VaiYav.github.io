@@ -1,18 +1,24 @@
 ---
-import { localePath, type Locale } from '../data/site';
+import { homeCopy } from '../data/home';
+import { links, localePath, locales, type Locale } from '../data/site';
 interface Props { locale?: Locale; path?: string }
 const { locale = 'en', path = '' } = Astro.props;
+const nav = homeCopy[locale].nav;
+const home = localePath(locale);
+const items = [
+  { label: nav.products, href: `${home}#products` },
+  { label: nav.about, href: `${home}#about` },
+  { label: nav.rescue, href: `${home}#rescue` },
+  { label: nav.notes, href: localePath(locale, 'blog'), current: path.startsWith('blog') },
+];
 ---
 <header class="topbar frame">
-  <a class="wordmark" href={localePath(locale)}>Valentyn Yakovliev <span>Product rescue</span></a>
-  <nav class="topnav" aria-label="Primary navigation">
-    <a href={localePath(locale, 'ai-engineer')}>AI systems</a>
-    <a href={localePath(locale, 'blog')}>Notes</a>
-    <a href="/valentyn-yakovliev-recruiter-resume.html">Recruiter CV</a>
+  <a class="wordmark" href={home}>Valentyn Yakovliev</a>
+  <nav class="topnav" aria-label={nav.label}>
+    {items.map((item) => <a href={item.href} aria-current={item.current ? 'page' : undefined}>{item.label}</a>)}
   </nav>
-  <div class="language-switcher" role="group" aria-label="Choose language">
-    <a class:list={{ active: locale === 'en' }} href={localePath('en', path)}>EN</a>
-    <a class:list={{ active: locale === 'uk' }} href={localePath('uk', path)}>UK</a>
-    <a class:list={{ active: locale === 'ru' }} href={localePath('ru', path)}>RU</a>
+  <a class="topbar-cv" href={links.cv}>{nav.cv}</a>
+  <div class="language-switcher" role="group" aria-label={nav.language}>
+    {locales.map((item) => <a class:list={{ active: locale === item }} href={localePath(item, path)} lang={item} hreflang={item}>{item.toUpperCase()}</a>)}
   </div>
 </header>
