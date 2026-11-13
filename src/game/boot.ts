@@ -21,6 +21,7 @@ function drawShell(ctx: CanvasRenderingContext2D): void {
 
 /**
  * Starts the game on a canvas sized to its host element.
+ * The loop runs only while the tab is visible and the stage is on screen.
  * Returns a handle that stops the loop and removes every listener.
  */
 export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement): GameHandle {
@@ -29,6 +30,7 @@ export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement): GameHand
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let time = 0;
+  let onScreen = true;
 
   const draw = () => {
     drawBackdrop(ctx, time);
@@ -46,22 +48,33 @@ export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement): GameHand
     time = seconds;
     draw();
   });
-  const onVisibility = () => {
-    if (document.hidden) loop.stop();
-    else if (!reducedMotion) loop.start();
+  const syncLoop = () => {
+    if (!reducedMotion && onScreen && !document.hidden) loop.start();
+    else loop.stop();
   };
 
-  const observer = new ResizeObserver(resize);
-  observer.observe(host);
-  document.addEventListener('visibilitychange', onVisibility);
-  resize();
-  if (!reducedMotion) loop.start();
-
-  return {
-    dispose() {
-      loop.stop();
-      observer.disconnect();
-      document.removeEventListener('visibilitychange', onVisibility);
-    },
+  const resizeObserver = new ResizeObserver(resize);
+  const viewObserver = new IntersectionObserver((entries) => {
+    onScreen = entries.some((entry) => entry.isIntersecting);
+    syncLoop();
+  });
+  const dispose = () => {
+    loop.stop();
+    resizeObserver.disconnect();
+    viewObserver.disconnect();
+    document.removeEventListener('visibilitychange', syncLoop);
   };
+
+  try {
+    resizeObserver.observe(host);
+    viewObserver.observe(host);
+    document.addEventListener('visibilitychange', syncLoop);
+    resize();
+    syncLoop();
+  } catch (error) {
+    dispose();
+    throw error;
+  }
+
+  return { dispose };
 }

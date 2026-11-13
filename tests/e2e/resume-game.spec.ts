@@ -9,14 +9,34 @@ test.describe('résumé game on the home page', () => {
     await expect(section.getByText('Soulwise AI · 2025 – Present')).toBeVisible();
   });
 
-  test('starts the canvas on Start and hides the cover', async ({ page }) => {
+  test('starts the canvas on Start, paints it and moves focus to the stage', async ({ page }) => {
     await page.goto('/');
     const section = page.locator('[data-game]');
     await section.getByRole('button', { name: 'Start' }).click();
     await expect(section).toHaveAttribute('data-state', 'running');
     await expect(section.getByRole('button', { name: 'Start' })).toBeHidden();
-    const width = await section.locator('canvas').evaluate((canvas: HTMLCanvasElement) => canvas.width);
-    expect(width % 280).toBe(0);
+    await expect(section.locator('[data-game-status]')).toHaveText('Game started.');
+    await expect(section.locator('[data-game-stage]')).toBeFocused();
+    const canvas = await section.locator('canvas').evaluate((node: HTMLCanvasElement) => {
+      const pixel = node.getContext('2d')?.getImageData(2, 2, 1, 1).data;
+      return { width: node.width, alpha: pixel ? pixel[3] : 0 };
+    });
+    expect(canvas.width).toBeGreaterThan(280);
+    expect(canvas.alpha).toBe(255);
+  });
+
+  test('stops cleanly when the visitor navigates away and back', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (error) => errors.push(error.message));
+    await page.goto('/');
+    await page.locator('[data-game]').getByRole('button', { name: 'Start' }).click();
+    await expect(page.locator('[data-game]')).toHaveAttribute('data-state', 'running');
+    await page.getByRole('link', { name: 'Notes' }).click();
+    await expect(page).toHaveURL(/\/blog\/$/);
+    await page.goBack();
+    await expect(page.locator('[data-game]')).toHaveAttribute('data-state', 'idle');
+    await expect(page.locator('[data-game]').getByRole('button', { name: 'Start' })).toBeEnabled();
+    expect(errors).toEqual([]);
   });
 
   test('keeps the recruiter CV one click away', async ({ page }) => {
