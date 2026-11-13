@@ -320,6 +320,34 @@ test.describe('résumé game on the home page', () => {
     });
   });
 
+  test('mixes the music loud enough above 500 Hz for a phone speaker, without clipping', async ({ page }) => {
+    await page.goto('/');
+    // The dev server serves the source modules, so the real mix is rendered offline in the browser.
+    const modules = { synth: '/src/game/audio/synth.ts', pattern: '/src/game/audio/pattern.ts' };
+    const level = await page.evaluate(async (paths) => {
+      const { createRig, queueSteps } = (await import(paths.synth)) as typeof import('../../src/game/audio/synth');
+      const { LOOP_STEPS, stepSeconds } = (await import(paths.pattern)) as typeof import('../../src/game/audio/pattern');
+      const rate = 44100;
+      const measure = async (cut: number) => {
+        const ctx = new OfflineAudioContext(1, Math.ceil(rate * (LOOP_STEPS * stepSeconds() + 0.5)), rate);
+        const highpass = ctx.createBiquadFilter();
+        highpass.type = 'highpass';
+        highpass.frequency.value = cut;
+        highpass.connect(ctx.destination);
+        queueSteps(createRig(ctx, highpass), 0, LOOP_STEPS, 0.01);
+        const data = (await ctx.startRendering()).getChannelData(0);
+        let sum = 0;
+        let peak = 0;
+        for (const value of data) { sum += value * value; peak = Math.max(peak, Math.abs(value)); }
+        return { rms: Math.sqrt(sum / data.length), peak };
+      };
+      return { phone: await measure(500), full: await measure(10) };
+    }, modules);
+    // Before the phone mix the band a phone speaker can play sat at about 0.016 RMS.
+    expect(level.phone.rms).toBeGreaterThan(0.045);
+    expect(level.full.peak).toBeLessThan(1);
+  });
+
   test.describe('on a phone', () => {
     test.use({ hasTouch: true, viewport: { width: 390, height: 780 } });
 
