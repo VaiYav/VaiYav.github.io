@@ -34,4 +34,14 @@ describe('drawBackdrop', () => {
     expect(area).toBe(WORLD.width * WORLD.height);
     for (const colour of colours) expect(BAND_COLORS).toContain(colour);
   });
+
+  it('skips the cells inside a covered hole and nothing else', () => {
+    const cells: { x: number; y: number }[] = [];
+    const ctx = { fillStyle: '', fillRect(x: number, y: number) { cells.push({ x, y }); } };
+    const hole = { x: 10, y: 10, w: 20, h: 8 };
+    drawBackdrop(ctx as unknown as CanvasRenderingContext2D, 0, hole);
+    expect(cells).toHaveLength((WORLD.width * WORLD.height) / 4 - (hole.w * hole.h) / 4);
+    expect(cells.some((cell) => cell.x === 12 && cell.y === 12)).toBe(false);
+    expect(cells.some((cell) => cell.x === 8 && cell.y === 10)).toBe(true);
+  });
 });

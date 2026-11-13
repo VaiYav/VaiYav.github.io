@@ -19,4 +19,10 @@ describe('fitScale', () => {
   it('falls back to one for a width that is not a number', () => {
     expect(fitScale(Number.NaN)).toBe(1);
   });
+
+  it('also fits the height when one is given, as in full screen', () => {
+    expect(fitScale(WORLD.width * 6, WORLD.height * 3 + 20)).toBe(3);
+    expect(fitScale(WORLD.width * 2, WORLD.height * 5)).toBe(2);
+    expect(fitScale(WORLD.width * 4, 10)).toBe(1);
+  });
 });

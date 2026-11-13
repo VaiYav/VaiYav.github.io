@@ -1,4 +1,4 @@
-import { COUCH, PLACEMENTS } from '../../data/game/map';
+import { COUCH, OUTER, PLACEMENTS } from '../../data/game/map';
 import type { Camera } from '../engine/camera';
 import { WORLD } from '../engine/viewport';
 import { drawBackdrop } from '../render/background';
@@ -30,6 +30,9 @@ const WALK_FRAMES = 8;
 const IDLE_FRAMES = 2;
 const IDLE_FPS = 2;
 const SHADOW_OFFSET = { x: 2, y: 3 } as const;
+/** The sway never moves the building's edge further than this, so the backdrop is skipped deeper inside. */
+const SWAY_MARGIN = 8;
+const COVERED = { x: OUTER.x + SWAY_MARGIN, y: OUTER.y + SWAY_MARGIN, w: OUTER.w - SWAY_MARGIN * 2, h: OUTER.h - SWAY_MARGIN * 2 } as const;
 
 function createLayer(width: number, height: number): { canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D } {
   const canvas = document.createElement('canvas');
@@ -93,7 +96,7 @@ export function createScene(): Scene {
     draw(ctx, frame) {
       drawWorld(frame);
       if (frame.camera.angle === 0) { ctx.fillStyle = NEON.bg; ctx.fillRect(0, 0, WORLD.width, WORLD.height); }
-      else drawBackdrop(ctx, frame.time);
+      else drawBackdrop(ctx, frame.time, COVERED);
       ctx.save();
       ctx.imageSmoothingEnabled = false;
       ctx.translate(WORLD.width / 2, WORLD.height / 2);

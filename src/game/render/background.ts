@@ -15,10 +15,24 @@ export function bandColor(x: number, y: number, time: number): string {
   return BAND_COLORS[(index + (dithered ? 1 : 0)) % BAND_COLORS.length];
 }
 
-/** Fills the whole world with the backdrop. The context is expected to be scaled to world pixels. */
-export function drawBackdrop(ctx: CanvasRenderingContext2D, time: number): void {
+export interface Hole {
+  readonly x: number;
+  readonly y: number;
+  readonly w: number;
+  readonly h: number;
+}
+
+const inside = (x: number, y: number, hole: Hole): boolean =>
+  x >= hole.x && y >= hole.y && x + CELL <= hole.x + hole.w && y + CELL <= hole.y + hole.h;
+
+/**
+ * Fills the world with the backdrop. The context is expected to be scaled to world pixels.
+ * Cells that lie wholly inside the hole are skipped: something opaque is drawn over them anyway.
+ */
+export function drawBackdrop(ctx: Pick<CanvasRenderingContext2D, 'fillStyle' | 'fillRect'>, time: number, hole?: Hole): void {
   for (let y = 0; y < WORLD.height; y += CELL) {
     for (let x = 0; x < WORLD.width; x += CELL) {
+      if (hole && inside(x, y, hole)) continue;
       ctx.fillStyle = bandColor(x / CELL, y / CELL, time);
       ctx.fillRect(x, y, CELL, CELL);
     }

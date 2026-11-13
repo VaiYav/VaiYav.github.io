@@ -20,6 +20,20 @@ export interface GameProbe {
 
 type ProbeWindow = Window & { __resumeGame?: GameProbe };
 
+/** Publishes the probe on window and returns a function that removes it. */
+function installProbe(canvas: HTMLCanvasElement, read: () => { hero: HeroState; camera: Camera }): () => void {
+  const host = window as ProbeWindow;
+  host.__resumeGame = {
+    hero: () => read().hero,
+    toClient: (world) => {
+      const view = worldToView(world, read().camera);
+      const rect = canvas.getBoundingClientRect();
+      return { x: rect.left + (view.x / WORLD.width) * rect.width, y: rect.top + (view.y / WORLD.height) * rect.height };
+    },
+  };
+  return () => { delete host.__resumeGame; };
+}
+
 /** Applies a pending tap and the held keys to the hero for one frame. */
 function advanceHero(hero: HeroState, controls: Controls, canvas: HTMLCanvasElement, camera: Camera, delta: number): HeroState {
   const tap = controls.takeTap();
@@ -38,14 +52,15 @@ export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement): GameHand
 
   const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const scene = createScene();
-  const controls = bindControls(host, canvas);
   let hero = createHero(SPAWN);
   let time = 0;
   let onScreen = true;
 
-  const draw = () => scene.draw(ctx, { time, hero, camera: cameraAt(time, still) });
+  // With reduced motion the scenery holds still; only the hero moves, and only on the visitor's input.
+  const draw = () => scene.draw(ctx, { time: still ? 0 : time, hero, camera: cameraAt(time, still) });
   const resize = () => {
-    const scale = fitScale(host.clientWidth);
+    // In full screen the stage has a height of its own, so the world must fit that too.
+    const scale = document.fullscreenElement === host ? fitScale(host.clientWidth, host.clientHeight) : fitScale(host.clientWidth);
     canvas.width = WORLD.width * scale;
     canvas.height = WORLD.height * scale;
     ctx.setTransform(scale, 0, 0, scale, 0, 0);
@@ -61,34 +76,28 @@ export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement): GameHand
     if (onScreen && !document.hidden) loop.start();
     else loop.stop();
   };
-  const probe: GameProbe = {
-    hero: () => hero,
-    toClient: (world) => {
-      const view = worldToView(world, cameraAt(time, still));
-      const rect = canvas.getBoundingClientRect();
-      return { x: rect.left + (view.x / WORLD.width) * rect.width, y: rect.top + (view.y / WORLD.height) * rect.height };
-    },
-  };
+  const removeProbe = import.meta.env.DEV ? installProbe(canvas, () => ({ hero, camera: cameraAt(time, still) })) : () => undefined;
 
   const resizeObserver = new ResizeObserver(resize);
   const viewObserver = new IntersectionObserver((entries) => {
     onScreen = entries.some((entry) => entry.isIntersecting);
     syncLoop();
   });
+  // Bound last, so nothing above can throw and leave its listeners behind.
+  const controls = bindControls(host, canvas);
   const dispose = () => {
     loop.stop();
     controls.dispose();
     resizeObserver.disconnect();
     viewObserver.disconnect();
     document.removeEventListener('visibilitychange', syncLoop);
-    delete (window as ProbeWindow).__resumeGame;
+    removeProbe();
   };
 
   try {
     resizeObserver.observe(host);
     viewObserver.observe(host);
     document.addEventListener('visibilitychange', syncLoop);
-    if (import.meta.env.DEV) (window as ProbeWindow).__resumeGame = probe;
     resize();
     syncLoop();
   } catch (error) {

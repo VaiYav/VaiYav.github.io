@@ -18,7 +18,9 @@ export function bindControls(stage: HTMLElement, canvas: HTMLCanvasElement): Con
   let tap: Point | null = null;
 
   const onKeyDown = (event: KeyboardEvent) => {
-    if (!isMoveKey(event.code) || event.metaKey || event.ctrlKey || event.altKey) return;
+    // A shortcut may swallow the matching keyup (macOS does with Cmd), so held keys are let go.
+    if (event.metaKey || event.ctrlKey || event.altKey) { pressed = new Set(); return; }
+    if (!isMoveKey(event.code)) return;
     event.preventDefault();
     pressed = new Set([...pressed, event.code]);
   };
