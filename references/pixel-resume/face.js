@@ -112,29 +112,73 @@ function renderPortrait(ctx, model, style, t, ox = 0, oy = 0) {
   }
 }
 
+/* Feature positions as fractions of the crop, measured on the photo. */
+const FEATURES = {
+  eyes: [[0.437, 0.535], [0.694, 0.55]], eyeSize: [0.1, 0.04],
+  mouth: [0.569, 0.795], mouthSize: [0.11, 0.035],
+};
+
+/* Returns a copy of the model with closed eyes or an open mouth painted into the cells. */
+function withExpression(model, kind) {
+  if (kind === 'idle') return model;
+  const { n } = model;
+  const cells = model.cells.map((c) => c.slice());
+  const fill = (cx, cy, w, h, colorAt) => {
+    const x0 = Math.round(cx * n - w / 2), y0 = Math.round(cy * n - h / 2);
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) cells[(y0 + y) * n + x0 + x] = colorAt(y, h);
+  };
+  if (kind === 'blink') {
+    const w = Math.max(3, Math.round(FEATURES.eyeSize[0] * n)), h = Math.max(2, Math.round(FEATURES.eyeSize[1] * n));
+    FEATURES.eyes.forEach(([ex, ey]) => {
+      const skin = model.cells[Math.round((ey + 0.075) * n) * n + Math.round(ex * n)];
+      fill(ex, ey, w, h, (y, rows) => (y === rows - 1 ? skin.map((v) => v * 0.4) : skin));
+    });
+  }
+  if (kind === 'talk') {
+    const w = Math.max(3, Math.round(FEATURES.mouthSize[0] * n)), h = Math.max(2, Math.round(FEATURES.mouthSize[1] * n));
+    fill(FEATURES.mouth[0], FEATURES.mouth[1], w, h, () => [34, 8, 26]);
+  }
+  return { ...model, cells };
+}
+
+/* Which frame a live portrait shows at time t. */
+function liveFrame(mode, t) {
+  if (t % 3.4 > 3.25) return 'blink';
+  if (mode === 'talk' && Math.floor(t * 7) % 2 === 0 && t % 5 < 3.6) return 'talk';
+  return 'idle';
+}
+
 function startPortraits(img) {
   const models = new Map();
-  const modelFor = (n) => {
-    if (!models.has(n)) {
-      const cells = downsample(img, n);
-      models.set(n, { n, cells, mask: backdropMask(cells, n) });
+  const modelFor = (n, kind = 'idle') => {
+    const key = `${n}:${kind}`;
+    if (!models.has(key)) {
+      if (kind === 'idle') {
+        const cells = downsample(img, n);
+        models.set(key, { n, cells, mask: backdropMask(cells, n) });
+      } else {
+        models.set(key, withExpression(modelFor(n), kind));
+      }
     }
-    return models.get(n);
+    return models.get(key);
   };
   /* Lets other boards draw the photo portrait into their own canvases. */
-  window.pixelFace = { draw: (ctx, styleName, n, ox, oy, t) => renderPortrait(ctx, modelFor(n), STYLES[styleName], t, ox, oy) };
+  window.pixelFace = {
+    draw: (ctx, styleName, n, ox, oy, t, mode = 'blink') => renderPortrait(ctx, modelFor(n, liveFrame(mode, t)), STYLES[styleName], t, ox, oy),
+  };
   const jobs = [...document.querySelectorAll('canvas[data-face]')].map((canvas) => {
     const n = Number(canvas.dataset.size);
     canvas.width = n; canvas.height = n;
-    return { ctx: canvas.getContext('2d'), model: modelFor(n), style: STYLES[canvas.dataset.face] };
+    const { face, frame, live } = canvas.dataset;
+    return { ctx: canvas.getContext('2d'), n, style: STYLES[face], frame: frame || 'idle', live };
   });
-  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  jobs.forEach((job) => renderPortrait(job.ctx, job.model, job.style, 0));
-  if (still) return;
-  const animated = jobs.filter((job) => job.style.animated);
+  const paintJob = (job, t) => renderPortrait(job.ctx, modelFor(job.n, job.live ? liveFrame(job.live, t) : job.frame), job.style, t);
+  jobs.forEach((job) => paintJob(job, 0));
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const animated = jobs.filter((job) => job.style.animated || job.live);
   window.setInterval(() => {
     const t = performance.now() / 1000;
-    animated.forEach((job) => renderPortrait(job.ctx, job.model, job.style, t));
+    animated.forEach((job) => paintJob(job, t));
   }, 110);
 }
 

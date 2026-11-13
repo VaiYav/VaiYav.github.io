@@ -79,8 +79,8 @@ const LIT = {
   key: { ...PAL, S: '#ff9fb5', s: '#e0608f', L: '#ffd0e0', u: '#f080a0', M: '#a03a6a', m: '#c02a5a', H: '#7a2a6a', h: '#b0408a', l: NEON.pink, B: '#b07ae8', b: '#8a4fd0', C: '#e0b0ff', G: NEON.ink, E: NEON.ink, W: NEON.white },
   rim: { ...PAL, S: '#7fb8c8', s: '#4a8a9a', L: '#b0e8f0', u: '#5fa0b0', M: '#2f5a6a', m: '#3a5a7a', H: '#12304a', h: '#1a5a6a', l: NEON.cyan, B: '#2ad0e0', b: NEON.teal, C: '#a0f8ff', G: NEON.ink, E: NEON.ink, W: '#a0f8ff' },
 };
-function neonBust(ctx, ox, oy, t) {
-  if (window.pixelFace) { window.pixelFace.draw(ctx, 'split', 48, ox, oy, t); return; }
+function neonBust(ctx, ox, oy, t, size = 48, mode = 'blink') {
+  if (window.pixelFace) { window.pixelFace.draw(ctx, 'split', size, ox, oy, t, mode); return; }
   const s = bust(blinkAt(t));
   for (let y = 0; y < s.h; y++) {
     for (let x = 0; x < s.w; x++) {
@@ -208,6 +208,23 @@ function drawFurniture(R, t) {
   R(30, 150, 12, 16, ink); R(31, 151, 10, 14, NEON.yel); R(33, 154, 6, 1, ink);
 }
 
+const TALK = ['OBOARD - 2022 TO 2025', 'FEATURE OWNER. SHIPPED INSIDE', 'MONDAY, SALESFORCE AND JIRA.'];
+
+/* Dialogue box with the talking portrait, drawn over the world. */
+function drawDialogue(ctx, R, T, t) {
+  const x = 8, y = 120, w = 196, h = 54;
+  R(x + 2, y + 2, w, h, NEON.mag); R(x, y, w, h, NEON.ink); R(x + 1, y + 1, w - 2, 1, NEON.cyan);
+  const typing = t % 5 < 3.6;
+  neonBust(ctx, x + 3, y + 3, t, 48, typing ? 'talk' : 'blink');
+  T('VALENTYN', x + 56, y + 13, NEON.yel, 8);
+  let budget = Math.floor((t % 5) * 26);
+  TALK.forEach((line, i) => {
+    T(line.slice(0, Math.max(0, budget)), x + 56, y + 25 + i * 9, i === 0 ? NEON.cyan : NEON.white, 6);
+    budget -= line.length;
+  });
+  if (!typing && Math.floor(t * 3) % 2) R(x + w - 9, y + h - 7, 5, 3, NEON.yel);
+}
+
 (function mountHQ() {
   const canvas = document.getElementById('n1');
   if (!canvas) return;
@@ -254,6 +271,7 @@ function drawFurniture(R, t) {
     });
     ctx.restore();
 
+    drawDialogue(ctx, R, T, t);
     glow('AGENT HQ', 8, 18, 16, 'left');
     glow('3 / 5 FOUND', WORLD.w - 8, 16, 8, 'right');
     R(0, WORLD.h - 14, WORLD.w, 14, NEON.ink);
@@ -284,8 +302,8 @@ mount('n2', 240, 135, 4, (c, t, R, T) => {
     T(item, 24, 100 + i * 10, active ? NEON.yel : NEON.pink, 8);
   });
 
-  R(175, 49, 54, 54, NEON.ink); R(177, 51, 50, 50, NEON.cyan);
-  neonBust(c, 178, 52, t);
-  T('8+ YEARS', 202, 112, NEON.white, 6, 'center'); T('0 TO 1 BUILDER', 202, 120, NEON.cyan, 6, 'center');
+  R(163, 35, 70, 70, NEON.ink); R(165, 37, 66, 66, NEON.cyan);
+  if (window.pixelFace) neonBust(c, 166, 38, t, 64); else neonBust(c, 174, 46, t);
+  T('8+ YEARS', 198, 115, NEON.white, 6, 'center'); T('0 TO 1 BUILDER', 198, 123, NEON.cyan, 6, 'center');
   scanlines(R, 240, 135);
 });
