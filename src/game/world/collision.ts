@@ -23,25 +23,26 @@ export function isBlocked(point: Point, half: number, solids: readonly Rect[]): 
   return solids.some((solid) => intersects(box, solid));
 }
 
-/** Moves along one axis in small steps and stops just before the first solid. */
-function advance(from: Point, distance: number, axis: 'x' | 'y', half: number, solids: readonly Rect[]): Point {
-  const steps = Math.ceil(Math.abs(distance) / SUB_STEP);
-  let position = from;
-  for (let i = 0; i < steps; i++) {
-    const next: Point = { ...position, [axis]: position[axis] + distance / steps };
-    if (isBlocked(next, half, solids)) break;
-    position = next;
-  }
-  return position;
+/** One small step along one axis; the body stays put when a solid is in the way. */
+function nudge(from: Point, axis: 'x' | 'y', amount: number, half: number, solids: readonly Rect[]): Point {
+  if (amount === 0) return from;
+  const next: Point = { ...from, [axis]: from[axis] + amount };
+  return isBlocked(next, half, solids) ? from : next;
 }
 
 /**
- * Moves a square body by delta, one axis at a time, so that it slides along walls
- * and never passes through a solid however large the step is.
+ * Moves a square body by delta in small steps, trying each axis on its own, so that it
+ * slides along walls and never passes through a solid however large the step is.
+ * The axes take turns, which keeps the body close to the straight line it was asked to follow.
  */
 export function slide(from: Point, delta: Point, half: number, solids: readonly Rect[]): Point {
-  const afterX = advance({ x: from.x, y: from.y }, delta.x, 'x', half, solids);
-  return advance(afterX, delta.y, 'y', half, solids);
+  const steps = Math.ceil(Math.max(Math.abs(delta.x), Math.abs(delta.y)) / SUB_STEP);
+  let position: Point = { x: from.x, y: from.y };
+  for (let i = 0; i < steps; i++) {
+    position = nudge(position, 'x', delta.x / steps, half, solids);
+    position = nudge(position, 'y', delta.y / steps, half, solids);
+  }
+  return position;
 }
 
 /** Shortest distance from a point to a rectangle; zero inside it. */

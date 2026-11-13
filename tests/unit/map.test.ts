@@ -3,6 +3,7 @@ import { gameObjects } from '../../src/data/game/content';
 import { HERO_HALF, INTERACT_RADIUS, OUTER, PLACEMENTS, ROOM_BOUNDS, SPAWN, solidRects } from '../../src/data/game/map';
 import { WORLD } from '../../src/game/engine/viewport';
 import { distanceToRect, isBlocked, type Point } from '../../src/game/world/collision';
+import { nearestObject } from '../../src/game/world/interaction';
 
 const STEP = 2;
 
@@ -51,6 +52,14 @@ describe('office map', () => {
     for (const placement of PLACEMENTS) {
       const close = cells.some((cell) => distanceToRect(cell, placement) <= INTERACT_RADIUS);
       expect(close, placement.id).toBe(true);
+    }
+  });
+
+  it('has a spot for every object where the action key opens that object and no other', () => {
+    const cells = reachable();
+    for (const placement of PLACEMENTS) {
+      const spot = cells.some((cell) => nearestObject(cell, PLACEMENTS, INTERACT_RADIUS)?.id === placement.id);
+      expect(spot, placement.id).toBe(true);
     }
   });
 

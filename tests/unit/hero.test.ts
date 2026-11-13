@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { HERO_SPEED, createHero, stepHero, walkFrame, type HeroState } from '../../src/game/world/hero';
+import { HERO_SPEED, createHero, stepHero, walkFrame, withRoute, type HeroState } from '../../src/game/world/hero';
 import type { Rect } from '../../src/game/world/collision';
 
 const none = { x: 0, y: 0 };
@@ -59,6 +59,35 @@ describe('stepHero', () => {
     const next = stepHero(hero, { x: 1, y: 0 }, 0.1, open);
     expect(next).not.toBe(hero);
     expect(hero.x).toBe(5);
+  });
+});
+
+describe('withRoute', () => {
+  it('follows every point of a route in order and then stops', () => {
+    let hero = withRoute(createHero({ x: 0, y: 0 }), [{ x: 20, y: 0 }, { x: 20, y: 20 }]);
+    let passedCorner = false;
+    for (let i = 0; i < 200 && hero.target; i++) {
+      hero = stepHero(hero, none, 0.05, open);
+      if (Math.hypot(hero.x - 20, hero.y) < 0.01) passedCorner = true;
+    }
+    expect(passedCorner).toBe(true);
+    expect(hero.x).toBeCloseTo(20);
+    expect(hero.y).toBeCloseTo(20);
+    expect(hero.route).toEqual([]);
+  });
+
+  it('stands still on an empty route', () => {
+    const hero = withRoute({ ...createHero({ x: 0, y: 0 }), target: { x: 9, y: 9 } }, []);
+    expect(hero.target).toBeNull();
+  });
+
+  it('drops the whole route when the keyboard takes over or the way is blocked', () => {
+    const routed = withRoute(createHero({ x: 0, y: 0 }), [{ x: 60, y: 0 }, { x: 60, y: 60 }]);
+    expect(stepHero(routed, { x: 0, y: 1 }, 0.1, open).route).toEqual([]);
+    const wall: Rect = { x: 20, y: -100, w: 4, h: 200 };
+    let hero = routed;
+    for (let i = 0; i < 200 && hero.target; i++) hero = stepHero(hero, none, 0.05, [wall]);
+    expect(hero.route).toEqual([]);
   });
 });
 
