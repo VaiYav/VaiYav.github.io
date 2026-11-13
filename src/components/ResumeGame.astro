@@ -14,11 +14,23 @@ import { WORLD } from '../game/engine/viewport';
 
   <div class="game-stage" data-game-stage tabindex="-1" role="group" aria-label="Résumé game">
     <canvas data-game-canvas width={WORLD.width} height={WORLD.height} aria-hidden="true"></canvas>
-    <div class="game-cover">
-      <button type="button" class="light-button" data-game-start>Start</button>
-      <a class="game-skip" href={links.cv}>Recruiter CV</a>
+    <div class="game-cover" data-game-cover>
+      <canvas class="game-title-face" data-game-title-face width="48" height="48" aria-hidden="true"></canvas>
+      <div class="game-menu">
+        <p class="game-title">Neon HQ</p>
+        <p class="game-subtitle" data-game-subtitle>A playable résumé</p>
+        <div class="game-menu-actions">
+          <button type="button" class="light-button" data-game-start>Start</button>
+          <a class="game-skip" href={links.cv}>Recruiter CV</a>
+        </div>
+        <p class="game-keys">WASD or arrows: walk · E: open · Esc: menu · or just tap</p>
+      </div>
     </div>
-    <button type="button" class="game-fullscreen" data-game-fullscreen hidden>Full screen</button>
+    <div class="game-tools">
+      <button type="button" data-game-menu>Menu</button>
+      <button type="button" data-game-music aria-pressed="false">Music: off</button>
+      <button type="button" data-game-fullscreen hidden>Full screen</button>
+    </div>
     <p class="game-hud" data-game-hud><span data-game-count>0</span> / {gameObjects.length} found</p>
     <p class="game-hint" data-game-hint hidden></p>
     <div class="game-dialog" data-game-dialog role="region" aria-label="Résumé entry" hidden>
@@ -73,86 +85,17 @@ import { WORLD } from '../game/engine/viewport';
 </section>
 
 <script>
-  import type { GameHandle } from '../game/boot';
+  import { mountShell } from '../game/dom/shell';
 
-  let handle: GameHandle | null = null;
-  /* Bumped on every teardown so a boot that finishes after navigation is discarded. */
-  let generation = 0;
+  let unmount: (() => void) | null = null;
 
   const teardown = () => {
-    generation += 1;
-    if (document.fullscreenElement) document.exitFullscreen().catch(() => undefined);
-    handle?.dispose();
-    handle = null;
+    unmount?.();
+    unmount = null;
   };
-
   const setup = () => {
     const root = document.querySelector<HTMLElement>('[data-game]');
-    if (!root || root.dataset.bound === 'true') return;
-    const stage = root.querySelector<HTMLElement>('[data-game-stage]');
-    const canvas = root.querySelector<HTMLCanvasElement>('[data-game-canvas]');
-    const start = root.querySelector<HTMLButtonElement>('[data-game-start]');
-    const status = root.querySelector<HTMLElement>('[data-game-status]');
-    const error = root.querySelector<HTMLElement>('[data-game-error]');
-    if (!stage || !canvas || !start || !status || !error) return;
-    root.dataset.bound = 'true';
-
-    const fullscreen = root.querySelector<HTMLButtonElement>('[data-game-fullscreen]');
-    const canFullscreen = document.fullscreenEnabled && typeof stage.requestFullscreen === 'function';
-
-    /* Must run inside the click itself: browsers refuse full screen once the gesture is over. */
-    const enterFullscreen = () => {
-      if (!canFullscreen || document.fullscreenElement) return;
-      // A refusal is fine: the game then simply plays inside the page.
-      stage.requestFullscreen().catch(() => undefined);
-    };
-    const showStage = () => {
-      if (!document.fullscreenElement) stage.scrollIntoView({ block: 'center' });
-      stage.focus({ preventScroll: true });
-    };
-
-    const launch = async () => {
-      enterFullscreen();
-      if (root.dataset.state === 'running') { showStage(); return; }
-      if (start.disabled) return;
-      const ticket = generation;
-      start.disabled = true;
-      error.hidden = true;
-      delete root.dataset.error;
-      try {
-        const { bootGame } = await import('../game/boot');
-        if (ticket !== generation || !root.isConnected) return;
-        handle = bootGame(canvas, stage, root);
-        root.dataset.state = 'running';
-        status.textContent = 'Game started. Walk with WASD or the arrow keys, or tap the floor. Press E next to an object to open it, or tap the object.';
-        // A tab stop, so keyboard players can come back to the game after leaving it.
-        stage.tabIndex = 0;
-        if (fullscreen) fullscreen.hidden = !canFullscreen;
-        showStage();
-      } catch (cause) {
-        // The text version below carries the same content; the reason stays on the element for debugging.
-        root.dataset.state = 'error';
-        root.dataset.error = cause instanceof Error ? cause.message : String(cause);
-        if (document.fullscreenElement === stage) document.exitFullscreen().catch(() => undefined);
-        error.hidden = false;
-        start.disabled = false;
-        start.focus();
-      }
-    };
-
-    start.addEventListener('click', launch);
-    for (const button of document.querySelectorAll<HTMLButtonElement>('[data-game-launch]')) {
-      button.hidden = false;
-      button.addEventListener('click', launch);
-    }
-    fullscreen?.addEventListener('click', () => {
-      if (document.fullscreenElement === stage) document.exitFullscreen().catch(() => undefined);
-      else enterFullscreen();
-      stage.focus({ preventScroll: true });
-    });
-    stage.addEventListener('fullscreenchange', () => {
-      if (fullscreen) fullscreen.textContent = document.fullscreenElement === stage ? 'Exit full screen' : 'Full screen';
-    });
+    if (root && root.dataset.bound !== 'true') unmount = mountShell(root);
   };
 
   document.addEventListener('astro:page-load', setup);
@@ -166,12 +109,22 @@ import { WORLD } from '../game/engine/viewport';
   /* Shown only once the script has bound the section, so no-JS visitors never see a dead Start button. */
   [data-bound='true'] .game-stage { display: grid; }
   .game-stage canvas { display: block; max-width: 100%; height: auto; image-rendering: pixelated; cursor: pointer; touch-action: manipulation; }
-  .game-cover { position: absolute; inset: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px; padding: 20px; background: rgba(13, 5, 24, .82); }
+  .game-cover { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 20px 28px; padding: 20px; overflow: auto; background: rgba(13, 5, 24, .9); color: #fdf6ff; }
+  .game-title-face { flex: none; width: 144px; height: 144px; image-rendering: pixelated; background: #5a1a7a; border: 3px solid #01e7f0; box-shadow: 6px 6px 0 #ff2e88; }
+  .game-menu { display: grid; gap: 10px; justify-items: start; }
+  .game-title { margin: 0; color: #fdf6ff; font-family: var(--display); font-size: clamp(2rem, 6vw, 3.4rem); font-weight: 800; line-height: 1; letter-spacing: -.03em; text-shadow: -3px 0 0 #01e7f0, 4px 3px 0 #ff2e88; }
+  .game-subtitle { margin: 0; color: #fff35c; font-size: .85rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .game-menu-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 6px; }
   .game-cover button { font: inherit; font-weight: 700; cursor: pointer; }
-  .game-skip { color: var(--white); font-weight: 700; text-underline-offset: 4px; }
+  .game-skip { color: #fdf6ff; font-weight: 700; text-underline-offset: 4px; }
+  .game-keys { margin: 4px 0 0; color: #c2a8d8; font-size: .78rem; }
   [data-state='running'] .game-cover { display: none; }
-  .game-fullscreen { position: absolute; top: 10px; right: 10px; padding: 6px 10px; border: 2px solid #fdf6ff; background: rgba(13, 5, 24, .82); color: #fdf6ff; font: inherit; font-size: .8rem; font-weight: 700; cursor: pointer; }
-  .game-fullscreen:hover, .game-fullscreen:focus-visible { background: #fff35c; border-color: #fff35c; color: #0d0518; }
+  .game-tools { position: absolute; top: 10px; right: 10px; z-index: 1; display: none; gap: 6px; }
+  [data-state='running'] .game-tools { display: flex; }
+  .game-tools button { padding: 6px 10px; border: 2px solid #fdf6ff; background: rgba(13, 5, 24, .82); color: #fdf6ff; font: inherit; font-size: .8rem; font-weight: 700; cursor: pointer; }
+  .game-tools button[hidden] { display: none; }
+  .game-tools button:hover, .game-tools button:focus-visible, .game-tools button[aria-pressed='true'] { background: #fff35c; border-color: #fff35c; color: #0d0518; }
+  @media (max-width: 520px) { .game-title-face { width: 72px; height: 72px; } .game-keys { display: none; } .game-tools button { padding: 5px 7px; font-size: .72rem; } .game-hud { top: 44px; } .game-objects { top: 80px; } }
   .game-hud, .game-hint { position: absolute; margin: 0; padding: 6px 10px; border: 2px solid #fdf6ff; background: rgba(13, 5, 24, .82); color: #fdf6ff; font-size: .8rem; font-weight: 700; display: none; }
   .game-hud { top: 10px; left: 10px; }
   .game-hint { left: 50%; bottom: 10px; max-width: calc(100% - 20px); transform: translateX(-50%); border-color: #fff35c; color: #fff35c; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -197,7 +150,7 @@ import { WORLD } from '../game/engine/viewport';
   .game-stage:fullscreen { width: 100vw; height: 100vh; margin: 0; border: 0; }
   .game-stage:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
   .game-status { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .game-error { position: absolute; left: 0; right: 0; bottom: 0; margin: 0; padding: 12px 16px; background: var(--yellow); border-top: var(--line-sm); font-weight: 600; }
+  .game-error { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; margin: 0; padding: 12px 16px; background: var(--yellow); border-top: var(--line-sm); font-weight: 600; }
   .game-text h3 { margin-bottom: 24px; }
   .game-rooms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: var(--line-sm); border-left: var(--line-sm); }
   .game-rooms section { padding: 22px; border-right: var(--line-sm); border-bottom: var(--line-sm); }

@@ -1,5 +1,4 @@
 ---
-import { gameEnabled } from '../data/game/flags';
 import { copy, links, type Locale } from '../data/site';
 import { Image } from 'astro:assets';
 import portrait from '../../assets/unnamed.jpg';
@@ -16,7 +15,6 @@ const text = copy[locale];
       <div class="hero-actions">
         <a class="primary-button" href={links.cv}>{text.primary}</a>
         <a class="email-link" href={links.email}>{text.email}</a>
-        {gameEnabled && <button type="button" class="light-button game-launch" lang="en" data-game-launch hidden>▶ Start the game</button>}
       </div>
       <p class="hero-note">{text.heroNote}</p>
     </div>
@@ -26,9 +24,3 @@ const text = copy[locale];
     </figure>
   </div>
 </section>
-
-<style>
-  .game-launch { font: inherit; font-weight: 700; cursor: pointer; }
-  /* Stays hidden until the script binds it, so no-JS visitors never see a dead button. */
-  .game-launch[hidden] { display: none; }
-</style>

@@ -1,5 +1,6 @@
 import { SPAWN } from '../data/game/map';
 import { bindControls, type Controls } from './dom/controls';
+import { createMusic } from './dom/music';
 import { bindOverlay } from './dom/overlay';
 import { createScene } from './dom/scene';
 import { cameraAt, clientToView, viewToWorld, worldToView, type Camera } from './engine/camera';
@@ -11,7 +12,17 @@ import type { HeroState } from './world/hero';
 import { createOffice } from './world/office';
 
 export interface GameHandle {
+  /** Freezes the world and holds the music, for the menu. */
+  pause(): void;
+  resume(): void;
+  /** Turns the music on or off; must be called from a click. Returns whether it is now on. */
+  toggleMusic(): boolean;
   dispose(): void;
+}
+
+export interface GameOptions {
+  /** Escape was pressed with no dialogue to close: the page should show or hide its menu. */
+  onMenu(): void;
 }
 
 /** What the end-to-end tests may read; exposed only in development builds. */
@@ -19,6 +30,7 @@ export interface GameProbe {
   hero(): HeroState;
   open(): string | null;
   found(): number;
+  music(): string;
   /** Page coordinates of a world point, for aiming a tap. */
   toClient(world: Point): Point;
 }
@@ -26,12 +38,13 @@ export interface GameProbe {
 type ProbeWindow = Window & { __resumeGame?: GameProbe };
 
 /** Publishes the probe on window and returns a function that removes it. */
-function installProbe(canvas: HTMLCanvasElement, read: () => { game: GameState; camera: Camera }): () => void {
+function installProbe(canvas: HTMLCanvasElement, read: () => { game: GameState; camera: Camera; music: string }): () => void {
   const host = window as ProbeWindow;
   host.__resumeGame = {
     hero: () => read().game.hero,
     open: () => read().game.open,
     found: () => read().game.found.size,
+    music: () => read().music,
     toClient: (world) => {
       const view = worldToView(world, read().camera);
       const rect = canvas.getBoundingClientRect();
@@ -53,7 +66,7 @@ function advance(game: GameState, controls: Controls, world: World, toWorld: (cl
  * The loop runs only while the tab is visible and the stage is on screen.
  * Returns a handle that stops the loop and removes every listener.
  */
-export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement, section: HTMLElement): GameHandle {
+export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement, section: HTMLElement, options: GameOptions): GameHandle {
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error('Canvas 2D is not available in this browser.');
 
@@ -63,6 +76,8 @@ export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement, section: 
   let game = createGame(SPAWN);
   let time = 0;
   let onScreen = true;
+  let paused = false;
+  const music = createMusic();
 
   const camera = () => cameraAt(time, still);
   const toWorld = (client: Point) => viewToWorld(clientToView(client, canvas.getBoundingClientRect()), camera());
@@ -93,12 +108,14 @@ export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement, section: 
     draw();
   });
   const syncLoop = () => {
-    if (onScreen && !document.hidden) { loop.start(); return; }
+    const running = onScreen && !document.hidden && !paused;
+    music.setPaused(!running);
+    if (running) { loop.start(); return; }
     loop.stop();
     // A tap made while paused must not fire when the game comes back.
     controls.takeTap();
   };
-  const removeProbe = import.meta.env.DEV ? installProbe(canvas, () => ({ game, camera: camera() })) : () => undefined;
+  const removeProbe = import.meta.env.DEV ? installProbe(canvas, () => ({ game, camera: camera(), music: music.state() })) : () => undefined;
 
   const resizeObserver = new ResizeObserver(resize);
   const viewObserver = new IntersectionObserver((entries) => {
@@ -106,11 +123,19 @@ export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement, section: 
     syncLoop();
   });
   // Bound last, so nothing above can throw and leave its listeners behind.
-  const controls = bindControls(host, canvas, (action) => change(action === 'close' ? closeDialog(game, world) : interact(game, world)));
+  const controls = bindControls(host, canvas, (action) => {
+    if (action === 'close' && !game.open) { options.onMenu(); return; }
+    if (!paused) change(action === 'close' ? closeDialog(game, world) : interact(game, world));
+  });
+  const setPaused = (next: boolean) => {
+    paused = next;
+    syncLoop();
+  };
   const dispose = () => {
     loop.stop();
     controls.dispose();
     overlay.dispose();
+    music.dispose();
     resizeObserver.disconnect();
     viewObserver.disconnect();
     document.removeEventListener('visibilitychange', syncLoop);
@@ -128,5 +153,5 @@ export function bootGame(canvas: HTMLCanvasElement, host: HTMLElement, section: 
     throw error;
   }
 
-  return { dispose };
+  return { pause: () => setPaused(true), resume: () => setPaused(false), toggleMusic: () => music.toggle(), dispose };
 }

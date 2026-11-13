@@ -33,7 +33,7 @@ test.describe('résumé game on the home page', () => {
     await expect(page.locator('[data-game]')).toHaveAttribute('data-state', 'running');
     await page.locator('[data-game]').getByRole('button', { name: 'Exit full screen' }).click();
     await expect.poll(() => page.evaluate(() => document.fullscreenElement === null)).toBe(true);
-    await page.getByRole('link', { name: 'Notes' }).click();
+    await page.getByRole('link', { name: 'Notes' }).first().click();
     await expect(page).toHaveURL(/\/blog\/$/);
     expect(await page.evaluate(() => '__resumeGame' in window)).toBe(false);
     await page.goBack();
@@ -209,6 +209,90 @@ test.describe('résumé game on the home page', () => {
       await dialog.getByRole('button', { name: 'Close' }).scrollIntoViewIfNeeded();
       await dialog.getByRole('button', { name: 'Close' }).click();
       await expect(dialog).toBeHidden();
+    });
+  });
+
+  test.describe('title, menu and music', () => {
+    type Probe = { hero(): { x: number }; music(): string };
+    const heroX = (page: Page) => page.evaluate(() => (window as unknown as { __resumeGame: Probe }).__resumeGame.hero().x);
+    const musicState = (page: Page) => page.evaluate(() => (window as unknown as { __resumeGame: Probe }).__resumeGame.music());
+
+    test('offers the game and the plain résumé side by side on the title screen', async ({ page }) => {
+      await page.goto('/');
+      const cover = page.locator('[data-game-cover]');
+      await expect(cover.getByText('Neon HQ')).toBeVisible();
+      await expect(cover.getByRole('button', { name: 'Start' })).toBeVisible();
+      await expect(cover.getByRole('link', { name: 'Recruiter CV' })).toBeVisible();
+      const painted = await cover.locator('canvas').evaluate((node: HTMLCanvasElement) => {
+        const data = node.getContext('2d')?.getImageData(0, 0, node.width, node.height).data ?? [];
+        let solid = 0;
+        for (let i = 3; i < data.length; i += 4) if (data[i] === 255) solid += 1;
+        return solid;
+      });
+      expect(painted).toBeGreaterThan(800);
+      await expect(page.locator('[data-game-menu]')).toBeHidden();
+    });
+
+    test('pauses on Escape, freezes the hero and resumes from the menu', async ({ page }) => {
+      await page.goto('/');
+      const section = page.locator('[data-game]');
+      await section.getByRole('button', { name: 'Start' }).click();
+      await page.waitForFunction(() => '__resumeGame' in window);
+      await section.getByRole('button', { name: 'Exit full screen' }).click();
+      await expect.poll(() => page.evaluate(() => document.fullscreenElement === null)).toBe(true);
+      await page.keyboard.press('Escape');
+      await expect(section).toHaveAttribute('data-state', 'paused');
+      const resume = section.getByRole('button', { name: 'Resume' });
+      await expect(resume).toBeFocused();
+      await expect(section.locator('[data-game-subtitle]')).toHaveText('Paused');
+      await expect(section.locator('[data-game-cover]').getByRole('link', { name: 'Recruiter CV' })).toBeVisible();
+      const before = await heroX(page);
+      await page.keyboard.down('KeyD');
+      await page.waitForTimeout(250);
+      await page.keyboard.up('KeyD');
+      await page.keyboard.press('KeyE');
+      expect(await heroX(page)).toBe(before);
+      await expect(section.locator('[data-game-dialog]')).toBeHidden();
+      await resume.click();
+      await expect(section).toHaveAttribute('data-state', 'running');
+      await expect(section.locator('[data-game-stage]')).toBeFocused();
+      await page.keyboard.down('KeyD');
+      await page.waitForTimeout(300);
+      await page.keyboard.up('KeyD');
+      expect(await heroX(page)).toBeGreaterThan(before + 5);
+    });
+
+    test('opens the menu from its button and closes it again with Escape', async ({ page }) => {
+      await page.goto('/');
+      const section = page.locator('[data-game]');
+      await section.getByRole('button', { name: 'Start' }).click();
+      await page.waitForFunction(() => '__resumeGame' in window);
+      await section.getByRole('button', { name: 'Exit full screen' }).click();
+      await section.getByRole('button', { name: 'Menu' }).click();
+      await expect(section).toHaveAttribute('data-state', 'paused');
+      await page.keyboard.press('Escape');
+      await expect(section).toHaveAttribute('data-state', 'running');
+    });
+
+    test('keeps the music off until asked, then plays, holds in the menu and stops', async ({ page }) => {
+      await page.goto('/');
+      const section = page.locator('[data-game]');
+      await section.getByRole('button', { name: 'Start' }).click();
+      await page.waitForFunction(() => '__resumeGame' in window);
+      const music = section.locator('[data-game-music]');
+      await expect(music).toHaveAttribute('aria-pressed', 'false');
+      expect(await musicState(page)).toBe('off');
+      await music.click();
+      await expect(music).toHaveAttribute('aria-pressed', 'true');
+      await expect(music).toHaveText('Music: on');
+      await expect.poll(() => musicState(page)).toBe('running');
+      await section.getByRole('button', { name: 'Menu' }).click();
+      await expect.poll(() => musicState(page)).toBe('suspended');
+      await section.getByRole('button', { name: 'Resume' }).click();
+      await expect.poll(() => musicState(page)).toBe('running');
+      await music.click();
+      await expect(music).toHaveAttribute('aria-pressed', 'false');
+      await expect.poll(() => musicState(page)).toBe('suspended');
     });
   });
 
